@@ -1,3 +1,34 @@
+<?php
+    session_start();
+
+    if (isset($_POST['logout'])) {
+        // Destroy the session and redirect to the Login page
+        session_destroy();
+        header("Location: UserLogin.php");
+        exit();
+    }
+
+    if (!isset($_SESSION['id'])) {
+        header("Location: UserLogin.php");
+        exit();
+    }
+
+    $id = $_SESSION['id'];
+
+    $conn = mysqli_connect("localhost", "root", "", "event_management");
+
+    if (!$conn) {
+        die("Connection failed: " . mysqli_connect_error());
+    }
+
+    $query = "SELECT * FROM credential WHERE id = '$id'";
+    $result = mysqli_query($conn, $query);
+
+    if ($row = mysqli_fetch_assoc($result)) {
+        $username = $row['username'];
+        $email = $row['email'];
+    }
+    ?>
 <!DOCTYPE html>
 <html>
 <head>
@@ -97,14 +128,12 @@ if ($conn->connect_error) {
     die("Connection failed: " . $conn->connect_error);
 }
 
-session_start();
-
 // Handle post submission
 if (isset($_POST['title']) && isset($_POST['content']) && isset($_SESSION['id'])) {
     $title = $_POST['title'];
     $content = $_POST['content'];
 
-    $sql = "INSERT INTO posts (title, content) VALUES ('$title', '$content')";
+    $sql = "INSERT INTO posts (posted_by, title, content) VALUES ('$username', '$title', '$content')";
     $conn->query($sql);
 }
 
@@ -113,7 +142,7 @@ if (isset($_POST['post']) && isset($_POST['comment']) && isset($_SESSION['id']))
     $post = $_POST['post'];
     $comment = $_POST['comment'];
 
-    $sql = "INSERT INTO comments (post_id, comment) VALUES ('$post', '$comment')";
+    $sql = "INSERT INTO comments (posted_by, post_id, comment) VALUES ('$username', '$post', '$comment')";
     $conn->query($sql);
 }
 
@@ -152,7 +181,7 @@ if (isset($_GET['action']) && $_GET['action'] === 'logout') {
 <?php
 // Check if the user is logged in
 if (isset($_SESSION['id'])) {
-    echo '<h2>Welcome, User ID: ' . $_SESSION['id'] . '!</h2>';
+    echo '<h2>Welcome, ' . $username . '!</h2>';
     echo '<a href="?action=logout">Logout</a>';
     echo '<hr>';
     echo '<h3>Create a new post:</h3>';

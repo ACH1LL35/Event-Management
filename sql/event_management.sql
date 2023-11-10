@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Nov 10, 2023 at 03:06 PM
+-- Generation Time: Nov 10, 2023 at 03:26 PM
 -- Server version: 10.4.28-MariaDB
 -- PHP Version: 8.2.4
 
@@ -89,11 +89,20 @@ INSERT INTO `booking` (`user_id`, `venue_name`, `from_date`, `to_date`) VALUES
 --
 
 CREATE TABLE `comments` (
+  `posted_by` varchar(32) NOT NULL,
   `id` int(11) NOT NULL,
   `post_id` int(11) NOT NULL,
   `comment` text NOT NULL,
   `created_at` timestamp NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `comments`
+--
+
+INSERT INTO `comments` (`posted_by`, `id`, `post_id`, `comment`, `created_at`) VALUES
+('', 12, 19, 'fghfghfhfhfh', '2023-11-10 14:17:52'),
+('alam56', 13, 21, 'heeeeeeeeeeeeeeeloooooooooo', '2023-11-10 14:26:01');
 
 -- --------------------------------------------------------
 
@@ -169,6 +178,7 @@ INSERT INTO `events` (`id`, `event_name`, `event_date`, `event_details`, `posted
 --
 
 CREATE TABLE `posts` (
+  `posted_by` varchar(32) NOT NULL,
   `id` int(11) NOT NULL,
   `title` varchar(255) NOT NULL,
   `content` text NOT NULL,
@@ -179,8 +189,9 @@ CREATE TABLE `posts` (
 -- Dumping data for table `posts`
 --
 
-INSERT INTO `posts` (`id`, `title`, `content`, `created_at`) VALUES
-(19, 'fththfthf', 'fhfhfhfhfhfhfhfh', '2023-11-10 13:58:40');
+INSERT INTO `posts` (`posted_by`, `id`, `title`, `content`, `created_at`) VALUES
+('', 19, 'fththfthf', 'fhfhfhfhfhfhfhfh', '2023-11-10 13:58:40'),
+('alam56', 21, 'tracking test', 'posted_by column check', '2023-11-10 14:25:34');
 
 -- --------------------------------------------------------
 
@@ -324,7 +335,7 @@ ALTER TABLE `admin_mod`
 -- AUTO_INCREMENT for table `comments`
 --
 ALTER TABLE `comments`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
 
 --
 -- AUTO_INCREMENT for table `complaint`
@@ -348,7 +359,7 @@ ALTER TABLE `events`
 -- AUTO_INCREMENT for table `posts`
 --
 ALTER TABLE `posts`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
 
 --
 -- AUTO_INCREMENT for table `ticket_cr`
