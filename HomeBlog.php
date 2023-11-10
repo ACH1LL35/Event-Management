@@ -133,7 +133,7 @@ if (isset($_POST['title']) && isset($_POST['content']) && isset($_SESSION['id'])
     $title = $_POST['title'];
     $content = $_POST['content'];
 
-    $sql = "INSERT INTO posts (posted_by, title, content) VALUES ('$username', '$title', '$content')";
+    $sql = "INSERT INTO posts (posted_by_id, posted_by_username, title, content) VALUES ('$id', '$username', '$title', '$content')";
     $conn->query($sql);
 }
 
@@ -142,7 +142,7 @@ if (isset($_POST['post']) && isset($_POST['comment']) && isset($_SESSION['id']))
     $post = $_POST['post'];
     $comment = $_POST['comment'];
 
-    $sql = "INSERT INTO comments (posted_by, post_id, comment) VALUES ('$username', '$post', '$comment')";
+    $sql = "INSERT INTO comments (posted_by_id, posted_by_username, post_id, comment) VALUES ('$id', '$username', '$post', '$comment')";
     $conn->query($sql);
 }
 
