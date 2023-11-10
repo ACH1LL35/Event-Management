@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Nov 08, 2023 at 05:10 PM
+-- Generation Time: Nov 10, 2023 at 03:06 PM
 -- Server version: 10.4.28-MariaDB
 -- PHP Version: 8.2.4
 
@@ -85,6 +85,19 @@ INSERT INTO `booking` (`user_id`, `venue_name`, `from_date`, `to_date`) VALUES
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `comments`
+--
+
+CREATE TABLE `comments` (
+  `id` int(11) NOT NULL,
+  `post_id` int(11) NOT NULL,
+  `comment` text NOT NULL,
+  `created_at` timestamp NOT NULL DEFAULT current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `complaint`
 --
 
@@ -148,6 +161,26 @@ INSERT INTO `events` (`id`, `event_name`, `event_date`, `event_details`, `posted
 (6, 'rtyryrthrhh', '2023-11-28', 'rthrthrthrthrthrth', '25002'),
 (7, 'admin test', '2023-11-15', 'posted by test', '25000'),
 (8, 'project', '2023-11-15', 'join now!!', '25000');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `posts`
+--
+
+CREATE TABLE `posts` (
+  `id` int(11) NOT NULL,
+  `title` varchar(255) NOT NULL,
+  `content` text NOT NULL,
+  `created_at` timestamp NOT NULL DEFAULT current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `posts`
+--
+
+INSERT INTO `posts` (`id`, `title`, `content`, `created_at`) VALUES
+(19, 'fththfthf', 'fhfhfhfhfhfhfhfh', '2023-11-10 13:58:40');
 
 -- --------------------------------------------------------
 
@@ -235,6 +268,13 @@ ALTER TABLE `admin_mod`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Indexes for table `comments`
+--
+ALTER TABLE `comments`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `post_id` (`post_id`);
+
+--
 -- Indexes for table `complaint`
 --
 ALTER TABLE `complaint`
@@ -250,6 +290,12 @@ ALTER TABLE `credential`
 -- Indexes for table `events`
 --
 ALTER TABLE `events`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `posts`
+--
+ALTER TABLE `posts`
   ADD PRIMARY KEY (`id`);
 
 --
@@ -275,6 +321,12 @@ ALTER TABLE `admin_mod`
   MODIFY `id` int(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=25005;
 
 --
+-- AUTO_INCREMENT for table `comments`
+--
+ALTER TABLE `comments`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+
+--
 -- AUTO_INCREMENT for table `complaint`
 --
 ALTER TABLE `complaint`
@@ -293,6 +345,12 @@ ALTER TABLE `events`
   MODIFY `id` int(8) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
+-- AUTO_INCREMENT for table `posts`
+--
+ALTER TABLE `posts`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
+
+--
 -- AUTO_INCREMENT for table `ticket_cr`
 --
 ALTER TABLE `ticket_cr`
@@ -303,6 +361,16 @@ ALTER TABLE `ticket_cr`
 --
 ALTER TABLE `venues`
   MODIFY `venue_id` int(3) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
+--
+-- Constraints for dumped tables
+--
+
+--
+-- Constraints for table `comments`
+--
+ALTER TABLE `comments`
+  ADD CONSTRAINT `comments_ibfk_1` FOREIGN KEY (`post_id`) REFERENCES `posts` (`id`) ON DELETE CASCADE;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

@@ -83,11 +83,11 @@
     </div>
 
     <?php
-// db.php - Database configuration
-$host = 'localhost';  // Update with your MySQL host
-$db = 'event_management';         // Update with your database name
-$user = 'root';       // Update with your MySQL username
-$pass = '';           // Update with your MySQL password
+
+$host = 'localhost';
+$db = 'event_management';
+$user = 'root';
+$pass = '';
 
 // Create a connection to the database
 $conn = new mysqli($host, $user, $pass, $db);
@@ -212,7 +212,6 @@ $conn->close();
 ?>
 </body>
 </html>
-
-
+<?php include 'footer.php'; ?>
 </body>
 </html>
