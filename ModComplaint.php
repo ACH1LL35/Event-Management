@@ -90,6 +90,11 @@ if ($row = mysqli_fetch_assoc($result)) {
         a:hover {
             background-color: #0056b3;
         }
+        #content {
+            flex: 1;
+            display: flex;
+            flex-direction: column; /* Align content vertically */
+        }
 
         .content {
             flex-grow: 1;
@@ -135,6 +140,14 @@ if ($row = mysqli_fetch_assoc($result)) {
         .logout-form .logout-button:hover {
             background-color: #0056b3;
         }
+        #content h1 {
+            text-align: center;
+            background-color: #000;
+            color: #fff;
+            padding: 20px;
+            
+            width: calc(100% + 40px); /* Adjust the width to cover the banner */
+        }
     </style>
 </head>
 <body>
@@ -159,31 +172,46 @@ if ($row = mysqli_fetch_assoc($result)) {
         </ul>
     </div>
 
-    <div class="content">
-        <h1>COMPLAINT LIST</h1>
-        <form method="post" action="<?php echo $_SERVER['PHP_SELF']; ?>">
-            <table border="1">
-                <tr>
-                    <th>Complaint ID</th>
-                    <th>Name</th>
-                    <th>Description</th>
-                    <th>Current Feedback</th>
-                    <th>Feedback</th>
-                </tr>
-                <?php while ($r = mysqli_fetch_assoc($result))  {?>
-                    <tr>
-                        <td><?php echo $r["id"]; ?></td>
-                        <td><?php echo $r["name"]; ?></td>
-                        <td><?php echo $r["description"]; ?></td>
-                        <td><?php echo $r["feedback"]; ?></td>
-                        <td>
-                            <textarea name="feedback" rows="4" cols="50"><?php echo $r["feedback"]; ?></textarea>
-                            <input type="hidden" name="complaint_id" value="<?php echo $r["id"]; ?>">
-                            <button type="submit" name="updateFeedback">Update Feedback</button>
-                        </td>
-                    </tr>
-                <?php } ?>
-            </table>
+    <div id="content">
+    <h1>COMPLAINT LIST</h1>
+        <form method="get">
+        <table border="1">
+            <tr>
+                <th>Complaint ID</th>
+                <th>Name</th>
+                <th>Email</th>
+                <th>Contact No.</th>
+                <th>Description</th>
+                <th>Feedback</th>
+                <th>Status</th>
+                <th>Action</th>
+            </tr>
+        <?php
+        if(isset($_GET['del']))
+        {
+            $id= $_GET['del'];
+            $sql1="Delete from complaint where id='$id'";
+            mysqli_query($conn,$sql1);
+        }
+
+        $sql="select * from complaint";
+        $res= mysqli_query($conn,$sql);
+
+        while($r= mysqli_fetch_assoc($res)) {
+        ?>
+            <tr>
+                <td><?php echo $r["id"]; ?></td>
+                <td><?php echo $r["name"]; ?></td>
+                <td><?php echo $r["email"]; ?></td>
+                <td><?php echo $r["contact"]; ?></td>
+                <td><?php echo $r["description"]; ?></td>
+                <td><?php echo $r["feedback"]; ?></td>
+                <center>
+                <td><button type="submit" name="del" value="<?php echo $r["id"]; ?>">Delete</button></td>
+                </center>
+            </tr>
+        <?php } ?>
+        </table>
         </form>
     </div>
 </body>

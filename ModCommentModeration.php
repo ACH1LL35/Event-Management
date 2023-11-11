@@ -90,6 +90,11 @@ if ($row = mysqli_fetch_assoc($result)) {
         a:hover {
             background-color: #0056b3;
         }
+        #content {
+            flex: 1;
+            display: flex;
+            flex-direction: column; /* Align content vertically */
+        }
 
         .content {
             flex-grow: 1;
@@ -135,6 +140,14 @@ if ($row = mysqli_fetch_assoc($result)) {
         .logout-form .logout-button:hover {
             background-color: #0056b3;
         }
+        #content h1 {
+            text-align: center;
+            background-color: #000;
+            color: #fff;
+            padding: 20px;
+            
+            width: calc(100% + 40px); /* Adjust the width to cover the banner */
+        }
     </style>
 </head>
 <body>
@@ -157,17 +170,14 @@ if ($row = mysqli_fetch_assoc($result)) {
             <li><a href="ModComplaint.php">Contact Update</a></li>
             <li><a href="ModComplaint.php">Support Mail</a></li>
         </ul>
-        <form method="post">
-            <input type="submit" name="logout" class="logout-button" value="Log Out">
-        </form>
     </div>
 
     <div id="content">
-        <h1 style="text-align: center; background-color: #000; color: #fff; padding: 20px;">COMPLAINT LIST</h1>
+        <h1>COMMENT MODERATION</h1>
         <form method="get">
         <table border="1">
             <tr>
-            <th>COMMENT UniqueID</th>
+                <th>COMMENT UniqueID</th>
                 <th>COMMENTEES UniqueID</th>
                 <th>COMMENTEES UserName</th>
                 <th>COMMENT</th>
