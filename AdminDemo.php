@@ -157,7 +157,10 @@ if ($row = mysqli_fetch_assoc($result)) {
             <li><a href="AdminComplaint.php">COMPLAINT LIST</a></li>
             <li><a href="AdminModAccess.php">MODERATOR ACCESS</a></li>
             <li><a href="AdminModManagement.php">MODERATOR MANAGEMENT</a></li>
-            <li><a href="#">Button 8</a></li>
+            <li><a href="#">Post Moderation</a></li>
+            <li><a href="#">Post Moderation History</a></li>
+            <li><a href="#">Comment Moderation</a></li>
+            <li><a href="#">Comment Moderation History</a></li>
             <li><a href="AdminAdd2Gallary.php">ADD TO GALLERY</a></li>
             <li><a href="AdminUserManagement.php">USER MANAGEMENT</a></li>
         </ul>
