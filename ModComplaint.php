@@ -1,43 +1,32 @@
 <?php
-$servername = "localhost";
-$username = "root";
-$pass = "";
-$dbname = "event_management";
-
-$conn = new mysqli($servername, $username, $pass, $dbname);
-
-// Check if a user ID session variable exists
 session_start();
-if (isset($_SESSION['id'])) {
-    $id = $_SESSION['id'];
 
-    $query = "SELECT uname FROM admin_mod WHERE id = '$id'";
-    $result = mysqli_query($conn, $query);
-
-    if ($result) {
-        if (mysqli_num_rows($result) > 0) {
-            $row = mysqli_fetch_assoc($result);
-            $uname = $row['uname'];
-        } else {
-            $uname = 'Unknown'; // Default value if uname is not found
-        }
-    } else {
-        $uname = 'Unknown'; // Default value if there is an error with the query
-    }
-} else {
-    $id = null; // Default value when no user is logged in
-    $uname = '';
+if (isset($_POST['logout'])) {
+    // Destroy the session and redirect to the Login page
+    session_destroy();
+    header("Location: AdminModLogin.php");
+    exit();
 }
 
-if (isset($_POST['feedback'])) {
-    $complaint_id = $_POST['complaint_id'];
-    $feedback = $_POST['feedback'];
-    $sql2 = "UPDATE complaint SET feedback='$feedback' WHERE id='$complaint_id'";
-    mysqli_query($conn, $sql2);
+if (!isset($_SESSION['id'])) {
+    header("Location: AdminModLogin.php");
+    exit();
 }
 
-$sql = "SELECT * FROM complaint";
-$res = mysqli_query($conn, $sql);
+$id = $_SESSION['id'];
+$conn = mysqli_connect("localhost", "root", "", "event_management");
+
+if (!$conn) {
+    die("Connection failed: " . mysqli_connect_error());
+}
+
+$query = "SELECT * FROM admin_mod WHERE id = '$id'";
+$result = mysqli_query($conn, $query);
+
+if ($row = mysqli_fetch_assoc($result)) {
+    $username = $row['uname']; // Update to use the correct variable name
+    // $email = $row['email'];
+}
 ?>
 
 <!DOCTYPE html>
@@ -90,7 +79,7 @@ $res = mysqli_query($conn, $sql);
             padding: 10px 20px;
             background-color: #007BFF;
             color: #ffffff;
-            text-align: center;
+            text-align: left;
             border: 2px solid #007BFF;
             border-radius: 3px;
             cursor: pointer;
@@ -131,14 +120,18 @@ $res = mysqli_query($conn, $sql);
 </head>
 <body>
     <div class="sidebar">
-        <h1>Welcome <?php echo $uname; ?></h1>
+        <h1>Welcome <?php echo $username; ?></h1>
         <ul>
             <li><a href="ModPanel.php">DASHBOARD</a></li>
+            <li><a href="ModInfoUpdate.php">Information Update</a></li>
             <li><a href="ModEvent.php">CREATE EVENT</a></li>
             <li><a href="eventcal.php">EVENT CALENDAR</a></li>
             <li><a href="ModAnalysis.php">ANALYSIS</a></li>
             <li><a href="ModComplaint.php">Complaint List</a></li>
-            <li><a href="ModInfoUpdate.php">Information Update</a></li>
+            <li><a href="ModPostModeration.php">POST MODERATION</a></li>
+            <li><a href="#">POST MODERATION HISTORY</a></li>
+            <li><a href="ModCommentModeration.php">COMMENT MODERATION</a></li>
+            <li><a href="#">COMMENT MODERATION HISTORY</a></li>
             <li><a href="ModComplaint.php">Contact Update</a></li>
             <li><a href="ModComplaint.php">Support Mail</a></li>
         </ul>
@@ -158,7 +151,7 @@ $res = mysqli_query($conn, $sql);
                     <th>Current Feedback</th>
                     <th>Feedback</th>
                 </tr>
-                <?php while ($r = mysqli_fetch_assoc($res))  {?>
+                <?php while ($r = mysqli_fetch_assoc($result))  {?>
                     <tr>
                         <td><?php echo $r["id"]; ?></td>
                         <td><?php echo $r["name"]; ?></td>

@@ -218,7 +218,7 @@ if ($row = mysqli_fetch_assoc($result)) {
                 <td><?php echo $r["posted_by_id"]; ?></td>
                 <td><?php echo $r["posted_by_username"]; ?></td>
                 <td><?php echo $r["title"]; ?></td>
-                <td><?php echo $r["comment"]; ?></td>
+                <td><?php echo $r["content"]; ?></td>
                 <td><?php echo $r["created_at"]; ?></td>
                 <center>
                 <td><button type="submit" name="del" value="<?php echo $r["id"]; ?>">Delete</button></td>

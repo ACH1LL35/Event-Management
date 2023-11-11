@@ -90,7 +90,7 @@ $res = mysqli_query($conn, $sql);
             padding: 10px 20px;
             background-color: #007BFF;
             color: #ffffff;
-            text-align: center;
+            text-align: left;
             border: 2px solid #007BFF;
             border-radius: 3px;
             cursor: pointer;
@@ -176,12 +176,15 @@ $res = mysqli_query($conn, $sql);
         <h1>Welcome <?php echo $uname; ?></h1>
         <ul>
             <li><a href="ModPanel.php">DASHBOARD</a></li>
-            <li><a href="ModPanel.php">DASHBOARD</a></li>
+            <li><a href="ModInfoUpdate.php">Information Update</a></li>
             <li><a href="ModEvent.php">CREATE EVENT</a></li>
             <li><a href="eventcal.php">EVENT CALENDAR</a></li>
             <li><a href="ModAnalysis.php">ANALYSIS</a></li>
             <li><a href="ModComplaint.php">Complaint List</a></li>
-            <li><a href="ModInfoUpdate.php">Information Update</a></li>
+            <li><a href="ModPostModeration.php">POST MODERATION</a></li>
+            <li><a href="#">POST MODERATION HISTORY</a></li>
+            <li><a href="ModCommentModeration.php">COMMENT MODERATION</a></li>
+            <li><a href="#">COMMENT MODERATION HISTORY</a></li>
             <li><a href="ModComplaint.php">Contact Update</a></li>
             <li><a href="ModComplaint.php">Support Mail</a></li>
         </ul>

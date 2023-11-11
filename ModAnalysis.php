@@ -1,3 +1,48 @@
+<?php
+    // Start a PHP session
+    session_start();
+
+    // Check if a user ID session variable exists
+    if (isset($_SESSION['id'])) {
+        $id = $_SESSION['id'];
+
+        // Replace these database connection details with your actual information
+        $dbHost = "localhost";
+        $dbUser = "root";
+        $dbPassword = "";
+        $dbName = "event_management";
+
+        $dbConnection = mysqli_connect($dbHost, $dbUser, $dbPassword, $dbName);
+
+        if (!$dbConnection) {
+            die("Database connection failed: " . mysqli_connect_error());
+        }
+
+        $query = "SELECT uname FROM admin_mod WHERE id = '$id'";
+        $result = mysqli_query($dbConnection, $query);
+
+        if ($result) {
+            if (mysqli_num_rows($result) > 0) {
+                $row = mysqli_fetch_assoc($result);
+                $uname = $row['uname'];
+            } else {
+                $uname = 'Unknown'; // Default value if uname is not found
+            }
+        } else {
+            $uname = 'Unknown'; // Default value if there is an error with the query
+        }
+    } else {
+        $id = null; // Default value when no user is logged in
+        $uname = '';
+    }
+
+    // Handle the logout functionality
+    if (isset($_POST['logout'])) {
+        session_destroy();
+        header('Location: AdminModLogin.php');
+        exit();
+    }
+    ?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
