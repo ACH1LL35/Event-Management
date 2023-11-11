@@ -213,9 +213,9 @@ if ($result->num_rows > 0) {
             <li><a href="AdminComplaint.php">COMPLAINT LIST</a></li>
             <li><a href="AdminModAccess.php">MODERATOR ACCESS</a></li>
             <li><a href="AdminModManagement.php">MODERATOR MANAGEMENT</a></li>
-            <li><a href="#">POST MODERATION</a></li>
+            <li><a href="AdminPostModeration.php">POST MODERATION</a></li>
             <li><a href="#">POST MODERATION HISTORY</a></li>
-            <li><a href="#">COMMENT MODERATION</a></li>
+            <li><a href="AdminCommentModeration.php">COMMENT MODERATION</a></li>
             <li><a href="#">COMMENT MODERATION HISTORY</a></li>
             <li><a href="AdminAdd2Gallary.php">ADD TO GALLERY</a></li>
             <li><a href="UserManagement.php">USER MANAGEMENT</a></li>
