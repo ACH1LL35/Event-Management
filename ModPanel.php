@@ -56,27 +56,25 @@
             background-color: #0056b3;
         }
 
-        #logout-container {
-            position: absolute;
-            top: 20px;
-            right: 10px;
-        }
-        .logout-button {
-            display: inline-block;
-            padding: 10px 20px;
-            background-color: #ff5733;
-            color: #fff;
-            text-decoration: none;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-            transition: background-color 0.3s;
-            margin-top: 20px;
-            margin-right: 20px;
-        }
-        .logout-button:hover {
-            background-color: #ff0000;
-        }
+        /* Styles for the logout form */
+    .logout-form {
+        text-align: center;
+    }
+
+    .logout-form .logout-button {
+        padding: 10px 20px;
+        background-color: #007BFF;
+        color: #ffffff;
+        border: 2px solid #007BFF;
+        border-radius: 3px;
+        cursor: pointer;
+        width: 200px;
+        text-decoration: none;
+    }
+
+    .logout-form .logout-button:hover {
+        background-color: #0056b3;
+    }
     </style>
 </head>
 <body>
@@ -125,16 +123,11 @@
         exit();
     }
     ?>
-
-    <h1 style="text-align: center; background-color: #333; color: #fff; padding: 20px 450px;">
-        Welcome <?php echo $uname; ?> to the Moderator Control
-    </h1>
-
-    <div id="logout-container">
-        <form method="post">
+    <div id="menu">
+    <form class="logout-form" method="post">
             <input type="submit" name="logout" class="logout-button" value="Log Out">
         </form>
-    </div>
+        <h1>Welcome, <?php echo $username; ?>!</h1>
     <ul>
             <li><a href="ModPanel.php">DASHBOARD</a></li>
             <li><a href="ModInfoUpdate.php">INFORMATION UPDATE</a></li>

@@ -62,7 +62,7 @@ $res = mysqli_query($conn, $sql);
             color: #fff;
             width: 200px;
             padding: 20px;
-            height: 730px;
+            height: 800px;
         }
 
         .header {
@@ -169,10 +169,32 @@ $res = mysqli_query($conn, $sql);
         input[type="submit"]:hover {
             background-color: #0056b3;
         }
+        /* Styles for the logout form */
+        .logout-form {
+            text-align: center;
+        }
+
+        .logout-form .logout-button {
+            padding: 10px 20px;
+            background-color: #007BFF;
+            color: #ffffff;
+            border: 2px solid #007BFF;
+            border-radius: 3px;
+            cursor: pointer;
+            width: 200px;
+            text-decoration: none;
+        }
+
+        .logout-form .logout-button:hover {
+            background-color: #0056b3;
+        }
     </style>
 </head>
 <body>
     <div class="sidebar">
+    <form class="logout-form" method="post">
+            <input type="submit" name="logout" class="logout-button" value="Log Out">
+        </form>
         <h1>Welcome <?php echo $uname; ?></h1>
         <ul>
             <li><a href="ModPanel.php">DASHBOARD</a></li>
@@ -188,9 +210,6 @@ $res = mysqli_query($conn, $sql);
             <li><a href="ModComplaint.php">Contact Update</a></li>
             <li><a href="ModComplaint.php">Support Mail</a></li>
         </ul>
-        <form method="post">
-            <input type="submit" name="logout" class="logout-button" value="Log Out">
-        </form>
     </div>
 
     <div id="content">

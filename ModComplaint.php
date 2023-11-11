@@ -51,7 +51,7 @@ if ($row = mysqli_fetch_assoc($result)) {
             color: #fff;
             width: 200px;
             padding: 20px;
-            height: 730px;
+            height: 800px;
         }
 
         .header {
