@@ -28,22 +28,30 @@ if ($row = mysqli_fetch_assoc($result)) {
     // $email = $row['email'];
 }
 ?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
+    <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Moderator Admin Page</title>
     <style>
-         body {
+        body {
             font-family: Arial, Helvetica, sans-serif;
             background-color: #f2f2f2;
             display: flex;
-            flex-direction: column;
+            flex-direction: row;
             align-items: flex-start;
             height: 100vh;
             margin: 0;
-            padding-left: 20px;
+        }
+
+        .sidebar {
+            background-color: #333;
+            color: #fff;
+            width: 200px;
+            padding: 20px;
+            height: 800px;
         }
 
         .header {
@@ -55,9 +63,6 @@ if ($row = mysqli_fetch_assoc($result)) {
         h1 {
             text-align: center;
             margin-right: auto;
-            background-color: #333;
-            color: #fff;
-            padding: 10px 350px;
         }
 
         ul {
@@ -85,77 +90,73 @@ if ($row = mysqli_fetch_assoc($result)) {
         a:hover {
             background-color: #0056b3;
         }
+        #content {
+            flex: 1;
+            display: flex;
+            flex-direction: column; /* Align content vertically */
+        }
 
+        .content {
+            flex-grow: 1;
+            padding: 20px;
+        }
+
+        table {
+            border-collapse: collapse;
+            width: 80%;
+            margin: 0 auto;
+            background-color: #ffffff;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        th, td {
+            padding: 10px;
+            border: 1px solid #ccc;
+            text-align: left;
+        }
+
+        th {
+            background-color: #007BFF;
+            color: #fff;
+        }
         /* Styles for the logout form */
-    .logout-form {
-        text-align: center;
-    }
+        .logout-form {
+            text-align: center;
+        }
 
-    .logout-form .logout-button {
-        padding: 10px 20px;
-        background-color: #007BFF;
-        color: #ffffff;
-        border: 2px solid #007BFF;
-        border-radius: 3px;
-        cursor: pointer;
-        width: 200px;
-        text-decoration: none;
-    }
+        .logout-form .logout-button {
+            padding: 10px 20px;
+            background-color: #007BFF;
+            color: #ffffff;
+            border: 2px solid #007BFF;
+            border-radius: 3px;
+            cursor: pointer;
+            width: 200px;
+            text-decoration: none;
+        }
 
-    .logout-form .logout-button:hover {
-        background-color: #0056b3;
-    }
+        .logout-form .logout-button:hover {
+            background-color: #0056b3;
+        }
+        #content h1 {
+            text-align: center;
+            background-color: #000;
+            color: #fff;
+            padding: 20px;
+            
+            width: calc(100% + 40px); /* Adjust the width to cover the banner */
+        }
     </style>
 </head>
 <body>
-    <?php
-    // Check if a user ID session variable exists
-    if (isset($_SESSION['id'])) {
-        $id = $_SESSION['id'];
-
-        // Replace these database connection details with your actual information
-        $dbHost = "localhost";
-        $dbUser = "root";
-        $dbPassword = "";
-        $dbName = "event_management";
-
-        $dbConnection = mysqli_connect($dbHost, $dbUser, $dbPassword, $dbName);
-
-        if (!$dbConnection) {
-            die("Database connection failed: " . mysqli_connect_error());
-        }
-
-        $query = "SELECT uname FROM admin_mod WHERE id = '$id'";
-        $result = mysqli_query($dbConnection, $query);
-
-        if ($result) {
-            if (mysqli_num_rows($result) > 0) {
-                $row = mysqli_fetch_assoc($result);
-                $uname = $row['uname'];
-            } else {
-                $uname = 'Unknown'; // Default value if uname is not found
-            }
-        } else {
-            $uname = 'Unknown'; // Default value if there is an error with the query
-        }
-    } else {
-        $id = null; // Default value when no user is logged in
-        $uname = '';
-    }
-
-    // Handle the logout functionality
-    if (isset($_POST['logout'])) {
-        session_destroy();
-        header('Location: AdminModLogin.php');
-        exit();
-    }
-    ?>
-    <div id="menu">
+    <div class="sidebar">
     <form class="logout-form" method="post">
             <input type="submit" name="logout" class="logout-button" value="Log Out">
         </form>
-        <h1>Welcome, <?php echo $username; ?>!</h1>
-    <ul>
+        <h1>Welcome <?php echo $username; ?></h1>
+        <ul>
             <li><a href="ModPanel.php">DASHBOARD</a></li>
             <li><a href="ModInfoUpdate.php">INFORMATION UPDATE</a></li>
             <li><a href="ModEvent.php">CREATE EVENT</a></li>
@@ -168,6 +169,7 @@ if ($row = mysqli_fetch_assoc($result)) {
             <li><a href="#">COMMENT MODERATION HISTORY</a></li>
             <li><a href="ModComplaint.php">Contact Update</a></li>
             <li><a href="ModComplaint.php">Support Mail</a></li>
-    </ul>
+        </ul>
+    </div>
 </body>
 </html>
