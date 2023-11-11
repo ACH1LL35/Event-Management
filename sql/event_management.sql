@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Nov 10, 2023 at 03:39 PM
+-- Generation Time: Nov 11, 2023 at 11:10 PM
 -- Server version: 10.4.28-MariaDB
 -- PHP Version: 8.2.4
 
@@ -102,8 +102,6 @@ CREATE TABLE `comments` (
 --
 
 INSERT INTO `comments` (`posted_by_id`, `posted_by_username`, `id`, `post_id`, `comment`, `created_at`) VALUES
-('', '', 12, 19, 'fghfghfhfhfh', '2023-11-10 14:17:52'),
-('', 'alam56', 13, 21, 'heeeeeeeeeeeeeeeloooooooooo', '2023-11-10 14:26:01'),
 ('15', 'alam56', 14, 23, 'comment id+username', '2023-11-10 14:38:53');
 
 -- --------------------------------------------------------
@@ -143,7 +141,7 @@ CREATE TABLE `credential` (
 --
 
 INSERT INTO `credential` (`id`, `name`, `username`, `cnumber`, `email`, `password`, `address`, `status`) VALUES
-(15, 'Zobayer Alam', 'alam56', '01778651619', 'alam@gmail.com', 'user1', 'YDT[OKNSRTHOPBJIKSDFGBPBJOSDFGBJOPBN', '');
+(15, 'Zobayer Alam', 'alam69', '01778651619', 'alam@gmail.com', 'user1', 'YDT[OKNSRTHOPBJIKSDFGBPBJOSDFGBJOPBN', '');
 
 -- --------------------------------------------------------
 
@@ -193,7 +191,6 @@ CREATE TABLE `posts` (
 --
 
 INSERT INTO `posts` (`posted_by_id`, `posted_by_username`, `id`, `title`, `content`, `created_at`) VALUES
-('', '', 19, 'fththfthf', 'fhfhfhfhfhfhfhfh', '2023-11-10 13:58:40'),
 ('', 'alam56', 21, 'tracking test', 'posted_by column check', '2023-11-10 14:25:34'),
 ('15', 'alam56', 23, 'updated tracker test', 'id+username', '2023-11-10 14:38:34');
 
