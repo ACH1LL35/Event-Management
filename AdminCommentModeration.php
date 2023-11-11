@@ -1,3 +1,33 @@
+<?php
+session_start();
+
+if (isset($_POST['logout'])) {
+    // Destroy the session and redirect to the Login page
+    session_destroy();
+    header("Location: AdminModLogin.php");
+    exit();
+}
+
+if (!isset($_SESSION['id'])) {
+    header("Location: AdminModLogin.php");
+    exit();
+}
+
+$id = $_SESSION['id'];
+$conn = mysqli_connect("localhost", "root", "", "event_management");
+
+if (!$conn) {
+    die("Connection failed: " . mysqli_connect_error());
+}
+
+$query = "SELECT * FROM admin_mod WHERE id = '$id'";
+$result = mysqli_query($conn, $query);
+
+if ($row = mysqli_fetch_assoc($result)) {
+    $username = $row['uname']; // Update to use the correct variable name
+    // $email = $row['email'];
+}
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -163,35 +193,32 @@
         <form method="get">
         <table border="1">
             <tr>
-                <th>Complaint ID</th>
-                <th>Name</th>
-                <th>Email</th>
-                <th>Contact No.</th>
-                <th>Description</th>
-                <th>Feedback</th>
-                <th>Status</th>
-                <th>Action</th>
+                <th>COMMENT UniqueID</th>
+                <th>COMMENTEES UniqueID</th>
+                <th>COMMENTEES UserName</th>
+                <th>COMMENT</th>
+                <th>COMMENT DATE</th>
+                <th>ACTION</th>
             </tr>
         <?php
         if(isset($_GET['del']))
         {
             $id= $_GET['del'];
-            $sql1="Delete from complaint where id='$id'";
+            $sql1="Delete from comments where id='$id'";
             mysqli_query($conn,$sql1);
         }
 
-        $sql="select * from complaint";
+        $sql="select * from comments";
         $res= mysqli_query($conn,$sql);
 
         while($r= mysqli_fetch_assoc($res)) {
         ?>
             <tr>
                 <td><?php echo $r["id"]; ?></td>
-                <td><?php echo $r["name"]; ?></td>
-                <td><?php echo $r["email"]; ?></td>
-                <td><?php echo $r["contact"]; ?></td>
-                <td><?php echo $r["description"]; ?></td>
-                <td><?php echo $r["feedback"]; ?></td>
+                <td><?php echo $r["posted_by_id"]; ?></td>
+                <td><?php echo $r["posted_by_username"]; ?></td>
+                <td><?php echo $r["comment"]; ?></td>
+                <td><?php echo $r["created_at"]; ?></td>
                 <center>
                 <td><button type="submit" name="del" value="<?php echo $r["id"]; ?>">Delete</button></td>
                 </center>
