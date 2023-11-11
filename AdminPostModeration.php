@@ -142,7 +142,6 @@ if ($row = mysqli_fetch_assoc($result)) {
             <input type="submit" name="logout" class="logout-button" value="Log Out">
         </form>
         <?php
-        session_start();
 
         if (!isset($_SESSION['id'])) {
             header("Location: AdminModLogin.php");
