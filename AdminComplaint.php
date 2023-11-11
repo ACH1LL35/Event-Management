@@ -33,7 +33,7 @@ if ($row = mysqli_fetch_assoc($result)) {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Complaint List</title>
+    <title>COMPLAINT LIST</title>
     <style>
         body {
             font-family: Arial, Helvetica, sans-serif;
@@ -188,7 +188,7 @@ if ($row = mysqli_fetch_assoc($result)) {
     </div>
 
     <div id="content">
-        <h1 style="text-align: center; background-color: #000; color: #fff; padding: 20px;">Complaint List</h1>
+        <h1 style="text-align: center; background-color: #000; color: #fff; padding: 20px;">COMPLAINT LIST</h1>
         <form method="get">
         <table border="1">
             <tr>

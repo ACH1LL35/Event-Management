@@ -33,7 +33,7 @@ if ($row = mysqli_fetch_assoc($result)) {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Complaint List</title>
+    <title>COMPLAINT LIST</title>
     <style>
         body {
             font-family: Arial, Helvetica, sans-serif;
