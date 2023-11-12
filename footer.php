@@ -69,7 +69,7 @@
             <a>||</a>
             <a href="Ad.php">Advertise</a>
             <a>||</a>
-            <a href="ContactUs.php">Contact Us</a>
+            <a href="HomeContactUs.php">Contact Us</a>
         </div>
         <div class="social-icons">
             <a href="https://www.instagram.com/" target="_blank">
