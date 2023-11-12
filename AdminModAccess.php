@@ -24,19 +24,18 @@ $query = "SELECT * FROM admin_mod WHERE id = '$id'";
 $result = mysqli_query($conn, $query);
 
 if ($row = mysqli_fetch_assoc($result)) {
-    $uname = $row['uname']; // Update to use the correct variable name
+    $uname = $row['uname'];
     // $email = $row['email'];
 }
 ?>
 <?php
-// Check if the user is logged in and has a session ID
+
 if (!isset($_SESSION['id'])) {
-    // Redirect the user to the login page or perform other actions
     header("Location: login.php");
     exit();
 }
 
-$id = $_SESSION['id']; // Get the user ID from the session
+$id = $_SESSION['id'];
 
 $servername = "localhost";
 $username = "root";
@@ -250,7 +249,7 @@ if ($result->num_rows > 0) {
                 $error_message = "Email address is already registered.";
             } else {
                 // Neither username nor email is already in use, so proceed with registration
-                $sql = "INSERT INTO admin_mod (uname, email, password, type) VALUES ('$uname', '$email', '$password', 'mod')";
+                $sql = "INSERT INTO admin_mod (uname, email, password, type, status) VALUES ('$uname', '$email', '$password', 'mod', '1')";
 
                 if ($conn->query($sql) === TRUE) {
                     echo "Registration successful!";

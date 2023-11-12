@@ -24,7 +24,7 @@ $query = "SELECT * FROM admin_mod WHERE id = '$id'";
 $result = mysqli_query($conn, $query);
 
 if ($row = mysqli_fetch_assoc($result)) {
-    $username = $row['uname']; // Update to use the correct variable name
+    $username = $row['uname'];
     // $email = $row['email'];
 }
 ?>
@@ -138,7 +138,7 @@ if ($row = mysqli_fetch_assoc($result)) {
 </head>
 <body>
     <div id="menu">
-    <form class="logout-form" method="post">
+        <form class="logout-form" method="post">
             <input type="submit" name="logout" class="logout-button" value="Log Out">
         </form>
         <h1>Welcome, <?php echo $username; ?>!</h1>
@@ -166,50 +166,63 @@ if ($row = mysqli_fetch_assoc($result)) {
 
     <div id="content">
         <h1 style="text-align: center; background-color: #000; color: #fff; padding: 20px;">User List</h1>
-        <form method="get">
-        <table border="1">
-            <tr>
-                <th>ID</th>
-                <th>NAME</th>
-                <th>USER NAME</th>
-                <th>CONTACT NUMBER </th>
-                <th>Email</th>
-                <th>ADDRESS</th>
-                <th>ACTION</th>
-            </tr>
-        <?php
-        $servername="localhost";
-        $username="root";
-        $pass="";
-        $dbname="event_management";
-        $conn = new mysqli($servername, $username, $pass, $dbname);
+        <form method="post">
+            <table border="1">
+                <tr>
+                    <th>ID</th>
+                    <th>NAME</th>
+                    <th>USER NAME</th>
+                    <th>CONTACT NUMBER</th>
+                    <th>Email</th>
+                    <th>ADDRESS</th>
+                    <th>STATUS</th>
+                    <th>ACTION</th>
+                </tr>
+                <?php
+                $servername = "localhost";
+                $username = "root";
+                $pass = "";
+                $dbname = "event_management";
+                $conn = new mysqli($servername, $username, $pass, $dbname);
 
-        if(isset($_GET['del']))
-        {
-            $id= $_GET['del'];
-            $sql1="Delete from credential where id='$id'";
-            mysqli_query($conn,$sql1);
-        }
+                if (isset($_POST['action'])) {
+                    $id = $_POST['user_id'];
+                    $action = $_POST['action'];
 
-        $sql="select * from credential";
-        $res= mysqli_query($conn,$sql);
+                    if ($action === 'ban') {
+                        // Update the status to 0 (banned)
+                        $sql = "UPDATE credential SET status = 0 WHERE id='$id'";
+                        mysqli_query($conn, $sql);
+                    } elseif ($action === 'unban') {
+                        // Update the status to 1 (unbanned)
+                        $sql = "UPDATE credential SET status = 1 WHERE id='$id'";
+                        mysqli_query($conn, $sql);
+                    }
+                }
 
-        while($r= mysqli_fetch_assoc($res)) {
-        ?>
-            <tr>
-                <td><?php echo $r["id"]; ?></td>
-                <td><?php echo $r["name"]; ?></td>
-                <td><?php echo $r["username"]; ?></td>
-                <td><?php echo $r["cnumber"]; ?></td>
-                <td><?php echo $r["email"]; ?></td>
-                <td><?php echo $r["address"]; ?></td>
-                <center>
-                <td><button type="submit" name="del" value="<?php echo $r["id"]; ?>">Delete</button></td>
-                </center>
-            </tr>
-        <?php } ?>
-        </table>
+                $sql = "SELECT * FROM credential";
+                $res = mysqli_query($conn, $sql);
+
+                while ($r = mysqli_fetch_assoc($res)) {
+                    ?>
+                    <tr>
+                        <td><?php echo $r["id"]; ?></td>
+                        <td><?php echo $r["name"]; ?></td>
+                        <td><?php echo $r["username"]; ?></td>
+                        <td><?php echo $r["cnumber"]; ?></td>
+                        <td><?php echo $r["email"]; ?></td>
+                        <td><?php echo $r["address"]; ?></td>
+                        <td><?php echo $r["status"]; ?></td>
+                        <td>
+                            <input type="hidden" name="user_id" value="<?php echo $r["id"]; ?>">
+                            <button type="submit" name="action" value="ban">Ban</button>
+                            <button type="submit" name="action" value="unban">Unban</button>
+                        </td>
+                    </tr>
+                <?php } ?>
+            </table>
         </form>
     </div>
 </body>
 </html>
+

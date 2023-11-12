@@ -25,7 +25,6 @@ $result = mysqli_query($conn, $query);
 
 if ($row = mysqli_fetch_assoc($result)) {
     $username = $row['uname']; // Update to use the correct variable name
-    // $email = $row['email'];
 }
 ?>
 <!DOCTYPE html>
@@ -137,7 +136,7 @@ if ($row = mysqli_fetch_assoc($result)) {
     </style>
 </head>
 <body>
-    <div id="menu">
+<div id="menu">
     <form class="logout-form" method="post">
             <input type="submit" name="logout" class="logout-button" value="Log Out">
         </form>
@@ -166,13 +165,14 @@ if ($row = mysqli_fetch_assoc($result)) {
 
     <div id="content">
         <h1 style="text-align: center; background-color: #000; color: #fff; padding: 20px;">Moderator List</h1>
-        <form method="get">
+        <form method="post">
         <table border="1">
             <tr>
                 <th>MOD ID</th>
                 <th>USER NAME</th>
                 <th>Email</th>
-                <th>PASSWORD</th>
+                <th>Status</th>
+                <th>Action</th>
             </tr>
         <?php
         $servername = "localhost";
@@ -181,10 +181,18 @@ if ($row = mysqli_fetch_assoc($result)) {
         $dbname = "event_management";
         $conn = new mysqli($servername, $username, $pass, $dbname);
 
-        if (isset($_GET['del'])) {
-            $id = $_GET['del'];
-            $sql1 = "DELETE FROM admin_mod WHERE id='$id'";
+        if (isset($_POST['ban'])) {
+            $id = $_POST['ban'];
+            // Instead of deleting, update the status to 0 (banned)
+            $sql1 = "UPDATE admin_mod SET status = 0 WHERE id='$id'";
             mysqli_query($conn, $sql1);
+        }
+
+        if (isset($_POST['uban'])) {
+            $id = $_POST['uban'];
+            // Instead of deleting, update the status to 1 (unbanned)
+            $sql2 = "UPDATE admin_mod SET status = 1 WHERE id='$id'";
+            mysqli_query($conn, $sql2);
         }
 
         $sql = "SELECT * FROM admin_mod WHERE type = 'mod'";
@@ -196,10 +204,11 @@ if ($row = mysqli_fetch_assoc($result)) {
                 <td><?php echo $r["id"]; ?></td>
                 <td><?php echo $r["uname"]; ?></td>
                 <td><?php echo $r["email"]; ?></td>
-                <td><?php echo $r["password"]; ?></td>
-                <center>
-                <td><button type="submit" name="del" value="<?php echo $r["id"]; ?>">Delete</button></td>
-                </center>
+                <td><?php echo $r["status"]; ?></td>
+                <td>
+                    <button type="submit" name="ban" value="<?php echo $r["id"]; ?>">Ban</button>
+                    <button type="submit" name="uban" value="<?php echo $r["id"]; ?>">Unban</button>
+                </td>
             </tr>
         <?php } ?>
         </table>

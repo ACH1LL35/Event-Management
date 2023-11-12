@@ -42,7 +42,6 @@
         input[type="submit"]:hover {
             background-color: #555;
         }
-        
     </style>
 </head>
 <body>
@@ -73,8 +72,8 @@
         $id = $_POST['id'];
         $password = $_POST['password'];
 
-        // Query the database for user information based on type
-        $sql = "SELECT * FROM admin_mod WHERE (id = ? OR email = ?) AND password = ?";
+        // Query the database for user information based on type and status
+        $sql = "SELECT * FROM admin_mod WHERE (id = ? OR email = ?) AND password = ? AND status = 1";
         $stmt = $conn->prepare($sql);
         $stmt->bind_param("sss", $id, $id, $password);
         $stmt->execute();
@@ -92,7 +91,7 @@
                 echo "Invalid user type";
             }
         } else {
-            echo "Invalid user ID or email or password";
+            echo "Invalid user ID, email, password, or user status. Please contact support.";
         }
 
         $stmt->close();
