@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Nov 12, 2023 at 09:39 PM
+-- Generation Time: Nov 12, 2023 at 10:55 PM
 -- Server version: 10.4.28-MariaDB
 -- PHP Version: 8.2.4
 
@@ -45,7 +45,7 @@ INSERT INTO `admin_mod` (`id`, `uname`, `email`, `password`, `type`, `status`) V
 (25001, 'zobayer', '', 'admin2', 'admin', 0),
 (25002, 'modtest', 'mod1@gmail.com', 'modtest', 'mod', 0),
 (25003, 'mod33', 'mod33@gmail.com', 'mod33', '', 0),
-(25004, 'mod46', 'mod46@gmail.com', 'mod46', 'mod', 0);
+(25004, 'mod46', 'mod46@gmail.com', 'mod46', 'mod', 1);
 
 -- --------------------------------------------------------
 
@@ -103,9 +103,9 @@ CREATE TABLE `comments` (
 --
 
 INSERT INTO `comments` (`posted_by_id`, `posted_by_username`, `id`, `post_id`, `comment`, `created_at`, `status`) VALUES
-('15', 'alam56', 14, 23, 'comment id+username', '2023-11-10 14:38:53', 1),
+('15', 'alam56', 14, 23, 'comment id+username', '2023-11-10 14:38:53', 0),
 ('15', 'alam69', 15, 21, 'tywer5yweywerywe5rywerywer', '2023-11-12 20:26:57', 1),
-('15', 'alam69', 16, 23, 'tyutjtyjtyjtyjtryjtj', '2023-11-12 20:32:36', 1);
+('15', 'alam69', 16, 23, 'tyutjtyjtyjtyjtryjtj', '2023-11-12 20:32:36', 0);
 
 -- --------------------------------------------------------
 
@@ -154,7 +154,7 @@ CREATE TABLE `credential` (
 --
 
 INSERT INTO `credential` (`id`, `name`, `username`, `cnumber`, `email`, `password`, `address`, `status`) VALUES
-(15, 'Zobayer Alam', 'alam69', '01778651619', 'alam@gmail.com', 'user1', 'YDT[OKNSRTHOPBJIKSDFGBPBJOSDFGBJOPBN', 0);
+(15, 'Zobayer Alam', 'alam69', '01778651619', 'alam@gmail.com', 'user1', 'YDT[OKNSRTHOPBJIKSDFGBPBJOSDFGBJOPBN', 1);
 
 -- --------------------------------------------------------
 
@@ -205,7 +205,7 @@ CREATE TABLE `posts` (
 --
 
 INSERT INTO `posts` (`posted_by_id`, `posted_by_username`, `id`, `title`, `content`, `created_at`, `status`) VALUES
-('', 'alam56', 21, 'tracking test', 'posted_by column check', '2023-11-10 14:25:34', 1),
+('', 'alam56', 21, 'tracking test', 'posted_by column check', '2023-11-10 14:25:34', 0),
 ('15', 'alam56', 23, 'updated tracker test', 'id+username', '2023-11-10 14:38:34', 1);
 
 -- --------------------------------------------------------
