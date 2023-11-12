@@ -20,6 +20,18 @@ if (!$conn) {
     die("Connection failed: " . mysqli_connect_error());
 }
 
+if ($_SERVER["REQUEST_METHOD"] === "POST") {
+    if (isset($_POST['hide'])) {
+        $postId = $_POST['hide'];
+        $sqlUpdateStatus = "UPDATE posts SET status = 0 WHERE id = $postId";
+        mysqli_query($conn, $sqlUpdateStatus);
+    } elseif (isset($_POST['unhide'])) {
+        $postId = $_POST['unhide'];
+        $sqlUpdateStatus = "UPDATE posts SET status = 1 WHERE id = $postId";
+        mysqli_query($conn, $sqlUpdateStatus);
+    }
+}
+
 $query = "SELECT * FROM admin_mod WHERE id = '$id'";
 $result = mysqli_query($conn, $query);
 
@@ -179,9 +191,9 @@ if ($row = mysqli_fetch_assoc($result)) {
             <li><a href="AdminModAccess.php">MODERATOR ACCESS</a></li>
             <li><a href="AdminModManagement.php">MODERATOR MANAGEMENT</a></li>
             <li><a href="AdminPostModeration.php">POST MODERATION</a></li>
-            <li><a href="#">POST MODERATION HISTORY</a></li>
+            <li><a href="AdminPMH.php">POST MODERATION HISTORY</a></li>
             <li><a href="AdminCommentModeration.php">COMMENT MODERATION</a></li>
-            <li><a href="#">COMMENT MODERATION HISTORY</a></li>
+            <li><a href="AdminCMH.php">COMMENT MODERATION HISTORY</a></li>
             <li><a href="AdminQueryF.php">QUERY FEEDBACK</a></li>
             <li><a href="AdminQuotationF.php">QOUTATION FEEDBACK</a></li>
             <li><a href="AdminAdd2Gallary.php">ADD TO GALLERY</a></li>
@@ -191,25 +203,19 @@ if ($row = mysqli_fetch_assoc($result)) {
 
     <div id="content">
         <h1 style="text-align: center; background-color: #000; color: #fff; padding: 20px;">COMPLAINT FEEDBACK</h1>
-        <form method="get">
+        <form method="post">
         <table border="1">
             <tr>
-                <th>POST UniqueID</th>
+            <th>POST UniqueID</th>
                 <th>POSTERS UniqueID</th>
                 <th>POSTERS UserName</th>
                 <th>POST TITLE</th>
                 <th>POST</th>
                 <th>POST DATE</th>
+                <th>STATUS</th>
                 <th>ACTION</th>
             </tr>
         <?php
-        if(isset($_GET['del']))
-        {
-            $id= $_GET['del'];
-            $sql1="Delete from posts where id='$id'";
-            mysqli_query($conn,$sql1);
-        }
-
         $sql="select * from posts";
         $res= mysqli_query($conn,$sql);
 
@@ -222,8 +228,15 @@ if ($row = mysqli_fetch_assoc($result)) {
                 <td><?php echo $r["title"]; ?></td>
                 <td><?php echo $r["content"]; ?></td>
                 <td><?php echo $r["created_at"]; ?></td>
+                <td><?php echo $r["status"]; ?></td>
                 <center>
-                <td><button type="submit" name="del" value="<?php echo $r["id"]; ?>">Delete</button></td>
+                <td>
+                    <?php if ($r["status"] == 1): ?>
+                        <button type="submit" name="hide" value="<?php echo $r["id"]; ?>">Hide</button>
+                    <?php else: ?>
+                        <button type="submit" name="unhide" value="<?php echo $r["id"]; ?>">Unhide</button>
+                    <?php endif; ?>
+                </td>
                 </center>
             </tr>
         <?php } ?>

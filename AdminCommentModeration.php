@@ -20,6 +20,18 @@ if (!$conn) {
     die("Connection failed: " . mysqli_connect_error());
 }
 
+if ($_SERVER["REQUEST_METHOD"] === "POST") {
+    if (isset($_POST['hide'])) {
+        $commentId = $_POST['hide'];
+        $sqlUpdateStatus = "UPDATE comments SET status = 0 WHERE id = $commentId";
+        mysqli_query($conn, $sqlUpdateStatus);
+    } elseif (isset($_POST['unhide'])) {
+        $commentId = $_POST['unhide'];
+        $sqlUpdateStatus = "UPDATE comments SET status = 1 WHERE id = $commentId";
+        mysqli_query($conn, $sqlUpdateStatus);
+    }
+}
+
 $query = "SELECT * FROM admin_mod WHERE id = '$id'";
 $result = mysqli_query($conn, $query);
 
@@ -33,7 +45,7 @@ if ($row = mysqli_fetch_assoc($result)) {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>COMPLAINT FEEDBACK</title>
+    <title>COMMENT FEEDBACK</title>
     <style>
         body {
             font-family: Arial, Helvetica, sans-serif;
@@ -138,7 +150,7 @@ if ($row = mysqli_fetch_assoc($result)) {
 </head>
 <body>
     <div id="menu">
-    <form class="logout-form" method="post">
+        <form class="logout-form" method="post">
             <input type="submit" name="logout" class="logout-button" value="Log Out">
         </form>
         <?php
@@ -166,9 +178,9 @@ if ($row = mysqli_fetch_assoc($result)) {
         }
         ?>
 
-    <h1>Welcome, <?php echo $uname; ?>!</h1>
+        <h1>Welcome, <?php echo $uname; ?>!</h1>
         <ul>
-            <li><a href="AdminPanel.php">Home</a></li>
+        <li><a href="AdminPanel.php">Home</a></li>
             <li><a href="AdminEvent.php">CREATE EVENT</a></li>
             <li><a href="AdminEventHistory.php">EVENT HISTORY</a></li>
             <li><a href="AdminEventCal.php">EVENT CALENDAR</a></li>
@@ -179,9 +191,9 @@ if ($row = mysqli_fetch_assoc($result)) {
             <li><a href="AdminModAccess.php">MODERATOR ACCESS</a></li>
             <li><a href="AdminModManagement.php">MODERATOR MANAGEMENT</a></li>
             <li><a href="AdminPostModeration.php">POST MODERATION</a></li>
-            <li><a href="#">POST MODERATION HISTORY</a></li>
+            <li><a href="AdminPMH.php">POST MODERATION HISTORY</a></li>
             <li><a href="AdminCommentModeration.php">COMMENT MODERATION</a></li>
-            <li><a href="#">COMMENT MODERATION HISTORY</a></li>
+            <li><a href="AdminCMH.php">COMMENT MODERATION HISTORY</a></li>
             <li><a href="AdminQueryF.php">QUERY FEEDBACK</a></li>
             <li><a href="AdminQuotationF.php">QOUTATION FEEDBACK</a></li>
             <li><a href="AdminAdd2Gallary.php">ADD TO GALLERY</a></li>
@@ -190,42 +202,43 @@ if ($row = mysqli_fetch_assoc($result)) {
     </div>
 
     <div id="content">
-        <h1 style="text-align: center; background-color: #000; color: #fff; padding: 20px;">COMPLAINT FEEDBACK</h1>
-        <form method="get">
-        <table border="1">
-            <tr>
-                <th>COMMENT UniqueID</th>
-                <th>COMMENTEES UniqueID</th>
-                <th>COMMENTEES UserName</th>
-                <th>COMMENT</th>
-                <th>COMMENT DATE</th>
-                <th>ACTION</th>
-            </tr>
-        <?php
-        if(isset($_GET['del']))
-        {
-            $id= $_GET['del'];
-            $sql1="Delete from comments where id='$id'";
-            mysqli_query($conn,$sql1);
-        }
+        <h1 style="text-align: center; background-color: #000; color: #fff; padding: 20px;">COMMENT FEEDBACK</h1>
+        <form method="post">
+            <table border="1">
+                <tr>
+                    <th>COMMENT UniqueID</th>
+                    <th>COMMENTEES UniqueID</th>
+                    <th>COMMENTEES UserName</th>
+                    <th>COMMENT</th>
+                    <th>COMMENT DATE</th>
+                    <th>STATUS</th>
+                    <th>ACTION</th>
+                </tr>
+                <?php
+                $sql="select * from comments";
+                $res= mysqli_query($conn,$sql);
 
-        $sql="select * from comments";
-        $res= mysqli_query($conn,$sql);
-
-        while($r= mysqli_fetch_assoc($res)) {
-        ?>
-            <tr>
-                <td><?php echo $r["id"]; ?></td>
-                <td><?php echo $r["posted_by_id"]; ?></td>
-                <td><?php echo $r["posted_by_username"]; ?></td>
-                <td><?php echo $r["comment"]; ?></td>
-                <td><?php echo $r["created_at"]; ?></td>
-                <center>
-                <td><button type="submit" name="del" value="<?php echo $r["id"]; ?>">Delete</button></td>
-                </center>
-            </tr>
-        <?php } ?>
-        </table>
+                while($r= mysqli_fetch_assoc($res)) {
+                ?>
+                    <tr>
+                        <td><?php echo $r["id"]; ?></td>
+                        <td><?php echo $r["posted_by_id"]; ?></td>
+                        <td><?php echo $r["posted_by_username"]; ?></td>
+                        <td><?php echo $r["comment"]; ?></td>
+                        <td><?php echo $r["created_at"]; ?></td>
+                        <td><?php echo $r["status"]; ?></td>
+                        <center>
+                        <td>
+                            <?php if ($r["status"] == 1): ?>
+                                <button type="submit" name="hide" value="<?php echo $r["id"]; ?>">Hide</button>
+                            <?php else: ?>
+                                <button type="submit" name="unhide" value="<?php echo $r["id"]; ?>">Unhide</button>
+                            <?php endif; ?>
+                        </td>
+                        </center>
+                    </tr>
+                <?php } ?>
+            </table>
         </form>
     </div>
 </body>
