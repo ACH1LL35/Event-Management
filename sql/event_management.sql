@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Nov 11, 2023 at 11:10 PM
+-- Generation Time: Nov 12, 2023 at 12:36 PM
 -- Server version: 10.4.28-MariaDB
 -- PHP Version: 8.2.4
 
@@ -119,6 +119,15 @@ CREATE TABLE `complaint` (
   `feedback` varchar(512) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
+--
+-- Dumping data for table `complaint`
+--
+
+INSERT INTO `complaint` (`id`, `name`, `email`, `contact`, `description`, `feedback`) VALUES
+(124, 'Zobayer Alam', 'mod1@gmail.com', '01111111111', 'segergergergegegegege', ''),
+(125, 'Zobayer Alam', 'mod1@gmail.com', '01774861519', 'efedefeeedeeewfewewewew', ''),
+(126, 'Zobayer Alam', 'alam@gmail.com', '01774861519', 'ertertetertgetgeg', '');
+
 -- --------------------------------------------------------
 
 --
@@ -229,6 +238,28 @@ INSERT INTO `purchase_info` (`user_id`, `event_name`, `ticket_quantity`, `contac
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `query`
+--
+
+CREATE TABLE `query` (
+  `q_id` int(8) NOT NULL,
+  `u_id` int(8) NOT NULL,
+  `u_name` varchar(10) NOT NULL,
+  `u_email` varchar(32) NOT NULL,
+  `q_title` varchar(32) NOT NULL,
+  `q_des` varchar(256) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `query`
+--
+
+INSERT INTO `query` (`q_id`, `u_id`, `u_name`, `u_email`, `q_title`, `q_des`) VALUES
+(1, 15, 'alam69', 'alam@gmail.com', 'data insertion test', 'data insertion test 101\r\n');
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `ticket_cr`
 --
 
@@ -267,7 +298,9 @@ CREATE TABLE `venues` (
 --
 
 INSERT INTO `venues` (`venue_id`, `venue_name`) VALUES
-(1, 'HALL - 01');
+(1, 'HALL - 01'),
+(2, 'HALL - 02'),
+(3, 'HALL - 03');
 
 --
 -- Indexes for dumped tables
@@ -311,6 +344,12 @@ ALTER TABLE `posts`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Indexes for table `query`
+--
+ALTER TABLE `query`
+  ADD PRIMARY KEY (`q_id`);
+
+--
 -- Indexes for table `ticket_cr`
 --
 ALTER TABLE `ticket_cr`
@@ -342,7 +381,7 @@ ALTER TABLE `comments`
 -- AUTO_INCREMENT for table `complaint`
 --
 ALTER TABLE `complaint`
-  MODIFY `id` int(6) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=124;
+  MODIFY `id` int(6) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=127;
 
 --
 -- AUTO_INCREMENT for table `credential`
@@ -363,6 +402,12 @@ ALTER TABLE `posts`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=24;
 
 --
+-- AUTO_INCREMENT for table `query`
+--
+ALTER TABLE `query`
+  MODIFY `q_id` int(8) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
+--
 -- AUTO_INCREMENT for table `ticket_cr`
 --
 ALTER TABLE `ticket_cr`
@@ -372,7 +417,7 @@ ALTER TABLE `ticket_cr`
 -- AUTO_INCREMENT for table `venues`
 --
 ALTER TABLE `venues`
-  MODIFY `venue_id` int(3) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `venue_id` int(3) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- Constraints for dumped tables
