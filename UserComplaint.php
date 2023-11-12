@@ -1,61 +1,63 @@
-<?php
-$servername = "localhost";
-$username = "root";
-$pass = "";
-$dbname = "event_management";
-
-
-if ($_SERVER["REQUEST_METHOD"] == "POST") {
-
-    $conn = new mysqli($servername, $username, $pass, $dbname);
-
-
-    if ($conn->connect_error) {
-        die("Connection failed: " . $conn->connect_error);
-    }
-
-
-    $name = $_POST["name"];
-    $email = $_POST["email"];
-    $contact = $_POST["contact"];
-    $description = $_POST["description"];
-
-
-    $sql = "INSERT INTO complaint (name, email, contact, description) VALUES ('$name', '$email', '$contact', '$description')";
-
-    $displaySuccessMessage = false;
-
-    if ($_SERVER["REQUEST_METHOD"] == "POST") {
-
-        if ($conn->query($sql) === TRUE) {
-            $displaySuccessMessage = true;
-        } else {
-            echo "Error: " . $sql . "<br>" . $conn->error;
-        }
-    }
-
-    if ($displaySuccessMessage) {
-        echo '<div class="success-message">Complaint submitted successfully.</div>';
-    }
-    $conn->close();
-}
-?>
-
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Query/Complaint Submission Form</title>
+    <title>Dashboard</title>
     <style>
-        
-        
         body {
-            font-family: Arial, Helvetica, sans-serif;
+            font-family: Arial, sans-serif;
             background-color: #f2f2f2;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
-            margin-right: 20px;
+            margin: 0;
+            padding: 0;
+        }
+        h1 {
+            background-color: #333;
+            color: #fff;
+            padding: 20px;
+            text-align: center;
+            margin: 0;
+        }
+        #sidebar {
+            float: left;
+            width: 15%; /* Adjust width as needed */
+        }
+        #content {
+            float: left;
+            width: 80%; /* Adjust width as needed */
+        }
+        ul {
+            list-style-type: none;
+            padding: 0;
+        }
+        ul li {
+            margin: 0;
+        }
+        ul li a {
+            display: block;
+            padding: 10px;
+            background-color: #eee;
+            text-decoration: none;
+        }
+        ul li a:hover {
+            background-color: #ddd;
+        }
+        #logout-container {
+            position: absolute;
+            top: 20px;
+            right: 10px;
+        }
+        .logout-button {
+            display: inline-block;
+            padding: 10px 20px;
+            background-color: #ff5733;
+            color: #fff;
+            text-decoration: none;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+        .logout-button:hover {
+            background-color: #ff0000;
         }
 
         .container {
@@ -65,7 +67,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             border: 1px solid #ccc;
             border-radius: 5px;
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            margin-left: 550px;
+            margin-top: 50px;
         }
+
 
         h2 {
             text-align: center;
@@ -129,12 +134,59 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             position: absolute;
             top: 0;
         }
-
     </style>
 </head>
 <body>
+    <?php
+    session_start();
 
-<div class="container">
+    if (isset($_POST['logout'])) {
+        // Destroy the session and redirect to the Login page
+        session_destroy();
+        header("Location: UserLogin.php");
+        exit();
+    }
+
+    if (!isset($_SESSION['id'])) {
+        header("Location: UserLogin.php");
+        exit();
+    }
+
+    $id = $_SESSION['id'];
+
+    $conn = mysqli_connect("localhost", "root", "", "event_management");
+
+    if (!$conn) {
+        die("Connection failed: " . mysqli_connect_error());
+    }
+
+    $query = "SELECT * FROM credential WHERE id = '$id'";
+    $result = mysqli_query($conn, $query);
+
+    if ($row = mysqli_fetch_assoc($result)) {
+        $username = $row['username'];
+        $email = $row['email'];
+    }
+    ?>
+
+    <h1>Welcome, <?php echo $username; ?>!</h1>
+
+    <div id="sidebar">
+        <h2>My Accounts</h2>
+        <ul>
+            <li><a href="UserProfile.php">DASHBOARD</a></li>
+            <li><a href="UserUpdate.php">ACCOUNT DETAILS</a></li>
+            <li><a href="UserAddress.php">ADDRESS BOOK</a></li>
+            <li><a href="UserTicket.php">PURCHASE TICKET</a></li>
+            <li><a href="UserPurchase.php">PURCHASE HISTORY</a></li>
+            <li><a href="UserVenueBook.php">BOOK VENUE</a></li>
+            <li><a href="UserVenueHistory.php">BOOKING HISTORY</a></li>
+            <li><a href="#">UPCOMING</a></li>
+            <li><a href="UserComplaint.php">Feedback</a></li>
+        </ul>
+    </div>
+
+    <div class="container">
     <h2 class="text-center">Complaint Submission Form</h2>
 
     <form action="<?php echo $_SERVER['PHP_SELF']; ?>" method="post">
@@ -165,5 +217,15 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     </form>
 </div>
 
+
+    <div id="logout-container">
+        <form method="post">
+            <input type="submit" name="logout" class="logout-button" value="Log Out">
+        </form>
+    </div>
+
+    <?php
+    mysqli_close($conn);
+    ?>
 </body>
 </html>
