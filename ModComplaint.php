@@ -26,12 +26,26 @@ $result = mysqli_query($conn, $query);
 if ($row = mysqli_fetch_assoc($result)) {
     $username = $row['uname'];
 }
+
+// Process form submissions
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    foreach ($_POST['complaint_id'] as $complaintId) {
+        $feedbackText = mysqli_real_escape_string($conn, $_POST['feedback'][$complaintId]);
+        $complaintId = mysqli_real_escape_string($conn, $complaintId);
+
+        // Insert the session ID into the fd_by column only for the associated row
+        $fdBy = mysqli_real_escape_string($conn, $id);
+
+        $updateQuery = "UPDATE complaint SET feedback = '$feedbackText', fd_by = '$fdBy' WHERE id = '$complaintId'";
+        mysqli_query($conn, $updateQuery);
+    }
+}
 ?>
 
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
+<meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Moderator Admin Page</title>
     <style>
@@ -150,18 +164,18 @@ if ($row = mysqli_fetch_assoc($result)) {
     </style>
 </head>
 <body>
-    <div class="sidebar">
+<div class="sidebar">
         <form class="logout-form" method="post">
             <input type="submit" name="logout" class="logout-button" value="Log Out">
         </form>
         <h1>Welcome <?php echo $username; ?></h1>
         <ul>
-        <li><a href="ModPanel.php">DASHBOARD</a></li>
+            <li><a href="ModPanel.php">DASHBOARD</a></li>
             <li><a href="ModInfoUpdate.php">INFORMATION UPDATE</a></li>
             <li><a href="ModEvent.php">CREATE EVENT</a></li>
             <li><a href="eventcal.php">EVENT CALENDAR</a></li>
             <li><a href="ModAnalysis.php">ANALYSIS</a></li>
-            <li><a href="ModComplaint.php">COMPLAINT LIST</a></li>
+            <li><a href="ModComplaint.php">COMPLAINT FEEDBACK</a></li>
             <li><a href="ModPostModeration.php">POST MODERATION</a></li>
             <li><a href="#">POST MODERATION HISTORY</a></li>
             <li><a href="ModCommentModeration.php">COMMENT MODERATION</a></li>
@@ -174,55 +188,41 @@ if ($row = mysqli_fetch_assoc($result)) {
     </div>
 
     <div id="content">
-        <h1>COMPLAINT LIST</h1>
-        <form method="post">
-            <table border="1">
+        <h1>COMPLAINT FEEDBACK</h1>
+    <form method="post">
+        <table border="1">
+            <tr>
+                <th>Complaint ID</th>
+                <th>Name</th>
+                <th>Email</th>
+                <th>Description</th>
+                <th>Current Feedback</th>
+                <th>Feedback</th>
+
+                <th>Action</th>
+            </tr>
+            <?php
+            $sql = "select * from complaint";
+            $res = mysqli_query($conn, $sql);
+
+            while ($r = mysqli_fetch_assoc($res)) {
+                ?>
                 <tr>
-                    <th>Complaint ID</th>
-                    <th>Name</th>
-                    <th>Email</th>
-                    <th>Description</th>
-                    <th>Current Feedback</th>
-                    <th>Feedback</th>
-                    <th>Status</th>
-                    <th>Action</th>
+                    <td><?php echo $r["id"]; ?></td>
+                    <td><?php echo $r["name"]; ?></td>
+                    <td><?php echo $r["email"]; ?></td>
+                    <td><?php echo $r["description"]; ?></td>
+                    <td><?php echo $r["feedback"]; ?></td>
+                    <td>
+                        <textarea name="feedback[<?php echo $r['id']; ?>]" rows="3"
+                                  cols="30"><?php echo $r['feedback']; ?></textarea>
+                    </td>
+                    <td>
+                        <button type="submit" name="complaint_id[]" value="<?php echo $r["id"]; ?>">Submit Feedback</button>
+                    </td>
                 </tr>
-                <?php
-                if (isset($_POST['submit'])) {
-                    foreach ($_POST['feedback'] as $complaintId => $feedbackText) {
-                        $complaintId = mysqli_real_escape_string($conn, $complaintId);
-                        $feedbackText = mysqli_real_escape_string($conn, $feedbackText);
-
-                        $updateQuery = "UPDATE complaint SET feedback = '$feedbackText' WHERE id = '$complaintId'";
-                        mysqli_query($conn, $updateQuery);
-                    }
-                }
-
-                $sql = "select * from complaint";
-                $res = mysqli_query($conn, $sql);
-
-                while ($r = mysqli_fetch_assoc($res)) {
-                    ?>
-                    <tr>
-                        <td><?php echo $r["id"]; ?></td>
-                        <td><?php echo $r["name"]; ?></td>
-                        <td><?php echo $r["email"]; ?></td>
-                        <td><?php echo $r["description"]; ?></td>
-                        <td><?php echo $r["feedback"]; ?></td>
-                        <td>
-                            <textarea name="feedback[<?php echo $r['id']; ?>]" rows="3"
-                                      cols="30"><?php echo $r['feedback']; ?></textarea>
-                        </td>
-                        <td><input type="submit" name="submit" value="Submit Feedback"></td>
-                        <td>
-                            <center>
-                                <button type="submit" name="del" value="<?php echo $r["id"]; ?>">Delete</button>
-                            </center>
-                        </td>
-                    </tr>
-                <?php } ?>
-            </table>
-        </form>
-    </div>
+            <?php } ?>
+        </table>
+    </form>
 </body>
 </html>

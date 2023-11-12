@@ -200,7 +200,7 @@ if ($row = mysqli_fetch_assoc($result)) {
                 <th>Contact No.</th>
                 <th>Description</th>
                 <th>Feedback</th>
-                <th>Status</th>
+                <th>Feedback Given By</th>
                 <th>Action</th>
             </tr>
         <?php
@@ -223,6 +223,7 @@ if ($row = mysqli_fetch_assoc($result)) {
                 <td><?php echo $r["contact"]; ?></td>
                 <td><?php echo $r["description"]; ?></td>
                 <td><?php echo $r["feedback"]; ?></td>
+                <td><?php echo $r["fd_by"]; ?></td>
                 <center>
                 <td><button type="submit" name="del" value="<?php echo $r["id"]; ?>">Delete</button></td>
                 </center>
