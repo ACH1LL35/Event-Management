@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Nov 12, 2023 at 05:57 PM
+-- Generation Time: Nov 12, 2023 at 09:39 PM
 -- Server version: 10.4.28-MariaDB
 -- PHP Version: 8.2.4
 
@@ -33,7 +33,7 @@ CREATE TABLE `admin_mod` (
   `email` varchar(32) NOT NULL,
   `password` varchar(32) NOT NULL,
   `type` varchar(10) NOT NULL,
-  `status` varchar(10) NOT NULL
+  `status` int(1) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
@@ -41,11 +41,11 @@ CREATE TABLE `admin_mod` (
 --
 
 INSERT INTO `admin_mod` (`id`, `uname`, `email`, `password`, `type`, `status`) VALUES
-(25000, 'alam', 'admin1@gmail.com', 'admin1', 'admin', ''),
-(25001, 'zobayer', '', 'admin2', 'admin', ''),
-(25002, 'modtest', 'mod1@gmail.com', 'modtest', 'mod', ''),
-(25003, 'mod33', 'mod33@gmail.com', 'mod33', '', ''),
-(25004, 'mod46', 'mod46@gmail.com', 'mod46', 'mod', '');
+(25000, 'alam', 'admin1@gmail.com', 'admin1', 'admin', 0),
+(25001, 'zobayer', '', 'admin2', 'admin', 0),
+(25002, 'modtest', 'mod1@gmail.com', 'modtest', 'mod', 0),
+(25003, 'mod33', 'mod33@gmail.com', 'mod33', '', 0),
+(25004, 'mod46', 'mod46@gmail.com', 'mod46', 'mod', 0);
 
 -- --------------------------------------------------------
 
@@ -94,15 +94,18 @@ CREATE TABLE `comments` (
   `id` int(11) NOT NULL,
   `post_id` int(11) NOT NULL,
   `comment` text NOT NULL,
-  `created_at` timestamp NOT NULL DEFAULT current_timestamp()
+  `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
+  `status` int(1) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `comments`
 --
 
-INSERT INTO `comments` (`posted_by_id`, `posted_by_username`, `id`, `post_id`, `comment`, `created_at`) VALUES
-('15', 'alam56', 14, 23, 'comment id+username', '2023-11-10 14:38:53');
+INSERT INTO `comments` (`posted_by_id`, `posted_by_username`, `id`, `post_id`, `comment`, `created_at`, `status`) VALUES
+('15', 'alam56', 14, 23, 'comment id+username', '2023-11-10 14:38:53', 1),
+('15', 'alam69', 15, 21, 'tywer5yweywerywe5rywerywer', '2023-11-12 20:26:57', 1),
+('15', 'alam69', 16, 23, 'tyutjtyjtyjtyjtryjtj', '2023-11-12 20:32:36', 1);
 
 -- --------------------------------------------------------
 
@@ -143,7 +146,7 @@ CREATE TABLE `credential` (
   `email` varchar(32) NOT NULL,
   `password` varchar(32) NOT NULL,
   `address` varchar(256) NOT NULL,
-  `status` varchar(10) NOT NULL
+  `status` int(1) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
@@ -151,7 +154,7 @@ CREATE TABLE `credential` (
 --
 
 INSERT INTO `credential` (`id`, `name`, `username`, `cnumber`, `email`, `password`, `address`, `status`) VALUES
-(15, 'Zobayer Alam', 'alam69', '01778651619', 'alam@gmail.com', 'user1', 'YDT[OKNSRTHOPBJIKSDFGBPBJOSDFGBJOPBN', '');
+(15, 'Zobayer Alam', 'alam69', '01778651619', 'alam@gmail.com', 'user1', 'YDT[OKNSRTHOPBJIKSDFGBPBJOSDFGBJOPBN', 0);
 
 -- --------------------------------------------------------
 
@@ -193,16 +196,17 @@ CREATE TABLE `posts` (
   `id` int(11) NOT NULL,
   `title` varchar(255) NOT NULL,
   `content` text NOT NULL,
-  `created_at` timestamp NOT NULL DEFAULT current_timestamp()
+  `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
+  `status` int(1) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `posts`
 --
 
-INSERT INTO `posts` (`posted_by_id`, `posted_by_username`, `id`, `title`, `content`, `created_at`) VALUES
-('', 'alam56', 21, 'tracking test', 'posted_by column check', '2023-11-10 14:25:34'),
-('15', 'alam56', 23, 'updated tracker test', 'id+username', '2023-11-10 14:38:34');
+INSERT INTO `posts` (`posted_by_id`, `posted_by_username`, `id`, `title`, `content`, `created_at`, `status`) VALUES
+('', 'alam56', 21, 'tracking test', 'posted_by column check', '2023-11-10 14:25:34', 1),
+('15', 'alam56', 23, 'updated tracker test', 'id+username', '2023-11-10 14:38:34', 1);
 
 -- --------------------------------------------------------
 
@@ -248,15 +252,17 @@ CREATE TABLE `query` (
   `u_name` varchar(10) NOT NULL,
   `u_email` varchar(32) NOT NULL,
   `q_title` varchar(32) NOT NULL,
-  `q_des` varchar(256) NOT NULL
+  `q_des` varchar(256) NOT NULL,
+  `q_fed` varchar(256) NOT NULL,
+  `fd_by` varchar(32) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `query`
 --
 
-INSERT INTO `query` (`q_id`, `u_id`, `u_name`, `u_email`, `q_title`, `q_des`) VALUES
-(1, 15, 'alam69', 'alam@gmail.com', 'data insertion test', 'data insertion test 101\r\n');
+INSERT INTO `query` (`q_id`, `u_id`, `u_name`, `u_email`, `q_title`, `q_des`, `q_fed`, `fd_by`) VALUES
+(1, 15, 'alam69', 'alam@gmail.com', 'data insertion test', 'data insertion test 101\r\n', '', '');
 
 -- --------------------------------------------------------
 
@@ -270,8 +276,17 @@ CREATE TABLE `quotation` (
   `u_name` varchar(10) NOT NULL,
   `u_email` varchar(32) NOT NULL,
   `qo_about` varchar(32) NOT NULL,
-  `qo_des` varchar(256) NOT NULL
+  `qo_des` varchar(256) NOT NULL,
+  `qo_fed` varchar(256) NOT NULL,
+  `fd_by` varchar(32) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `quotation`
+--
+
+INSERT INTO `quotation` (`qo_id`, `u_id`, `u_name`, `u_email`, `qo_about`, `qo_des`, `qo_fed`, `fd_by`) VALUES
+(0, 15, 'alam69', 'alam@gmail.com', 'hsdgfkjhgvsjdfghjksfgjks', 'sfoiyuhsdgfihgsfioysfsfasfasf', '', '0');
 
 -- --------------------------------------------------------
 
@@ -391,7 +406,7 @@ ALTER TABLE `admin_mod`
 -- AUTO_INCREMENT for table `comments`
 --
 ALTER TABLE `comments`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
 
 --
 -- AUTO_INCREMENT for table `complaint`
