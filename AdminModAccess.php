@@ -217,6 +217,8 @@ if ($result->num_rows > 0) {
             <li><a href="#">POST MODERATION HISTORY</a></li>
             <li><a href="AdminCommentModeration.php">COMMENT MODERATION</a></li>
             <li><a href="#">COMMENT MODERATION HISTORY</a></li>
+            <li><a href="#">QUERY FEEDBACK</a></li>
+            <li><a href="#">QOUTATION FEEDBACK</a></li>
             <li><a href="AdminAdd2Gallary.php">ADD TO GALLERY</a></li>
             <li><a href="UserManagement.php">USER MANAGEMENT</a></li>
         </ul>

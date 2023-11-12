@@ -166,6 +166,8 @@ if ($row = mysqli_fetch_assoc($result)) {
             <li><a href="#">POST MODERATION HISTORY</a></li>
             <li><a href="ModCommentModeration.php">COMMENT MODERATION</a></li>
             <li><a href="#">COMMENT MODERATION HISTORY</a></li>
+            <li><a href="#">QUERY FEEDBACK</a></li>
+            <li><a href="#">QOUTATION FEEDBACK</a></li>
             <li><a href="ModComplaint.php">Contact Update</a></li>
             <li><a href="ModComplaint.php">Support Mail</a></li>
         </ul>

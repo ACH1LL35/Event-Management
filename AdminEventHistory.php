@@ -183,6 +183,8 @@ if ($row = mysqli_fetch_assoc($result)) {
             <li><a href="#">POST MODERATION HISTORY</a></li>
             <li><a href="AdminCommentModeration.php">COMMENT MODERATION</a></li>
             <li><a href="#">COMMENT MODERATION HISTORY</a></li>
+            <li><a href="#">QUERY FEEDBACK</a></li>
+            <li><a href="#">QOUTATION FEEDBACK</a></li>
             <li><a href="AdminAdd2Gallary.php">ADD TO GALLERY</a></li>
             <li><a href="AdminUserManagement.php">USER MANAGEMENT</a></li>
         </ul>
