@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Nov 12, 2023 at 12:36 PM
+-- Generation Time: Nov 12, 2023 at 05:57 PM
 -- Server version: 10.4.28-MariaDB
 -- PHP Version: 8.2.4
 
@@ -116,17 +116,18 @@ CREATE TABLE `complaint` (
   `email` varchar(32) NOT NULL,
   `contact` varchar(11) NOT NULL,
   `description` varchar(512) NOT NULL,
-  `feedback` varchar(512) NOT NULL
+  `feedback` varchar(512) NOT NULL,
+  `fd_by` varchar(32) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `complaint`
 --
 
-INSERT INTO `complaint` (`id`, `name`, `email`, `contact`, `description`, `feedback`) VALUES
-(124, 'Zobayer Alam', 'mod1@gmail.com', '01111111111', 'segergergergegegegege', ''),
-(125, 'Zobayer Alam', 'mod1@gmail.com', '01774861519', 'efedefeeedeeewfewewewew', ''),
-(126, 'Zobayer Alam', 'alam@gmail.com', '01774861519', 'ertertetertgetgeg', '');
+INSERT INTO `complaint` (`id`, `name`, `email`, `contact`, `description`, `feedback`, `fd_by`) VALUES
+(124, 'Zobayer Alam', 'mod1@gmail.com', '01111111111', 'segergergergegegegege', 'us id test 53', '25002'),
+(125, 'Zobayer Alam', 'mod1@gmail.com', '01774861519', 'efedefeeedeeewfewewewew', 'sdfsf', ''),
+(126, 'Zobayer Alam', 'alam@gmail.com', '01774861519', 'ertertetertgetgeg', 'sfsfsfsfs', '');
 
 -- --------------------------------------------------------
 
@@ -256,6 +257,21 @@ CREATE TABLE `query` (
 
 INSERT INTO `query` (`q_id`, `u_id`, `u_name`, `u_email`, `q_title`, `q_des`) VALUES
 (1, 15, 'alam69', 'alam@gmail.com', 'data insertion test', 'data insertion test 101\r\n');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `quotation`
+--
+
+CREATE TABLE `quotation` (
+  `qo_id` int(8) NOT NULL,
+  `u_id` int(8) NOT NULL,
+  `u_name` varchar(10) NOT NULL,
+  `u_email` varchar(32) NOT NULL,
+  `qo_about` varchar(32) NOT NULL,
+  `qo_des` varchar(256) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
 
