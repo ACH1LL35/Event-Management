@@ -24,8 +24,7 @@ $query = "SELECT * FROM admin_mod WHERE id = '$id'";
 $result = mysqli_query($conn, $query);
 
 if ($row = mysqli_fetch_assoc($result)) {
-    $username = $row['uname']; // Update to use the correct variable name
-    // $email = $row['email'];
+    $username = $row['uname'];
 }
 ?>
 
@@ -152,12 +151,12 @@ if ($row = mysqli_fetch_assoc($result)) {
 </head>
 <body>
     <div class="sidebar">
-    <form class="logout-form" method="post">
+        <form class="logout-form" method="post">
             <input type="submit" name="logout" class="logout-button" value="Log Out">
         </form>
         <h1>Welcome <?php echo $username; ?></h1>
         <ul>
-            <li><a href="ModPanel.php">DASHBOARD</a></li>
+        <li><a href="ModPanel.php">DASHBOARD</a></li>
             <li><a href="ModInfoUpdate.php">INFORMATION UPDATE</a></li>
             <li><a href="ModEvent.php">CREATE EVENT</a></li>
             <li><a href="eventcal.php">EVENT CALENDAR</a></li>
@@ -175,45 +174,54 @@ if ($row = mysqli_fetch_assoc($result)) {
     </div>
 
     <div id="content">
-    <h1>COMPLAINT LIST</h1>
-        <form method="get">
-        <table border="1">
-            <tr>
-                <th>Complaint ID</th>
-                <th>Name</th>
-                <th>Email</th>
-                <th>Contact No.</th>
-                <th>Description</th>
-                <th>Feedback</th>
-                <th>Status</th>
-                <th>Action</th>
-            </tr>
-        <?php
-        if(isset($_GET['del']))
-        {
-            $id= $_GET['del'];
-            $sql1="Delete from complaint where id='$id'";
-            mysqli_query($conn,$sql1);
-        }
+        <h1>COMPLAINT LIST</h1>
+        <form method="post">
+            <table border="1">
+                <tr>
+                    <th>Complaint ID</th>
+                    <th>Name</th>
+                    <th>Email</th>
+                    <th>Description</th>
+                    <th>Current Feedback</th>
+                    <th>Feedback</th>
+                    <th>Status</th>
+                    <th>Action</th>
+                </tr>
+                <?php
+                if (isset($_POST['submit'])) {
+                    foreach ($_POST['feedback'] as $complaintId => $feedbackText) {
+                        $complaintId = mysqli_real_escape_string($conn, $complaintId);
+                        $feedbackText = mysqli_real_escape_string($conn, $feedbackText);
 
-        $sql="select * from complaint";
-        $res= mysqli_query($conn,$sql);
+                        $updateQuery = "UPDATE complaint SET feedback = '$feedbackText' WHERE id = '$complaintId'";
+                        mysqli_query($conn, $updateQuery);
+                    }
+                }
 
-        while($r= mysqli_fetch_assoc($res)) {
-        ?>
-            <tr>
-                <td><?php echo $r["id"]; ?></td>
-                <td><?php echo $r["name"]; ?></td>
-                <td><?php echo $r["email"]; ?></td>
-                <td><?php echo $r["contact"]; ?></td>
-                <td><?php echo $r["description"]; ?></td>
-                <td><?php echo $r["feedback"]; ?></td>
-                <center>
-                <td><button type="submit" name="del" value="<?php echo $r["id"]; ?>">Delete</button></td>
-                </center>
-            </tr>
-        <?php } ?>
-        </table>
+                $sql = "select * from complaint";
+                $res = mysqli_query($conn, $sql);
+
+                while ($r = mysqli_fetch_assoc($res)) {
+                    ?>
+                    <tr>
+                        <td><?php echo $r["id"]; ?></td>
+                        <td><?php echo $r["name"]; ?></td>
+                        <td><?php echo $r["email"]; ?></td>
+                        <td><?php echo $r["description"]; ?></td>
+                        <td><?php echo $r["feedback"]; ?></td>
+                        <td>
+                            <textarea name="feedback[<?php echo $r['id']; ?>]" rows="3"
+                                      cols="30"><?php echo $r['feedback']; ?></textarea>
+                        </td>
+                        <td><input type="submit" name="submit" value="Submit Feedback"></td>
+                        <td>
+                            <center>
+                                <button type="submit" name="del" value="<?php echo $r["id"]; ?>">Delete</button>
+                            </center>
+                        </td>
+                    </tr>
+                <?php } ?>
+            </table>
         </form>
     </div>
 </body>
