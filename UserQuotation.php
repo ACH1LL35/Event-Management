@@ -183,15 +183,13 @@
     }
 
     if ($_SERVER["REQUEST_METHOD"] == "POST") {
-        $name = mysqli_real_escape_string($conn, $_POST['name']);
-        $email = mysqli_real_escape_string($conn, $_POST['email']);
-        $contact = mysqli_real_escape_string($conn, $_POST['contact']);
+        $title = mysqli_real_escape_string($conn, $_POST['title']);
         $description = mysqli_real_escape_string($conn, $_POST['description']);
 
-        $insertQuery = "INSERT INTO complaint (name, email, contact, description) VALUES ('$name', '$email', '$contact', '$description')";
+        $insertQuery = "INSERT INTO quotation (u_id, u_name, u_email, qo_about, qo_des) VALUES ('$id','$username', '$email', '$title', '$description')";
 
         if (mysqli_query($conn, $insertQuery)) {
-            echo '<div class="success-message">Complaint submitted successfully!</div>';
+            echo '<div class="success-message">Query submitted successfully!</div>';
         } else {
             echo '<div class="error-message">Error: ' . mysqli_error($conn) . '</div>';
         }
@@ -212,29 +210,20 @@
             <li><a href="UserVenueBook.php">BOOK VENUE</a></li>
             <li><a href="UserVenueHistory.php">BOOKING HISTORY</a></li>
             <li><a href="#">UPCOMING</a></li>
-            <li><a href="UserQuery.php">Query</a></li>
-            <li><a href="UserQuotation.php">Ask for Quotation</a></li>
-            <li><a href="UserComplaint.php">Feedback</a></li>
+            <li><a href="UserQuery.php">QUERY</a></li>
+            <li><a href="UserQuotation.php">ASK FOR QUOTATION</a></li>
+            <li><a href="UserComplaint.php">FEEDBACK</a></li>
         </ul>
     </div>
 
     <div class="container">
-    <h2 class="text-center">Complaint Submission Form</h2>
+    <h2 class="text-center">Quotation Asking Form</h2>
 
     <form action="<?php echo $_SERVER['PHP_SELF']; ?>" method="post">
-        <div class="form-group">
-            <label for="name">Name:</label>
-            <input type="text" id="name" name="name" required>
-        </div>
 
         <div class="form-group">
-            <label for="email">Email:</label>
-            <input type="email" id="email" name="email" required>
-        </div>
-
-        <div class="form-group">
-            <label for "contact">Contact Number:</label>
-            <input type="tel" id="contact_number" name="contact" required>
+            <label for "title">About:</label>
+            <input type="tel" id="title" name="title" required>
         </div>
 
         <div class="form-group">

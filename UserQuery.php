@@ -189,7 +189,7 @@
         $insertQuery = "INSERT INTO query (u_id, u_name, u_email, q_title, q_des) VALUES ('$id','$username', '$email', '$title', '$description')";
 
         if (mysqli_query($conn, $insertQuery)) {
-            echo '<div class="success-message">Quesry submitted successfully!</div>';
+            echo '<div class="success-message">Query submitted successfully!</div>';
         } else {
             echo '<div class="error-message">Error: ' . mysqli_error($conn) . '</div>';
         }
@@ -210,9 +210,9 @@
             <li><a href="UserVenueBook.php">BOOK VENUE</a></li>
             <li><a href="UserVenueHistory.php">BOOKING HISTORY</a></li>
             <li><a href="#">UPCOMING</a></li>
-            <li><a href="UserQuery.php">Query</a></li>
-            <li><a href="UserQuotation.php">Ask for Quotation</a></li>
-            <li><a href="UserComplaint.php">Feedback</a></li>
+            <li><a href="UserQuery.php">QUERY</a></li>
+            <li><a href="UserQuotation.php">ASK FOR QUOTATION</a></li>
+            <li><a href="UserComplaint.php">FEEDBACK</a></li>
         </ul>
     </div>
 
