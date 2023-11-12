@@ -206,6 +206,9 @@ if ($row = mysqli_fetch_assoc($result)) {
         <form method="post">
             <table border="1">
                 <tr>
+                    <!-- <th>POST UniqueID</th>
+                    <th>POSTERS UniqueID</th>
+                    <th>POSTERS UserName</th> -->
                     <th>POST TITLE</th>
                     <th>POST</th>
                     <th>POST DATE</th>
@@ -219,6 +222,9 @@ if ($row = mysqli_fetch_assoc($result)) {
                 while ($r = mysqli_fetch_assoc($res)) {
                     ?>
                     <tr>
+                        <!-- <td>?php echo $r["id"]; ?></td>
+                        <td>?php echo $r["posted_by_id"]; ?></td>
+                        <td>?php echo $r["posted_by_username"]; ?></td> -->
                         <td><?php echo $r["title"]; ?></td>
                         <td><?php echo $r["content"]; ?></td>
                         <td><?php echo $r["created_at"]; ?></td>

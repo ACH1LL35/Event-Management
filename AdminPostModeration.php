@@ -206,7 +206,7 @@ if ($row = mysqli_fetch_assoc($result)) {
         <form method="post">
         <table border="1">
             <tr>
-            <th>POST UniqueID</th>
+                <th>POST UniqueID</th>
                 <th>POSTERS UniqueID</th>
                 <th>POSTERS UserName</th>
                 <th>POST TITLE</th>
