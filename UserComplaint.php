@@ -212,8 +212,8 @@
             <li><a href="UserVenueBook.php">BOOK VENUE</a></li>
             <li><a href="UserVenueHistory.php">BOOKING HISTORY</a></li>
             <li><a href="#">UPCOMING</a></li>
-            <li><a href="#">Query</a></li>
-            <li><a href="#">Ask for Quotation</a></li>
+            <li><a href="UserQuery.php">Query</a></li>
+            <li><a href="UserQuotation.php">Ask for Quotation</a></li>
             <li><a href="UserComplaint.php">Feedback</a></li>
         </ul>
     </div>
