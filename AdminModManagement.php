@@ -205,10 +205,15 @@ if ($row = mysqli_fetch_assoc($result)) {
                 <td><?php echo $r["uname"]; ?></td>
                 <td><?php echo $r["email"]; ?></td>
                 <td><?php echo $r["status"]; ?></td>
+                <center>
                 <td>
-                    <button type="submit" name="ban" value="<?php echo $r["id"]; ?>">Ban</button>
-                    <button type="submit" name="uban" value="<?php echo $r["id"]; ?>">Unban</button>
+                    <?php if ($r["status"] == 1): ?>
+                        <button type="submit" name="ban" value="<?php echo $r["id"]; ?>">Ban</button>
+                    <?php else: ?>
+                        <button type="submit" name="uban" value="<?php echo $r["id"]; ?>">Unban</button>
+                    <?php endif; ?>
                 </td>
+                </center>
             </tr>
         <?php } ?>
         </table>
