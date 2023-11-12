@@ -207,8 +207,8 @@ $res = mysqli_query($conn, $sql);
             <li><a href="#">POST MODERATION HISTORY</a></li>
             <li><a href="ModCommentModeration.php">COMMENT MODERATION</a></li>
             <li><a href="#">COMMENT MODERATION HISTORY</a></li>
-            <li><a href="#">QUERY FEEDBACK</a></li>
-            <li><a href="#">QOUTATION FEEDBACK</a></li>
+            <li><a href="AdminQueryF.php">QUERY FEEDBACK</a></li>
+            <li><a href="AdminQuotationF.php">QOUTATION FEEDBACK</a></li>
             <li><a href="ModComplaint.php">Contact Update</a></li>
             <li><a href="ModComplaint.php">Support Mail</a></li>
         </ul>
