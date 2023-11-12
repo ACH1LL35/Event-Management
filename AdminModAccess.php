@@ -210,7 +210,7 @@ if ($result->num_rows > 0) {
             <li><a href="AdminTicketCreation.php">TICKET PUBLISH</a></li>
             <li><a href="AdminTicketList.php">TICKET SALE LIST</a></li>
             <li><a href="AdminAnalysis.php">ANALYSIS</a></li>
-            <li><a href="AdminComplaint.php">COMPLAINT LIST</a></li>
+            <li><a href="AdminComplaint.php">COMPLAINT FEEDBACK</a></li>
             <li><a href="AdminModAccess.php">MODERATOR ACCESS</a></li>
             <li><a href="AdminModManagement.php">MODERATOR MANAGEMENT</a></li>
             <li><a href="AdminPostModeration.php">POST MODERATION</a></li>
