@@ -18,11 +18,11 @@
         }
         #sidebar {
             float: left;
-            width: 15%; /* Adjust width as needed */
+            width: 15%;
         }
         #content {
             float: left;
-            width: 80%; /* Adjust width as needed */
+            width: 80%;
         }
         ul {
             list-style-type: none;

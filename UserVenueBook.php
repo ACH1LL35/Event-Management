@@ -116,6 +116,27 @@
             margin-top: 10px;
             text-align: center;
         }
+        #logout-container {
+            position: absolute;
+            top: 20px;
+            right: 10px;
+        }
+
+        .logout-button {
+            display: inline-block;
+            padding: 10px 20px;
+            background-color: #ff5733;
+            color: #fff;
+            text-decoration: none;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        .logout-button:hover {
+            background-color: #ff0000;
+        }
     </style>
 </head>
 <body>
@@ -256,6 +277,10 @@
     echo '</div>';
     $conn->close();
     ?>
-
+    <div id="logout-container">
+        <form method="post">
+            <input type="submit" name="logout" class="logout-button" value="Log Out">
+        </form>
+    </div>
 </body>
 </html>
