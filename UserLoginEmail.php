@@ -1,15 +1,12 @@
 <?php
 session_start();
 
-
 $servername = "localhost";
 $username = "root";
 $password = "";
 $database = "event_management";
 
-
 $conn = new mysqli($servername, $username, $password, $database);
-
 
 if ($conn->connect_error) {
     die("Connection failed: " . $conn->connect_error);
@@ -21,11 +18,9 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     $email = $_POST["email"];
     $password = $_POST["password"];
 
-
     $email = $conn->real_escape_string($email);
 
-
-    $query = "SELECT id, password FROM credential WHERE email = '$email'";
+    $query = "SELECT id, password, status FROM credential WHERE email = '$email'";
     $result = $conn->query($query);
 
     if (!$result) {
@@ -35,9 +30,13 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
             $row = $result->fetch_assoc();
 
             if ($password === $row["password"]) {
-                $_SESSION["id"] = $row["id"];
-                header("Location: UserProfile.php");
-                exit;
+                if ($row["status"] == 1) {
+                    $_SESSION["id"] = $row["id"];
+                    header("Location: UserProfile.php");
+                    exit;
+                } else {
+                    $errors[] = "Account is not active. Please contact support.";
+                }
             } else {
                 $errors[] = "Invalid email address or password.";
             }

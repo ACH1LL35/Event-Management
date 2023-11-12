@@ -1,4 +1,3 @@
-
 <?php
 session_start();
 
@@ -26,7 +25,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     $id = $conn->real_escape_string($id);
 
     // Query to retrieve user data
-    $query = "SELECT id, password FROM credential WHERE id = '$id'";
+    $query = "SELECT id, password, status FROM credential WHERE id = '$id'";
     $result = $conn->query($query);
 
     if (!$result) {
@@ -36,14 +35,18 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
             $row = $result->fetch_assoc();
 
             if ($password === $row["password"]) {
-                $_SESSION["id"] = $row["id"];
-                header("Location: UserProfile.php");
-                exit;
+                if ($row["status"] == 1) {
+                    $_SESSION["id"] = $row["id"];
+                    header("Location: UserProfile.php");
+                    exit;
+                } else {
+                    $errors[] = "Account is not active. Please contact support.";
+                }
             } else {
-                $errors[] = "Invalid user ID Or password.";//PASSWORD
+                $errors[] = "Invalid user ID or password.";
             }
         } else {
-            $errors[] = "Invalid user ID Or password.";//USER ID
+            $errors[] = "Invalid user ID or password.";
         }
     }
 }
