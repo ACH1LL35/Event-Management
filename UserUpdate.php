@@ -192,7 +192,7 @@
             <li><a href="#">UPCOMING</a></li>
             <li><a href="UserQuery.php">QUERY</a></li>
             <li><a href="UserQuotation.php">ASK FOR QUOTATION</a></li>
-            <li><a href="UserComplaint.php">FEEDBACK</a></li>
+            <li><a href="UserFeedback.php">FEEDBACK</a></li>
         </ul>
     </div>
 

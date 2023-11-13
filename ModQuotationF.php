@@ -188,7 +188,7 @@ if (isset($_POST['qo_fed'])) {
     </div>
 
     <div id="content">
-        <h1>QUERY FEEDBACK</h1>
+        <h1>QUOTATION FEEDBACK</h1>
     <form method="post">
         <table border="1">
             <tr>
