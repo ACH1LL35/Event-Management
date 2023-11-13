@@ -19,6 +19,14 @@
                 padding: 10px;
             }
 
+            h4 {
+                text-align: center;
+                background-color: #333;
+                color: #fff;
+                padding: 10px;
+                opacity: 50%;
+            }
+
             /* Style for the table */
             table {
                 width: 80%;
@@ -76,6 +84,7 @@
 
     if (mysqli_num_rows($result) > 0) {
         echo "<h1>Feedback History</h1>";
+        echo "<h4>FOR ANY ADDITIONAL QUERY USE THE ID FROM FEEDBACK AND SUBMIT A NEW QUERY</h4>";
         echo "<table>";
         echo "<tr>
                 <th>ID</th>
@@ -92,7 +101,7 @@
                         <td>" . $row['q_fed'] . (isset($row['qo_fed']) ? $row['qo_fed'] : "") . "</td>
                       </tr>";
             }
-            
+
         echo "</table>";
     } else {
         echo "No data history available.";
