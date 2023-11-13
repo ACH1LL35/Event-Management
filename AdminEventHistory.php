@@ -33,7 +33,7 @@ if ($row = mysqli_fetch_assoc($result)) {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>COMPLAINT FEEDBACK</title>
+    <title>Events Archieve</title>
     <style>
         body {
             font-family: Arial, Helvetica, sans-serif;
@@ -142,7 +142,6 @@ if ($row = mysqli_fetch_assoc($result)) {
             <input type="submit" name="logout" class="logout-button" value="Log Out">
         </form>
         <?php
-        session_start();
 
         if (!isset($_SESSION['id'])) {
             header("Location: AdminModLogin.php");

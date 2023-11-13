@@ -202,7 +202,7 @@ if ($row = mysqli_fetch_assoc($result)) {
     </div>
 
     <div id="content">
-        <h1 style="text-align: center; background-color: #000; color: #fff; padding: 20px;">POST MODERATION HISTORY</h1>
+        <h1 style="text-align: center; background-color: #000; color: #fff; padding: 20px;">COMMENT MODERATION HISTORY</h1>
         <form method="post">
             <table border="1">
                 <tr>

@@ -31,7 +31,7 @@ if ($row = mysqli_fetch_assoc($result)) {
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Image Upload and Admin Page</title>
+    <title>Image Upload</title>
     <style>
         /* Add your CSS styles here */
         body {
