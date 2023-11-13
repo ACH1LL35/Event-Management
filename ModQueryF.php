@@ -28,15 +28,15 @@ if ($row = mysqli_fetch_assoc($result)) {
 }
 
 // Process form submissions
-if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    foreach ($_POST['complaint_id'] as $complaintId) {
-        $feedbackText = mysqli_real_escape_string($conn, $_POST['feedback'][$complaintId]);
-        $complaintId = mysqli_real_escape_string($conn, $complaintId);
+if (isset($_POST['q_fed'])) {
+    foreach ($_POST['q_id'] as $qId) {
+        $q_fedText = isset($_POST['q_fed'][$qId]) ? mysqli_real_escape_string($conn, $_POST['q_fed'][$qId]) : '';
+        $qId = mysqli_real_escape_string($conn, $qId);
 
         // Insert the session ID into the fd_by column only for the associated row
         $fdBy = mysqli_real_escape_string($conn, $id);
 
-        $updateQuery = "UPDATE complaint SET feedback = '$feedbackText', fd_by = '$fdBy' WHERE id = '$complaintId'";
+        $updateQuery = "UPDATE query SET q_fed = '$q_fedText', fd_by = '$fdBy' WHERE q_id = '$qId'";
         mysqli_query($conn, $updateQuery);
     }
 }
@@ -47,7 +47,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 <head>
 <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Moderator Admin Page</title>
+    <title>Moderator Query Page</title>
     <style>
         body {
             font-family: Arial, Helvetica, sans-serif;
@@ -188,37 +188,38 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     </div>
 
     <div id="content">
-        <h1>COMPLAINT FEEDBACK</h1>
+        <h1>QUERY FEEDBACK</h1>
     <form method="post">
         <table border="1">
             <tr>
-                <th>Complaint ID</th>
+            <th>QUERY ID</th>
                 <th>Name</th>
                 <th>Email</th>
+                <th>Title</th>
                 <th>Description</th>
                 <th>Current Feedback</th>
                 <th>Feedback</th>
-
                 <th>Action</th>
             </tr>
             <?php
-            $sql = "select * from complaint";
+            $sql = "select * from query";
             $res = mysqli_query($conn, $sql);
 
             while ($r = mysqli_fetch_assoc($res)) {
                 ?>
-                <tr>
-                    <td><?php echo $r["id"]; ?></td>
-                    <td><?php echo $r["name"]; ?></td>
-                    <td><?php echo $r["email"]; ?></td>
-                    <td><?php echo $r["description"]; ?></td>
-                    <td><?php echo $r["feedback"]; ?></td>
+                    <tr>
+                    <td><?php echo $r["q_id"]; ?></td>
+                    <td><?php echo $r["u_name"]; ?></td>
+                    <td><?php echo $r["u_email"]; ?></td>
+                    <td><?php echo $r["q_title"]; ?></td>
+                    <td><?php echo $r["q_des"]; ?></td>
+                    <td><?php echo $r["q_fed"]; ?></td>
                     <td>
-                        <textarea name="feedback[<?php echo $r['id']; ?>]" rows="3"
-                                  cols="30"><?php echo $r['feedback']; ?></textarea>
+                        <textarea name="q_fed[<?php echo $r['q_id']; ?>]" rows="3"
+                                  cols="30"><?php echo $r['q_fed']; ?></textarea>
                     </td>
                     <td>
-                        <button type="submit" name="complaint_id[]" value="<?php echo $r["id"]; ?>">Submit Feedback</button>
+                        <button type="submit" name="q_id[]" value="<?php echo $r["q_id"]; ?>">Submit Feedback</button>
                     </td>
                 </tr>
             <?php } ?>

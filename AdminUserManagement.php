@@ -33,7 +33,7 @@ if ($row = mysqli_fetch_assoc($result)) {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>COMPLAINT FEEDBACK</title>
+    <title>USER</title>
     <style>
         body {
             font-family: Arial, Helvetica, sans-serif;
@@ -188,7 +188,7 @@ if ($row = mysqli_fetch_assoc($result)) {
                 if (isset($_POST['action'])) {
                     $id = $_POST['user_id'];
                     $action = $_POST['action'];
-
+                
                     if ($action === 'ban') {
                         // Update the status to 0 (banned)
                         $sql = "UPDATE credential SET status = 0 WHERE id='$id'";
@@ -198,7 +198,7 @@ if ($row = mysqli_fetch_assoc($result)) {
                         $sql = "UPDATE credential SET status = 1 WHERE id='$id'";
                         mysqli_query($conn, $sql);
                     }
-                }
+                }                
 
                 $sql = "SELECT * FROM credential";
                 $res = mysqli_query($conn, $sql);
@@ -213,11 +213,17 @@ if ($row = mysqli_fetch_assoc($result)) {
                         <td><?php echo $r["email"]; ?></td>
                         <td><?php echo $r["address"]; ?></td>
                         <td><?php echo $r["status"]; ?></td>
+
                         <td>
+                        <?php if ($r["status"] == 1): ?>
+                            <button type="submit" name="action" value="ban">BAN</button>
                             <input type="hidden" name="user_id" value="<?php echo $r["id"]; ?>">
-                            <button type="submit" name="action" value="ban">Ban</button>
-                            <button type="submit" name="action" value="unban">Unban</button>
+                        <?php else: ?>
+                            <button type="submit" name="action" value="unban">UNBAN</button>
+                            <input type="hidden" name="user_id" value="<?php echo $r["id"]; ?>">
+                        <?php endif; ?>
                         </td>
+
                     </tr>
                 <?php } ?>
             </table>

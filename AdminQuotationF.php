@@ -33,7 +33,7 @@ if ($row = mysqli_fetch_assoc($result)) {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>COMPLAINT FEEDBACK</title>
+    <title>QUOTATION FEEDBACK</title>
     <style>
         body {
             font-family: Arial, Helvetica, sans-serif;
@@ -190,43 +190,43 @@ if ($row = mysqli_fetch_assoc($result)) {
     </div>
 
     <div id="content">
-        <h1 style="text-align: center; background-color: #000; color: #fff; padding: 20px;">COMPLAINT FEEDBACK</h1>
+        <h1 style="text-align: center; background-color: #000; color: #fff; padding: 20px;">QUOTATION FEEDBACK</h1>
         <form method="get">
         <table border="1">
             <tr>
-                <th>Complaint ID</th>
+                <th>QOUTATION ID</th>
                 <th>Name</th>
                 <th>Email</th>
-                <th>Contact No.</th>
+                <th>ABOUT</th>
                 <th>Description</th>
                 <th>Feedback</th>
                 <th>Feedback Given By</th>
                 <th>Action</th>
             </tr>
         <?php
-        if(isset($_GET['del']))
-        {
-            $id= $_GET['del'];
-            $sql1="Delete from complaint where id='$id'";
-            mysqli_query($conn,$sql1);
-        }
+        // if(isset($_GET['del']))
+        // {
+        //     $id= $_GET['del'];
+        //     $sql1="Delete from complaint where id='$id'";
+        //     mysqli_query($conn,$sql1);
+        // }
 
-        $sql="select * from complaint";
+        $sql="select * from quotation";
         $res= mysqli_query($conn,$sql);
 
         while($r= mysqli_fetch_assoc($res)) {
         ?>
             <tr>
-                <td><?php echo $r["id"]; ?></td>
-                <td><?php echo $r["name"]; ?></td>
-                <td><?php echo $r["email"]; ?></td>
-                <td><?php echo $r["contact"]; ?></td>
-                <td><?php echo $r["description"]; ?></td>
-                <td><?php echo $r["feedback"]; ?></td>
+                <td><?php echo $r["qo_id"]; ?></td>
+                <td><?php echo $r["u_name"]; ?></td>
+                <td><?php echo $r["u_email"]; ?></td>
+                <td><?php echo $r["qo_about"]; ?></td>
+                <td><?php echo $r["qo_des"]; ?></td>
+                <td><?php echo $r["qo_fed"]; ?></td>
                 <td><?php echo $r["fd_by"]; ?></td>
-                <center>
-                <td><button type="submit" name="del" value="<?php echo $r["id"]; ?>">Delete</button></td>
-                </center>
+                <!-- <center>
+                <td><button type="submit" name="del" value="?php echo $r["id"]; ?>">Delete</button></td>
+                </center> -->
             </tr>
         <?php } ?>
         </table>
