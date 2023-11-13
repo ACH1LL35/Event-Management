@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Nov 12, 2023 at 10:55 PM
+-- Generation Time: Nov 13, 2023 at 11:00 AM
 -- Server version: 10.4.28-MariaDB
 -- PHP Version: 8.2.4
 
@@ -41,9 +41,9 @@ CREATE TABLE `admin_mod` (
 --
 
 INSERT INTO `admin_mod` (`id`, `uname`, `email`, `password`, `type`, `status`) VALUES
-(25000, 'alam', 'admin1@gmail.com', 'admin1', 'admin', 0),
+(25000, 'alam', 'admin1@gmail.com', 'admin1', 'admin', 1),
 (25001, 'zobayer', '', 'admin2', 'admin', 0),
-(25002, 'modtest', 'mod1@gmail.com', 'modtest', 'mod', 0),
+(25002, 'modtest', 'mod1@gmail.com', 'modtest', 'mod', 1),
 (25003, 'mod33', 'mod33@gmail.com', 'mod33', '', 0),
 (25004, 'mod46', 'mod46@gmail.com', 'mod46', 'mod', 1);
 
@@ -103,9 +103,9 @@ CREATE TABLE `comments` (
 --
 
 INSERT INTO `comments` (`posted_by_id`, `posted_by_username`, `id`, `post_id`, `comment`, `created_at`, `status`) VALUES
-('15', 'alam56', 14, 23, 'comment id+username', '2023-11-10 14:38:53', 0),
+('15', 'alam56', 14, 23, 'comment id+username', '2023-11-10 14:38:53', 1),
 ('15', 'alam69', 15, 21, 'tywer5yweywerywe5rywerywer', '2023-11-12 20:26:57', 1),
-('15', 'alam69', 16, 23, 'tyutjtyjtyjtyjtryjtj', '2023-11-12 20:32:36', 0);
+('15', 'alam69', 16, 23, 'tyutjtyjtyjtyjtryjtj', '2023-11-12 20:32:36', 1);
 
 -- --------------------------------------------------------
 
@@ -205,8 +205,8 @@ CREATE TABLE `posts` (
 --
 
 INSERT INTO `posts` (`posted_by_id`, `posted_by_username`, `id`, `title`, `content`, `created_at`, `status`) VALUES
-('', 'alam56', 21, 'tracking test', 'posted_by column check', '2023-11-10 14:25:34', 0),
-('15', 'alam56', 23, 'updated tracker test', 'id+username', '2023-11-10 14:38:34', 1);
+('', 'alam56', 21, 'tracking test', 'posted_by column check', '2023-11-10 14:25:34', 1),
+('15', 'alam56', 23, 'updated tracker test', 'id+username', '2023-11-10 14:38:34', 0);
 
 -- --------------------------------------------------------
 
@@ -262,7 +262,7 @@ CREATE TABLE `query` (
 --
 
 INSERT INTO `query` (`q_id`, `u_id`, `u_name`, `u_email`, `q_title`, `q_des`, `q_fed`, `fd_by`) VALUES
-(1, 15, 'alam69', 'alam@gmail.com', 'data insertion test', 'data insertion test 101\r\n', '', '');
+(1, 15, 'alam69', 'alam@gmail.com', 'data insertion test', 'data insertion test 101\r\n', 'rtheheheheherherherherh', '25002');
 
 -- --------------------------------------------------------
 
@@ -286,7 +286,7 @@ CREATE TABLE `quotation` (
 --
 
 INSERT INTO `quotation` (`qo_id`, `u_id`, `u_name`, `u_email`, `qo_about`, `qo_des`, `qo_fed`, `fd_by`) VALUES
-(0, 15, 'alam69', 'alam@gmail.com', 'hsdgfkjhgvsjdfghjksfgjks', 'sfoiyuhsdgfihgsfioysfsfasfasf', '', '0');
+(1, 15, 'alam69', 'alam@gmail.com', 'hsdgfkjhgvsjdfghjksfgjks', 'sfoiyuhsdgfihgsfioysfsfasfasf', 'e5yew5yeyeyeheheheheheh', '25002');
 
 -- --------------------------------------------------------
 
@@ -381,6 +381,12 @@ ALTER TABLE `query`
   ADD PRIMARY KEY (`q_id`);
 
 --
+-- Indexes for table `quotation`
+--
+ALTER TABLE `quotation`
+  ADD PRIMARY KEY (`qo_id`);
+
+--
 -- Indexes for table `ticket_cr`
 --
 ALTER TABLE `ticket_cr`
@@ -437,6 +443,12 @@ ALTER TABLE `posts`
 --
 ALTER TABLE `query`
   MODIFY `q_id` int(8) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
+--
+-- AUTO_INCREMENT for table `quotation`
+--
+ALTER TABLE `quotation`
+  MODIFY `qo_id` int(8) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `ticket_cr`
