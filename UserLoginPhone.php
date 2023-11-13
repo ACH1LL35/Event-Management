@@ -143,8 +143,9 @@ $conn->close();
         <form action="<?php echo $_SERVER['PHP_SELF']; ?>" method="POST">
             <div class="form-group">
                 <label for="cnumber">Contact Number:</label>
-                <input type="text" id="cnumber" name="cnumber" pattern=".{11,11}" required title="11 characters required" placeholder="Ex. 01774861519">
+                <input type="text" id="cnumber" name="cnumber" pattern="01[3-9]\d{8}" title="Enter a valid contact number starting with 013, 014, 015, 016, 017, 018, or 019" required>
             </div>
+
             <div class="form-group">
                 <label for="password">Password:</label>
                 <input type="password" id="password" name="password" required>

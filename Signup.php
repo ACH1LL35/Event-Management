@@ -143,9 +143,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 <p id="emailWarning" class="warning"></p>
             </div>
             <div class="form-group">
-                <label for="cnumber">Contact Number:</label>
-                <input type="text" id="cnumber" name="cnumber" required>
+            <label for="cnumber">Contact Number:</label>
+            <input type="text" id="cnumber" name="cnumber" pattern="01[3-9]\d{8}" title="Enter a valid contact number." required>
             </div>
+
             <div class="form-group">
                 <label for="password">Password:</label>
                 <input type="password" id="password" name="password" required>
