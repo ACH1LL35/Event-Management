@@ -205,7 +205,7 @@
                 <select name="event_name" required>
                     <option value="" disabled selected>Select an event</option>
                     <?php
-                    // Connect to your database (Modify the connection details as needed)
+
                     $servername = "localhost";
                     $username = "root";
                     $password = "";
@@ -216,8 +216,7 @@
                         die("Connection failed: " . $conn->connect_error);
                     }
 
-                    // Fetch event names and available tickets from the database
-                    $sql = "SELECT event_name, available_tickets FROM ticket_cr"; // Adjust your table name if needed
+                    $sql = "SELECT event_name, available_tickets FROM ticket_cr";
                     $result = $conn->query($sql);
 
                     if ($result->num_rows > 0) {
@@ -235,7 +234,7 @@
                 <input type="number" name="ticket_quantity" required><br>
 
                 <label for="contact_number">Contact Number:</label>
-                <input type="tel" name="contact_number" required><br><br> <!-- Added two <br> elements for spacing -->
+                <input type="tel" name="contact_number" required><br><br>
 
                 <input type="submit" value="Purchase Ticket">
             </form>
@@ -251,7 +250,7 @@
                 $contact_number = $_POST["contact_number"];
                 $user_id = $_SESSION['id'];
 
-                // Connect to your database (Modify the connection details as needed)
+                // Connect to your database
                 $servername = "localhost";
                 $username = "root";
                 $password = "";
