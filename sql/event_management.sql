@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Nov 15, 2023 at 05:40 PM
+-- Generation Time: Nov 15, 2023 at 05:42 PM
 -- Server version: 10.4.28-MariaDB
 -- PHP Version: 8.2.4
 
@@ -63,6 +63,16 @@ CREATE TABLE `booking` (
   `email` varchar(32) NOT NULL,
   `cnumber` varchar(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `booking`
+--
+
+INSERT INTO `booking` (`user_id`, `booking_id`, `venue_name`, `from_date`, `to_date`, `name`, `email`, `cnumber`) VALUES
+(15, '1APZR9LOA1', 'HALL - 01', '2023-11-16', '2023-11-16', 'Zobayer Alam', 'alam@gmail.com', '01778651619'),
+(15, 'C8PY1C4J5U', 'HALL - 02', '2023-11-18', '2023-11-18', 'Zobayer Alam', 'alam@gmail.com', '01778651619'),
+(15, '0HGS4SZKYO', 'HALL - 03', '2023-11-20', '2023-11-20', 'Zobayer Alam', 'alam@gmail.com', '01778651619'),
+(15, 'UK95CQ5L9N', 'HALL - 01', '2023-11-20', '2023-11-20', 'Zobayer Alam', 'alam@gmail.com', '01778651619');
 
 -- --------------------------------------------------------
 
@@ -199,7 +209,6 @@ INSERT INTO `posts` (`posted_by_id`, `posted_by_username`, `id`, `title`, `conte
 CREATE TABLE `purchase_info` (
   `user_id` int(6) NOT NULL,
   `ticket_id` varchar(10) NOT NULL,
-  `id` int(11) NOT NULL,
   `event_name` varchar(256) NOT NULL,
   `ticket_quantity` int(3) NOT NULL,
   `contact_number` varchar(11) NOT NULL,
@@ -211,8 +220,8 @@ CREATE TABLE `purchase_info` (
 -- Dumping data for table `purchase_info`
 --
 
-INSERT INTO `purchase_info` (`user_id`, `ticket_id`, `id`, `event_name`, `ticket_quantity`, `contact_number`, `email`, `name`) VALUES
-(15, '2Z2TD5907S', 0, 'dgvc', 20, '01778651619', 'alam@gmail.com', 'Zobayer Alam');
+INSERT INTO `purchase_info` (`user_id`, `ticket_id`, `event_name`, `ticket_quantity`, `contact_number`, `email`, `name`) VALUES
+(15, '2Z2TD5907S', 'dgvc', 20, '01778651619', 'alam@gmail.com', 'Zobayer Alam');
 
 -- --------------------------------------------------------
 
