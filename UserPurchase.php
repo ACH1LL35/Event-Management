@@ -31,7 +31,7 @@
                 <th>Ticket ID</th>
                 <th>Event Name</th>
                 <th>Ticket Quantity</th>
-                <th>Action</th>
+                <th colspan='2'>Action</th>
               </tr>";
 
         while ($row = mysqli_fetch_assoc($result)) {
@@ -40,6 +40,7 @@
                     <td>" . $row['event_name'] . "</td>
                     <td>" . $row['ticket_quantity'] . "</td>
                     <td><button onclick='performAction'>Download Ticket</button></td>
+                    <td><button onclick='performAction'>Cancel Ticket</button></td>
                   </tr>";
         }
 
