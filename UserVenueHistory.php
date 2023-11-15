@@ -76,6 +76,7 @@ tr:hover {
         echo "<h1>Venue Booking History</h1>";
         echo "<table>";
         echo "<tr>
+                <th>Booking ID</th>
                 <th>Venue</th>
                 <th>Booked From Date (yyyy/mm/dd)</th>
                 <th>Booked Till Date (yyyy/mm/dd)</th>
@@ -84,6 +85,7 @@ tr:hover {
 
         while ($row = mysqli_fetch_assoc($result)) {
             echo "<tr>
+                    <td>" . $row['booking_id'] . "</td>
                     <td>" . $row['venue_name'] . "</td>
                     <td>" . $row['from_date'] . "</td>
                     <td>" . $row['to_date'] . "</td>

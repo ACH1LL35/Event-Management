@@ -177,6 +177,7 @@
         $username = $row['username'];
         $email = $row['email'];
         $name = $row['name'];
+        $cnumber = $row['cnumber'];
     }
     ?>
 
@@ -242,8 +243,6 @@
                     <label for="ticket_quantity">Ticket Quantity:</label>
                     <input type="number" name="ticket_quantity" required><br>
 
-                    <label for="contact_number">Contact Number:</label>
-                    <input type="tel" name="contact_number" required><br><br>
 
                     <input type="submit" value="Purchase Ticket">
                 </form>
@@ -256,7 +255,6 @@
             if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_SESSION['id'])) {
                 $event_name = $_POST["event_name"];
                 $ticket_quantity = $_POST["ticket_quantity"];
-                $contact_number = $_POST["contact_number"];
                 $user_id = $_SESSION['id'];
 
                 $servername = "localhost";
@@ -283,7 +281,7 @@
                         if ($conn->query($update_sql) === TRUE) {
                             $ticket_id = generateRandomString(10);
 
-                            $insert_purchase_sql = "INSERT INTO purchase_info (event_name, ticket_quantity, contact_number, user_id, email, name, ticket_id) VALUES ('$event_name', $ticket_quantity, '$contact_number', $user_id, '$email', '$name', '$ticket_id')";
+                            $insert_purchase_sql = "INSERT INTO purchase_info (event_name, ticket_quantity, contact_number, user_id, email, name, ticket_id) VALUES ('$event_name', $ticket_quantity, '$cnumber', $user_id, '$email', '$name', '$ticket_id')";
 
                             if ($conn->query($insert_purchase_sql) === TRUE) {
                                 $message = "Tickets purchased successfully. Ticket ID: $ticket_id";
