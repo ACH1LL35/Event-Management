@@ -165,6 +165,7 @@
     if ($row = mysqli_fetch_assoc($result)) {
         $username = $row['username'];
         $email = $row['email'];
+        $name = $row['name'];
     }
     ?>
 
@@ -276,7 +277,7 @@
 
                         if ($conn->query($update_sql) === TRUE) {
                             // Store purchase information in a separate database table
-                            $insert_purchase_sql = "INSERT INTO purchase_info (event_name, ticket_quantity, contact_number, user_id) VALUES ('$event_name', $ticket_quantity, '$contact_number', $user_id)";
+                            $insert_purchase_sql = "INSERT INTO purchase_info (event_name, ticket_quantity, contact_number, user_id, email, name) VALUES ('$event_name', $ticket_quantity, '$contact_number', $user_id, '$email', '$name')";
                             if ($conn->query($insert_purchase_sql) === TRUE) {
                                 $message = "Tickets purchased successfully.";
                             } else {
