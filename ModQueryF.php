@@ -182,8 +182,8 @@ if (isset($_POST['q_fed'])) {
             <li><a href="#">COMMENT MODERATION HISTORY</a></li>
             <li><a href="ModQueryF.php">QUERY FEEDBACK</a></li>
             <li><a href="ModQuotationF.php">QOUTATION FEEDBACK</a></li>
-            <li><a href="ModComplaint.php">Contact Update</a></li>
-            <li><a href="ModComplaint.php">Support Mail</a></li>
+            <li><a href="#">Contact Update</a></li>
+            <li><a href="#">Support Mail</a></li>
         </ul>
     </div>
 
