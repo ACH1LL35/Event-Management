@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Nov 15, 2023 at 01:18 PM
+-- Generation Time: Nov 15, 2023 at 05:40 PM
 -- Server version: 10.4.28-MariaDB
 -- PHP Version: 8.2.4
 
@@ -43,7 +43,7 @@ CREATE TABLE `admin_mod` (
 INSERT INTO `admin_mod` (`id`, `uname`, `email`, `password`, `type`, `status`) VALUES
 (25000, 'alam', 'admin1@eventx.com', 'admin1', 'admin', 1),
 (25001, 'zobayer', '', 'admin2', 'admin', 0),
-(25002, 'modtest', 'mod1@eventx.com', 'modtest', 'mod', 1),
+(25002, 'modtest', 'mod1@eventx.com', 'modtest', 'mod', 0),
 (25003, 'mod33', 'mod33@eventx.com', 'mod33', '', 0),
 (25004, 'mod46', 'mod46@eventx.com', 'mod46', 'mod', 1);
 
@@ -63,30 +63,6 @@ CREATE TABLE `booking` (
   `email` varchar(32) NOT NULL,
   `cnumber` varchar(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
---
--- Dumping data for table `booking`
---
-
-INSERT INTO `booking` (`user_id`, `booking_id`, `venue_name`, `from_date`, `to_date`, `name`, `email`, `cnumber`) VALUES
-(15, '', 'HALL - 01', '2023-11-10', '2023-11-13', '', '', ''),
-(15, '', '1', '2023-11-15', '2023-11-15', '', '', ''),
-(15, '', 'HALL - 01', '2023-11-24', '2023-11-24', '', '', ''),
-(15, '', 'HALL - 01', '2023-11-15', '2023-11-17', '', '', ''),
-(15, '', 'HALL - 01', '2023-11-23', '2023-11-23', '', '', ''),
-(15, '', 'HALL - 01', '2023-11-30', '2023-11-30', '', '', ''),
-(15, '', 'HALL - 01', '2023-12-08', '2023-12-07', '', '', ''),
-(15, '', 'HALL - 01', '2023-12-09', '2023-12-09', '', '', ''),
-(15, '', 'HALL - 01', '2023-11-21', '2023-11-21', '', '', ''),
-(15, '', 'HALL - 01', '2023-12-10', '2023-12-10', '', '', ''),
-(15, '', 'HALL - 01', '2023-12-27', '2023-12-27', '', '', ''),
-(15, '', 'HALL - 01', '2023-12-28', '2023-12-28', '', '', ''),
-(15, '', 'HALL - 01', '2024-02-08', '2024-02-09', '', '', ''),
-(15, '', 'HALL - 01', '2023-11-16', '2023-11-16', '', '', ''),
-(15, '', 'HALL - 01', '2023-11-15', '2023-11-15', '', '', ''),
-(15, '', 'HALL - 01', '2023-11-24', '2023-11-24', '', '', ''),
-(15, '', 'HALL - 03', '2023-11-17', '2023-11-18', 'Zobayer Alam', 'alam@gmail.com', '01778651619'),
-(15, 'BO6DF7PC4W', 'HALL - 02', '2023-11-14', '2023-11-17', 'Zobayer Alam', 'alam@gmail.com', '01778651619');
 
 -- --------------------------------------------------------
 
@@ -223,6 +199,7 @@ INSERT INTO `posts` (`posted_by_id`, `posted_by_username`, `id`, `title`, `conte
 CREATE TABLE `purchase_info` (
   `user_id` int(6) NOT NULL,
   `ticket_id` varchar(10) NOT NULL,
+  `id` int(11) NOT NULL,
   `event_name` varchar(256) NOT NULL,
   `ticket_quantity` int(3) NOT NULL,
   `contact_number` varchar(11) NOT NULL,
@@ -234,25 +211,8 @@ CREATE TABLE `purchase_info` (
 -- Dumping data for table `purchase_info`
 --
 
-INSERT INTO `purchase_info` (`user_id`, `ticket_id`, `event_name`, `ticket_quantity`, `contact_number`, `email`, `name`) VALUES
-(0, '', 'dgvc', 10, '01774861519', '', ''),
-(13, '', 'dgvc', 5, '01774861519', '', ''),
-(13, '', 'rock', 10, '01775461213', '', ''),
-(0, '', 'aiub', 20, '01774861519', '', ''),
-(0, '', 'aiub', 20, '01774861519', '', ''),
-(13, '', 'dgvc', 25, '01774861519', '', ''),
-(13, '', 'rock', 5, '01774861519', '', ''),
-(15, '', 'dgvc', 10, '01774861510', '', ''),
-(15, '', 'project', 20, '0177000000', '', ''),
-(15, '', 'rock', 10, '01774861519', '', ''),
-(15, '', 'rock', 4, '01774861510', '', ''),
-(15, '', 'aiub', 100, '0177000000', '', ''),
-(15, '', 'aiub', 5, '01774861519', '', ''),
-(15, '', 'project', 56, '01774861519', 'alam@gmail.com', ''),
-(15, '', 'rock', 19, '01778761519', 'alam@gmail.com', 'name'),
-(15, '', 'project', 29, '01778761519', 'alam@gmail.com', ''),
-(15, '', 'project', 39, '0177000000', 'alam@gmail.com', 'Zobayer Alam'),
-(15, 'C8W5AF9YUG', 'dgvc', 10, '01774861519', 'alam@gmail.com', 'Zobayer Alam');
+INSERT INTO `purchase_info` (`user_id`, `ticket_id`, `id`, `event_name`, `ticket_quantity`, `contact_number`, `email`, `name`) VALUES
+(15, '2Z2TD5907S', 0, 'dgvc', 20, '01778651619', 'alam@gmail.com', 'Zobayer Alam');
 
 -- --------------------------------------------------------
 
@@ -323,7 +283,7 @@ CREATE TABLE `ticket_cr` (
 
 INSERT INTO `ticket_cr` (`id`, `event_name`, `venue`, `ticket_price`, `total_tickets`, `available_tickets`) VALUES
 (2, 'dgvc', 'ervr', 200, 500, 435),
-(3, 'aiub', 'aiub', 200, 500, 355),
+(3, 'aiub', 'aiub', 200, 500, 335),
 (4, 'rock', 'aiub', 999, 5000, 4900),
 (5, 'project', 'hall 01', 200, 2000, 1800);
 
