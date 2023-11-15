@@ -175,6 +175,7 @@ if ($row = mysqli_fetch_assoc($result)) {
             <tr>
                 <th>USER ID</th>
                 <th>Event Name</th>
+                <th>Ticket ID</th>
                 <th>Ticket Quantity</th>
                 <th>Contact No.</th>
             </tr>
@@ -194,6 +195,7 @@ if ($row = mysqli_fetch_assoc($result)) {
             <tr>
                 <td><?php echo $r["user_id"]; ?></td>
                 <td><?php echo $r["event_name"]; ?></td>
+                <td><?php echo $r["ticket_id"]; ?></td>
                 <td><?php echo $r["ticket_quantity"]; ?></td>
                 <td><?php echo $r["contact_number"]; ?></td>
                 <!-- <center>

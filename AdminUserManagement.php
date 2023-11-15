@@ -143,7 +143,7 @@ if ($row = mysqli_fetch_assoc($result)) {
         </form>
         <h1>Welcome, <?php echo $username; ?>!</h1>
         <ul>
-            <li><a href="AdminPanel.php">Home</a></li>
+        <li><a href="AdminPanel.php">Home</a></li>
             <li><a href="AdminEvent.php">CREATE EVENT</a></li>
             <li><a href="AdminEventHistory.php">EVENT HISTORY</a></li>
             <li><a href="AdminEventCal.php">EVENT CALENDAR</a></li>
@@ -234,5 +234,4 @@ if ($row = mysqli_fetch_assoc($result)) {
         </form>
     </div>
 </body>
-</html>
-
+</html>Y
