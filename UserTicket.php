@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html>
+
 <head>
     <title>Dashboard</title>
     <style>
@@ -20,12 +21,12 @@
 
         #sidebar {
             float: left;
-            width: 20%; /* Adjust width as needed */
+            width: 20%;
         }
 
         #content {
             float: left;
-            width: 80%; /* Adjust width as needed */
+            width: 80%;
         }
 
         ul {
@@ -70,16 +71,15 @@
             background-color: #ff0000;
         }
 
-        /* Style for the "Purchase Ticket" section */
         .container {
             background-color: #fff;
             border: 1px solid #ccc;
             padding: 20px;
             margin: 0px;
             border-radius: 5px;
-            width: 70%; /* Adjust the width as needed */
-            background-size: cover; /* Adjust background size as needed */
-            position: relative; /* Added for relative positioning of the comment */
+            width: 70%;
+            background-size: cover;
+            position: relative;
         }
 
         .container h2 {
@@ -115,7 +115,6 @@
             background-color: #333;
         }
 
-        /* Highlight the selected option with a comment */
         .container select option:checked::before {
             content: "Selected";
             color: #333;
@@ -135,12 +134,24 @@
         }
     </style>
 </head>
+
 <body>
     <?php
+    function generateRandomString($length = 10)
+    {
+        $characters = '0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+        $randomString = '';
+
+        for ($i = 0; $i < $length; $i++) {
+            $randomString .= $characters[rand(0, strlen($characters) - 1)];
+        }
+
+        return $randomString;
+    }
+
     session_start();
 
     if (isset($_POST['logout'])) {
-        // Destroy the session and redirect to the Login page
         session_destroy();
         header("Location: UserLogin.php");
         exit();
@@ -197,47 +208,45 @@
         <div class="container">
             <h2>Purchase Ticket</h2>
             <?php
-            // Check if the user is logged in
-            if(isset($_SESSION['id'])) {
+            if (isset($_SESSION['id'])) {
             ?>
-            <form method="post">
-                <label for="event_name">Event Name:</label>
-                <select name="event_name" required>
-                    <option value="" disabled selected>Select an event</option>
-                    <?php
+                <form method="post">
+                    <label for="event_name">Event Name:</label>
+                    <select name="event_name" required>
+                        <option value="" disabled selected>Select an event</option>
+                        <?php
 
-                    $servername = "localhost";
-                    $username = "root";
-                    $password = "";
-                    $dbname = "event_management";
-                    $conn = new mysqli($servername, $username, $password, $dbname);
+                        $servername = "localhost";
+                        $username = "root";
+                        $password = "";
+                        $dbname = "event_management";
+                        $conn = new mysqli($servername, $username, $password, $dbname);
 
-                    if ($conn->connect_error) {
-                        die("Connection failed: " . $conn->connect_error);
-                    }
-
-                    $sql = "SELECT event_name, available_tickets FROM ticket_cr";
-                    $result = $conn->query($sql);
-
-                    if ($result->num_rows > 0) {
-                        while ($row = $result->fetch_assoc()) {
-                            echo "<option value='" . $row["event_name"] . "'>" . $row["event_name"] . "</option>";
+                        if ($conn->connect_error) {
+                            die("Connection failed: " . $conn->connect_error);
                         }
-                    }
 
-                    // Close the database connection
-                    $conn->close();
-                    ?>
-                </select><br>
+                        $sql = "SELECT event_name, available_tickets FROM ticket_cr";
+                        $result = $conn->query($sql);
 
-                <label for="ticket_quantity">Ticket Quantity:</label>
-                <input type="number" name="ticket_quantity" required><br>
+                        if ($result->num_rows > 0) {
+                            while ($row = $result->fetch_assoc()) {
+                                echo "<option value='" . $row["event_name"] . "'>" . $row["event_name"] . "</option>";
+                            }
+                        }
 
-                <label for="contact_number">Contact Number:</label>
-                <input type="tel" name="contact_number" required><br><br>
+                        $conn->close();
+                        ?>
+                    </select><br>
 
-                <input type="submit" value="Purchase Ticket">
-            </form>
+                    <label for="ticket_quantity">Ticket Quantity:</label>
+                    <input type="number" name="ticket_quantity" required><br>
+
+                    <label for="contact_number">Contact Number:</label>
+                    <input type="tel" name="contact_number" required><br><br>
+
+                    <input type="submit" value="Purchase Ticket">
+                </form>
             <?php
             } else {
                 echo "Please <a href='UserLogin.php'>log in</a> to purchase tickets.";
@@ -250,7 +259,6 @@
                 $contact_number = $_POST["contact_number"];
                 $user_id = $_SESSION['id'];
 
-                // Connect to your database
                 $servername = "localhost";
                 $username = "root";
                 $password = "";
@@ -261,7 +269,6 @@
                     die("Connection failed: " . $conn->connect_error);
                 }
 
-                // Fetch the available tickets for the selected event
                 $sql = "SELECT available_tickets FROM ticket_cr WHERE event_name = '$event_name'";
                 $result = $conn->query($sql);
 
@@ -270,15 +277,16 @@
                     $available_tickets = $row["available_tickets"];
 
                     if ($ticket_quantity <= $available_tickets) {
-                        // Deduct the purchased tickets from available tickets
                         $new_available_tickets = $available_tickets - $ticket_quantity;
                         $update_sql = "UPDATE ticket_cr SET available_tickets = $new_available_tickets WHERE event_name = '$event_name'";
 
                         if ($conn->query($update_sql) === TRUE) {
-                            // Store purchase information in a separate database table
-                            $insert_purchase_sql = "INSERT INTO purchase_info (event_name, ticket_quantity, contact_number, user_id, email, name) VALUES ('$event_name', $ticket_quantity, '$contact_number', $user_id, '$email', '$name')";
+                            $ticket_id = generateRandomString(10);
+
+                            $insert_purchase_sql = "INSERT INTO purchase_info (event_name, ticket_quantity, contact_number, user_id, email, name, ticket_id) VALUES ('$event_name', $ticket_quantity, '$contact_number', $user_id, '$email', '$name', '$ticket_id')";
+
                             if ($conn->query($insert_purchase_sql) === TRUE) {
-                                $message = "Tickets purchased successfully.";
+                                $message = "Tickets purchased successfully. Ticket ID: $ticket_id";
                             } else {
                                 $message = "Error storing purchase information: " . $conn->error;
                             }
@@ -292,10 +300,9 @@
                     $message = "Event not found or multiple events with the same name.";
                 }
 
-                // Close the database connection
                 $conn->close();
             }
-            // Display the message only when there is a message to show
+
             if (isset($message)) {
                 echo '<div id="message">' . $message . '</div>';
             }
@@ -308,4 +315,5 @@
         </form>
     </div>
 </body>
+
 </html>

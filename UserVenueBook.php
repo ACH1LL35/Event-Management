@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html>
+
 <head>
     <title>Dashboard</title>
     <style>
@@ -70,14 +71,13 @@
             background-color: #ff0000;
         }
 
-        /* Style for the form section */
         #venue-form {
             background-color: #fff;
             border: 1px solid #ccc;
             padding: 20px;
             border-radius: 5px;
             width: 55%;
-            margin: 130px auto; /* Center the form horizontally */
+            margin: 130px auto;
         }
 
         #venue-form label {
@@ -116,6 +116,7 @@
             margin-top: 10px;
             text-align: center;
         }
+
         #logout-container {
             position: absolute;
             top: 20px;
@@ -139,12 +140,24 @@
         }
     </style>
 </head>
+
 <body>
     <?php
+    function generateRandomString($length = 10)
+    {
+        $characters = '0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+        $randomString = '';
+
+        for ($i = 0; $i < $length; $i++) {
+            $randomString .= $characters[rand(0, strlen($characters) - 1)];
+        }
+
+        return $randomString;
+    }
+
     session_start();
 
     if (isset($_POST['logout'])) {
-        // Destroy the session and redirect to the Login page
         session_destroy();
         header("Location: UserLogin.php");
         exit();
@@ -169,6 +182,8 @@
     if ($row = mysqli_fetch_assoc($result)) {
         $username = $row['username'];
         $email = $row['email'];
+        $name = $row['name'];
+        $cnumber = $row['cnumber'];
     }
     ?>
 
@@ -200,8 +215,8 @@
 
     <?php
 
-    // Function to establish a database connection
-    function connectToDatabase() {
+    function connectToDatabase()
+    {
         $servername = "localhost";
         $username = "root";
         $password = "";
@@ -214,7 +229,6 @@
         return $conn;
     }
 
-
     if ($_SERVER["REQUEST_METHOD"] == "POST") {
         if (isset($_SESSION['id'])) {
             $id = $_SESSION['id'];
@@ -225,17 +239,17 @@
             $from_date = $_POST['fromDate'];
             $to_date = $_POST['toDate'];
 
-            // Check if the venue is already booked for the selected dates
+            $booking_id = generateRandomString(10);
+
             $sql = "SELECT * FROM booking WHERE venue_name = '$venue_name' AND ('$from_date' BETWEEN from_date AND to_date OR '$to_date' BETWEEN from_date AND to_date)";
             $result = $conn->query($sql);
 
             if ($result->num_rows > 0) {
                 $message = "Venue is already booked for the selected dates.";
             } else {
-                // Insert the booking into the database with the user's session ID
-                $sql = "INSERT INTO booking (venue_name, user_id, from_date, to_date) VALUES ('$venue_name', $id, '$from_date', '$to_date')";
+                $sql = "INSERT INTO booking (booking_id, venue_name, user_id, from_date, to_date, name, email, cnumber) VALUES ('$booking_id', '$venue_name', $id, '$from_date', '$to_date', '$name', '$email', '$cnumber')";
                 if ($conn->query($sql) === TRUE) {
-                    $message = "Booking confirmed!";
+                    $message = "Booking confirmed! Booking ID: $booking_id";
                 } else {
                     $message = "Error: " . $sql . "<br>" . $conn->error;
                 }
@@ -245,7 +259,6 @@
         }
     }
 
-    // Populate the dropdown with venue names from the database
     $conn = connectToDatabase();
     $sql = "SELECT venue_name FROM Venues";
     $result = $conn->query($sql);
@@ -270,11 +283,10 @@
         echo '<p>No venues available</p>';
     }
 
-    // Display the message only when there is a message to show
     if (isset($message)) {
         echo '<div id="message">' . $message . '</div>';
     }
-    
+
     echo '</div>';
     $conn->close();
     ?>
@@ -284,4 +296,5 @@
         </form>
     </div>
 </body>
+
 </html>

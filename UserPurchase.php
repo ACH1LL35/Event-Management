@@ -36,7 +36,7 @@
 
         while ($row = mysqli_fetch_assoc($result)) {
             echo "<tr>
-                    <td>" . $row['contact_number'] . "</td>
+                    <td>" . $row['ticket_id'] . "</td>
                     <td>" . $row['event_name'] . "</td>
                     <td>" . $row['ticket_quantity'] . "</td>
                     <td><button onclick='performAction'>Download Ticket</button></td>

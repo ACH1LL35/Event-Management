@@ -79,6 +79,7 @@ tr:hover {
                 <th>Venue</th>
                 <th>Booked From Date (yyyy/mm/dd)</th>
                 <th>Booked Till Date (yyyy/mm/dd)</th>
+                <th>Action</th>
               </tr>";
 
         while ($row = mysqli_fetch_assoc($result)) {
@@ -86,6 +87,7 @@ tr:hover {
                     <td>" . $row['venue_name'] . "</td>
                     <td>" . $row['from_date'] . "</td>
                     <td>" . $row['to_date'] . "</td>
+                    <td><button onclick='performAction'>Download Receipt</button></td>
                   </tr>";
         }
 
