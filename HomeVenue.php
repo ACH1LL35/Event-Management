@@ -6,6 +6,7 @@
         /* Basic CSS styles... */
         body {
             font-family: Arial, sans-serif;
+            background-image: url('images/ven2.jpg'); /* Path to your background image in the "images" folder */
             margin: 0;
             padding: 0;
         }
@@ -177,6 +178,7 @@
          }
         .center-text {
             text-align: center;
+            color: wheat;
         }
 
     </style>

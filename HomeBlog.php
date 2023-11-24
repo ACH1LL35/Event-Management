@@ -40,6 +40,7 @@ if ($row = mysqli_fetch_assoc($result)) {
         /* Basic CSS styles */
         body {
             font-family: Arial, sans-serif;
+            background-image: url('images/bl.jpg'); /* Path to your background image in the "images" folder */
             margin: 0;
             padding: 0;
         }
