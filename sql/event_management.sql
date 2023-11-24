@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Nov 15, 2023 at 05:42 PM
+-- Generation Time: Nov 24, 2023 at 09:09 PM
 -- Server version: 10.4.28-MariaDB
 -- PHP Version: 8.2.4
 
@@ -43,7 +43,7 @@ CREATE TABLE `admin_mod` (
 INSERT INTO `admin_mod` (`id`, `uname`, `email`, `password`, `type`, `status`) VALUES
 (25000, 'alam', 'admin1@eventx.com', 'admin1', 'admin', 1),
 (25001, 'zobayer', '', 'admin2', 'admin', 0),
-(25002, 'modtest', 'mod1@eventx.com', 'modtest', 'mod', 0),
+(25002, 'modtest', 'mod1@eventx.com', 'modtest', 'mod', 1),
 (25003, 'mod33', 'mod33@eventx.com', 'mod33', '', 0),
 (25004, 'mod46', 'mod46@eventx.com', 'mod46', 'mod', 1);
 
@@ -69,9 +69,6 @@ CREATE TABLE `booking` (
 --
 
 INSERT INTO `booking` (`user_id`, `booking_id`, `venue_name`, `from_date`, `to_date`, `name`, `email`, `cnumber`) VALUES
-(15, '1APZR9LOA1', 'HALL - 01', '2023-11-16', '2023-11-16', 'Zobayer Alam', 'alam@gmail.com', '01778651619'),
-(15, 'C8PY1C4J5U', 'HALL - 02', '2023-11-18', '2023-11-18', 'Zobayer Alam', 'alam@gmail.com', '01778651619'),
-(15, '0HGS4SZKYO', 'HALL - 03', '2023-11-20', '2023-11-20', 'Zobayer Alam', 'alam@gmail.com', '01778651619'),
 (15, 'UK95CQ5L9N', 'HALL - 01', '2023-11-20', '2023-11-20', 'Zobayer Alam', 'alam@gmail.com', '01778651619');
 
 -- --------------------------------------------------------
