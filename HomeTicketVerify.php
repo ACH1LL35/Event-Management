@@ -9,7 +9,7 @@
             font-family: Arial, sans-serif;
             margin: 0;
             padding: 0;
-            background-image: url('images/ticket.jpg'); /* Path to your background image in the "images" folder */
+            background-image: url('images/tkt.jpg'); /* Path to your background image in the "images" folder */
             background-size: cover;
             background-position: center;
             background-attachment: fixed;
@@ -81,7 +81,7 @@
             font-family: Arial, sans-serif;
             margin: 0;
             padding: 0;
-            background-image: url('images/bg.jpg'); /* Path to your background image in the "images" folder */
+            background-image: url('images/tkt.jpg'); /* Path to your background image in the "images" folder */
             background-size: cover;
             background-position: center;
             background-attachment: fixed;
