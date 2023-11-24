@@ -80,6 +80,7 @@
         <a href="HomeGallery.php">Gallery</a>
         <a href="HomeVenue.php">Venue</a>
         <a href="HomeEventSupport.php">Event Support</a>
+        <a href="HomeTicketVerify.php">Verify Ticket</a>
         <a id="Login-button" href="UserLogin.php">Login</a>
         <a id="book-button" href="UserTicket.php">Book Now</a>
     </div>
