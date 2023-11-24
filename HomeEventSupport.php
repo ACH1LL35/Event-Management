@@ -156,7 +156,9 @@
         }
         .center-text {
             text-align: center;
+            color: wheat;
         }
+        
 
     </style>
 </head>

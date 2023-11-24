@@ -157,6 +157,9 @@
         .center-text {
             text-align: center;
         }
+        .color-text {
+            color: wheat;
+        }
 
     </style>
 </head>
@@ -177,7 +180,7 @@
 
     <div class="content">
         <h1 class="center-text">Welcome to EventX</h1>
-        <p class="center-text" >EventX is your premier event partner, providing a wide range of services and unforgettable experiences for all your special occasions.</p>
+        <p class="center-text , color-text" >EventX is your premier event partner, providing a wide range of services and unforgettable experiences for all your special occasions.</p>
 
         <!-- Display 3 images and descriptions in a zigzag layout -->
         <div class="zigzag">
