@@ -1,5 +1,5 @@
 <?php
-session_start();
+include("AdminSidebar.php");
 
 if (isset($_POST['logout'])) {
     // Destroy the session and redirect to the Login page
@@ -58,50 +58,10 @@ if ($row = mysqli_fetch_assoc($result)) {
             margin: 0;
         }
 
-        #menu {
-            width: 250px;
-            background-color: #333;
-            color: #fff;
-            padding: 20px;
-        }
-
-        .header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
         #content {
             flex: 1;
             display: flex;
             flex-direction: column; /* Align content vertically */
-        }
-
-        ul {
-            list-style: none;
-            padding: 0;
-        }
-
-        li {
-            margin: 1px 0;
-        }
-
-        a {
-            display: block;
-            padding: 10px 20px;
-            background-color: #007BFF;
-            color: #ffffff;
-            text-align: left;
-            border: 2px solid #007BFF;
-            border-radius: 3px;
-            cursor: pointer;
-            width: 200px;
-            text-decoration: none;
-            margin-bottom: 5px;
-        }
-
-        a:hover {
-            background-color: #0056b3;
         }
 
         .content {
@@ -149,69 +109,11 @@ if ($row = mysqli_fetch_assoc($result)) {
     </style>
 </head>
 <body>
-    <div id="menu">
-        <form class="logout-form" method="post">
-            <input type="submit" name="logout" class="logout-button" value="Log Out">
-        </form>
-        <?php
-
-        if (!isset($_SESSION['id'])) {
-            header("Location: AdminModLogin.php");
-            exit();
-        }
-
-        $id = $_SESSION['id'];
-
-        $conn = mysqli_connect("localhost", "root", "", "event_management");
-
-        if (!$conn) {
-            die("Connection failed: " . mysqli_connect_error());
-        }
-
-        $query = "SELECT uname FROM admin_mod WHERE id = '$id'";
-        $result = mysqli_query($conn, $query);
-
-        if ($row = mysqli_fetch_assoc($result)) {
-            $uname = $row['uname'];
-        } else {
-            $uname = "Username not found in the database.";
-        }
-        ?>
-
-        <h1>Welcome, <?php echo $uname; ?>!</h1>
-        <ul>
-        <li><a href="AdminPanel.php">Home</a></li>
-            <li><a href="AdminEvent.php">CREATE EVENT</a></li>
-            <li><a href="AdminEventHistory.php">EVENT HISTORY</a></li>
-            <li><a href="AdminEventCal.php">EVENT CALENDAR</a></li>
-             <li><a href="AdminTicketCreation.php">TICKET PUBLISH</a></li>
-            <li><a href="AdminTicketManagement.php">TICKET MANAGEMENT</a></li>
-            <li><a href="AdminTicketList.php">TICKET SALE LIST</a></li>
-            <li><a href="AdminVenueManagement.php">VENUE MANAGEMENT</a></li>
-            <li><a href="AdminVenueBookHistory.php">VENUE BOOKING LIST</a></li>
-            <li><a href="AdminAnalysis.php">ANALYSIS</a></li>
-            <li><a href="AdminComplaint.php">COMPLAINT FEEDBACK</a></li>
-            <li><a href="AdminModAccess.php">MODERATOR ACCESS</a></li>
-            <li><a href="AdminModManagement.php">MODERATOR MANAGEMENT</a></li>
-            <li><a href="AdminPostModeration.php">POST MODERATION</a></li>
-            <li><a href="AdminPMH.php">POST MODERATION HISTORY</a></li>
-            <li><a href="AdminCommentModeration.php">COMMENT MODERATION</a></li>
-            <li><a href="AdminCMH.php">COMMENT MODERATION HISTORY</a></li>
-            <li><a href="AdminQueryF.php">QUERY FEEDBACK</a></li>
-            <li><a href="AdminQuotationF.php">QOUTATION FEEDBACK</a></li>
-            <li><a href="AdminAdd2Gallary.php">ADD TO GALLERY</a></li>
-            <li><a href="AdminUserManagement.php">USER MANAGEMENT</a></li>
-            <li><a href="AdminNewsletter.php">NEWSLETTER</a></li>
-        </ul>
-    </div>
-
     <div id="content">
         <h1 style="text-align: center; background-color: #000; color: #fff; padding: 20px;">COMMENT MODERATION HISTORY</h1>
         <form method="post">
             <table border="1">
                 <tr>
-                    <!-- <th>COMMENT UniqueID</th>
-                    <th>COMMENTEES UniqueID</th> -->
                     <th>COMMENTEES UserName</th>
                     <th>COMMENT</th>
                     <th>COMMENT DATE</th>
@@ -225,8 +127,6 @@ if ($row = mysqli_fetch_assoc($result)) {
                 while($r= mysqli_fetch_assoc($res)) {
                 ?>
                     <tr>
-                        <!-- <td>?php echo $r["id"]; ?></td>
-                        <td>?php echo $r["posted_by_id"]; ?></td> -->
                         <td><?php echo $r["posted_by_username"]; ?></td>
                         <td><?php echo $r["comment"]; ?></td>
                         <td><?php echo $r["created_at"]; ?></td>

@@ -1,5 +1,5 @@
 <?php
-session_start();
+include("AdminSidebar.php");
 
 if (isset($_POST['logout'])) {
     // Destroy the session and redirect to the Login page
@@ -40,6 +40,7 @@ if ($row = mysqli_fetch_assoc($result)) {
     // $email = $row['email'];
 }
 ?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -50,31 +51,13 @@ if ($row = mysqli_fetch_assoc($result)) {
         body {
             font-family: Arial, Helvetica, sans-serif;
             background-color: #f2f2f2;
-            display: flex;
-            flex-direction: row;
-            justify-content: flex-start;
-            align-items: flex-start;
-            height: 100vh;
             margin: 0;
         }
 
-        #menu {
-            width: 250px;
-            background-color: #333;
-            color: #fff;
-            padding: 20px;
-        }
-
-        .header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
         #content {
-            flex: 1;
             display: flex;
             flex-direction: column; /* Align content vertically */
+            align-items: center;
         }
 
         ul {
@@ -115,6 +98,7 @@ if ($row = mysqli_fetch_assoc($result)) {
             border: 1px solid #ccc;
             border-radius: 5px;
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            margin-top: 20px;
         }
 
         th, td {
@@ -127,9 +111,11 @@ if ($row = mysqli_fetch_assoc($result)) {
             background-color: #007BFF;
             color: #fff;
         }
+
         /* Styles for the logout form */
         .logout-form {
             text-align: center;
+            margin-top: 20px;
         }
 
         .logout-form .logout-button {
@@ -149,70 +135,11 @@ if ($row = mysqli_fetch_assoc($result)) {
     </style>
 </head>
 <body>
-    <div id="menu">
-        <form class="logout-form" method="post">
-            <input type="submit" name="logout" class="logout-button" value="Log Out">
-        </form>
-        <?php
-
-        if (!isset($_SESSION['id'])) {
-            header("Location: AdminModLogin.php");
-            exit();
-        }
-
-        $id = $_SESSION['id'];
-
-        $conn = mysqli_connect("localhost", "root", "", "event_management");
-
-        if (!$conn) {
-            die("Connection failed: " . mysqli_connect_error());
-        }
-
-        $query = "SELECT uname FROM admin_mod WHERE id = '$id'";
-        $result = mysqli_query($conn, $query);
-
-        if ($row = mysqli_fetch_assoc($result)) {
-            $uname = $row['uname'];
-        } else {
-            $uname = "Username not found in the database.";
-        }
-        ?>
-
-        <h1>Welcome, <?php echo $uname; ?>!</h1>
-        <ul>
-            <li><a href="AdminPanel.php">Home</a></li>
-            <li><a href="AdminEvent.php">CREATE EVENT</a></li>
-            <li><a href="AdminEventHistory.php">EVENT HISTORY</a></li>
-            <li><a href="AdminEventCal.php">EVENT CALENDAR</a></li>
-             <li><a href="AdminTicketCreation.php">TICKET PUBLISH</a></li>
-            <li><a href="AdminTicketManagement.php">TICKET MANAGEMENT</a></li>
-            <li><a href="AdminTicketList.php">TICKET SALE LIST</a></li>
-            <li><a href="AdminVenueManagement.php">VENUE MANAGEMENT</a></li>
-            <li><a href="AdminVenueBookHistory.php">VENUE BOOKING LIST</a></li>
-            <li><a href="AdminAnalysis.php">ANALYSIS</a></li>
-            <li><a href="AdminComplaint.php">COMPLAINT FEEDBACK</a></li>
-            <li><a href="AdminModAccess.php">MODERATOR ACCESS</a></li>
-            <li><a href="AdminModManagement.php">MODERATOR MANAGEMENT</a></li>
-            <li><a href="AdminPostModeration.php">POST MODERATION</a></li>
-            <li><a href="AdminPMH.php">POST MODERATION HISTORY</a></li>
-            <li><a href="AdminCommentModeration.php">COMMENT MODERATION</a></li>
-            <li><a href="AdminCMH.php">COMMENT MODERATION HISTORY</a></li>
-            <li><a href="AdminQueryF.php">QUERY FEEDBACK</a></li>
-            <li><a href="AdminQuotationF.php">QOUTATION FEEDBACK</a></li>
-            <li><a href="AdminAdd2Gallary.php">ADD TO GALLERY</a></li>
-            <li><a href="AdminUserManagement.php">USER MANAGEMENT</a></li>
-            <li><a href="AdminNewsletter.php">NEWSLETTER</a></li>
-        </ul>
-    </div>
-
     <div id="content">
-        <h1 style="text-align: center; background-color: #000; color: #fff; padding: 20px;">POST MODERATION HISTORY</h1>
+    <h1 style="text-align: center; background-color: #000; color: #fff; padding: 20px;">pOST MODERATION HISTORY</h1>
         <form method="post">
             <table border="1">
                 <tr>
-                    <!-- <th>POST UniqueID</th>
-                    <th>POSTERS UniqueID</th>
-                    <th>POSTERS UserName</th> -->
                     <th>POST TITLE</th>
                     <th>POST</th>
                     <th>POST DATE</th>
@@ -226,22 +153,17 @@ if ($row = mysqli_fetch_assoc($result)) {
                 while ($r = mysqli_fetch_assoc($res)) {
                     ?>
                     <tr>
-                        <!-- <td>?php echo $r["id"]; ?></td>
-                        <td>?php echo $r["posted_by_id"]; ?></td>
-                        <td>?php echo $r["posted_by_username"]; ?></td> -->
                         <td><?php echo $r["title"]; ?></td>
                         <td><?php echo $r["content"]; ?></td>
                         <td><?php echo $r["created_at"]; ?></td>
                         <td><?php echo $r["status"]; ?></td>
-                        <center>
-                            <td>
-                                <?php if ($r["status"] == 1): ?>
-                                    <button type="submit" name="hide" value="<?php echo $r["id"]; ?>">Hide</button>
-                                <?php else: ?>
-                                    <button type="submit" name="unhide" value="<?php echo $r["id"]; ?>">Unhide</button>
-                                <?php endif; ?>
-                            </td>
-                        </center>
+                        <td>
+                            <?php if ($r["status"] == 1): ?>
+                                <button type="submit" name="hide" value="<?php echo $r["id"]; ?>">Hide</button>
+                            <?php else: ?>
+                                <button type="submit" name="unhide" value="<?php echo $r["id"]; ?>">Unhide</button>
+                            <?php endif; ?>
+                        </td>
                     </tr>
                 <?php } ?>
             </table>
@@ -249,4 +171,3 @@ if ($row = mysqli_fetch_assoc($result)) {
     </div>
 </body>
 </html>
-

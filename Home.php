@@ -82,6 +82,7 @@
         <div><a class="company-name" href="AdminModLogin.php">EventX</a></div>
         <a href="Home.php">Home</a>
         <a href="HomeEvents.php">Events</a>
+        <a href="HomeEvents.php">Event Calender</a>
         <a href="HomeServices.php">Services</a>
         <a href="HomeBlog.php">Blog</a>
         <a href="HomeGallery.php">Gallery</a>

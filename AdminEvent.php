@@ -1,5 +1,5 @@
 <?php
-session_start();
+include('AdminSidebar.php');
 
 if (isset($_POST['logout'])) {
     // Destroy the session and redirect to the Login page
@@ -28,6 +28,7 @@ if ($row = mysqli_fetch_assoc($result)) {
     // $email = $row['email'];
 }
 ?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -36,56 +37,22 @@ if ($row = mysqli_fetch_assoc($result)) {
     <title>Event Posting</title>
     <style>
         body {
-    font-family: Arial, Helvetica, sans-serif;
-    background-color: #f2f2f2;
-    display: flex;
-    align-items: flex-start;
-    height: 100vh;
-    margin: 0;
-}
+            font-family: Arial, Helvetica, sans-serif;
+            background-color: #f2f2f2;
+            display: flex;
+            align-items: flex-start;
+            height: 100vh;
+            margin: 0;
+        }
 
-    #menu {
-        width: 250px;
-        background-color: #333;
-        color: #fff;
-        padding: 20px;
-    }
-    
-    ul {
-        list-style: none;
-        padding: 0;
-    }
-
-    li {
-        margin: 1px 0;
-    }
-
-    a {
-        display: block;
-        padding: 10px 20px;
-        background-color: #007BFF;
-        color: #ffffff;
-        text-align: left;
-        border: 2px solid #007BFF;
-        border-radius: 3px;
-        cursor: pointer;
-        width: 200px;
-        text-decoration: none;
-        margin-bottom: 5px;
-    }
-
-    a:hover {
-        background-color: #0056b3;
-    }
-
-        #event-form {
+        #content {
             max-width: 1000px;
             padding: 20px;
             background-color: #ffffff;
             border: 1px solid #ccc;
             border-radius: 5px;
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-            margin: 150px 380px;
+            margin: 150px auto;
             text-align: left;
             width: 600px;
         }
@@ -98,7 +65,6 @@ if ($row = mysqli_fetch_assoc($result)) {
 
         input[type="text"],
         input[type="date"],
-        input[type="file"],
         textarea {
             width: 90%;
             padding: 10px;
@@ -121,62 +87,33 @@ if ($row = mysqli_fetch_assoc($result)) {
         button[type="submit"]:hover {
             background-color: #0056b3;
         }
+
         /* Styles for the logout form */
-    .logout-form {
-        text-align: center;
-    }
+        .logout-form {
+            text-align: center;
+        }
 
-    .logout-form .logout-button {
-        padding: 10px 20px;
-        background-color: #007BFF;
-        color: #ffffff;
-        border: 2px solid #007BFF;
-        border-radius: 3px;
-        cursor: pointer;
-        width: 200px;
-        text-decoration: none;
-    }
+        .logout-form .logout-button {
+            padding: 10px 20px;
+            background-color: #007BFF;
+            color: #ffffff;
+            border: 2px solid #007BFF;
+            border-radius: 3px;
+            cursor: pointer;
+            width: 200px;
+            text-decoration: none;
+        }
 
-    .logout-form .logout-button:hover {
-        background-color: #0056b3;
-    }
+        .logout-form .logout-button:hover {
+            background-color: #0056b3;
+        }
     </style>
 </head>
 <body>
-    <div id="menu">
-    <form class="logout-form" method="post">
-            <input type="submit" name="logout" class="logout-button" value="Log Out">
-        </form>
-        <h1>Welcome, <?php echo $username; ?>!</h1>
-        <ul>
-            <li><a href="AdminPanel.php">Home</a></li>
-            <li><a href="AdminEvent.php">CREATE EVENT</a></li>
-            <li><a href="AdminEventHistory.php">EVENT HISTORY</a></li>
-            <li><a href="AdminEventCal.php">EVENT CALENDAR</a></li>
-             <li><a href="AdminTicketCreation.php">TICKET PUBLISH</a></li>
-            <li><a href="AdminTicketManagement.php">TICKET MANAGEMENT</a></li>
-            <li><a href="AdminTicketList.php">TICKET SALE LIST</a></li>
-            <li><a href="AdminVenueManagement.php">VENUE MANAGEMENT</a></li>
-            <li><a href="AdminVenueBookHistory.php">VENUE BOOKING LIST</a></li>
-            <li><a href="AdminAnalysis.php">ANALYSIS</a></li>
-            <li><a href="AdminComplaint.php">COMPLAINT FEEDBACK</a></li>
-            <li><a href="AdminModAccess.php">MODERATOR ACCESS</a></li>
-            <li><a href="AdminModManagement.php">MODERATOR MANAGEMENT</a></li>
-            <li><a href="AdminPostModeration.php">POST MODERATION</a></li>
-            <li><a href="AdminPMH.php">POST MODERATION HISTORY</a></li>
-            <li><a href="AdminCommentModeration.php">COMMENT MODERATION</a></li>
-            <li><a href="AdminCMH.php">COMMENT MODERATION HISTORY</a></li>
-            <li><a href="AdminQueryF.php">QUERY FEEDBACK</a></li>
-            <li><a href="AdminQuotationF.php">QOUTATION FEEDBACK</a></li>
-            <li><a href="AdminAdd2Gallary.php">ADD TO GALLERY</a></li>
-            <li><a href="AdminUserManagement.php">USER MANAGEMENT</a></li>
-            <li><a href="AdminNewsletter.php">NEWSLETTER</a></li>
-        </ul>
-    </div>
     <div id="content">
         <form id="event-form" method="POST" action="<?php echo $_SERVER['PHP_SELF']; ?>">
             <center>
-            <h2>Event Publishing</h2>
+                <h2>Event Publishing</h2>
             </center>
             <label for="event-name">Event Name:</label>
             <input type="text" id="event-name" name="event-name">
