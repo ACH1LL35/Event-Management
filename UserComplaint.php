@@ -1,3 +1,7 @@
+<?php
+include("UserSidebar.php");
+?>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -73,7 +77,7 @@
 
 
         h2 {
-            text-align: center;
+            text-align: left;
         }
 
         label {
@@ -152,8 +156,6 @@
         die("Connection failed: " . mysqli_connect_error());
     }
 
-    session_start();
-
     if (isset($_POST['logout'])) {
         // Destroy the session and redirect to the Login page
         session_destroy();
@@ -198,26 +200,6 @@
     }
 
     ?>
-
-    <h1>Welcome, <?php echo $username; ?>!</h1>
-
-    <div id="sidebar">
-        <h2>My Accounts</h2>
-        <ul>
-            <li><a href="UserProfile.php">DASHBOARD</a></li>
-            <li><a href="UserUpdate.php">ACCOUNT DETAILS</a></li>
-            <li><a href="UserAddress.php">ADDRESS BOOK</a></li>
-            <li><a href="UserTicket.php">PURCHASE TICKET</a></li>
-            <li><a href="UserPurchase.php">PURCHASE HISTORY</a></li>
-            <li><a href="UserVenueBook.php">BOOK VENUE</a></li>
-            <li><a href="UserVenueHistory.php">BOOKING HISTORY</a></li>
-            <li><a href="#">UPCOMING</a></li>
-            <li><a href="UserComplaint.php">COMPLAINT</a></li>
-            <li><a href="UserQuery.php">QUERY</a></li>
-            <li><a href="UserQuotation.php">ASK FOR QUOTATION</a></li>
-            <li><a href="UserFeedback.php">FEEDBACK</a></li>
-        </ul>
-    </div>
 
     <div class="container">
     <h2 class="text-center">Complaint Submission Form</h2>

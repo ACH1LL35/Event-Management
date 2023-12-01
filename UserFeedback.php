@@ -1,3 +1,7 @@
+<?php
+include("UserSidebar.php");
+?>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -16,7 +20,7 @@
                 text-align: center;
                 background-color: #333;
                 color: #fff;
-                padding: 10px;
+                padding: 20px;
             }
 
             h4 {
@@ -62,8 +66,6 @@
 </head>
 <body>
     <?php
-    session_start();
-
     if (!isset($_SESSION['id'])) {
         header("Location: UserLogin.php");
         exit();
@@ -83,9 +85,13 @@
     $result = mysqli_query($conn, $query);
 
     if (mysqli_num_rows($result) > 0) {
-        echo "<h1>Feedback History</h1>";
-        echo "<h4>FOR ANY ADDITIONAL QUERY USE THE ID FROM FEEDBACK AND SUBMIT A NEW QUERY</h4>";
         echo "<table>";
+        echo "<tr> 
+            <th colspan=4>FEEDBACK</th>
+            </tr>";
+        echo "<tr> 
+            <th colspan=4 >FOR ANY ADDITIONAL QUERY USE THE ID FROM FEEDBACK AND SUBMIT A NEW QUERY</th>
+            </tr>";
         echo "<tr>
                 <th>ID</th>
                 <th>Title</th>
