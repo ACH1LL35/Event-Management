@@ -113,7 +113,7 @@ if ($row = mysqli_fetch_assoc($result)) {
     <div id="content">
         <form id="event-form" method="POST" action="<?php echo $_SERVER['PHP_SELF']; ?>">
             <center>
-                <h2>Event Publishing</h2>
+            <h2>Event Publishing</h2>
             </center>
             <label for="event-name">Event Name:</label>
             <input type="text" id="event-name" name="event-name">

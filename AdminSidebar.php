@@ -61,13 +61,15 @@ if ($row = mysqli_fetch_assoc($result)) {
             margin: 1px 0;
         }
 
-        h1 {
-            background-color: #333;
-            color: #fff;
-            padding: 20px;
-            text-align: center;
-            margin: 0;
-        }
+        
+        h2 {
+        background-color: #333;
+        color: #fff;
+        padding: 20px;
+        text-align: center;
+        margin: 0;
+         }
+
 
         a {
             display: block;

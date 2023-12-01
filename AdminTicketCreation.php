@@ -141,7 +141,7 @@ if ($row = mysqli_fetch_assoc($result)) {
 }
 ?>
 <div id="content">
-    <h1>PUBLISH TICKET</h1>
+    <h1 style="text-align: center; background-color: #000; color: #fff; padding: 20px;">PUBLISH TICKET</h1>
     <form method="post">
         <label for="event_name">Event Name:</label>
         <input type="text" name="event_name" required><br>
