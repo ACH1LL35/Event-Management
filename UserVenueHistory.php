@@ -1,3 +1,7 @@
+<?php
+include("UserSidebar.php");
+?>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -16,7 +20,7 @@
                 text-align: center;
                 background-color: #333;
                 color: #fff;
-                padding: 10px;
+                padding: 20px;
             }
 
             /* Style for the table */
@@ -54,8 +58,6 @@
 </head>
 <body>
     <?php
-    session_start();
-
     if (!isset($_SESSION['id'])) {
         header("Location: UserLogin.php");
         exit();
@@ -90,7 +92,6 @@
     $result = mysqli_query($conn, $query);
 
     if (mysqli_num_rows($result) > 0) {
-        echo "<h1>Venue Booking History</h1>";
         echo "<table>";
         echo "<tr>
                 <th>Booking ID</th>
