@@ -99,14 +99,27 @@
             font-weight: bold;
             cursor: pointer;
         }
+
+        .gallery img {
+            max-width: 23%; /* Adjust the image size as needed */
+            height: auto;
+            margin: 10px;
+        }
     </style>
 </head>
 <body>
     <div class="top-bar">
         <div><a class="company-name" href="AdminModLogin.php">EventX</a></div>
         <a href="Home.php">Home</a>
-        <a href="#">Profile</a>
-        <a href="#">Profit</a>
+        <a href="HomeEvents.php">Events</a>
+        <a href="HomeServices.php">Services</a>
+        <a href="HomeBlog.php">Blog</a>
+        <a href="HomeGallery.php">Gallery</a>
+        <a href="HomeVenue.php">Venue</a>
+        <a href="HomeEventSupport.php">Event Support</a>
+        <a href="HomeTicketVerify.php">Verify Ticket</a>
+        <a id="Login-button" href="UserLogin.php">Login</a>
+        <a id="book-button" href="UserTicket.php">Book Now</a>
     </div>
 
     <div class="gallery">

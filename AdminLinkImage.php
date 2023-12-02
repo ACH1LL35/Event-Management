@@ -43,7 +43,9 @@ if (isset($_POST['upload'])) {
         $fileName = $uploadedFile['name'];
 
         // Generate a unique file name to prevent overwriting
-        $targetFile = $targetDirectory . uniqid() . '_' . $fileName;
+        // $targetFile = $targetDirectory . uniqid() . '_' . $fileName;
+        $targetFile = $targetDirectory . $fileName;
+
 
         // Move the uploaded file to the target directory on the server
         if (move_uploaded_file($uploadedFile['tmp_name'], $targetFile)) {
