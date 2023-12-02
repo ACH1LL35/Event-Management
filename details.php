@@ -108,15 +108,8 @@
     <div class="top-bar">
         <div><a class="company-name" href="AdminModLogin.php">EventX</a></div>
         <a href="Home.php">Home</a>
-        <a href="HomeEvents.php">Events</a>
-        <a href="HomeServices.php">Services</a>
-        <a href="HomeBlog.php">Blog</a>
-        <a href="HomeGallery.php">Gallery</a>
-        <a href="HomeVenue.php">Venue</a>
-        <a href="HomeEventSupport.php">Event Support</a>
-        <a href="HomeTicketVerify.php">Verify Ticket</a>
-        <a id="Login-button" href="UserLogin.php">Login</a>
-        <a id="book-button" href="UserTicket.php">Book Now</a>
+        <a href="#">Profile</a>
+        <a href="#">Profit</a>
     </div>
 
     <div class="gallery-details">
