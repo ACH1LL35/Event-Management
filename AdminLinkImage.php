@@ -24,16 +24,51 @@ $query = "SELECT * FROM admin_mod WHERE id = '$id'";
 $result = mysqli_query($conn, $query);
 
 if ($row = mysqli_fetch_assoc($result)) {
-    $username = $row['uname']; // Update to use the correct variable name
-    // $email = $row['email'];
+    $username = $row['uname'];
+}
+
+if (isset($_POST['upload'])) {
+    $title = mysqli_real_escape_string($conn, $_POST['title']);
+    $description = mysqli_real_escape_string($conn, $_POST['description']);
+
+    // Define the target directory on the server where you want to save the images
+    $targetDirectory = 'C:/xampp/htdocs/project/gallery/';
+
+    // Get the uploaded file information
+    $uploadedFile = $_FILES['image'];
+
+    // Check if a file was uploaded
+    if ($uploadedFile['error'] === UPLOAD_ERR_OK) {
+        // Use only the name of the file
+        $fileName = $uploadedFile['name'];
+
+        // Generate a unique file name to prevent overwriting
+        $targetFile = $targetDirectory . uniqid() . '_' . $fileName;
+
+        // Move the uploaded file to the target directory on the server
+        if (move_uploaded_file($uploadedFile['tmp_name'], $targetFile)) {
+            // Insert data into the database
+            $insertQuery = "INSERT INTO gallery_data (title, description, image_path) VALUES ('$title', '$description', '$fileName')";
+            if (mysqli_query($conn, $insertQuery)) {
+                echo "File uploaded successfully.";
+            } else {
+                echo "Failed to upload the file. Error: " . mysqli_error($conn);
+            }
+        } else {
+            echo "Failed to upload the file.";
+        }
+    } else {
+        echo "Error uploading the file: " . $uploadedFile['error'];
+    }
 }
 ?>
+
 <!DOCTYPE html>
 <html>
 <head>
     <title>Image Upload</title>
     <style>
-        body {
+body {
             font-family: Arial, Helvetica, sans-serif;
             background-color: #f2f2f2;
             display: flex;
@@ -104,41 +139,21 @@ if ($row = mysqli_fetch_assoc($result)) {
 
         .logout-form .logout-button:hover {
             background-color: #0056b3;
-        }
-    </style>
+        }    </style>
 </head>
 <body>
     <div id="content">
         <h2>Image Upload</h2>
         <form class="image-upload-form" action="<?php echo $_SERVER['PHP_SELF']; ?>" method="post" enctype="multipart/form-data">
+            <label for="title">Title:</label>
+            <input type="text" name="title" required><br>
+            
+            <label for="description">Description:</label>
+            <textarea name="description" required></textarea>
+
             <input type="file" name="image" accept="image/*">
             <input type="submit" name="upload" value="Upload Image">
         </form>
-
-        <?php
-        if (isset($_POST['upload'])) {
-            // Define the target directory on the server where you want to save the images
-            $targetDirectory = 'C:/xampp/htdocs/project/gallery/';
-
-            // Get the uploaded file information
-            $uploadedFile = $_FILES['image'];
-
-            // Check if a file was uploaded
-            if ($uploadedFile['error'] === UPLOAD_ERR_OK) {
-                // Generate a unique file name to prevent overwriting
-                $targetFile = $targetDirectory . uniqid() . '_' . $uploadedFile['name'];
-
-                // Move the uploaded file to the target directory on the server
-                if (move_uploaded_file($uploadedFile['tmp_name'], $targetFile)) {
-                    echo "File uploaded successfully.";
-                } else {
-                    echo "Failed to upload the file.";
-                }
-            } else {
-                echo "Error uploading the file: " . $uploadedFile['error'];
-            }
-        }
-        ?>
     </div>
 </body>
 </html>
