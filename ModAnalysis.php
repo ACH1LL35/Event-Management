@@ -1,12 +1,9 @@
 <?php
-    // Start a PHP session
     session_start();
 
-    // Check if a user ID session variable exists
     if (isset($_SESSION['id'])) {
         $id = $_SESSION['id'];
 
-        // Replace these database connection details with your actual information
         $dbHost = "localhost";
         $dbUser = "root";
         $dbPassword = "";
@@ -26,17 +23,16 @@
                 $row = mysqli_fetch_assoc($result);
                 $uname = $row['uname'];
             } else {
-                $uname = 'Unknown'; // Default value if uname is not found
+                $uname = 'Unknown';
             }
         } else {
-            $uname = 'Unknown'; // Default value if there is an error with the query
+            $uname = 'Unknown';
         }
     } else {
-        $id = null; // Default value when no user is logged in
+        $id = null;
         $uname = '';
     }
 
-    // Handle the logout functionality
     if (isset($_POST['logout'])) {
         session_destroy();
         header('Location: AdminModLogin.php');

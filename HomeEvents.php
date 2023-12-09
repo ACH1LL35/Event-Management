@@ -1,3 +1,4 @@
+<?php include 'HomeTopBar.php'; ?>
 <!DOCTYPE html>
 <html>
 <head>
@@ -22,33 +23,6 @@
         /* Basic CSS styles */
         body {
             font-family: Arial, sans-serif;
-        }
-
-        .top-bar {
-            background-color: #333;
-            color: #fff;
-            padding: 10px 0;
-            text-align: center;
-            position: relative;
-        }
-
-        .top-bar a {
-            color: #fff;
-            text-decoration: none;
-            margin: 0 15px;
-        }
-
-        .top-bar a:hover {
-            text-decoration: underline;
-        }
-
-        .company-name {
-            font-size: 24px;
-            cursor: pointer;
-        }
-
-        .company-name:hover {
-            text-decoration: underline;
         }
 
         #Login-button,
@@ -114,19 +88,6 @@
     </style>
 </head>
 <body>
-    <div class="top-bar">
-        <div><a class="company-name" href="AdminModLogin.php">EventX</a></div>
-        <a href="Home.php">Home</a>
-        <a href="HomeEvents.php">Events</a>
-        <a href="HomeServices.php">Services</a>
-        <a href="HomeBlog.php">Blog</a>
-        <a href="HomeGallery.php">Gallery</a>
-        <a href="HomeVenue.php">Venue</a>
-        <a href="HomeEventSupport.php">Event Support</a>
-        <a href="HomeTicketVerify.php">Verify Ticket</a>
-        <a id="Login-button" href="UserLogin.php">Login</a>
-        <a id="book-button" href="UserTicket.php">Book Now</a>
-    </div>
 
     <div class="event-list">
         <?php
