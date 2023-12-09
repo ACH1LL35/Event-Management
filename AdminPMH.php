@@ -48,43 +48,21 @@ if ($row = mysqli_fetch_assoc($result)) {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>POST MODERATION HISTORY</title>
     <style>
-        body {
+       body {
             font-family: Arial, Helvetica, sans-serif;
             background-color: #f2f2f2;
+            display: flex;
+            flex-direction: row;
+            justify-content: flex-start;
+            align-items: flex-start;
+            height: 100vh;
             margin: 0;
         }
 
         #content {
+            flex: 1;
             display: flex;
             flex-direction: column; /* Align content vertically */
-            align-items: center;
-        }
-
-        ul {
-            list-style: none;
-            padding: 0;
-        }
-
-        li {
-            margin: 1px 0;
-        }
-
-        a {
-            display: block;
-            padding: 10px 20px;
-            background-color: #007BFF;
-            color: #ffffff;
-            text-align: left;
-            border: 2px solid #007BFF;
-            border-radius: 3px;
-            cursor: pointer;
-            width: 200px;
-            text-decoration: none;
-            margin-bottom: 5px;
-        }
-
-        a:hover {
-            background-color: #0056b3;
         }
 
         .content {
@@ -98,7 +76,6 @@ if ($row = mysqli_fetch_assoc($result)) {
             border: 1px solid #ccc;
             border-radius: 5px;
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-            margin-top: 20px;
         }
 
         th, td {
@@ -111,11 +88,9 @@ if ($row = mysqli_fetch_assoc($result)) {
             background-color: #007BFF;
             color: #fff;
         }
-
         /* Styles for the logout form */
         .logout-form {
             text-align: center;
-            margin-top: 20px;
         }
 
         .logout-form .logout-button {
@@ -136,7 +111,7 @@ if ($row = mysqli_fetch_assoc($result)) {
 </head>
 <body>
     <div id="content">
-    <h1 style="text-align: center; background-color: #000; color: #fff; padding: 20px;">pOST MODERATION HISTORY</h1>
+    <h1 style="text-align: center; background-color: #000; color: #fff; padding: 20px;">POST MODERATION HISTORY</h1>
         <form method="post">
             <table border="1">
                 <tr>

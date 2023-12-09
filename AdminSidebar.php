@@ -47,8 +47,8 @@ if ($row = mysqli_fetch_assoc($result)) {
 
         #menu {
             width: 250px;
-            background-color: #333;
-            color: #fff;
+            /* background-color: #333; */
+            color: #333;
             padding: 20px;
         }
 
@@ -147,7 +147,7 @@ if ($row = mysqli_fetch_assoc($result)) {
             width: 290px;
             text-decoration: none;
             margin-bottom: 5px;
-            margin-left: 40px;
+            margin-left: 5px;
         }
 
         details a:hover {

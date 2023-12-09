@@ -205,6 +205,10 @@ mysqli_close($conn);
                 if (xhr.readyState == 4 && xhr.status == 200) {
                     alert(xhr.responseText);
                     // You can handle the response as needed
+                    // Add a timeout to refresh the page after 2 seconds
+                        setTimeout(function () {
+                        window.location.reload();
+                    }, 2000);
                 }
             };
 
