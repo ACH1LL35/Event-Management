@@ -130,7 +130,7 @@
         <a href="HomeEvents.php">Events</a>
         <a href="HomeServices.php">Services</a>
         <a href="HomeBlog.php">Blog</a>
-        <a href="HomeGallery.php">Gallery</a>
+        <a href="index.php">Gallery</a>
         <a href="HomeVenue.php">Venue</a>
         <a href="HomeEventSupport.php">Event Support</a>
         <a href="HomeTicketVerify.php">Verify Ticket</a>

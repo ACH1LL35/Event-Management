@@ -25,6 +25,7 @@ $result = mysqli_query($conn, $query);
 
 if ($row = mysqli_fetch_assoc($result)) {
     $username = $row['uname']; // Update to use the correct variable name
+    // $email = $row['email'];
 }
 
 // Fetch all events
@@ -118,13 +119,22 @@ mysqli_close($conn);
                 return event.Showid == eventSelect.value;
             });
 
-            selectedEvent.venue = newEventVenue.value;
-            selectedEvent.ticket_price = newTicketPrice.value;
-            selectedEvent.total_tickets = newTotalTickets.value;
-            selectedEvent.available_tickets = newAvailableTickets.value;
+            var xhr = new XMLHttpRequest();
+            xhr.open('POST', '', true); // Empty URL to use the same file
+            xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+            xhr.onreadystatechange = function() {
+                if (xhr.readyState == 4 && xhr.status == 200) {
+                    alert(xhr.responseText);
+                    // You can handle the response as needed
+                }
+            };
 
-            alert('Event updated successfully!');
-            // You can handle the update logic as needed
+            xhr.send('updateEventDetails=true' +
+                     '&showId=' + selectedEvent.Showid +
+                     '&newEventVenue=' + newEventVenue.value +
+                     '&newTicketPrice=' + newTicketPrice.value +
+                     '&newTotalTickets=' + newTotalTickets.value +
+                     '&newAvailableTickets=' + newAvailableTickets.value);
         }
     </script>
 </body>
