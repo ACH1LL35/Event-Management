@@ -4,12 +4,12 @@
 <head>
     <title>EventX - Your Event Partner</title>
     <style>
-        /* Basic CSS styles... */
         body {
             font-family: Arial, sans-serif;
-            background-image: url('images/ser.jpg'); /* Path to your background image in the "images" folder */
+            background-image: url('images/ser.jpg'); /* Path to "images" folder */
             margin: 0;
             padding: 0;
+            color: #000;
         }
 
         #Login-button {
@@ -42,12 +42,10 @@
             background-color: #ff9933;
         }
 
-        /* Add styles for the content section */
         .content {
             padding: 20px;
         }
 
-        /* Add zigzag class for alternating layout */
         .zigzag {
             display: flex;
             flex-direction: row;
@@ -66,7 +64,7 @@
         }
 
         .image {
-            width: 1000px; /* Adjust the width as needed */
+            width: 1000px;
         }
 
         .image img {
@@ -88,7 +86,6 @@
             line-height: 1.6;
         }
 
-        /* Hide radio buttons and labels */
         .image-input {
             display: none;
         }
@@ -143,7 +140,6 @@
         <h1 class="center-text">Welcome to EventX</h1>
         <p class="center-text , color-text" >EventX is your premier event partner, providing a wide range of services and unforgettable experiences for all your special occasions.</p>
 
-        <!-- Display 3 images and descriptions in a zigzag layout -->
         <div class="zigzag">
             <div class="image">
                 <img src="images/ven.jpg" alt="Image 1">

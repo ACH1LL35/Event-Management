@@ -10,33 +10,7 @@
             background-image: url('images/ven2.jpg'); /* Path to your background image in the "images" folder */
             margin: 0;
             padding: 0;
-        }
-
-        .top-bar {
-            background-color: #333;
-            color: #fff;
-            padding: 10px 0;
-            text-align: center;
-            position: relative;
-        }
-
-        .top-bar a {
-            color: #fff;
-            text-decoration: none;
-            margin: 0 15px;
-        }
-
-        .top-bar a:hover {
-            text-decoration: underline;
-        }
-
-        .company-name {
-            font-size: 24px;
-            cursor: pointer;
-        }
-
-        .company-name:hover {
-            text-decoration: underline;
+            color: #000;
         }
 
         #Login-button {
@@ -102,15 +76,18 @@
         }
 
         .description {
+            color: #000;
             width: 300px;
         }
 
         .description h2 {
+            color: #000;
             font-size: 18px;
             margin-bottom: 10px;
         }
 
         .description p {
+            color: #000;
             font-size: 14px;
             line-height: 1.6;
         }
@@ -156,8 +133,6 @@
             display: block;
         }
 
-        /* Add styles for the buttons */
-        /* Add styles for the buttons */
          .button-container {
             display: flex;
             margin-top: 10px;
@@ -233,7 +208,7 @@
             </div>
             <div class "description">
                 <h1>HALL - 02</h1>
-                <hh2> Hall Measurement</h2>
+                <h2> Hall Measurement</h2>
                 <p> Mezzanine Floor: 2050 Sq. ft.</p>
                 <p> Width: 78´</p>
                 <p> Height: 34´</p>
