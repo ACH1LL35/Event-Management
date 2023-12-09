@@ -1,5 +1,5 @@
 <?php
-session_start();
+include("AdminSidebar.php");
 
 if (isset($_POST['logout'])) {
     // Destroy the session and redirect to the Login page
@@ -25,6 +25,7 @@ $result = mysqli_query($conn, $query);
 
 if ($row = mysqli_fetch_assoc($result)) {
     $username = $row['uname']; // Update to use the correct variable name
+    // $email = $row['email'];
 }
 
 // Fetch all events
@@ -46,21 +47,100 @@ mysqli_close($conn);
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Master Admin Page</title>
     <style>
-        /* Your existing styles here */
+        select {
+            width: 100%; /* Adjust the width as needed */
+            padding: 10px;
+            margin-bottom: 15px;
+            border: 1px solid #ccc;
+            border-radius: 3px;
+        }
+            select option[value=""] {
+            color: #999; /* Adjust the color as needed */
+        }
+
+        body {
+            font-family: Arial, Helvetica, sans-serif;
+            background-color: #f2f2f2;
+            display: flex;
+            align-items: flex-start;
+            height: 100vh;
+            margin: 0;
+        }
+
+        #content {
+            max-width: 1000px;
+            padding: 20px;
+            background-color: #ffffff;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            margin: 10px auto;
+            text-align: left;
+            width: 600px;
+        }
+
+        label {
+            font-weight: bold;
+            display: block;
+            margin-bottom: 5px;
+        }
+
+        input[type="text"],
+        input[type="date"],
+        textarea {
+            width: 90%;
+            padding: 10px;
+            margin-bottom: 15px;
+            border: 1px solid #ccc;
+            border-radius: 3px;
+        }
+
+        button[type="submit"] {
+            display: block;
+            padding: 10px 20px;
+            background-color: #007BFF;
+            color: #ffffff;
+            text-align: center;
+            border: none;
+            border-radius: 3px;
+            cursor: pointer;
+        }
+
+        button[type="submit"]:hover {
+            background-color: #0056b3;
+        }
+
+        /* Styles for the logout form */
+        .logout-form {
+            text-align: center;
+            margin-top: 20px;
+        }
+
+        .logout-form .logout-button {
+            padding: 10px 20px;
+            background-color: #007BFF;
+            color: #ffffff;
+            border: 2px solid #007BFF;
+            border-radius: 3px;
+            cursor: pointer;
+            width: 200px;
+            text-decoration: none;
+        }
+
+        .logout-form .logout-button:hover {
+            background-color: #0056b3;
+        }
     </style>
 </head>
 <body>
-    <div id="menu">
-        <form class="logout-form" method="post">
-            <input type="submit" name="logout" class="logout-button" value="Log Out">
-        </form>
-        <h1>Welcome, <?php echo $username; ?>!</h1>
-        <h2>Select Event:</h2>
-        <select id="eventSelect">
-            <?php foreach ($events as $event): ?>
-                <option value="<?php echo $event['Showid']; ?>"><?php echo $event['event_name']; ?></option>
-            <?php endforeach; ?>
-        </select>
+        <div id="content">
+            <h2>Select Event:</h2>
+            <select id="eventSelect">
+                <option value="" disabled selected>Select an event</option>
+                <?php foreach ($events as $event): ?>
+                    <option value="<?php echo $event['Showid']; ?>"><?php echo $event['event_name']; ?></option>
+                <?php endforeach; ?>
+            </select>
 
         <div id="eventDetails">
             <h2>Event Details</h2>
@@ -118,13 +198,22 @@ mysqli_close($conn);
                 return event.Showid == eventSelect.value;
             });
 
-            selectedEvent.venue = newEventVenue.value;
-            selectedEvent.ticket_price = newTicketPrice.value;
-            selectedEvent.total_tickets = newTotalTickets.value;
-            selectedEvent.available_tickets = newAvailableTickets.value;
+            var xhr = new XMLHttpRequest();
+            xhr.open('POST', 'update_event_details.php', true); // Correct URL
+            xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+            xhr.onreadystatechange = function() {
+                if (xhr.readyState == 4 && xhr.status == 200) {
+                    alert(xhr.responseText);
+                    // You can handle the response as needed
+                }
+            };
 
-            alert('Event updated successfully!');
-            // You can handle the update logic as needed
+            xhr.send('updateEventDetails=true' +
+                     '&showId=' + selectedEvent.Showid +
+                     '&newEventVenue=' + newEventVenue.value +
+                     '&newTicketPrice=' + newTicketPrice.value +
+                     '&newTotalTickets=' + newTotalTickets.value +
+                     '&newAvailableTickets=' + newAvailableTickets.value);
         }
     </script>
 </body>
