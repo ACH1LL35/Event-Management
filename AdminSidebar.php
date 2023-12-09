@@ -61,15 +61,13 @@ if ($row = mysqli_fetch_assoc($result)) {
             margin: 1px 0;
         }
 
-        
         h2 {
-        background-color: #333;
-        color: #fff;
-        padding: 20px;
-        text-align: center;
-        margin: 0;
-         }
-
+            background-color: #333;
+            color: #fff;
+            padding: 20px;
+            text-align: center;
+            margin: 0;
+        }
 
         a {
             display: block;
@@ -108,6 +106,53 @@ if ($row = mysqli_fetch_assoc($result)) {
         .logout-form .logout-button:hover {
             background-color: #0056b3;
         }
+
+        /* Additional style for the dropdown */
+        details {
+            display: inline-block;
+        }
+
+        summary {
+            cursor: pointer;
+            padding: 10px 20px;
+            background-color: #007BFF;
+            color: #ffffff;
+            border: 2px solid #007BFF;
+            border-radius: 3px;
+            width: 200px;
+            text-align: left;
+            list-style: none;
+            margin-bottom: 5px;
+        }
+
+        details ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        details li {
+            margin: 1px 0;
+        }
+
+        details a {
+            display: block;
+            padding: 10px 20px;
+            background-color: #007BFF;
+            color: #ffffff;
+            text-align: left;
+            border: 2px solid #007BFF;
+            border-radius: 3px;
+            cursor: pointer;
+            width: 290px;
+            text-decoration: none;
+            margin-bottom: 5px;
+            margin-left: 40px;
+        }
+
+        details a:hover {
+            background-color: #0056b3;
+        }
     </style>
 </head>
 <body>
@@ -117,30 +162,79 @@ if ($row = mysqli_fetch_assoc($result)) {
         </form>
         <h1>Welcome, <?php echo $username; ?>!</h1>
         <ul>
-            <li><a href="AdminPanel.php">Home</a></li>
-            <li><a href="AdminEvent.php">CREATE EVENT</a></li>
-            <li><a href="AdminEventHistory.php">EVENT HISTORY</a></li>
-            <li><a href="AdminEventCal.php">EVENT CALENDAR</a></li>
-             <li><a href="AdminTicketCreation.php">TICKET PUBLISH</a></li>
-             <li><a href="AdminTicketManagement.php">TICKET MANAGEMENT</a></li>
-            <li><a href="AdminTicketAudit.php">TICKET AUDIT</a></li>
-            <li><a href="AdminTicketList.php">TICKET SALE LIST</a></li>
-            <li><a href="AdminVenueManagement.php">VENUE MANAGEMENT</a></li>
-            <li><a href="AdminVenueBookHistory.php">VENUE BOOKING LIST</a></li>
-            <li><a href="AdminAnalysis.php">ANALYSIS</a></li>
-            <li><a href="AdminComplaint.php">COMPLAINT FEEDBACK</a></li>
-            <li><a href="AdminModAccess.php">MODERATOR ACCESS</a></li>
-            <li><a href="AdminModManagement.php">MODERATOR MANAGEMENT</a></li>
-            <li><a href="AdminPostModeration.php">POST MODERATION</a></li>
-            <li><a href="AdminPMH.php">POST MODERATION HISTORY</a></li>
-            <li><a href="AdminCommentModeration.php">COMMENT MODERATION</a></li>
-            <li><a href="AdminCMH.php">COMMENT MODERATION HISTORY</a></li>
-            <li><a href="AdminQueryF.php">QUERY FEEDBACK</a></li>
-            <li><a href="AdminQuotationF.php">QOUTATION FEEDBACK</a></li>
-            <li><a href="AdminAdd2Gallary.php">ADD TO GALLERY</a></li>
-            <li><a href="AdminLinkImage.php">LINK TO GALLERY</a></li>
-            <li><a href="AdminUserManagement.php">USER MANAGEMENT</a></li>
-            <li><a href="AdminNewsletter.php">NEWSLETTER</a></li>
+            <li><a href="AdminPanel.php">➾ HOME</a></li>
+            
+            <!-- Use details and summary for the dropdown -->
+            <details>
+                <summary>➾ TICKET</summary>
+                <ul>
+                    <li><a href="AdminTicketCreation.php">⤷ TICKET PUBLISH</a></li>
+                    <li><a href="AdminTicketManagement.php">⤷ TICKET MANAGEMENT</a></li>
+                    <li><a href="AdminTicketList.php">⤷ TICKET SALE LIST</a></li>
+                </ul>
+            </details>
+
+            <details>
+                <summary>➾ EVENT</summary>
+                <ul>
+                    <li><a href="AdminEventHistory.php">⤷ EVENT HISTORY</a></li>
+                    <li><a href="AdminEventCal.php">⤷ EVENT CALENDAR</a></li>
+                </ul>
+            </details>
+            
+            <details>
+                <summary>➾ VENUE</summary>
+                <ul>
+                    <li><a href="AdminVenueManagement.php">⤷ VENUE MANAGEMENT</a></li>
+                    <li><a href="AdminVenueBookHistory.php">⤷ VENUE BOOKING LIST</a></li>
+                </ul>
+            </details>
+
+            <details>
+                <summary>➾ MODERATOR</summary>
+                <ul>
+                    <li><a href="AdminModAccess.php">⤷ MODERATOR ACCESS</a></li>
+                    <li><a href="AdminModManagement.php">⤷ MODERATOR MANAGEMENT</a></li>
+                </ul>
+            </details>
+            
+            <li><a href="AdminAnalysis.php">➾ ANALYSIS</a></li>
+            
+
+            <details>
+                <summary>➾ MODERATION</summary>
+                <ul>
+                    <li><a href="AdminPostModeration.php">⤷ POST MODERATION</a></li>
+                    <li><a href="AdminPMH.php">⤷ POST MODERATION HISTORY</a></li>
+                    <li><a href="AdminCommentModeration.php">⤷ COMMENT MODERATION</a></li>
+                    <li><a href="AdminCMH.php">⤷ COMMENT MODERATION HISTORY</a></li>
+                </ul>
+            </details>
+
+            <details>
+                <summary>➾ FEEDBACK</summary>
+                <ul>
+                    <li><a href="AdminQueryF.php">⤷ QUERY FEEDBACK</a></li>
+                    <li><a href="AdminQuotationF.php">⤷ QUOTATION FEEDBACK</a></li>
+                    <li><a href="AdminComplaint.php">⤷ COMPLAINT FEEDBACK</a></li>
+                </ul>
+            </details>
+
+            <details>
+                <summary>➾ GALLERY</summary>
+                <ul>
+                    <li><a href="AdminAdd2Gallary.php">⤷ DD TO GALLERY</a></li>
+                    <li><a href="AdminLinkImage.php">⤷ LINK TO GALLERY</a></li>
+                </ul>
+            </details>
+
+            <details>
+                <summary>➾ USER</summary>
+                <ul>
+                    <li><a href="AdminUserManagement.php">⤷ USER MANAGEMENT</a></li>
+                    <li><a href="AdminNewsletter.php">⤷ NEWSLETTER</a></li>
+                </ul>
+            </details>
         </ul>
     </div>
 </body>
