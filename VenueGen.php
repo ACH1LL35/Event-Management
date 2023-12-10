@@ -3,6 +3,17 @@
 require_once("vendor/tecnickcom/tcpdf/tcpdf.php");
 require_once("vendor/tecnickcom/tcpdf/tcpdf_barcodes_1d.php"); // Include barcode library
 
+// Custom TCPDF class to override SetFooter method
+class CustomTCPDF extends TCPDF {
+    // Override SetFooter to add custom footer
+    public function SetFooter() {
+        // Add your custom footer content here
+        $this->SetY(-15);
+        $this->SetFont('times', 'I', 8);
+        $this->Cell(0, 10, "E-BOOKING provided by EventX", 0, false, 'C');
+    }
+}
+
 // Function to generate PDF for a specific booking
 function generateVenuePDF($bookingId)
 {
@@ -12,18 +23,46 @@ function generateVenuePDF($bookingId)
     $result = mysqli_query($conn, $query);
     $bookingData = mysqli_fetch_assoc($result);
 
-    // Create a new TCPDF instance
-    $pdf = new TCPDF();
+    // Create a new CustomTCPDF instance
+    $pdf = new CustomTCPDF();
     $pdf->AddPage();
+
+
+    // Add a font size 14 heading
+    $pdf->SetFont('times', 'B', 20);
+    $pdf->Cell(0, 10, 'ENTRY PASS', 0, 1, 'C'); // Center-aligned heading
 
     // Set font
     $pdf->SetFont('times', '', 12);
 
-    // Add booking information to the PDF (customize based on your data)
+    // Set custom X and Y coordinates
+    $customX = 20;
+    $customY = 30;
+
+    // Add booking information to the PDF at custom X and Y coordinates
+    $pdf->SetXY($customX, $customY);
     $pdf->Cell(0, 10, "Booking ID: " . $bookingData['booking_id'], 0, 1);
-    $pdf->Cell(0, 10, "Venue Name: " . $bookingData['venue_name'], 0, 1);
+
+    // Update Y coordinate for the next cell
+    $pdf->SetXY($customX, $customY);
+    $pdf->Cell(0, 20, "Venue Name: " . $bookingData['venue_name'], 0, 1);
+
+    
+    // Set custom X and Y coordinates
+    $customX = 130;
+    $customY = 30;
+
+    // Add booking information to the PDF at custom X and Y coordinates
+    $pdf->SetXY($customX, $customY);
     $pdf->Cell(0, 10, "Booked From Date: " . $bookingData['from_date'], 0, 1);
-    $pdf->Cell(0, 10, "Booked Till Date: " . $bookingData['to_date'], 0, 1);
+
+    // Add booking information to the PDF at custom X and Y coordinates
+    $pdf->SetXY($customX, $customY);
+    $pdf->Cell(0, 20, "Booked Till Date: " . $bookingData['to_date'], 0, 1);
+
+    // Set custom X and Y coordinates for barcode
+    $barcodeX = 70;
+    $barcodeY = 50;
 
     // Generate barcode
     $style = array(
@@ -43,7 +82,8 @@ function generateVenuePDF($bookingId)
         'stretchtext' => 4
     );
 
-    $pdf->write1DBarcode($bookingId, 'C128', '', '', '', 18, 0.4, $style, 'N');
+
+    $pdf->write1DBarcode($bookingId, 'C128', $barcodeX, $barcodeY, '', 18, 0.4, $style, 'N');
 
     // ... Add more booking details as needed
 
