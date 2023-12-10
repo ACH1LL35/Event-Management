@@ -98,7 +98,7 @@ include("UserSidebar.php");
                 <th>Venue</th>
                 <th>Booked From Date (yyyy/mm/dd)</th>
                 <th>Booked Till Date (yyyy/mm/dd)</th>
-                <th>Action</th>
+                <th colspan='2'>Action</th>
               </tr>";
 
         while ($row = mysqli_fetch_assoc($result)) {
@@ -111,6 +111,12 @@ include("UserSidebar.php");
                         <form method='post' action=''>
                             <input type='hidden' name='booking_id' value='" . $row['booking_id'] . "'>
                             <input type='submit' name='cancel_booking' value='Cancel Booking'>
+                        </form>
+                    </td>
+                    <td>
+                        <form method='get' action='VenueGen.php'>
+                        <input type='hidden' name='booking_id' value='" . $row['booking_id'] . "'>
+                        <input type='submit' name='download_booking' value='Download Booking'>
                         </form>
                     </td>
                   </tr>";
