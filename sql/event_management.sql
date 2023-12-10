@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Nov 24, 2023 at 09:09 PM
+-- Generation Time: Dec 10, 2023 at 03:07 PM
 -- Server version: 10.4.28-MariaDB
 -- PHP Version: 8.2.4
 
@@ -57,8 +57,11 @@ CREATE TABLE `booking` (
   `user_id` int(8) NOT NULL,
   `booking_id` varchar(10) NOT NULL,
   `venue_name` varchar(32) NOT NULL,
+  `venue_fee` int(6) NOT NULL,
   `from_date` date NOT NULL,
   `to_date` date NOT NULL,
+  `duration` int(2) NOT NULL,
+  `total_fee` int(7) NOT NULL,
   `name` varchar(32) NOT NULL,
   `email` varchar(32) NOT NULL,
   `cnumber` varchar(11) NOT NULL
@@ -68,8 +71,10 @@ CREATE TABLE `booking` (
 -- Dumping data for table `booking`
 --
 
-INSERT INTO `booking` (`user_id`, `booking_id`, `venue_name`, `from_date`, `to_date`, `name`, `email`, `cnumber`) VALUES
-(15, 'UK95CQ5L9N', 'HALL - 01', '2023-11-20', '2023-11-20', 'Zobayer Alam', 'alam@gmail.com', '01778651619');
+INSERT INTO `booking` (`user_id`, `booking_id`, `venue_name`, `venue_fee`, `from_date`, `to_date`, `duration`, `total_fee`, `name`, `email`, `cnumber`) VALUES
+(15, 'UK95CQ5L9N', 'HALL - 01', 0, '2023-11-20', '2023-11-20', 0, 0, 'Zobayer Alam', 'alam@gmail.com', '01778651619'),
+(15, 'E9OBHBC241', 'HALL - 03', 0, '2023-12-21', '2023-12-29', 8, 0, 'Zobayer Alam', 'alam@gmail.com', '01778651619'),
+(15, 'IOAF9YTHK9', 'HALL - 05', 200000, '2023-12-13', '2023-12-21', 8, 0, 'Zobayer Alam', 'alam@gmail.com', '01778651619');
 
 -- --------------------------------------------------------
 
@@ -92,7 +97,7 @@ CREATE TABLE `comments` (
 --
 
 INSERT INTO `comments` (`posted_by_id`, `posted_by_username`, `id`, `post_id`, `comment`, `created_at`, `status`) VALUES
-('15', 'alam56', 14, 23, 'comment id+username', '2023-11-10 14:38:53', 0),
+('15', 'alam56', 14, 23, 'comment id+username', '2023-11-10 14:38:53', 1),
 ('15', 'alam69', 15, 21, 'tywer5yweywerywe5rywerywer', '2023-11-12 20:26:57', 1),
 ('15', 'alam69', 16, 23, 'tyutjtyjtyjtyjtryjtj', '2023-11-12 20:32:36', 1);
 
@@ -176,6 +181,32 @@ INSERT INTO `events` (`id`, `event_name`, `event_date`, `event_details`, `posted
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `gallery_data`
+--
+
+CREATE TABLE `gallery_data` (
+  `id` int(11) NOT NULL,
+  `image_path` varchar(255) NOT NULL,
+  `title` varchar(255) NOT NULL,
+  `description` text DEFAULT NULL,
+  `created_at` timestamp NOT NULL DEFAULT current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `gallery_data`
+--
+
+INSERT INTO `gallery_data` (`id`, `image_path`, `title`, `description`, `created_at`) VALUES
+(7, 'giphy.gif', '1', '1', '2023-12-02 20:34:25'),
+(8, 'pexels-emir-kaan-okutan-2403568.jpg', '2', '2', '2023-12-02 20:34:34'),
+(9, 'pexels-jonathan-borba-3014856.jpg', '3', '3', '2023-12-02 20:34:39'),
+(10, 'pexels-jonathan-borba-18853312.jpg', '4', '4', '2023-12-02 20:34:44'),
+(11, 'pexels-lisa-fotios-18844140.jpg', '5', '5', '2023-12-02 20:34:49'),
+(12, 'pexels-nathan-cowley-1128784.jpg', '6', '6', '2023-12-02 20:34:56');
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `posts`
 --
 
@@ -207,6 +238,7 @@ CREATE TABLE `purchase_info` (
   `user_id` int(6) NOT NULL,
   `ticket_id` varchar(10) NOT NULL,
   `event_name` varchar(256) NOT NULL,
+  `venue` varchar(64) NOT NULL,
   `ticket_quantity` int(3) NOT NULL,
   `contact_number` varchar(11) NOT NULL,
   `email` varchar(32) NOT NULL,
@@ -217,8 +249,13 @@ CREATE TABLE `purchase_info` (
 -- Dumping data for table `purchase_info`
 --
 
-INSERT INTO `purchase_info` (`user_id`, `ticket_id`, `event_name`, `ticket_quantity`, `contact_number`, `email`, `name`) VALUES
-(15, '2Z2TD5907S', 'dgvc', 20, '01778651619', 'alam@gmail.com', 'Zobayer Alam');
+INSERT INTO `purchase_info` (`user_id`, `ticket_id`, `event_name`, `venue`, `ticket_quantity`, `contact_number`, `email`, `name`) VALUES
+(15, '2Z2TD5907S', 'dgvc', '', 20, '01778651619', 'alam@gmail.com', 'Zobayer Alam'),
+(15, 'ZBW9QRL5HM', 'project', '', 15, '01778651619', 'alam@gmail.com', 'Zobayer Alam'),
+(15, 'CTBQMZOQ63', 'rock', '', 2, '01778651619', 'alam@gmail.com', 'Zobayer Alam'),
+(15, 'YD4JCYCE2Z', 'rock', '', 23, '01778651619', 'alam@gmail.com', 'Zobayer Alam'),
+(15, '71FIY1SCVT', 'aiub', 'aiub', 14, '01778651619', 'alam@gmail.com', 'Zobayer Alam'),
+(15, '4ZL5MU8CRB', 'dgvc', 'test', 13, '01778651619', 'alam@gmail.com', 'Zobayer Alam');
 
 -- --------------------------------------------------------
 
@@ -275,7 +312,7 @@ INSERT INTO `quotation` (`qo_id`, `u_id`, `u_name`, `u_email`, `qo_about`, `qo_d
 --
 
 CREATE TABLE `ticket_cr` (
-  `id` int(11) NOT NULL,
+  `Showid` int(11) NOT NULL,
   `event_name` varchar(255) NOT NULL,
   `venue` varchar(255) NOT NULL,
   `ticket_price` int(10) NOT NULL,
@@ -287,11 +324,11 @@ CREATE TABLE `ticket_cr` (
 -- Dumping data for table `ticket_cr`
 --
 
-INSERT INTO `ticket_cr` (`id`, `event_name`, `venue`, `ticket_price`, `total_tickets`, `available_tickets`) VALUES
-(2, 'dgvc', 'ervr', 200, 500, 435),
-(3, 'aiub', 'aiub', 200, 500, 335),
-(4, 'rock', 'aiub', 999, 5000, 4900),
-(5, 'project', 'hall 01', 200, 2000, 1800);
+INSERT INTO `ticket_cr` (`Showid`, `event_name`, `venue`, `ticket_price`, `total_tickets`, `available_tickets`) VALUES
+(2, 'dgvc', 'test', 3999, 500, 422),
+(3, 'aiub', 'aiub', 250, 500, 321),
+(4, 'rock', 'aiub', 250, 5000, 4875),
+(5, 'project', 'hall 01', 999, 2000, 1785);
 
 -- --------------------------------------------------------
 
@@ -301,17 +338,20 @@ INSERT INTO `ticket_cr` (`id`, `event_name`, `venue`, `ticket_price`, `total_tic
 
 CREATE TABLE `venues` (
   `venue_id` int(3) NOT NULL,
-  `venue_name` varchar(32) NOT NULL
+  `venue_name` varchar(32) NOT NULL,
+  `venue_fee` int(6) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `venues`
 --
 
-INSERT INTO `venues` (`venue_id`, `venue_name`) VALUES
-(1, 'HALL - 01'),
-(2, 'HALL - 02'),
-(3, 'HALL - 03');
+INSERT INTO `venues` (`venue_id`, `venue_name`, `venue_fee`) VALUES
+(1, 'HALL - 01', 400000),
+(2, 'HALL - 02', 400000),
+(3, 'HALL - 03', 400000),
+(4, 'HALL - 04', 550000),
+(5, 'HALL - 05', 200000);
 
 --
 -- Indexes for dumped tables
@@ -349,6 +389,12 @@ ALTER TABLE `events`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Indexes for table `gallery_data`
+--
+ALTER TABLE `gallery_data`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Indexes for table `posts`
 --
 ALTER TABLE `posts`
@@ -370,7 +416,7 @@ ALTER TABLE `quotation`
 -- Indexes for table `ticket_cr`
 --
 ALTER TABLE `ticket_cr`
-  ADD PRIMARY KEY (`id`);
+  ADD PRIMARY KEY (`Showid`);
 
 --
 -- Indexes for table `venues`
@@ -413,6 +459,12 @@ ALTER TABLE `events`
   MODIFY `id` int(8) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
+-- AUTO_INCREMENT for table `gallery_data`
+--
+ALTER TABLE `gallery_data`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+
+--
 -- AUTO_INCREMENT for table `posts`
 --
 ALTER TABLE `posts`
@@ -434,13 +486,13 @@ ALTER TABLE `quotation`
 -- AUTO_INCREMENT for table `ticket_cr`
 --
 ALTER TABLE `ticket_cr`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `Showid` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT for table `venues`
 --
 ALTER TABLE `venues`
-  MODIFY `venue_id` int(3) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `venue_id` int(3) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- Constraints for dumped tables

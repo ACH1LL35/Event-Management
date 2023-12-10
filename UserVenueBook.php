@@ -215,6 +215,11 @@ include("UserSidebar.php");
             $from_date = $_POST['fromDate'];
             $to_date = $_POST['toDate'];
 
+            // Calculate duration in days
+            $fromDate = new DateTime($from_date);
+            $toDate = new DateTime($to_date);
+            $duration = $fromDate->diff($toDate)->days;
+
             $booking_id = generateRandomString(10);
 
             $sql = "SELECT * FROM booking WHERE venue_name = '$venue_name' AND ('$from_date' BETWEEN from_date AND to_date OR '$to_date' BETWEEN from_date AND to_date)";
@@ -223,11 +228,22 @@ include("UserSidebar.php");
             if ($result->num_rows > 0) {
                 $message = "Venue is already booked for the selected dates.";
             } else {
-                $sql = "INSERT INTO booking (booking_id, venue_name, user_id, from_date, to_date, name, email, cnumber) VALUES ('$booking_id', '$venue_name', $id, '$from_date', '$to_date', '$name', '$email', '$cnumber')";
-                if ($conn->query($sql) === TRUE) {
-                    $message = "Booking confirmed! Booking ID: $booking_id";
+                // Retrieve venue fee
+                $venueFeeQuery = "SELECT venue_fee FROM Venues WHERE venue_name = '$venue_name'";
+                $venueFeeResult = $conn->query($venueFeeQuery);
+
+                if ($venueFeeResult->num_rows > 0) {
+                    $venueFeeRow = $venueFeeResult->fetch_assoc();
+                    $venue_fee = $venueFeeRow['venue_fee'];
+
+                    $sql = "INSERT INTO booking (booking_id, venue_name, user_id, from_date, to_date, duration, name, email, cnumber, venue_fee) VALUES ('$booking_id', '$venue_name', $id, '$from_date', '$to_date', $duration, '$name', '$email', '$cnumber', $venue_fee)";
+                    if ($conn->query($sql) === TRUE) {
+                        $message = "Booking confirmed! Booking ID: $booking_id";
+                    } else {
+                        $message = "Error: " . $sql . "<br>" . $conn->error;
+                    }
                 } else {
-                    $message = "Error: " . $sql . "<br>" . $conn->error;
+                    $message = "Error retrieving venue fee for '$venue_name'";
                 }
             }
 
@@ -272,5 +288,4 @@ include("UserSidebar.php");
         </form>
     </div>
 </body>
-
 </html>

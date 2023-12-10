@@ -32,8 +32,6 @@ function generateTicketPDF($ticketId)
     // Set font
     $pdf->SetFont('times', '', 10);
 
-    // Add ticket information to the PDF (customize based on your data)
-    // Set custom X and Y coordinates
     $customX = 20;
     $customY = 30;
 
