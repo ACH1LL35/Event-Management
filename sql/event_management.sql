@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Dec 10, 2023 at 03:07 PM
+-- Generation Time: Dec 10, 2023 at 03:13 PM
 -- Server version: 10.4.28-MariaDB
 -- PHP Version: 8.2.4
 
@@ -64,17 +64,18 @@ CREATE TABLE `booking` (
   `total_fee` int(7) NOT NULL,
   `name` varchar(32) NOT NULL,
   `email` varchar(32) NOT NULL,
-  `cnumber` varchar(11) NOT NULL
+  `cnumber` varchar(11) NOT NULL,
+  `booked_at` timestamp NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `booking`
 --
 
-INSERT INTO `booking` (`user_id`, `booking_id`, `venue_name`, `venue_fee`, `from_date`, `to_date`, `duration`, `total_fee`, `name`, `email`, `cnumber`) VALUES
-(15, 'UK95CQ5L9N', 'HALL - 01', 0, '2023-11-20', '2023-11-20', 0, 0, 'Zobayer Alam', 'alam@gmail.com', '01778651619'),
-(15, 'E9OBHBC241', 'HALL - 03', 0, '2023-12-21', '2023-12-29', 8, 0, 'Zobayer Alam', 'alam@gmail.com', '01778651619'),
-(15, 'IOAF9YTHK9', 'HALL - 05', 200000, '2023-12-13', '2023-12-21', 8, 0, 'Zobayer Alam', 'alam@gmail.com', '01778651619');
+INSERT INTO `booking` (`user_id`, `booking_id`, `venue_name`, `venue_fee`, `from_date`, `to_date`, `duration`, `total_fee`, `name`, `email`, `cnumber`, `booked_at`) VALUES
+(15, 'UK95CQ5L9N', 'HALL - 01', 0, '2023-11-20', '2023-11-20', 0, 0, 'Zobayer Alam', 'alam@gmail.com', '01778651619', '2023-12-10 14:11:48'),
+(15, 'E9OBHBC241', 'HALL - 03', 0, '2023-12-21', '2023-12-29', 8, 0, 'Zobayer Alam', 'alam@gmail.com', '01778651619', '2023-12-10 14:11:48'),
+(15, 'IOAF9YTHK9', 'HALL - 05', 200000, '2023-12-13', '2023-12-21', 8, 0, 'Zobayer Alam', 'alam@gmail.com', '01778651619', '2023-12-10 14:11:48');
 
 -- --------------------------------------------------------
 
@@ -242,20 +243,21 @@ CREATE TABLE `purchase_info` (
   `ticket_quantity` int(3) NOT NULL,
   `contact_number` varchar(11) NOT NULL,
   `email` varchar(32) NOT NULL,
-  `name` varchar(32) NOT NULL
+  `name` varchar(32) NOT NULL,
+  `purchased_at` timestamp NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `purchase_info`
 --
 
-INSERT INTO `purchase_info` (`user_id`, `ticket_id`, `event_name`, `venue`, `ticket_quantity`, `contact_number`, `email`, `name`) VALUES
-(15, '2Z2TD5907S', 'dgvc', '', 20, '01778651619', 'alam@gmail.com', 'Zobayer Alam'),
-(15, 'ZBW9QRL5HM', 'project', '', 15, '01778651619', 'alam@gmail.com', 'Zobayer Alam'),
-(15, 'CTBQMZOQ63', 'rock', '', 2, '01778651619', 'alam@gmail.com', 'Zobayer Alam'),
-(15, 'YD4JCYCE2Z', 'rock', '', 23, '01778651619', 'alam@gmail.com', 'Zobayer Alam'),
-(15, '71FIY1SCVT', 'aiub', 'aiub', 14, '01778651619', 'alam@gmail.com', 'Zobayer Alam'),
-(15, '4ZL5MU8CRB', 'dgvc', 'test', 13, '01778651619', 'alam@gmail.com', 'Zobayer Alam');
+INSERT INTO `purchase_info` (`user_id`, `ticket_id`, `event_name`, `venue`, `ticket_quantity`, `contact_number`, `email`, `name`, `purchased_at`) VALUES
+(15, '2Z2TD5907S', 'dgvc', '', 20, '01778651619', 'alam@gmail.com', 'Zobayer Alam', '2023-12-10 14:12:14'),
+(15, 'ZBW9QRL5HM', 'project', '', 15, '01778651619', 'alam@gmail.com', 'Zobayer Alam', '2023-12-10 14:12:14'),
+(15, 'CTBQMZOQ63', 'rock', '', 2, '01778651619', 'alam@gmail.com', 'Zobayer Alam', '2023-12-10 14:12:14'),
+(15, 'YD4JCYCE2Z', 'rock', '', 23, '01778651619', 'alam@gmail.com', 'Zobayer Alam', '2023-12-10 14:12:14'),
+(15, '71FIY1SCVT', 'aiub', 'aiub', 14, '01778651619', 'alam@gmail.com', 'Zobayer Alam', '2023-12-10 14:12:14'),
+(15, '4ZL5MU8CRB', 'dgvc', 'test', 13, '01778651619', 'alam@gmail.com', 'Zobayer Alam', '2023-12-10 14:12:14');
 
 -- --------------------------------------------------------
 
