@@ -27,10 +27,15 @@ function generateVenuePDF($bookingId)
     $pdf = new CustomTCPDF();
     $pdf->AddPage();
 
+    // Add logo to the PDF
+    $logoPath = 'logo/Untitled.jpg';
+    $pdf->Image($logoPath, 10, 10, 40, 15);
+
+
 
     // Add a font size 14 heading
     $pdf->SetFont('times', 'B', 20);
-    $pdf->Cell(0, 10, 'BOOKING RECEIPT', 0, 1, 'C'); // Center-aligned heading
+    $pdf->Cell(0, 30, 'BOOKING RECEIPT', 0, 1, 'C'); // Center-aligned heading
 
     // Set font
     $pdf->SetFont('times', '', 12);
@@ -54,11 +59,15 @@ function generateVenuePDF($bookingId)
 
     // Add booking information to the PDF at custom X and Y coordinates
     $pdf->SetXY($customX, $customY);
-    $pdf->Cell(0, 10, "Booked From Date: " . $bookingData['from_date'], 0, 1);
+    $pdf->Cell(0, 10, "Booking Date: " . $bookingData['booked_at'], 0, 1);
 
     // Add booking information to the PDF at custom X and Y coordinates
     $pdf->SetXY($customX, $customY);
-    $pdf->Cell(0, 20, "Booked Till Date: " . $bookingData['to_date'], 0, 1);
+    $pdf->Cell(0, 20, "Booked From Date: " . $bookingData['from_date'], 0, 1);
+
+    // Add booking information to the PDF at custom X and Y coordinates
+    $pdf->SetXY($customX, $customY);
+    $pdf->Cell(0, 30, "Booked Till Date: " . $bookingData['to_date'], 0, 1);
 
     // Set custom X and Y coordinates
     $customX = 20;
