@@ -42,7 +42,7 @@ function sendMail($_email, $reset_token)
         $mail->Subject = 'Password Reset Link from A2Z Events';
         $mail->Body    = "We got a request from you to reset your password! <br>
           Click the link below : <br>
-          <a href='http://localhost/Practice/Project/php/Update_password.php?email=$_email&reset_token=$reset_token'> Reset Password</a>
+          <a href='http://localhost/Project/Update_password.php?email=$_email&reset_token=$reset_token'> Reset Password</a>
         ";
 
         $mail->send();

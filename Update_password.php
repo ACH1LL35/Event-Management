@@ -113,65 +113,66 @@ if(isset($_POST['update_btn']))
 ?>
 
 <style>
-* {
-  margin: 0;
-  padding: 0;
-  list-style: none;
-  box-sizing: border-box;
-}
+        * {
+        margin: 0;
+        padding: 0;
+        list-style: none;
+        box-sizing: border-box;
+        }
 
-body {
-  height: 100%;
-  width: 100%;
-  background-color: #f0f2f5;
-  font-family: Arial, Helvetica, sans-serif;
-  font-size: 14px;
-  position: static;
-}
+        body {
+        height: 100%;
+        width: 100%;
+        background-color: #f0f2f5;
+        font-family: Arial, Helvetica, sans-serif;
+        font-size: 14px;
+        position: static;
+        }
 
-h1 {
-    margin-bottom: 50px;
-}
+        h1 {
+            margin-bottom: 50px;
+        }
 
-#divarea {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    width: 400px;
-    background: #fff;
-    box-shadow: 0 0 10px #ddd;
-    border-radius: 10px;
-    padding: 15px;
-    text-align: center;
-}
+        #divarea {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 400px;
+            background: #fff;
+            box-shadow: 0 0 10px #ddd;
+            border-radius: 10px;
+            padding: 15px;
+            text-align: center;
+        }
 
-#pass, #con_pass {
-    text-align: center;
-    width: 100%;
-    display: block;
-    border: 1px solid #ddd;
-    padding: 14px 16px;
-    font-size: 19px;
-    border-radius: 6px;
-    margin-bottom: 15px;
-}
+        #pass, #con_pass {
+            text-align: center;
+            width: 100%;
+            display: block;
+            border: 1px solid #ddd;
+            padding: 14px 16px;
+            font-size: 19px;
+            border-radius: 6px;
+            margin-bottom: 15px;
+        }
 
-#update_btn {
-    text-align: center;
-    width: 85%;
-    display: block;
-    border: 1px solid #ddd;
-    padding: 14px 16px;
-    font-size: 19px;
-    border-radius: 6px;
-    margin-bottom: 15px;
-    margin-inline: 7.5%;
-    background-color: coral;
-    font-weight: bolder;
-}
+        #update_btn {
+            text-align: center;
+            width: 85%;
+            display: block;
+            border: 1px solid #ddd;
+            padding: 14px 16px;
+            font-size: 19px;
+            border-radius: 6px;
+            margin-bottom: 15px;
+            margin-inline: 7.5%;
+            background-color: #007BFF;
+            color: #fff;
+        }
 
-#update_btn:hover {
-    background-color: rgb(154, 49, 11);
-}
+        #update_btn:hover {
+            background-color: #0056b3;
+        }
+        
 </style>
