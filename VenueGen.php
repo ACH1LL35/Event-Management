@@ -60,9 +60,21 @@ function generateVenuePDF($bookingId)
     $pdf->SetXY($customX, $customY);
     $pdf->Cell(0, 20, "Booked Till Date: " . $bookingData['to_date'], 0, 1);
 
+    // Set custom X and Y coordinates
+    $customX = 70;
+    $customY = 60;
+    
+     // Add booking information to the PDF at custom X and Y coordinates
+    $pdf->SetXY($customX, $customY);
+    $pdf->Cell(0, 10, "" . $bookingData['name'], 0, 1);
+    
+    // Add booking information to the PDF at custom X and Y coordinates
+    $pdf->SetXY($customX, $customY);
+    $pdf->Cell(0, 20, "" . $bookingData['cnumber'], 0, 1);
+
     // Set custom X and Y coordinates for barcode
     $barcodeX = 70;
-    $barcodeY = 50;
+    $barcodeY = 90;
 
     // Generate barcode
     $style = array(
@@ -85,7 +97,6 @@ function generateVenuePDF($bookingId)
 
     $pdf->write1DBarcode($bookingId, 'C128', $barcodeX, $barcodeY, '', 18, 0.4, $style, 'N');
 
-    // ... Add more booking details as needed
 
     // Output the PDF to the browser for download
     $pdf->Output("booking_$bookingId.pdf", 'D');

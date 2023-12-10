@@ -22,19 +22,23 @@ function generateTicketPDF($ticketId)
     $ticketData = mysqli_fetch_assoc($result);
 
     // Create a new CustomTCPDF instance
-    $pdf = new CustomTCPDF('P', 'mm', 'A4', true, 'UTF-8', false);
-
-    // Set margins and auto page break
-    $pdf->SetMargins(10, 10, 10);
-    $pdf->SetAutoPageBreak(true, 15);
-
-    // Add a page
+    $pdf = new CustomTCPDF();
     $pdf->AddPage();
+
+    // Add a font size 14 heading
+    $pdf->SetFont('times', 'B', 20);
+    $pdf->Cell(0, 10, 'ENTRY PASS', 0, 1, 'C'); // Center-aligned heading
 
     // Set font
     $pdf->SetFont('times', '', 10);
 
     // Add ticket information to the PDF (customize based on your data)
+    // Set custom X and Y coordinates
+    $customX = 20;
+    $customY = 30;
+
+    // Add booking information to the PDF at custom X and Y coordinates
+    $pdf->SetXY($customX, $customY);
     $pdf->Cell(0, 10, "Ticket ID: " . $ticketData['ticket_id'], 0, 1);
     $pdf->Cell(0, 10, "Event Name: " . $ticketData['event_name'], 0, 1);
     $pdf->Cell(0, 10, "Ticket Quantity: " . $ticketData['ticket_quantity'], 0, 1);
