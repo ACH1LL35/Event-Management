@@ -1,4 +1,8 @@
 <?php
+use PHPMailer\PHPMailer\PHPMailer;
+use PHPMailer\PHPMailer\SMTP;
+use PHPMailer\PHPMailer\Exception;
+
 $successMessage = "";
 $errorMessages = [];
 
@@ -43,7 +47,41 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $sql = "INSERT INTO credential (name, email, cnumber, password) VALUES ('$name', '$email', '$cnumber', '$password')"; // Updated SQL query
 
         if ($mysqli->query($sql) === true) {
-            $successMessage = "Registration successful!";
+            // Send email using PHPMailer
+            require 'vendor/autoload.php';
+            require("PHPMailer/PHPMailer.php");
+            require("PHPMailer/SMTP.php");
+            require("PHPMailer/Exception.php");
+
+            $mail = new PHPMailer();
+
+            try {
+                //Server settings
+                $mail->isSMTP();                                            //Send using SMTP
+                $mail->Host       = 'smtp.gmail.com';                     //Set the SMTP server to send through
+                $mail->SMTPAuth   = true;                                   //Enable SMTP authentication
+                $mail->Username   = 'eventa2zmanagement@gmail.com';                     //SMTP username
+                $mail->Password   = 'kawn bptd orqf nmci';                               //SMTP password
+                $mail->SMTPSecure = PHPMailer::ENCRYPTION_SMTPS;            //Enable implicit TLS encryption
+                $mail->Port       = 465;                                    //TCP port to connect to; use 587 if you have set `SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS`
+            
+                //Recipients
+                $mail->setFrom('eventa2zmanagement@gmail.com', 'A2Z EVENTS');
+                $mail->addAddress($email);     //Add a recipient
+    
+                //Content
+                $mail->isHTML(true);                                  //Set email format to HTML
+                $mail->Subject = 'Email verification from A2Z Events';
+                $mail->Body    = "Thanks for registration! 
+                click the link below to verify the mail address 
+                <a href='http://localhost/project/verify.php?email=$email&verifi_code=$verifi_code'> Verify </a>";
+            
+                $mail->send();
+
+                $successMessage = "Registration successful! Verification email sent.";
+            } catch (Exception $e) {
+                $errorMessages[] = "Error sending verification email: " . $mail->ErrorInfo;
+            }
         } else {
             $errorMessages[] = "Error: " . $sql . "<br>" . $mysqli->error;
         }
@@ -109,7 +147,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         }
     </script>
 
-<meta charset="UTF-8">
+    <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Signup Page</title>
     <style>
