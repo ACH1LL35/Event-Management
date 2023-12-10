@@ -38,10 +38,18 @@ function generateTicketPDF($ticketId)
     $customY = 30;
 
     // Add booking information to the PDF at custom X and Y coordinates
-    $pdf->SetXY($customX, $customY);
-    $pdf->Cell(0, 10, "Ticket ID: " . $ticketData['ticket_id'], 0, 1);
-    $pdf->Cell(0, 10, "Event Name: " . $ticketData['event_name'], 0, 1);
-    $pdf->Cell(0, 10, "Ticket Quantity: " . $ticketData['ticket_quantity'], 0, 1);
+    // $pdf->SetXY($customX, $customY);
+    // $pdf->Cell(0, 10, "Ticket ID: " . $ticketData['ticket_id'], 0, 1);
+    // $pdf->Cell(0, 10, "Event Name: " . $ticketData['event_name'], 0, 1);
+    // $pdf->Cell(0, 10, "Ticket Quantity: " . $ticketData['ticket_quantity'], 0, 1);
+    // $pdf->Cell(0, 10, "Gate Opening : 2 PM |" . $ticketData['venue'], 0, 1);
+    // $pdf->Cell(0, 10, "Event Start : 3 PM" . $ticketData['venue'], 0, 1);
+    $pdf->Cell(0, 10, "Venue :  " . $ticketData['venue'], 0, 1);
+    $pdf->Cell(0, 10, "Printing Time: " . date('Y-m-d H:i:s'), 0, 1);
+
+
+
+
 
     // Generate barcode
     $style = array(
