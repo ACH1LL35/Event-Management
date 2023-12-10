@@ -1,5 +1,6 @@
 <?php
 $successMessage = "";
+$errorMessages = [];
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     
@@ -20,13 +21,32 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $cpassword = $mysqli->real_escape_string($_POST['cpassword']);
     $cnumber = $mysqli->real_escape_string($_POST['cnumber']);
 
-    // Insert user data into the database without password hashing
-    $sql = "INSERT INTO credential (name, email, cnumber, password) VALUES ('$name', '$email', '$cnumber', '$password')"; // Updated SQL query
+    // Server-side validation
+    if (empty($name) || empty($email) || empty($password) || empty($cpassword) || empty($cnumber)) {
+        $errorMessages[] = "All fields are required.";
+    }
 
-    if ($mysqli->query($sql) === true) {
-        $successMessage = "Registration successful!";
-    } else {
-        echo "Error: " . $sql . "<br>" . $mysqli->error;
+    if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
+        $errorMessages[] = "Invalid email format.";
+    }
+
+    if (!preg_match("/^01[3-9]\d{8}$/", $cnumber)) {
+        $errorMessages[] = "Enter a valid contact number.";
+    }
+
+    if ($password !== $cpassword) {
+        $errorMessages[] = "Passwords do not match.";
+    }
+
+    if (empty($errorMessages)) {
+        // Insert user data into the database without password hashing
+        $sql = "INSERT INTO credential (name, email, cnumber, password) VALUES ('$name', '$email', '$cnumber', '$password')"; // Updated SQL query
+
+        if ($mysqli->query($sql) === true) {
+            $successMessage = "Registration successful!";
+        } else {
+            $errorMessages[] = "Error: " . $sql . "<br>" . $mysqli->error;
+        }
     }
 
     // Close the database connection
@@ -37,6 +57,58 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <script>
+        function validateForm() {
+            var name = document.getElementById("name").value;
+            var email = document.getElementById("email").value;
+            var cnumber = document.getElementById("cnumber").value;
+            var password = document.getElementById("password").value;
+            var cpassword = document.getElementById("cpassword").value;
+
+            var emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            var cnumberRegex = /^01[3-9]\d{8}$/;
+
+            // Clear previous error messages
+            document.getElementById("nameError").innerHTML = "";
+            document.getElementById("emailError").innerHTML = "";
+            document.getElementById("cnumberError").innerHTML = "";
+            document.getElementById("passwordError").innerHTML = "";
+            document.getElementById("cpasswordError").innerHTML = "";
+
+            if (name.trim() === "") {
+                document.getElementById("nameError").innerHTML = "Please enter your full name.";
+                return false;
+            }
+
+            if (!emailRegex.test(email)) {
+                document.getElementById("emailError").innerHTML = "Invalid email format.";
+                return false;
+            }
+
+            if (!cnumberRegex.test(cnumber)) {
+                document.getElementById("cnumberError").innerHTML = "Enter a valid contact number.";
+                return false;
+            }
+
+            if (password.trim() === "") {
+                document.getElementById("passwordError").innerHTML = "Please enter a password.";
+                return false;
+            }
+
+            if (cpassword.trim() === "") {
+                document.getElementById("cpasswordError").innerHTML = "Please confirm your password.";
+                return false;
+            }
+
+            if (password !== cpassword) {
+                document.getElementById("cpasswordError").innerHTML = "Passwords do not match.";
+                return false;
+            }
+
+            return true;
+        }
+    </script>
+
 <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Signup Page</title>
@@ -124,7 +196,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 </head>
 <body>
     <div class="container">
-        <!-- Display the success message if it is set -->
+        <?php if (!empty($errorMessages)) : ?>
+            <div class="warning">
+                <?php echo implode("<br>", $errorMessages); ?>
+            </div>
+        <?php endif; ?>
+
         <?php if (!empty($successMessage)) : ?>
             <div class="success-message">
                 <?php echo $successMessage; ?>
@@ -132,33 +209,34 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         <?php endif; ?>
 
         <h2>Sign Up</h2>
-        <form action="<?php echo $_SERVER['PHP_SELF']; ?>" method="POST">
+        <form action="<?php echo $_SERVER['PHP_SELF']; ?>" method="POST" onsubmit="return validateForm()">
             <div class="form-group">
                 <label for="name">Full Name:</label>
-                <input type="text" id="name" name="name" required>
+                <input type="text" id="name" name="name">
+                <p id="nameError" class="warning"></p>
             </div>
             <div class="form-group">
                 <label for="email">Email:</label>
-                <input type="email" id="email" name="email" required>
-                <p id="emailWarning" class="warning"></p>
+                <input type="email" id="email" name="email">
+                <p id="emailError" class="warning"></p>
             </div>
             <div class="form-group">
-            <label for="cnumber">Contact Number:</label>
-            <input type="text" id="cnumber" name="cnumber" pattern="01[3-9]\d{8}" title="Enter a valid contact number." required>
+                <label for="cnumber">Contact Number:</label>
+                <input type="text" id="cnumber" name="cnumber" pattern="01[3-9]\d{8}" title="Enter a valid contact number.">
+                <p id="cnumberError" class="warning"></p>
             </div>
-
             <div class="form-group">
                 <label for="password">Password:</label>
-                <input type="password" id="password" name="password" required>
-                <p id="capsLockWarning" class="warning"></p>
+                <input type="password" id="password" name="password">
+                <p id="passwordError" class="warning"></p>
             </div>
             <div class="form-group">
                 <label for="cpassword">Confirm Password:</label>
-                <input type="password" id="cpassword" name="cpassword" required>
-                <p id="passwordMatchWarning" class="warning"></p>
+                <input type="password" id="cpassword" name="cpassword">
+                <p id="cpasswordError" class="warning"></p>
             </div>
             <div class="form-group">
-                <input type="checkbox" id="agree" name="agree" required>
+                <input type="checkbox" id="agree" name="agree">
                 <label for="agree">I agree to the terms and conditions</label>
             </div>
             <div class="form-group text-center">
@@ -171,4 +249,3 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     </div>
 </body>
 </html>
-
