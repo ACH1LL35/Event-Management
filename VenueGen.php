@@ -31,8 +31,6 @@ function generateVenuePDF($bookingId)
     $logoPath = 'logo/Untitled.jpg';
     $pdf->Image($logoPath, 10, 10, 40, 15);
 
-
-
     // Add a font size 14 heading
     $pdf->SetFont('times', 'B', 20);
     $pdf->Cell(0, 30, 'BOOKING RECEIPT', 0, 1, 'C'); // Center-aligned heading
