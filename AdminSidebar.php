@@ -24,7 +24,7 @@ $query = "SELECT * FROM admin_mod WHERE id = '$id'";
 $result = mysqli_query($conn, $query);
 
 if ($row = mysqli_fetch_assoc($result)) {
-    $username = $row['uname']; // Update to use the correct variable name
+    $uname = $row['uname']; // Update to use the correct variable name
     // $email = $row['email'];
 }
 ?>
@@ -50,7 +50,9 @@ if ($row = mysqli_fetch_assoc($result)) {
             /* background-color: #333; */
             color: #333;
             padding: 20px;
+            overflow-y: auto; /* Add this line for vertical scrolling */
         }
+
 
         ul {
             list-style: none;
@@ -160,7 +162,7 @@ if ($row = mysqli_fetch_assoc($result)) {
         <form class="logout-form" method="post">
             <input type="submit" name="logout" class="logout-button" value="Log Out">
         </form>
-        <h1>Welcome, <?php echo $username; ?>!</h1>
+        <h1>Welcome, <?php echo $uname; ?>!</h1>
         <ul>
             <li><a href="AdminPanel.php">➾ HOME</a></li>
             

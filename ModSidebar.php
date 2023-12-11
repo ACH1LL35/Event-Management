@@ -60,6 +60,10 @@ if ($row = mysqli_fetch_assoc($result)) {
         li {
             margin: 1px 0;
         }
+        h1 {
+            text-align: center;
+            margin-right: auto;
+        }
 
         h2 {
             background-color: #333;
@@ -174,9 +178,7 @@ if ($row = mysqli_fetch_assoc($result)) {
                 </ul>
             </details>
 
-            <li><a href="ModAnalysis.php">ANALYSIS</a></li>
-            <li><a href="ModAnalysis.php">➾ ANALYSIS</a></li>
-            
+            <li><a href="ModAnalysis.php">ANALYSIS</a></li>            
 
             <details>
                 <summary>➾ MODERATION</summary>

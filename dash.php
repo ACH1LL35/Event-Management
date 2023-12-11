@@ -24,16 +24,16 @@ $query = "SELECT * FROM admin_mod WHERE id = '$id'";
 $result = mysqli_query($conn, $query);
 
 if ($row = mysqli_fetch_assoc($result)) {
-    $userUname = $row['uname'];
+    $username = $row['uname']; // Update to use the correct variable name
     // $email = $row['email'];
 }
 
 $servername = "localhost";
-$dbUsername = "root"; // Use a different variable name for the database connection
+$username = "root";
 $password = "";
 $dbname = "event_management";
 
-$conn = new mysqli($servername, $dbUsername, $password, $dbname);
+$conn = new mysqli($servername, $username, $password, $dbname);
 
 if ($conn->connect_error) {
     die("Connection failed: " . $conn->connect_error);
@@ -81,9 +81,10 @@ foreach ($tables as $tableName => $customName) {
 
         #menu {
             width: 250px;
+            /* background-color: #333; */
             color: #333;
             padding: 20px;
-            overflow-y: auto;
+            overflow-y: auto; /* Add this line for vertical scrolling */
         }
 
         ul {
@@ -101,7 +102,6 @@ foreach ($tables as $tableName => $customName) {
             padding: 20px;
             text-align: center;
             margin: 0;
-            border-radius: 45px;
         }
 
         a {
@@ -122,6 +122,7 @@ foreach ($tables as $tableName => $customName) {
             background-color: #0056b3;
         }
 
+        /* Styles for the logout form */
         .logout-form {
             text-align: center;
         }
@@ -141,6 +142,7 @@ foreach ($tables as $tableName => $customName) {
             background-color: #0056b3;
         }
 
+        /* Additional style for the dropdown */
         details {
             display: inline-block;
         }
@@ -190,30 +192,26 @@ foreach ($tables as $tableName => $customName) {
         #content {
             display: flex;
             flex-wrap: wrap;
-            justify-content: space-between;
-            max-width: 1200px;
-            margin: 20px auto;
+            justify-content: space-between; /* Spread columns evenly */
+            max-width: 1200px; /* Set your preferred max width */
+            margin: 20px auto; /* Add some margin for better spacing */
         }
 
         .box {
-            width: calc(25% - 20px);
-            margin: 10px;
+            width: calc(25% - 20px); /* 25% width with some spacing */
+            margin: 10px; /* Adjust the margin as needed for spacing */
             padding: 20px;
             background-color: #ffffff;
             border: 1px solid #ccc;
-            border-radius: 45px;
+            border-radius: 5px;
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
             text-align: center;
         }
 
         @media (max-width: 768px) {
             .box {
-                width: calc(50% - 20px);
+                width: calc(50% - 20px); /* 50% width on smaller screens */
             }
-        }
-
-        p {
-            font-size: 25px; /* Adjust the font size as needed */
         }
     </style>
 </head>
@@ -222,10 +220,11 @@ foreach ($tables as $tableName => $customName) {
         <form class="logout-form" method="post">
             <input type="submit" name="logout" class="logout-button" value="Log Out">
         </form>
-        <h1>Welcome, <?php echo $userUname; ?>!</h1>
+        <h1>Welcome, <?php echo $username; ?>!</h1>
         <ul>
-            <li><a href="AdminPanel.php">➾ HOME</a></li>
-
+            <li><a href="dash.php">➾ HOME</a></li>
+            
+            <!-- Use details and summary for the dropdown -->
             <details>
                 <summary>➾ TICKET</summary>
                 <ul>
@@ -242,7 +241,7 @@ foreach ($tables as $tableName => $customName) {
                     <li><a href="AdminEventCal.php">⤷ EVENT CALENDAR</a></li>
                 </ul>
             </details>
-
+            
             <details>
                 <summary>➾ VENUE</summary>
                 <ul>
@@ -258,8 +257,9 @@ foreach ($tables as $tableName => $customName) {
                     <li><a href="AdminModManagement.php">⤷ MODERATOR MANAGEMENT</a></li>
                 </ul>
             </details>
-
+            
             <li><a href="AdminAnalysis.php">➾ ANALYSIS</a></li>
+            
 
             <details>
                 <summary>➾ MODERATION</summary>
@@ -301,7 +301,7 @@ foreach ($tables as $tableName => $customName) {
     <div id="content">
         <?php foreach ($counts as $customName => $count) { ?>
             <div class="box">
-                <h2><?php echo ($customName !== "") ? $customName : $tableName; ?></h2>
+                <h2><?php echo ($customName !== "") ? $customName : $tableName; ?> Count</h2>
                 <p><?php echo $count; ?></p>
             </div>
         <?php } ?>
