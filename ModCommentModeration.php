@@ -1,5 +1,6 @@
 <?php
-session_start();
+include("ModSidebar.php");
+
 
 if (isset($_POST['logout'])) {
     // Destroy the session and redirect to the Login page
@@ -151,28 +152,6 @@ if ($row = mysqli_fetch_assoc($result)) {
     </style>
 </head>
 <body>
-    <div class="sidebar">
-    <form class="logout-form" method="post">
-            <input type="submit" name="logout" class="logout-button" value="Log Out">
-        </form>
-        <h1>Welcome <?php echo $username; ?></h1>
-        <ul>
-            <li><a href="ModPanel.php">DASHBOARD</a></li>
-            <li><a href="ModInfoUpdate.php">INFORMATION UPDATE</a></li>
-            <li><a href="ModEvent.php">CREATE EVENT</a></li>
-            <li><a href="eventcal.php">EVENT CALENDAR</a></li>
-            <li><a href="ModAnalysis.php">ANALYSIS</a></li>
-            <li><a href="ModComplaint.php">COMPLAINT FEEDBACK</a></li>
-            <li><a href="ModPostModeration.php">POST MODERATION</a></li>
-            <li><a href="#">POST MODERATION HISTORY</a></li>
-            <li><a href="ModCommentModeration.php">COMMENT MODERATION</a></li>
-            <li><a href="#">COMMENT MODERATION HISTORY</a></li>
-            <li><a href="ModQueryF.php">QUERY FEEDBACK</a></li>
-            <li><a href="ModQuotationF.php">QOUTATION FEEDBACK</a></li>
-            <li><a href="#">Contact Update</a></li>
-            <li><a href="#">Support Mail</a></li>
-        </ul>
-    </div>
 
     <div id="content">
         <h1>COMMENT MODERATION</h1>

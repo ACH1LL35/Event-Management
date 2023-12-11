@@ -1,6 +1,5 @@
 <?php
-include("ModSidebar.php");
-
+session_start();
 
 if (isset($_POST['logout'])) {
     // Destroy the session and redirect to the Login page
@@ -25,30 +24,17 @@ $query = "SELECT * FROM admin_mod WHERE id = '$id'";
 $result = mysqli_query($conn, $query);
 
 if ($row = mysqli_fetch_assoc($result)) {
-    $username = $row['uname'];
-}
-
-// Process form submissions
-if (isset($_POST['qo_fed'])) {
-    foreach ($_POST['qo_id'] as $qoId) {
-        $qo_fedText = isset($_POST['qo_fed'][$qoId]) ? mysqli_real_escape_string($conn, $_POST['qo_fed'][$qoId]) : '';
-        $qoId = mysqli_real_escape_string($conn, $qoId);
-
-        // Insert the session ID into the fd_by column only for the associated row
-        $fdBy = mysqli_real_escape_string($conn, $id);
-
-        $updateQuery = "UPDATE quotation SET qo_fed = '$qo_fedText', fd_by = '$fdBy' WHERE qo_id = '$qoId'";
-        mysqli_query($conn, $updateQuery);
-    }
+    $username = $row['uname']; // Update to use the correct variable name
+    // $email = $row['email'];
 }
 ?>
 
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
+    <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Moderator Query Page</title>
+    <title>Moderator Admin Page</title>
     <style>
         body {
             font-family: Arial, Helvetica, sans-serif;
@@ -165,44 +151,27 @@ if (isset($_POST['qo_fed'])) {
     </style>
 </head>
 <body>
-
-    <div id="content">
-        <h1>QUOTATION FEEDBACK</h1>
-    <form method="post">
-        <table border="1">
-            <tr>
-            <th>QUERY ID</th>
-                <th>Name</th>
-                <th>Email</th>
-                <th>About</th>
-                <th>Description</th>
-                <th>Current Feedback</th>
-                <th>Feedback</th>
-                <th>Action</th>
-            </tr>
-            <?php
-            $sql = "select * from quotation";
-            $res = mysqli_query($conn, $sql);
-
-            while ($r = mysqli_fetch_assoc($res)) {
-                ?>
-                    <tr>
-                    <td><?php echo $r["qo_id"]; ?></td>
-                    <td><?php echo $r["u_name"]; ?></td>
-                    <td><?php echo $r["u_email"]; ?></td>
-                    <td><?php echo $r["qo_about"]; ?></td>
-                    <td><?php echo $r["qo_des"]; ?></td>
-                    <td><?php echo $r["qo_fed"]; ?></td>
-                    <td>
-                        <textarea name="qo_fed[<?php echo $r['qo_id']; ?>]" rows="3"
-                                  cols="30"><?php echo $r['qo_fed']; ?></textarea>
-                    </td>
-                    <td>
-                        <button type="submit" name="qo_id[]" value="<?php echo $r["qo_id"]; ?>">Submit Feedback</button>
-                    </td>
-                </tr>
-            <?php } ?>
-        </table>
-    </form>
+    <div class="sidebar">
+    <form class="logout-form" method="post">
+            <input type="submit" name="logout" class="logout-button" value="Log Out">
+        </form>
+        <h1>Welcome <?php echo $username; ?></h1>
+        <ul>
+            <li><a href="ModPanel.php">DASHBOARD</a></li>
+            <li><a href="ModInfoUpdate.php">INFORMATION UPDATE</a></li>
+            <li><a href="ModEvent.php">CREATE EVENT</a></li>
+            <li><a href="eventcal.php">EVENT CALENDAR</a></li>
+            <li><a href="ModAnalysis.php">ANALYSIS</a></li>
+            <li><a href="ModComplaint.php">COMPLAINT FEEDBACK</a></li>
+            <li><a href="ModPostModeration.php">POST MODERATION</a></li>
+            <li><a href="#">POST MODERATION HISTORY</a></li>
+            <li><a href="ModCommentModeration.php">COMMENT MODERATION</a></li>
+            <li><a href="#">COMMENT MODERATION HISTORY</a></li>
+            <li><a href="ModQueryF.php">QUERY FEEDBACK</a></li>
+            <li><a href="ModQuotationF.php">QOUTATION FEEDBACK</a></li>
+            <li><a href="#">Contact Update</a></li>
+            <li><a href="#">Support Mail</a></li>
+        </ul>
+    </div>
 </body>
 </html>

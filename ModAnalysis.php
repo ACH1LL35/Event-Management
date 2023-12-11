@@ -1,5 +1,5 @@
 <?php
-    session_start();
+include("ModSidebar.php");
 
     if (isset($_SESSION['id'])) {
         $id = $_SESSION['id'];

@@ -116,7 +116,7 @@ include("UserSidebar.php");
                     <td>
                         <form method='get' action='VenueGen.php'>
                         <input type='hidden' name='booking_id' value='" . $row['booking_id'] . "'>
-                        <input type='submit' name='download_booking' value='Download Booking'>
+                        <input type='submit' name='download_booking' value='Download Receipt'>
                         </form>
                     </td>
                   </tr>";

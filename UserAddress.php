@@ -100,7 +100,6 @@ include("UserSidebar.php");
 </head>
 <body>
 <?php
-    session_start(); // Start the session
 
     if (isset($_POST['logout'])) {
         // Destroy the session and redirect to the Login page
@@ -137,7 +136,7 @@ include("UserSidebar.php");
     }
     ?>
 
-    <h1>Welcome, <?php echo $username; ?>!</h1>
+    <!-- <h1>Welcome, <?php echo $username; ?>!</h1> -->
 
     <div id="content">
         <h2><?php echo $username; ?>'s Profile</h2>

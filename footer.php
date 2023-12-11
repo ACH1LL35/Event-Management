@@ -73,19 +73,15 @@
         </div>
         <div class="social-icons">
             <a href="https://www.instagram.com/" target="_blank">
-                <!-- Instagram logo (Replace with the actual logo URL) -->
                 <img src="logo/instagram.png" alt="Instagram" width="20" height="20">
             </a>
             <a href="https://twitter.com/" target="_blank">
-                <!-- Twitter logo (Replace with the actual logo URL) -->
                 <img src="logo/twitter.png" alt="Twitter" width="20" height="20">
             </a>
             <a href="https://www.facebook.com/" target="_blank">
-                <!-- Facebook logo (Replace with the actual logo URL) -->
                 <img src="logo/facebook.png" alt="Facebook" width="20" height="20">
             </a>
             <a href="https://www.youtube.com/" target="_blank">
-                <!-- YouTube logo (Replace with the actual logo URL) -->
                 <img src="logo/youtube.png" alt="YouTube" width="20" height="20">
             </a>
         </div>

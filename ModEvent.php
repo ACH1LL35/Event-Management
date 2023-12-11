@@ -1,6 +1,5 @@
 <?php
-    // Start a PHP session
-    session_start();
+include("ModSidebar.php");
 
     // Check if a user ID session variable exists
     if (isset($_SESSION['id'])) {
