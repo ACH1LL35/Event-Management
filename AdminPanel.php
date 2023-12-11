@@ -198,8 +198,8 @@ foreach ($tables as $tableName => $customName) {
 
         .box {
             width: calc(25% - 20px);
-            margin: 10px;
-            padding: 20px;
+            margin: 3px;
+            padding: 9px;
             background-color: #ffffff;
             border: 1px solid #ccc;
             border-radius: 45px;
@@ -227,6 +227,7 @@ foreach ($tables as $tableName => $customName) {
         <h1>Welcome, <?php echo $userUname; ?>!</h1>
         <ul>
             <li><a href="AdminPanel.php">➾ HOME</a></li>
+            <li><a href="AdminInfoUpdate.php">➾ Info Update</a></li>
 
             <details>
                 <summary>➾ TICKET</summary>

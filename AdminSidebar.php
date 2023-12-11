@@ -165,6 +165,7 @@ if ($row = mysqli_fetch_assoc($result)) {
         <h1>Welcome, <?php echo $uname; ?>!</h1>
         <ul>
             <li><a href="AdminPanel.php">➾ HOME</a></li>
+            <li><a href="AdminInfoUpdate.php">➾ Info Update</a></li>
             
             <!-- Use details and summary for the dropdown -->
             <details>
