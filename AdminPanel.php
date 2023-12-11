@@ -135,6 +135,7 @@ foreach ($tables as $tableName => $customName) {
             cursor: pointer;
             width: 200px;
             text-decoration: none;
+            margin-top: 10px;
         }
 
         .logout-form .logout-button:hover {
@@ -219,6 +220,7 @@ foreach ($tables as $tableName => $customName) {
 </head>
 <body>
     <div id="menu">
+    <h2 style="text-align: center; background-color: #000; color: #fff; padding: 20px;">DASHBOARD</h2>
         <form class="logout-form" method="post">
             <input type="submit" name="logout" class="logout-button" value="Log Out">
         </form>
