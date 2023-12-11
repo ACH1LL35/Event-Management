@@ -9,7 +9,6 @@ $dbname = "event_management";
 $conn = new mysqli($servername, $username, $pass, $dbname);
 
 // Check if a user ID session variable exists
-session_start();
 if (isset($_SESSION['id'])) {
     $id = $_SESSION['id'];
 
@@ -59,14 +58,6 @@ $res = mysqli_query($conn, $sql);
             margin: 0;
         }
 
-        .sidebar {
-            background-color: #333;
-            color: #fff;
-            width: 200px;
-            padding: 20px;
-            height: 900px;
-        }
-
         .header {
             display: flex;
             justify-content: space-between;
@@ -96,8 +87,9 @@ $res = mysqli_query($conn, $sql);
             border: 2px solid #007BFF;
             border-radius: 3px;
             cursor: pointer;
-            width: 150px;
+            width: 200px;
             text-decoration: none;
+            margin-bottom: 5px;
         }
 
         a:hover {
@@ -141,6 +133,7 @@ $res = mysqli_query($conn, $sql);
 
         h2 {
             font-size: 24px;
+            margin-top: 10px;
         }
 
         /* Style for form labels and inputs */

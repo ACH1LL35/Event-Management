@@ -96,8 +96,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             border: 2px solid #007BFF;
             border-radius: 3px;
             cursor: pointer;
-            width: 150px;
+            width: 200px;
             text-decoration: none;
+            margin-bottom: 5px;
         }
 
         a:hover {
