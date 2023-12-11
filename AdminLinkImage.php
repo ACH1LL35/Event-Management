@@ -97,7 +97,7 @@ body {
 
         /* Styles for the image upload form */
         .image-upload-form {
-            text-align: center;
+            text-align: left;
             margin: 20px;
             padding: 20px;
             border: 1px solid #007BFF; /* Add a border */
@@ -151,7 +151,7 @@ body {
             <input type="text" name="title" required><br>
             
             <label for="description">Description:</label>
-            <textarea name="description" required></textarea>
+            <textarea name="description" style="width: 300px; height: 85px;"required></textarea>
 
             <input type="file" name="image" accept="image/*">
             <input type="submit" name="upload" value="Upload Image">

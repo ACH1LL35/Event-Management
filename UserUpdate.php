@@ -181,8 +181,6 @@ include("UserSidebar.php");
     ?>
 
     <div id="content">
-        <h2><?php echo $username; ?>'s Profile</h2>
-        <p>Unique UserID: <?php echo $id; ?></p>
 
         <!-- "Update Your Username" section -->
         <div id="username-update">

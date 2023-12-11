@@ -1,9 +1,8 @@
 <?php
 include("UserSidebar.php");
 ?>
-
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
     <title>Dashboard</title>
     <style>
@@ -100,7 +99,6 @@ include("UserSidebar.php");
 </head>
 <body>
 <?php
-
     if (isset($_POST['logout'])) {
         // Destroy the session and redirect to the Login page
         session_destroy();
@@ -132,23 +130,37 @@ include("UserSidebar.php");
         $address_result = mysqli_query($conn, $address_query);
         if ($address_row = mysqli_fetch_assoc($address_result)) {
             $current_address = $address_row['address'];
+            // Split the address components
+            $address_components = explode(', ', $current_address);
+            $house_road = isset($address_components[0]) ? $address_components[0] : '';
+            $address_line1 = isset($address_components[1]) ? $address_components[1] : '';
+            $address_line2 = isset($address_components[2]) ? $address_components[2] : '';
+            $state = isset($address_components[3]) ? $address_components[3] : '';
+            $zip = isset($address_components[4]) ? $address_components[4] : '';
         }
     }
     ?>
 
-    <!-- <h1>Welcome, <?php echo $username; ?>!</h1> -->
-
     <div id="content">
-        <h2><?php echo $username; ?>'s Profile</h2>
-        <p>Unique UserID: <?php echo $id; ?></p>
-
         <h2>Current Address</h2>
         <p><?php echo $current_address; ?></p>
 
         <h2>Update Your Address</h2>
         <form action="<?php echo $_SERVER['PHP_SELF']; ?>" method="post" class="update-address-form">
-            <label for="new_address">New Address:</label>
-            <input type="text" name="new_address" value="<?php echo $current_address; ?>" class="address-input">
+            <label for="house_road">House/Road:</label><br>
+            <input type="text" name="house_road" value="<?php echo $house_road; ?>" class="address-input">
+            <br>
+            <label for="address_line1">Address Line 1:</label><br>
+            <input type="text" name="address_line1" value="<?php echo $address_line1; ?>" class="address-input">
+            <br>
+            <label for="address_line2">Address Line 2:</label><br>
+            <input type="text" name="address_line2" value="<?php echo $address_line2; ?>" class="address-input">
+            <br>
+            <label for="state">State:</label><br>
+            <input type="text" name="state" value="<?php echo $state; ?>" class="address-input">
+            <br>
+            <label for="zip">Zip Code:</label><br>
+            <input type="text" name="zip" value="<?php echo $zip; ?>" class="address-input">
             <br>
             <input type="submit" name="update_address" value="Update Address" class="update-button">
         </form>
@@ -156,12 +168,21 @@ include("UserSidebar.php");
         <?php
         // update
         if (isset($_POST["update_address"])) {
-            $new_address = mysqli_real_escape_string($conn, $_POST['new_address']);
+            $house_road = mysqli_real_escape_string($conn, $_POST['house_road']);
+            $address_line1 = mysqli_real_escape_string($conn, $_POST['address_line1']);
+            $address_line2 = mysqli_real_escape_string($conn, $_POST['address_line2']);
+            $state = mysqli_real_escape_string($conn, $_POST['state']);
+            $zip = mysqli_real_escape_string($conn, $_POST['zip']);
+
+            // Concatenate the address components with a comma
+            $new_address = "$house_road, $address_line1, $address_line2, $state, $zip";
+
             $update_address_query = "UPDATE credential SET address = '$new_address' WHERE id = '$id'";
             if (mysqli_query($conn, $update_address_query)) {
                 echo "Address updated successfully!";
                 // Refresh page
-                header("Refresh:0");
+                echo '<script>window.location.href = "UserAddress.php";</script>';
+    exit();
             } else {
                 echo "Error updating address: " . mysqli_error($conn);
             }

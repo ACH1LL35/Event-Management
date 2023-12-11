@@ -184,9 +184,6 @@ include("UserSidebar.php");
     ?>
 
     <div id="content">
-        <h2><?php echo $username; ?>'s Profile</h2>
-        <p>Username: <?php echo $username; ?></p>
-        <p>Email: <?php echo $email; ?></p>
 
         <div class="container">
             <h2>Purchase Ticket</h2>

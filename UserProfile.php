@@ -62,7 +62,7 @@
     </style>
 </head>
 <body>
-    <?php
+<?php
     session_start();
 
     if (isset($_POST['logout'])) {
@@ -92,7 +92,7 @@
         $username = $row['username'];
         $email = $row['email'];
     }
-    ?>
+?>
 
     <h1>Welcome, <?php echo $username; ?>!</h1>
 

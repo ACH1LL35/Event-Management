@@ -114,7 +114,7 @@
         </ul>
     </div>
 
-    <div id="content">
+    <div>
         <h2><?php echo $username; ?>'s Profile</h2>
         <p>Username: <?php echo $username; ?></p>
         <p>Email: <?php echo $email; ?></p>
