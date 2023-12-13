@@ -43,8 +43,8 @@
             background-color: #ff9933;
         }
 
-        /* CSS styles for the visuals/gallery */
-        .visuals/gallery img {
+        /* CSS styles for the gallery */
+        .gallery img {
             max-width: 23%; /* Adjust the image size as needed */
             height: auto;
             margin: 10px;
@@ -53,12 +53,12 @@
 </head>
 <body>
 
-    <div class="visuals/gallery">
+    <div class="gallery">
         <?php
-        $visuals/galleryPath = 'visuals/gallery/'; // Relative path to your visuals/gallery folder
+        $galleryPath = 'visuals/gallery/'; // Relative path to your visuals/gallery folder
 
         // Get all image files in the visuals/gallery folder
-        $images = glob($visuals/galleryPath . "*.{jpg,jpeg,png,gif}", GLOB_BRACE);
+        $images = glob($galleryPath . "*.{jpg,jpeg,png,gif}", GLOB_BRACE);
 
         foreach ($images as $image) {
             echo '<img src="' . $image . '" alt="visuals/gallery Image">';
