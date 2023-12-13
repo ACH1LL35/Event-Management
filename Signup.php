@@ -1,13 +1,13 @@
 <?php
-use PHPMailer\PHPMailer\PHPMailer;
-use PHPMailer\PHPMailer\SMTP;
-use PHPMailer\PHPMailer\Exception;
+// use PHPMailer\PHPMailer\PHPMailer;
+// use PHPMailer\PHPMailer\SMTP;
+// use PHPMailer\PHPMailer\Exception;
 
 $successMessage = "";
 $errorMessages = [];
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    
+
     $host = "localhost";
     $username = "root";
     $password = "";
@@ -20,7 +20,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     }
 
     $name = $mysqli->real_escape_string($_POST['name']);
-    $email = $mysqli->real_escape_string($_POST['email']);
+    $email = $mysqli->real_escape_string($_POST['email']);;
     $password = $mysqli->real_escape_string($_POST['password']);
     $cpassword = $mysqli->real_escape_string($_POST['cpassword']);
     $cnumber = $mysqli->real_escape_string($_POST['cnumber']);
@@ -42,9 +42,17 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $errorMessages[] = "Passwords do not match.";
     }
 
+    // Check if email already exists in the database
+    $checkEmailQuery = "SELECT * FROM credential WHERE email = '$email'";
+    $result = $mysqli->query($checkEmailQuery);
+
+    if ($result->num_rows > 0) {
+        $errorMessages[] = "This email is already registered. Please use a different email.";
+    }
+
     if (empty($errorMessages)) {
         // Insert user data into the database without password hashing
-        $sql = "INSERT INTO credential (name, email, cnumber, password) VALUES ('$name', '$email', '$cnumber', '$password')"; // Updated SQL query
+        $sql = "INSERT INTO credential (name, email, cnumber, password) VALUES ('$name', '$email', '$cnumber', '$password')";
 
         if ($mysqli->query($sql) === true) {
             // Send email using PHPMailer
@@ -64,18 +72,18 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 $mail->Password   = 'kawn bptd orqf nmci';                               //SMTP password
                 $mail->SMTPSecure = PHPMailer::ENCRYPTION_SMTPS;            //Enable implicit TLS encryption
                 $mail->Port       = 465;                                    //TCP port to connect to; use 587 if you have set `SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS`
-            
+
                 //Recipients
                 $mail->setFrom('eventa2zmanagement@gmail.com', 'A2Z EVENTS');
                 $mail->addAddress($email);     //Add a recipient
-    
+
                 //Content
                 $mail->isHTML(true);                                  //Set email format to HTML
                 $mail->Subject = 'Email verification from A2Z Events';
                 $mail->Body    = "Thanks for registration! 
                 click the link below to verify the mail address 
                 <a href='http://localhost/project/verify.php?email=$email&verifi_code=$verifi_code'> Verify </a>";
-            
+
                 $mail->send();
 
                 $successMessage = "Registration successful! Verification email sent.";
@@ -224,6 +232,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         .warning {
             color: red;
         }
+
         .success-message {
             text-align: center;
             background-color: #4CAF50; /* Green background */
