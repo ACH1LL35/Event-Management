@@ -1,6 +1,6 @@
 <?php
-
-include("AdminSidebar.php");
+session_start();
+include("view/AdminSidebar.php");
 
 if (isset($_POST['logout'])) {
     // Destroy the session and redirect to the Login page

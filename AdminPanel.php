@@ -51,7 +51,7 @@ $tables = array(
     "ticket_cr" => "",
     "query" => "",
     "quotation" => "",
-    "visuals/gallery_data" => "GALLAEY IMAGES"
+    "gallery_data" => "GALLAEY IMAGES"
 );
 
 $counts = array();
@@ -283,7 +283,7 @@ foreach ($tables as $tableName => $customName) {
                 </ul>
             </details>
 
-                    <li><a href="upload.php">⤷ ADD TO visuals/gallery</a></li>
+                    <li><a href="upload.php">⤷ ADD TO GALLERYY</a></li>
 
             <details>
                 <summary>➾ USER</summary>

@@ -66,7 +66,7 @@
     </style>
 </head>
 <body>
-    <?php include('AdminSidebar.php'); ?>
+    <?php include('view/AdminSidebar.php'); ?>
 
     <div id="content">
         <h2>Image Upload</h2>

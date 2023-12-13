@@ -29,7 +29,7 @@ if ($row = mysqli_fetch_assoc($result)) {
 }
 ?>
 <?php
-include("AdminSidebar.php");
+include("view/AdminSidebar.php");
 
 $servername = "localhost";
 $username = "root";
