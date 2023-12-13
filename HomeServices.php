@@ -142,10 +142,10 @@
 
         <div class="zigzag">
             <div class="image">
-                <img src="images/ven.jpg" alt="Image 1">
+                <img src="visuals/images/ven.jpg" alt="Image 1">
                 <input type="radio" id="popup1" class="image-input" />
                 <div class="image-popup" id="popup1">
-                    <img src="images/ven.jpg" alt="Image 1">
+                    <img src="visuals/images/ven.jpg" alt="Image 1">
                 </div>
             </div>
             <div class="description">
@@ -156,10 +156,10 @@
 
         <div class="zigzag">
             <div class="image">
-                <img src="images/staff.jpg" alt="Image 3">
+                <img src="visuals/images/staff.jpg" alt="Image 3">
                 <input type="radio" id="popup3" class="image-input" />
                 <div class="image-popup" id="popup3">
-                    <img src="images/staff.jpg" alt="Image 3">
+                    <img src="visuals/images/staff.jpg" alt="Image 3">
                 </div>
             </div>
             <div class="description">
@@ -170,10 +170,10 @@
 
         <div class="zigzag">
             <div class="image">
-                <img src="images/deco.jpg" alt="Image 3">
+                <img src="visuals/images/deco.jpg" alt="Image 3">
                 <input type="radio" id="popup3" class="image-input" />
                 <div class="image-popup" id="popup3">
-                    <img src="images/deco.jpg" alt="Image 3">
+                    <img src="visuals/images/deco.jpg" alt="Image 3">
                 </div>
             </div>
             <div class="description">
@@ -185,10 +185,10 @@
 
         <div class="zigzag">
             <div class="image">
-                <img src="images/sup.jpg" alt="Image 3">
+                <img src="visuals/images/sup.jpg" alt="Image 3">
                 <input type="radio" id="popup3" class="image-input" />
                 <div class="image-popup" id="popup3">
-                    <img src="images/sup.jpg" alt="Image 3">
+                    <img src="visuals/images/sup.jpg" alt="Image 3">
                 </div>
             </div>
             <div class="description">
@@ -200,10 +200,10 @@
 
         <div class="zigzag">
             <div class="image">
-                <img src="images/cat.jpg" alt="Image 3">
+                <img src="visuals/images/cat.jpg" alt="Image 3">
                 <input type="radio" id="popup3" class="image-input" />
                 <div class="image-popup" id="popup3">
-                    <img src="images/cat.jpg" alt="Image 3">
+                    <img src="visuals/images/cat.jpg" alt="Image 3">
                 </div>
             </div>
             <div class="description">

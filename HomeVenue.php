@@ -168,10 +168,10 @@
         <!-- Display 3 images and descriptions in a zigzag layout -->
         <div class="zigzag">
             <div class="image">
-                <img src="images/h1.jpg" alt="Image 1">
+                <img src="visuals/images/h1.jpg" alt="Image 1">
                 <input type="radio" id="popup1" class="image-input" />
                 <div class="image-popup" id="popup1">
-                    <img src="images/h1.jpg" alt="Image 1">
+                    <img src="visuals/images/h1.jpg" alt="Image 1">
                 </div>
             </div>
             <div class="description">
@@ -200,10 +200,10 @@
 
         <div class="zigzag">
             <div class="image">
-                <img src="images/h2.jpg" alt="Image 2">
+                <img src="visuals/images/h2.jpg" alt="Image 2">
                 <input type="radio" id="popup2" class="image-input" />
                 <div class="image-popup" id="popup2">
-                    <img src="images/h2.jpg" alt="Image 2">
+                    <img src="visuals/images/h2.jpg" alt="Image 2">
                 </div>
             </div>
             <div class "description">
@@ -232,10 +232,10 @@
 
         <div class="zigzag">
             <div class="image">
-                <img src="images/h3.jpg" alt="Image 3">
+                <img src="visuals/images/h3.jpg" alt="Image 3">
                 <input type="radio" id="popup3" class="image-input" />
                 <div class="image-popup" id="popup3">
-                    <img src="images/h3.jpg" alt="Image 3">
+                    <img src="visuals/images/h3.jpg" alt="Image 3">
                 </div>
             </div>
             <div class="description">
