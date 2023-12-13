@@ -3,9 +3,9 @@ require_once("vendor/tecnickcom/tcpdf/tcpdf.php");
 require_once("vendor/tecnickcom/tcpdf/tcpdf_barcodes_1d.php");
 
 class CustomTCPDF extends TCPDF {
-    // Override SetFooter to customize footer content
-    public function SetFooter() {
-        // Add your custom footer content here
+    // Override Setview/footer to customize view/footer content
+    public function Setview/footer() {
+        // Add your custom view/footer content here
         $this->SetY(-15);
         $this->SetFont('times', 'I', 8);
         $this->Cell(0, 10, "E-TICKETING provided by EventX", 0, false, 'C');

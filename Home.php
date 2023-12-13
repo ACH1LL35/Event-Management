@@ -81,6 +81,6 @@
 <body>
 
     <!-- Your page content goes here -->
-    <?php include 'footer.php'; ?>
+    <?php include 'view/footer.php'; ?>
 </body>
 </html>

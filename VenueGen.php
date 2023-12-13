@@ -3,11 +3,11 @@
 require_once("vendor/tecnickcom/tcpdf/tcpdf.php");
 require_once("vendor/tecnickcom/tcpdf/tcpdf_barcodes_1d.php"); // Include barcode library
 
-// Custom TCPDF class to override SetFooter method
+// Custom TCPDF class to override Setview/footer method
 class CustomTCPDF extends TCPDF {
-    // Override SetFooter to add custom footer
-    public function SetFooter() {
-        // Add your custom footer content here
+    // Override Setview/footer to add custom view/footer
+    public function Setview/footer() {
+        // Add your custom view/footer content here
         $this->SetY(-15);
         $this->SetFont('times', 'I', 8);
         $this->Cell(0, 10, "E-BOOKING provided by EventX", 0, false, 'C');

@@ -186,6 +186,6 @@
             </div>
         </div>
     </div>
-    <?php include 'footer.php'; ?>
+    <?php include 'view/footer.php'; ?>
 </body>
 </html>

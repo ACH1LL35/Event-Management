@@ -84,7 +84,7 @@ project/
 |-- composer.lock
 |-- dash.php
 |-- details.php
-|-- footer.php
+|-- view/footer.php
 |-- index.php
 |-- menu.php
 |-- profile.php
