@@ -283,13 +283,7 @@ foreach ($tables as $tableName => $customName) {
                 </ul>
             </details>
 
-            <details>
-                <summary>➾ GALLERY</summary>
-                <ul>
-                    <li><a href="AdminAdd2Gallary.php">⤷ DD TO GALLERY</a></li>
-                    <li><a href="AdminLinkImage.php">⤷ LINK TO GALLERY</a></li>
-                </ul>
-            </details>
+                    <li><a href="upload.php">⤷ ADD TO GALLERY</a></li>
 
             <details>
                 <summary>➾ USER</summary>

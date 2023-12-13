@@ -61,15 +61,15 @@
     <!-- Your page content goes here -->
     <div class="footer">
         <div class="footer-links">
-            <a href="Privacy.php">Privacy Policy</a>
+            <a href="view/Privacy.php">Privacy Policy</a>
             <a>||</a>
-            <a href="/collection-statement">Collection Statement</a>
+            <a href="view/collection-statement">Collection Statement</a>
             <a>||</a>
-            <a href="Term.php">Terms & Conditions</a>
+            <a href="view/Term.php">Terms & Conditions</a>
             <a>||</a>
-            <a href="Ad.php">Advertise</a>
+            <a href="view/Ad.php">Advertise</a>
             <a>||</a>
-            <a href="HomeContactUs.php">Contact Us</a>
+            <a href="view/HomeContactUs.php">Contact Us</a>
         </div>
         <div class="social-icons">
             <a href="https://www.instagram.com/" target="_blank">
