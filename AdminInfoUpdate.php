@@ -8,6 +8,7 @@ $dbname = "event_management";
 
 $conn = new mysqli($servername, $username, $pass, $dbname);
 
+session_start();
 // Check if a user ID session variable exists
 if (isset($_SESSION['id'])) {
     $id = $_SESSION['id'];

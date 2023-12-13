@@ -7,15 +7,25 @@ class GalleryController {
     public function __construct() {
         // Initialize the model
         $this->galleryModel = new GalleryModel();
+
+        // Check if session is started
+        if (session_status() == PHP_SESSION_NONE) {
+            session_start();
+        }
     }
 
     public function showUploadForm() {
         // Fetch user details from the model
-        $id = $_SESSION['id'];
-        $userData = $this->galleryModel->getUserDetails($id);
+        $id = $_SESSION['id'] ?? null;
 
-        // Include the view
-        include('view/gallery_upload_view.php');
+        if ($id) {
+            $userData = $this->galleryModel->getUserDetails($id);
+
+            // Include the view
+            include('view/gallery_upload_view.php');
+        } else {
+            echo "User ID not found in session.";
+        }
     }
 
     public function handleUpload() {

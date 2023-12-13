@@ -1,5 +1,4 @@
 <?php
-session_start();
 include('controller/GalleryController.php');
 
 $controller = new GalleryController();
