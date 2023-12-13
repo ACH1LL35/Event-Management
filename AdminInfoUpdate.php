@@ -1,4 +1,34 @@
 <?php
+session_start();
+
+if (isset($_POST['logout'])) {
+    // Destroy the session and redirect to the Login page
+    session_destroy();
+    header("Location: start.php");
+    exit();
+}
+
+if (!isset($_SESSION['id'])) {
+    header("Location: start.php");
+    exit();
+}
+
+$id = $_SESSION['id'];
+$conn = mysqli_connect("localhost", "root", "", "event_management");
+
+if (!$conn) {
+    die("Connection failed: " . mysqli_connect_error());
+}
+
+$query = "SELECT * FROM admin_mod WHERE id = '$id'";
+$result = mysqli_query($conn, $query);
+
+if ($row = mysqli_fetch_assoc($result)) {
+    $uname = $row['uname']; // Update to use the correct variable name
+    // $email = $row['email'];
+}
+?>
+<?php
 include("AdminSidebar.php");
 
 $servername = "localhost";
@@ -8,7 +38,6 @@ $dbname = "event_management";
 
 $conn = new mysqli($servername, $username, $pass, $dbname);
 
-session_start();
 // Check if a user ID session variable exists
 if (isset($_SESSION['id'])) {
     $id = $_SESSION['id'];

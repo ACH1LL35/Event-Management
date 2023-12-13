@@ -1,4 +1,5 @@
 <?php
+
 include("AdminSidebar.php");
 
 if (isset($_POST['logout'])) {

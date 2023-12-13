@@ -1,4 +1,5 @@
 <?php
+
 include('controller/GalleryController.php');
 
 $controller = new GalleryController();
