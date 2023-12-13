@@ -2,7 +2,7 @@
 
 include('controller/visuals/galleryController.php');
 
-$controller = new visuals/galleryController();
+$controller = new galleryController();
 
 if (isset($_POST['upload'])) {
     $controller->handleUpload();

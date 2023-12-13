@@ -31,12 +31,12 @@ if ($row = mysqli_fetch_assoc($result)) {
 <?php
 include('model/visuals/galleryModel.php');
 
-class visuals/galleryController {
-    private $visuals/galleryModel;
+class galleryController {
+    private $galleryModel;
 
     public function __construct() {
         // Initialize the model
-        $this->visuals/galleryModel = new visuals/galleryModel();
+        $this->galleryModel = new galleryModel();
 
         // Check if session is started
         if (session_status() == PHP_SESSION_NONE) {
@@ -48,7 +48,7 @@ class visuals/galleryController {
         $id = $_SESSION['id'] ?? null;
 
         if ($id) {
-            $userData = $this->visuals/galleryModel->getUserDetails($id);
+            $userData = $this->galleryModel->getUserDetails($id);
 
             // Include the view
             include('view/visuals/gallery_upload_view.php');
@@ -59,8 +59,8 @@ class visuals/galleryController {
 
     public function handleUpload() {
         // Handle image upload logic
-        $title = mysqli_real_escape_string($this->visuals/galleryModel->getConnection(), $_POST['title']);
-        $description = mysqli_real_escape_string($this->visuals/galleryModel->getConnection(), $_POST['description']);
+        $title = mysqli_real_escape_string($this->galleryModel->getConnection(), $_POST['title']);
+        $description = mysqli_real_escape_string($this->galleryModel->getConnection(), $_POST['description']);
 
         // Define the target directory on the server where you want to save the images
         $targetDirectory = 'C:/xampp/htdocs/project/visuals/gallery/';
@@ -79,7 +79,7 @@ class visuals/galleryController {
             // Move the uploaded file to the target directory on the server
             if (move_uploaded_file($uploadedFile['tmp_name'], $targetFile)) {
                 // Insert data into the database
-                $uploadResult = $this->visuals/galleryModel->uploadImage($title, $description, $fileName);
+                $uploadResult = $this->galleryModel->uploadImage($title, $description, $fileName);
 
                 if ($uploadResult) {
                     echo "File uploaded successfully.";
@@ -94,7 +94,7 @@ class visuals/galleryController {
         }
 
         // Close the database connection
-        $this->visuals/galleryModel->closeConnection();
+        $this->galleryModel->closeConnection();
     }
 
     // Add more methods as needed
