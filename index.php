@@ -42,7 +42,7 @@
         }
 
         /* CSS styles for the visuals/gallery */
-        .visuals/gallery img {
+        .gallery img {
             max-width: 23%; /* Adjust the image size as needed */
             height: auto;
             margin: 10px;
@@ -88,7 +88,7 @@
 </head>
 <body>
 
-    <div class="visuals/gallery">
+    <div class="gallery">
         <?php
         $dbHost = 'localhost';
         $dbUser = 'root';
@@ -100,7 +100,7 @@
             $pdo = new PDO("mysql:host=$dbHost;dbname=$dbName", $dbUser, $dbPass);
             $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
-            $stmt = $pdo->prepare("SELECT id, image_path FROM visuals/gallery_data");
+            $stmt = $pdo->prepare("SELECT id, image_path FROM gallery_data");
             $stmt->execute();
             $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
 

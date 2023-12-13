@@ -133,7 +133,7 @@
 
                 if (isset($_GET['id'])) {
                     $id = $_GET['id'];
-                    $stmt = $pdo->prepare("SELECT title, description, image_path, created_at FROM visuals/gallery_data WHERE id = :id");
+                    $stmt = $pdo->prepare("SELECT title, description, image_path, created_at FROM gallery_data WHERE id = :id");
                     $stmt->bindParam(':id', $id, PDO::PARAM_INT);
                     $stmt->execute();
 
