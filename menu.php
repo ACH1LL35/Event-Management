@@ -220,10 +220,10 @@ if ($row = mysqli_fetch_assoc($result)) {
             </details>
 
             <details>
-                <summary>➾ GALLERY</summary>
+                <summary>➾ visuals/gallery</summary>
                 <ul>
-                    <li><a href="AdminAdd2Gallary.php">⤷ DD TO GALLERY</a></li>
-                    <li><a href="AdminLinkImage.php">⤷ LINK TO GALLERY</a></li>
+                    <li><a href="AdminAdd2Gallary.php">⤷ DD TO visuals/gallery</a></li>
+                    <li><a href="AdminLinkImage.php">⤷ LINK TO visuals/gallery</a></li>
                 </ul>
             </details>
 

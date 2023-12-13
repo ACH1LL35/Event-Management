@@ -32,7 +32,7 @@ if (isset($_POST['upload'])) {
     $description = mysqli_real_escape_string($conn, $_POST['description']);
 
     // Define the target directory on the server where you want to save the images
-    $targetDirectory = 'C:/xampp/htdocs/project/gallery/';
+    $targetDirectory = 'C:/xampp/htdocs/project/visuals/gallery/';
 
     // Get the uploaded file information
     $uploadedFile = $_FILES['image'];
@@ -50,7 +50,7 @@ if (isset($_POST['upload'])) {
         // Move the uploaded file to the target directory on the server
         if (move_uploaded_file($uploadedFile['tmp_name'], $targetFile)) {
             // Insert data into the database
-            $insertQuery = "INSERT INTO gallery_data (title, description, image_path) VALUES ('$title', '$description', '$fileName')";
+            $insertQuery = "INSERT INTO visuals/gallery_data (title, description, image_path) VALUES ('$title', '$description', '$fileName')";
             if (mysqli_query($conn, $insertQuery)) {
                 echo "File uploaded successfully.";
             } else {

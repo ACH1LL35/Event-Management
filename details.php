@@ -62,9 +62,9 @@
             background-color: #ff9933;
         }
 
-        /* CSS styles for the gallery */
-        /* CSS styles for the gallery */
-            .gallery img {
+        /* CSS styles for the visuals/gallery */
+        /* CSS styles for the visuals/gallery */
+            .visuals/gallery img {
                 width: 20px; /* Set the desired width */
                 max-width: 100%; /* Ensure images don't exceed their original size */
                 height: auto;
@@ -111,7 +111,7 @@
         <a href="HomeEvents.php">Events</a>
         <a href="HomeServices.php">Services</a>
         <a href="HomeBlog.php">Blog</a>
-        <a href="HomeGallery.php">Gallery</a>
+        <a href="Homevisuals/gallery.php">visuals/gallery</a>
         <a href="HomeVenue.php">Venue</a>
         <a href="HomeEventSupport.php">Event Support</a>
         <a href="HomeTicketVerify.php">Verify Ticket</a>
@@ -119,13 +119,13 @@
         <a id="book-button" href="UserTicket.php">Book Now</a>
     </div>
 
-    <div class="gallery-details">
+    <div class="visuals/gallery-details">
         <?php
             $dbHost = 'localhost';
             $dbUser = 'root';
             $dbPass = '';
             $dbName = 'event_management';
-            $basePath = "gallery/"; // Adjust the base path as needed
+            $basePath = "visuals/gallery/"; // Adjust the base path as needed
 
             try {
                 $pdo = new PDO("mysql:host=$dbHost;dbname=$dbName", $dbUser, $dbPass);
@@ -133,7 +133,7 @@
 
                 if (isset($_GET['id'])) {
                     $id = $_GET['id'];
-                    $stmt = $pdo->prepare("SELECT title, description, image_path, created_at FROM gallery_data WHERE id = :id");
+                    $stmt = $pdo->prepare("SELECT title, description, image_path, created_at FROM visuals/gallery_data WHERE id = :id");
                     $stmt->bindParam(':id', $id, PDO::PARAM_INT);
                     $stmt->execute();
 
@@ -141,7 +141,7 @@
 
                     if ($details) {
                         // With this line
-                        echo '<img src="' . $basePath . $details['image_path'] . '" alt="Gallery Image" style="width: 200px; max-width: 100%; height: auto; margin: 10px; cursor: pointer;">';
+                        echo '<img src="' . $basePath . $details['image_path'] . '" alt="visuals/gallery Image" style="width: 200px; max-width: 100%; height: auto; margin: 10px; cursor: pointer;">';
                         echo '<h2>' . $details['title'] . '</h2>';
                         echo '<p>' . $details['description'] . '</p>';
                         echo '<p>created_at: ' . $details['created_at'] . '</p>';

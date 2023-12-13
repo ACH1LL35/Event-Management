@@ -223,7 +223,7 @@ if ($row = mysqli_fetch_assoc($result)) {
                 </ul>
             </details>
 
-                    <li><a href="upload.php">⤷ ADD TO GALLERY</a></li>
+                    <li><a href="upload.php">⤷ ADD TO visuals/gallery</a></li>
 
 
             <details>

@@ -37,7 +37,7 @@ project/
 |   |-- HomeContactUs.php
 |   |-- HomeEventSupport.php
 |   |-- HomeEvents.php
-|   |-- HomeGallery.php
+|   |-- Homevisuals/gallery.php
 |   |-- HomeServices.php
 |   |-- HomeTicketVerify.php
 |   |-- HomeTopBar.php

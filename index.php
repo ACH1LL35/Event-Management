@@ -41,8 +41,8 @@
             background-color: #ff9933;
         }
 
-        /* CSS styles for the gallery */
-        .gallery img {
+        /* CSS styles for the visuals/gallery */
+        .visuals/gallery img {
             max-width: 23%; /* Adjust the image size as needed */
             height: auto;
             margin: 10px;
@@ -79,7 +79,7 @@
             cursor: pointer;
         }
 
-        .gallery img {
+        .visuals/gallery img {
             max-width: 23%; /* Adjust the image size as needed */
             height: auto;
             margin: 10px;
@@ -88,19 +88,19 @@
 </head>
 <body>
 
-    <div class="gallery">
+    <div class="visuals/gallery">
         <?php
         $dbHost = 'localhost';
         $dbUser = 'root';
         $dbPass = '';
         $dbName = 'event_management';
-        $basePath = "gallery/"; // Adjust the base path as needed
+        $basePath = "visuals/gallery/"; // Adjust the base path as needed
 
         try {
             $pdo = new PDO("mysql:host=$dbHost;dbname=$dbName", $dbUser, $dbPass);
             $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
-            $stmt = $pdo->prepare("SELECT id, image_path FROM gallery_data");
+            $stmt = $pdo->prepare("SELECT id, image_path FROM visuals/gallery_data");
             $stmt->execute();
             $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
@@ -110,7 +110,7 @@
                 // Check if the image file exists
                 if (file_exists($imagePath)) {
                     echo '<a href="details.php?id=' . $row['id'] . '">';
-                    echo '<img src="' . $imagePath . '" alt="Gallery Image">';
+                    echo '<img src="' . $imagePath . '" alt="visuals/gallery Image">';
                     echo '</a>';
                 } else {
                     echo '<p>Error: Image not found for ID ' . $row['id'] . '</p>';

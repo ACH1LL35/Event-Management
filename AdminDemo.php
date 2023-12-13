@@ -166,7 +166,7 @@ if ($row = mysqli_fetch_assoc($result)) {
             <li><a href="AdminCMH.php">COMMENT MODERATION HISTORY</a></li>
             <li><a href="AdminQueryF.php">QUERY FEEDBACK</a></li>
             <li><a href="AdminQuotationF.php">QOUTATION FEEDBACK</a></li>
-            <li><a href="AdminAdd2Gallary.php">ADD TO GALLERY</a></li>
+            <li><a href="AdminAdd2Gallary.php">ADD TO visuals/gallery</a></li>
             <li><a href="AdminUserManagement.php">USER MANAGEMENT</a></li>
             <li><a href="AdminNewsletter.php">NEWSLETTER</a></li>
         </ul>
