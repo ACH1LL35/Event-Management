@@ -35,7 +35,7 @@ include("ModSidebar.php");
 
     if (isset($_POST['logout'])) {
         session_destroy();
-        header('Location: AdminModLogin.php');
+        header('Location: start.php');
         exit();
     }
     ?>

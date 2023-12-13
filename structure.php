@@ -13,7 +13,7 @@ project/
 |   |-- AdminInfoUpdate.php
 |   |-- AdminLinkImage.php
 |   |-- AdminModAccess.php
-|   |-- AdminModLogin.php
+|   |-- start.php
 |   |-- AdminModManagement.php
 |   |-- AdminNewsletter.php
 |   |-- AdminPMH.php

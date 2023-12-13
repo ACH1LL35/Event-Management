@@ -106,7 +106,7 @@
 </head>
 <body>
     <div class="top-bar">
-    <div><a class="company-name" href="AdminModLogin.php">EventX</a></div>
+    <div><a class="company-name" href="start.php">EventX</a></div>
         <a href="Home.php">Home</a>
         <a href="HomeEvents.php">Events</a>
         <a href="HomeServices.php">Services</a>

@@ -4,12 +4,12 @@ include("AdminSidebar.php");
 if (isset($_POST['logout'])) {
     // Destroy the session and redirect to the Login page
     session_destroy();
-    header("Location: AdminModLogin.php");
+    header("Location: start.php");
     exit();
 }
 
 if (!isset($_SESSION['id'])) {
-    header("Location: AdminModLogin.php");
+    header("Location: start.php");
     exit();
 }
 
@@ -92,7 +92,7 @@ if ($row = mysqli_fetch_assoc($result)) {
         <?php
 
         if (!isset($_SESSION['id'])) {
-            header("Location: AdminModLogin.php");
+            header("Location: start.php");
             exit();
         }
 
