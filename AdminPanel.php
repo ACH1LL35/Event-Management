@@ -41,17 +41,17 @@ if ($conn->connect_error) {
 
 // Define table names with optional custom names
 $tables = array(
-    "credential" => "",
+    "credential" => "REGISTERED USER",
     "booking" => "",
-    "comments" => "",
-    "complaint" => "",
+    "comments" => "SITE WIDE COMMENTS",
+    "complaint" => "COMPLAINT LAUNCHED",
     "events" => "",
-    "posts" => "",
+    "posts" => "SITE WIDE POSTS",
     "purchase_info" => "",
     "ticket_cr" => "",
     "query" => "",
     "quotation" => "",
-    "gallery_data" => ""
+    "gallery_data" => "GALLAEY IMAGES"
 );
 
 $counts = array();
@@ -95,7 +95,7 @@ foreach ($tables as $tableName => $customName) {
             margin: 1px 0;
         }
 
-        h2 {
+        h3 {
             background-color: #333;
             color: #fff;
             padding: 20px;
@@ -220,7 +220,7 @@ foreach ($tables as $tableName => $customName) {
 </head>
 <body>
     <div id="menu">
-    <h2 style="text-align: center; background-color: #000; color: #fff; padding: 20px;">DASHBOARD</h2>
+    <h3 style="text-align: center; background-color: #000; color: #fff; padding: 20px;">DASHBOARD</h3>
         <form class="logout-form" method="post">
             <input type="submit" name="logout" class="logout-button" value="Log Out">
         </form>
@@ -304,7 +304,7 @@ foreach ($tables as $tableName => $customName) {
     <div id="content">
         <?php foreach ($counts as $customName => $count) { ?>
             <div class="box">
-                <h2><?php echo ($customName !== "") ? $customName : $tableName; ?></h2>
+                <h3><?php echo ($customName !== "") ? $customName : $tableName; ?></h3>
                 <p><?php echo $count; ?></p>
             </div>
         <?php } ?>

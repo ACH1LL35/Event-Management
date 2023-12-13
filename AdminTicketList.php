@@ -52,10 +52,10 @@ if ($row = mysqli_fetch_assoc($result)) {
             padding-left: 20px;
         }
 
-        h1 {
+        h2 {
             text-align: center;
             background-color: #333;
-            color: #fff;
+            color: #000;
             padding: 20px;
             margin: 0;
         }
@@ -105,7 +105,7 @@ if ($row = mysqli_fetch_assoc($result)) {
 </head>
 <body>
     <div id="content">
-        <h1 style="text-align: center; background-color: #000; color: #fff; padding: 20px;">Ticket Sales List</h1>
+        <h2 style="text-align: center; background-color: #000; color: #fff; padding: 20px;">Ticket Sales List</h2>
         <form method="get">
             <table border="1">
                 <tr>
