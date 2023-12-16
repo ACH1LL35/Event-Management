@@ -1,6 +1,5 @@
 <?php
-// Include the necessary model file to establish the database connection
-include_once("../model/commentModelH.php");
+include_once("../model/commentModelM.php");
 
 // Establish database connection
 $conn = mysqli_connect("localhost", "root", "", "event_management");
@@ -9,13 +8,12 @@ if (!$conn) {
     die("Connection failed: " . mysqli_connect_error());
 }
 
-
 // Include the commentActionController to handle actions
 if ($_SERVER["REQUEST_METHOD"] === "POST") {
-    include_once("../controller/commentActionControllerH.php");
+    include_once("../controller/commentActionControllerM.php");
 }
 
-include_once("../controller/commentControllerH.php");
+include_once("../controller/commentControllerM.php");
 
 ?>
 
@@ -24,9 +22,9 @@ include_once("../controller/commentControllerH.php");
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>COMMENT MODERATION HISTORY</title>
+    <title>COMMENT MODERATION</title>
     <style>
-        body {
+         body {
             font-family: Arial, Helvetica, sans-serif;
             background-color: #f2f2f2;
             display: flex;
@@ -89,42 +87,42 @@ include_once("../controller/commentControllerH.php");
 </head>
 <body>
     <div id="content">
-        <h1 style="text-align: center; background-color: #000; color: #fff; padding: 20px;">COMMENT MODERATION HISTORY</h1>
-        
+        <h1 style="text-align: center; background-color: #000; color: #fff; padding: 20px;">COMMENT MODERATION</h1>
         <form method="post">
             <table border="1">
                 <tr>
+                    <th>COMMENT UniqueID</th>
+                    <th>COMMENTEES UniqueID</th>
                     <th>COMMENTEES UserName</th>
                     <th>COMMENT</th>
                     <th>COMMENT DATE</th>
                     <th>STATUS</th>
                     <th>ACTION</th>
                 </tr>
-                
                 <?php
-                // Retrieve comments data from the database
-                $sql = "SELECT * FROM comments WHERE status = 0";
+                $sql = "SELECT * FROM comments";
                 $res = mysqli_query($conn, $sql);
 
                 while ($r = mysqli_fetch_assoc($res)) {
                 ?>
                     <tr>
+                        <td><?php echo $r["id"]; ?></td>
+                        <td><?php echo $r["posted_by_id"]; ?></td>
                         <td><?php echo $r["posted_by_username"]; ?></td>
                         <td><?php echo $r["comment"]; ?></td>
                         <td><?php echo $r["created_at"]; ?></td>
                         <td><?php echo $r["status"]; ?></td>
+                        <center>
                         <td>
-                            <center>
-                                <?php if ($r["status"] == 1): ?>
-                                    <button type="submit" name="hide" value="<?php echo $r["id"]; ?>">Hide</button>
-                                <?php else: ?>
-                                    <button type="submit" name="unhide" value="<?php echo $r["id"]; ?>">Unhide</button>
-                                <?php endif; ?>
-                            </center>
+                            <?php if ($r["status"] == 1): ?>
+                                <button type="submit" name="hide" value="<?php echo $r["id"]; ?>">Hide</button>
+                            <?php else: ?>
+                                <button type="submit" name="unhide" value="<?php echo $r["id"]; ?>">Unhide</button>
+                            <?php endif; ?>
                         </td>
+                        </center>
                     </tr>
                 <?php } ?>
-                
             </table>
         </form>
     </div>
