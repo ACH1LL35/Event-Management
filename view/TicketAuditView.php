@@ -1,6 +1,6 @@
 <?php
 session_start();
-include('view/AdminSidebar.php');
+include('../view/AdminSidebar.php');
 
 if (isset($_POST['logout'])) {
     // Destroy the session and redirect to the Login page
@@ -15,26 +15,31 @@ if (!isset($_SESSION['id'])) {
 }
 
 $id = $_SESSION['id'];
-$conn = mysqli_connect("localhost", "root", "", "event_management");
 
-if (!$conn) {
-    die("Connection failed: " . mysqli_connect_error());
+$servername = "localhost";
+$username = "root";
+$pass = "";
+$dbname = "event_management";
+
+// Create a database connection
+$conn = new mysqli($servername, $username, $pass, $dbname);
+
+if ($conn->connect_error) {
+    die("Connection failed: " . $conn->connect_error);
 }
 
-$query = "SELECT * FROM admin_mod WHERE id = '$id'";
-$result = mysqli_query($conn, $query);
+include('../controller/TicketAuditController.php');
 
-if ($row = mysqli_fetch_assoc($result)) {
-    $username = $row['uname']; // Update to use the correct variable name
-    // $email = $row['email'];
-}
+$ticketAuditController = new TicketAuditController($conn);
+$ticketAuditController->handleRequest();
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Events Archive</title>
+    <title>Ticket Audit</title>
     <style>
         body {
             font-family: Arial, Helvetica, sans-serif;
@@ -109,33 +114,17 @@ if ($row = mysqli_fetch_assoc($result)) {
                 <th>Ticket Price</th>
                 <th>Total Ticket</th>
                 <th>Available Ticket</th>
-                
             </tr>
-        <?php
-        // if(isset($_GET['del']))
-        // {
-        //     $id= $_GET['del'];
-        //     $sql1="Delete from events where id='$id'";
-        //     mysqli_query($conn,$sql1);
-        // }
-
-        $sql="select * from ticket_cr";
-        $res= mysqli_query($conn,$sql);
-
-        while($r= mysqli_fetch_assoc($res)) {
-        ?>
+        <?php foreach ($ticketAuditController->getAllTicketAuditData() as $ticketAuditData): ?>
             <tr>
-                <td><?php echo $r["id"]; ?></td>
-                <td><?php echo $r["event_name"]; ?></td>
-                <td><?php echo $r["venue"]; ?></td>
-                <td><?php echo $r["ticket_price"]; ?></td>
-                <td><?php echo $r["total_tickets"]; ?></td>
-                <td><?php echo $r["available_tickets"]; ?></td>
-                <!-- <center>
-                <td><button type="submit" name="del" value="<?php echo $r["id"]; ?>">Delete</button></td>
-                </center> -->
+                <td><?php echo $ticketAuditData["Showid"]; ?></td>
+                <td><?php echo $ticketAuditData["event_name"]; ?></td>
+                <td><?php echo $ticketAuditData["venue"]; ?></td>
+                <td><?php echo $ticketAuditData["ticket_price"]; ?></td>
+                <td><?php echo $ticketAuditData["total_tickets"]; ?></td>
+                <td><?php echo $ticketAuditData["available_tickets"]; ?></td>
             </tr>
-        <?php } ?>
+        <?php endforeach; ?>
         </table>
         </form>
     </div>
