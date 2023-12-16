@@ -1,0 +1,84 @@
+project/
+|-- controller/
+|   |-- AdminProfileController.php
+|   |-- admin_login_controller.php
+|   |-- commentActionControllerH.php
+|   |-- commentActionControllerM.php
+|   |-- commentControllerH.php
+|   |-- commentControllerM.php
+|   |-- complaintFeedbackController.php
+|   |-- EventsArchiveController.php
+|   |-- GalleryController.php
+|   |-- ModeratorListController.php
+|   |-- ModeratorRegistrationController.php
+|   |-- PostControllerH.php
+|   |-- PostControllerM.php
+|   |-- PublishTicketController.php
+|   |-- QueryController.php
+|   |-- QuotationController.php
+|   |-- TicketAuditController.php
+|   |-- TicketController.php
+|   |-- TicketSalesController.php
+|
+|-- model/
+|   |-- AdminProfileModel.php
+|   |-- admin_login_model.php
+|   |-- commentActionModelH.php
+|   |-- commentActionModelM.php
+|   |-- commentModelH.php
+|   |-- commentModelM.php
+|   |-- complaintFeedbackModel.php
+|   |-- GalleryModel.php
+|   |-- ModeratorListModel.php
+|   |-- ModeratorRegistrationModel.php
+|   |-- PostModelH.php
+|   |-- PostModelM.php
+|   |-- PublishTicketModel.php
+|   |-- QueryModel.php
+|   |-- QuotationModel.php
+|   |-- TicketAuditModel.php
+|   |-- TicketModel.php
+|   |-- TicketSalesModel.php
+|
+|-- views/
+|   |-- Ad.php [basic HTML file]
+|   |-- AdminProfileView.php
+|   |-- AdminSidebar.php
+|   |-- AdminUserManagement.php
+|   |-- AdminVenueBookHistory.php
+|   |-- AdminVenueManagement.php
+|   |-- admin_login_view.php
+|   |-- commentViewH.php
+|   |-- commentViewM.php
+|   |-- complaintFeedbackView.php
+|   |-- dash.php
+|   |-- EventsArchiveView.php
+|   |-- footer.php [basic HTML file]
+|   |-- gallery_upload_view.php
+|   |-- HomeContactUs.php [basic HTML file]
+|   |-- ModeratorListView.php
+|   |-- ModeratorRegistrationView.php
+|   |-- PostViewH.php
+|   |-- PostViewM.php
+|   |-- Privacy.php [basic HTML file]
+|   |-- PublishTicketView.php
+|   |-- QueryView.php
+|   |-- QuotationView.php
+|   |-- start.php [starting point for ADMINISTRATOR-MODERATOR login]
+|   |-- Term.php [basic HTML file]
+|   |-- TicketAuditView.php
+|   |-- TicketSalesView.php
+|   |-- TicketView.php
+|   |-- update_event_details.php
+|   |-- upload.php
+|
+|-- visuals/
+|   |-- gallery/
+|   |-- images/
+|   |-- logo/
+|
+|-- vendor/
+|   |-- composer/
+|   |-- tecnickom/
+|   |-- phpmailer/
+|   |-- autoload

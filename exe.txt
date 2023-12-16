@@ -1,0 +1,31 @@
+dashboard/ [model/view/controller]
+|-- home/
+|-- info_update/
+|-- ticket/
+|   |-- ticket_publish/ [model/view/controller]
+|   |-- ticket_management/ [model/view/controller]
+|   |-- ticket_sale_list/ [model/view/controller]
+|   |-- ticket_audit/ [model/view/controller]
+|-- event/
+|   |-- event_publish/ [model/view/controller]
+|   |-- event_history/ [model/view/controller]
+|-- venue/
+|   |-- venue_management/ [model/view/controller]
+|   |-- venue_booking_list/ [model/view/controller]
+|-- moderator/
+|   |-- moderator_access/ [model/view/controller]
+|   |-- moderator_management/ [model/view/controller]
+|-- analysis/
+|-- moderation/
+|   |-- post_moderation/ [model/view/controller]
+|   |-- post_history/ [model/view/controller]
+|   |-- comment_moderation/ [model/view/controller]
+|   |-- comment_history/ [model/view/controller]
+|-- feedback/
+|   |-- query/ [model/view/controller]
+|   |-- quotation/ [model/view/controller]
+|   |-- complaint/ [model/view/controller]
+|-- gallery/
+|-- user/
+|   |-- user_management/ [model/view/controller]
+|   |-- newsletter/ [model/view/controller]
