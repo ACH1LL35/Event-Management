@@ -23,11 +23,17 @@ class AdminProfileController {
 
         if ($this->model->updateUsername($id, $newUsername)) {
             echo "Username updated successfully!";
-            header("refresh:2;url=AdminProfileView.php");
+            echo '<script>
+                    setTimeout(function(){
+                        window.location.href = "AdminProfileView.php";
+                    }, 2000); // Redirect after 2 seconds
+                  </script>';
             exit();
         } else {
-            echo "Error updating username.";
+            // Handle the case where the update was not successful
+            echo "Failed to update username.";
         }
+        
     }
 
     private function updatePassword() {
@@ -43,11 +49,15 @@ class AdminProfileController {
 
             if ($adminInfo) {
                 $currentPasswordDb = $adminInfo['password'];
-
+            
                 if ($currentPassword === $currentPasswordDb) {
                     if ($this->model->updatePassword($id, $newPassword)) {
                         echo "Password updated successfully.";
-                        header("refresh:2;url=AdminProfileView.php");
+                        echo '<script>
+                                setTimeout(function(){
+                                    window.location.href = "AdminProfileView.php";
+                                }, 2000); // Redirect after 2 seconds
+                              </script>';
                         exit();
                     } else {
                         echo "Error updating password.";
@@ -58,6 +68,7 @@ class AdminProfileController {
             } else {
                 echo "Error fetching admin information.";
             }
+            
         }
     }
 

@@ -24,7 +24,7 @@ $query = "SELECT * FROM admin_mod WHERE id = '$id'";
 $result = mysqli_query($conn, $query);
 
 if ($row = mysqli_fetch_assoc($result)) {
-    $username = $row['uname']; // Update to use the correct variable name
+    $uname = $row['uname']; // Update to use the correct variable name
     // $email = $row['email'];
 }
 
@@ -220,7 +220,7 @@ foreach ($tables as $tableName => $customName) {
         <form class="logout-form" method="post">
             <input type="submit" name="logout" class="logout-button" value="Log Out">
         </form>
-        <h1>Welcome, <?php echo $username; ?>!</h1>
+        <h1>Welcome, <?php echo $uname; ?>!</h1>
         <ul>
         <li><a href="view/dash.php">➾ HOME</a></li>
         <li><a href="AdminProfileView.php">➾ Info Update</a></li>
