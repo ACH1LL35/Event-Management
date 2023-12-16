@@ -196,7 +196,7 @@ if ($row = mysqli_fetch_assoc($result)) {
             <details>
                 <summary>➾ MODERATOR</summary>
                 <ul>
-                    <li><a href="AdminModAccess.php">⤷ MODERATOR ACCESS</a></li>
+                    <li><a href="ModeratorRegistrationView.php">⤷ MODERATOR ACCESS</a></li>
                     <li><a href="AdminModManagement.php">⤷ MODERATOR MANAGEMENT</a></li>
                 </ul>
             </details>
