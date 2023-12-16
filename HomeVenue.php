@@ -188,12 +188,12 @@
                 <p> U-Shape: 300</p>
                 <div class="button-container">
                     <!-- Create a button for the popup -->
-                    <a class="button" href="images/h1-1.jpg">Full Banquet Dining</a>
-                    <a class="button" href="images/h1-2.jpg">Banquet Dining with Stage</a>
+                    <a class="button" href="visuals/images/h1-1.jpg">Full Banquet Dining</a>
+                    <a class="button" href="visuals/images/h1-2.jpg">Banquet Dining with Stage</a>
                 </div>
                 <div class="button-container">
-                    <a class="button" href="images/h1-3.jpg">Theater with Stage</a>
-                    <a class="button" href="images/h1-4.jpg">Banquet with Waiting Stage</a>
+                    <a class="button" href="visuals/images/h1-3.jpg">Theater with Stage</a>
+                    <a class="button" href="visuals/images/h1-4.jpg">Banquet with Waiting Stage</a>
                 </div>
             </div>
         </div>
@@ -220,12 +220,12 @@
                 <p> U-Shape: 300</p>
                 <div class="button-container">
                     <!-- Create a button for the popup -->
-                    <a class="button" href="images/h2-1.jpg">Full Banquet Dining</a>
-                    <a class="button" href="images/h2-2.jpg">Banquet Dining with Stage</a>
+                    <a class="button" href="visuals/images/h2-1.jpg">Full Banquet Dining</a>
+                    <a class="button" href="visuals/images/h2-2.jpg">Banquet Dining with Stage</a>
                 </div>
                 <div class="button-container">
-                    <a class="button" href="images/h2-3.jpg">Theater with Stage</a>
-                    <a class="button" href="images/h2-4.jpg">Banquet with Waiting Stage</a>
+                    <a class="button" href="visuals/images/h2-3.jpg">Theater with Stage</a>
+                    <a class="button" href="visuals/images/h2-4.jpg">Banquet with Waiting Stage</a>
                 </div>
             </div>
         </div>
@@ -252,12 +252,12 @@
                 <p> U-Shape: 300</p>
                 <div class="button-container">
                     <!-- Create a button for the popup -->
-                    <a class="button" href="images/h3-1.jpg">Full Banquet Dining</a>
-                    <a class="button" href="images/h3-2.jpg">Banquet Dining with Stage</a>
+                    <a class="button" href="visuals/images/h3-1.jpg">Full Banquet Dining</a>
+                    <a class="button" href="visuals/images/h3-2.jpg">Banquet Dining with Stage</a>
                 </div>
                 <div class="button-container">
-                    <a class="button" href="images/h3-3.jpg">Theater with Stage</a>
-                    <a class="button" href="images/h3-4.jpg">Banquet with Waiting Stage</a>
+                    <a class="button" href="visuals/images/h3-3.jpg">Theater with Stage</a>
+                    <a class="button" href="visuals/images/h3-4.jpg">Banquet with Waiting Stage</a>
                 </div>
             </div>
         </div>

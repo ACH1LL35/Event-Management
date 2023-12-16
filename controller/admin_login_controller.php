@@ -1,5 +1,5 @@
 <?php
-include('model/admin_login_model.php');
+include('../model/admin_login_model.php');
 
 class AdminLoginController {
     private $model;
@@ -32,7 +32,7 @@ class AdminLoginController {
             }
         }
 
-        include('view/admin_login_view.php');
+        include('../view/admin_login_view.php');
         $this->model->closeConnection();
     }
 }
