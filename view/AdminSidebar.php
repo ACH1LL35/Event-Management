@@ -219,7 +219,7 @@ if ($row = mysqli_fetch_assoc($result)) {
                 <ul>
                     <li><a href="AdminQueryF.php">⤷ QUERY FEEDBACK</a></li>
                     <li><a href="AdminQuotationF.php">⤷ QUOTATION FEEDBACK</a></li>
-                    <li><a href="AdminComplaint.php">⤷ COMPLAINT FEEDBACK</a></li>
+                    <li><a href="complaintFeedbackView.php">⤷ COMPLAINT FEEDBACK</a></li>
                 </ul>
             </details>
 
