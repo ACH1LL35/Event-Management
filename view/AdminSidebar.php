@@ -180,7 +180,7 @@ if ($row = mysqli_fetch_assoc($result)) {
             <details>
                 <summary>➾ EVENT</summary>
                 <ul>
-                    <li><a href="AdminEventHistory.php">⤷ EVENT HISTORY</a></li>
+                    <li><a href="EventsArchiveView.php">⤷ EVENT HISTORY</a></li>
                     <li><a href="AdminEventCal.php">⤷ EVENT CALENDAR</a></li>
                 </ul>
             </details>
