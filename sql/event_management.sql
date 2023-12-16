@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Dec 10, 2023 at 03:13 PM
+-- Generation Time: Dec 16, 2023 at 04:17 PM
 -- Server version: 10.4.28-MariaDB
 -- PHP Version: 8.2.4
 
@@ -41,11 +41,12 @@ CREATE TABLE `admin_mod` (
 --
 
 INSERT INTO `admin_mod` (`id`, `uname`, `email`, `password`, `type`, `status`) VALUES
-(25000, 'alam', 'admin1@eventx.com', 'admin1', 'admin', 1),
+(25000, 'yellow', 'admin1@eventx.com', 'admin1', 'admin', 1),
 (25001, 'zobayer', '', 'admin2', 'admin', 0),
 (25002, 'modtest', 'mod1@eventx.com', 'modtest', 'mod', 1),
 (25003, 'mod33', 'mod33@eventx.com', 'mod33', '', 0),
-(25004, 'mod46', 'mod46@eventx.com', 'mod46', 'mod', 1);
+(25004, 'mod46', 'mod46@eventx.com', 'mod46', 'mod', 1),
+(25005, 'mvctest', 'mvctest@gmail.com', '9d.W~*w4,fP)mMu', 'mod', 1);
 
 -- --------------------------------------------------------
 
@@ -73,8 +74,6 @@ CREATE TABLE `booking` (
 --
 
 INSERT INTO `booking` (`user_id`, `booking_id`, `venue_name`, `venue_fee`, `from_date`, `to_date`, `duration`, `total_fee`, `name`, `email`, `cnumber`, `booked_at`) VALUES
-(15, 'UK95CQ5L9N', 'HALL - 01', 0, '2023-11-20', '2023-11-20', 0, 0, 'Zobayer Alam', 'alam@gmail.com', '01778651619', '2023-12-10 14:11:48'),
-(15, 'E9OBHBC241', 'HALL - 03', 0, '2023-12-21', '2023-12-29', 8, 0, 'Zobayer Alam', 'alam@gmail.com', '01778651619', '2023-12-10 14:11:48'),
 (15, 'IOAF9YTHK9', 'HALL - 05', 200000, '2023-12-13', '2023-12-21', 8, 0, 'Zobayer Alam', 'alam@gmail.com', '01778651619', '2023-12-10 14:11:48');
 
 -- --------------------------------------------------------
@@ -99,7 +98,7 @@ CREATE TABLE `comments` (
 
 INSERT INTO `comments` (`posted_by_id`, `posted_by_username`, `id`, `post_id`, `comment`, `created_at`, `status`) VALUES
 ('15', 'alam56', 14, 23, 'comment id+username', '2023-11-10 14:38:53', 1),
-('15', 'alam69', 15, 21, 'tywer5yweywerywe5rywerywer', '2023-11-12 20:26:57', 1),
+('15', 'alam69', 15, 21, 'tywer5yweywerywe5rywerywer', '2023-11-12 20:26:57', 0),
 ('15', 'alam69', 16, 23, 'tyutjtyjtyjtyjtryjtj', '2023-11-12 20:32:36', 1);
 
 -- --------------------------------------------------------
@@ -123,7 +122,6 @@ CREATE TABLE `complaint` (
 --
 
 INSERT INTO `complaint` (`id`, `name`, `email`, `contact`, `description`, `feedback`, `fd_by`) VALUES
-(124, 'Zobayer Alam', 'mod1@gmail.com', '01111111111', 'segergergergegegegege', 'us id test 53', '25002'),
 (125, 'Zobayer Alam', 'mod1@gmail.com', '01774861519', 'efedefeeedeeewfewewewew', 'sdfsf', ''),
 (126, 'Zobayer Alam', 'alam@gmail.com', '01774861519', 'ertertetertgetgeg', 'sfsfsfsfs', '');
 
@@ -141,15 +139,20 @@ CREATE TABLE `credential` (
   `email` varchar(32) NOT NULL,
   `password` varchar(32) NOT NULL,
   `address` varchar(256) NOT NULL,
-  `status` int(1) NOT NULL
+  `status` int(1) NOT NULL,
+  `verification_code` varchar(255) NOT NULL,
+  `resettoken` varchar(255) NOT NULL,
+  `is_verified` int(10) NOT NULL,
+  `resettokenexpire` date DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `credential`
 --
 
-INSERT INTO `credential` (`id`, `name`, `username`, `cnumber`, `email`, `password`, `address`, `status`) VALUES
-(15, 'Zobayer Alam', 'alam69', '01778651619', 'alam@gmail.com', 'user1', 'YDT[OKNSRTHOPBJIKSDFGBPBJOSDFGBJOPBN', 1);
+INSERT INTO `credential` (`id`, `name`, `username`, `cnumber`, `email`, `password`, `address`, `status`, `verification_code`, `resettoken`, `is_verified`, `resettokenexpire`) VALUES
+(15, 'Zobayer Alam', 'alam69', '01778651619', 'alam@gmail.com', 'user1', '517, skjfnkjsfbn, fhfhfhfhf, dhaka, 1225', 1, '', '', 0, NULL),
+(16, '', '', '', 'zobayeralam007@gmail.com', '$2y$10$Dtg2/r.dLxsKtkal5uJri.fh4', '', 1, '', '', 1, '2023-12-11');
 
 -- --------------------------------------------------------
 
@@ -226,8 +229,8 @@ CREATE TABLE `posts` (
 --
 
 INSERT INTO `posts` (`posted_by_id`, `posted_by_username`, `id`, `title`, `content`, `created_at`, `status`) VALUES
-('', 'alam56', 21, 'tracking test', 'posted_by column check', '2023-11-10 14:25:34', 0),
-('15', 'alam56', 23, 'updated tracker test', 'id+username', '2023-11-10 14:38:34', 0);
+('15', 'alam56', 21, 'tracking test', 'posted_by column check', '2023-11-10 14:25:34', 0),
+('15', 'alam56', 23, 'updated tracker test', 'id+username', '2023-11-10 14:38:34', 1);
 
 -- --------------------------------------------------------
 
@@ -238,6 +241,7 @@ INSERT INTO `posts` (`posted_by_id`, `posted_by_username`, `id`, `title`, `conte
 CREATE TABLE `purchase_info` (
   `user_id` int(6) NOT NULL,
   `ticket_id` varchar(10) NOT NULL,
+  `Showid` int(6) NOT NULL,
   `event_name` varchar(256) NOT NULL,
   `venue` varchar(64) NOT NULL,
   `ticket_quantity` int(3) NOT NULL,
@@ -251,13 +255,13 @@ CREATE TABLE `purchase_info` (
 -- Dumping data for table `purchase_info`
 --
 
-INSERT INTO `purchase_info` (`user_id`, `ticket_id`, `event_name`, `venue`, `ticket_quantity`, `contact_number`, `email`, `name`, `purchased_at`) VALUES
-(15, '2Z2TD5907S', 'dgvc', '', 20, '01778651619', 'alam@gmail.com', 'Zobayer Alam', '2023-12-10 14:12:14'),
-(15, 'ZBW9QRL5HM', 'project', '', 15, '01778651619', 'alam@gmail.com', 'Zobayer Alam', '2023-12-10 14:12:14'),
-(15, 'CTBQMZOQ63', 'rock', '', 2, '01778651619', 'alam@gmail.com', 'Zobayer Alam', '2023-12-10 14:12:14'),
-(15, 'YD4JCYCE2Z', 'rock', '', 23, '01778651619', 'alam@gmail.com', 'Zobayer Alam', '2023-12-10 14:12:14'),
-(15, '71FIY1SCVT', 'aiub', 'aiub', 14, '01778651619', 'alam@gmail.com', 'Zobayer Alam', '2023-12-10 14:12:14'),
-(15, '4ZL5MU8CRB', 'dgvc', 'test', 13, '01778651619', 'alam@gmail.com', 'Zobayer Alam', '2023-12-10 14:12:14');
+INSERT INTO `purchase_info` (`user_id`, `ticket_id`, `Showid`, `event_name`, `venue`, `ticket_quantity`, `contact_number`, `email`, `name`, `purchased_at`) VALUES
+(15, 'ZBW9QRL5HM', 0, 'project', '', 15, '01778651619', 'alam@gmail.com', 'Zobayer Alam', '2023-12-10 14:12:14'),
+(15, 'YD4JCYCE2Z', 0, 'rock', '', 23, '01778651619', 'alam@gmail.com', 'Zobayer Alam', '2023-12-10 14:12:14'),
+(15, '71FIY1SCVT', 0, 'aiub', 'aiub', 14, '01778651619', 'alam@gmail.com', 'Zobayer Alam', '2023-12-10 14:12:14'),
+(15, '4ZL5MU8CRB', 0, 'dgvc', 'test', 13, '01778651619', 'alam@gmail.com', 'Zobayer Alam', '2023-12-10 14:12:14'),
+(15, 'BSFW5E6PGS', 0, 'dgvc', 'test', 32, '01778651619', 'alam@gmail.com', 'Zobayer Alam', '2023-12-14 10:41:33'),
+(15, 'UGO2P7JFZT', 5, 'project', 'hall 01', 56, '01778651619', 'alam@gmail.com', 'Zobayer Alam', '2023-12-14 10:49:15');
 
 -- --------------------------------------------------------
 
@@ -305,7 +309,7 @@ CREATE TABLE `quotation` (
 --
 
 INSERT INTO `quotation` (`qo_id`, `u_id`, `u_name`, `u_email`, `qo_about`, `qo_des`, `qo_fed`, `fd_by`) VALUES
-(1, 15, 'alam69', 'alam@gmail.com', 'hsdgfkjhgvsjdfghjksfgjks', 'sfoiyuhsdgfihgsfioysfsfasfasf', 'QUOTATION FEED BACK RETURNED', '25002');
+(1, 15, 'alam69', 'alam@gmail.com', 'hsdgfkjhgvsjdfghjksfgjks', 'sfoiyuhsdgfihgsfioysfsfasfasf', 'aluuuuuuuuuuuuuuuuu', '25002');
 
 -- --------------------------------------------------------
 
@@ -327,10 +331,11 @@ CREATE TABLE `ticket_cr` (
 --
 
 INSERT INTO `ticket_cr` (`Showid`, `event_name`, `venue`, `ticket_price`, `total_tickets`, `available_tickets`) VALUES
-(2, 'dgvc', 'test', 3999, 500, 422),
+(2, 'dgvc', 'test', 3999, 500, 510),
 (3, 'aiub', 'aiub', 250, 500, 321),
-(4, 'rock', 'aiub', 250, 5000, 4875),
-(5, 'project', 'hall 01', 999, 2000, 1785);
+(4, 'rock', 'aiub', 250, 5000, 4877),
+(5, 'project', 'hall 01', 999, 2001, 1729),
+(6, 'mvc test', 'mvc', 600, 500, 500);
 
 -- --------------------------------------------------------
 
@@ -434,7 +439,7 @@ ALTER TABLE `venues`
 -- AUTO_INCREMENT for table `admin_mod`
 --
 ALTER TABLE `admin_mod`
-  MODIFY `id` int(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=25005;
+  MODIFY `id` int(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=25006;
 
 --
 -- AUTO_INCREMENT for table `comments`
@@ -452,7 +457,7 @@ ALTER TABLE `complaint`
 -- AUTO_INCREMENT for table `credential`
 --
 ALTER TABLE `credential`
-  MODIFY `id` int(8) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
+  MODIFY `id` int(8) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
 
 --
 -- AUTO_INCREMENT for table `events`
@@ -488,7 +493,7 @@ ALTER TABLE `quotation`
 -- AUTO_INCREMENT for table `ticket_cr`
 --
 ALTER TABLE `ticket_cr`
-  MODIFY `Showid` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `Showid` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT for table `venues`
