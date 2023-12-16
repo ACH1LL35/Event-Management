@@ -1,34 +1,16 @@
 <?php
-session_start();
-include("view/AdminSidebar.php");
+include_once("../model/complaintFeedbackModel.php");
 
-if (isset($_POST['logout'])) {
-    // Destroy the session and redirect to the Login page
-    session_destroy();
-    header("Location: start.php");
-    exit();
-}
-
-if (!isset($_SESSION['id'])) {
-    header("Location: start.php");
-    exit();
-}
-
-$id = $_SESSION['id'];
+// Establish database connection
 $conn = mysqli_connect("localhost", "root", "", "event_management");
 
 if (!$conn) {
     die("Connection failed: " . mysqli_connect_error());
 }
 
-$query = "SELECT * FROM admin_mod WHERE id = '$id'";
-$result = mysqli_query($conn, $query);
-
-if ($row = mysqli_fetch_assoc($result)) {
-    $username = $row['uname']; // Update to use the correct variable name
-    // $email = $row['email'];
-}
+include_once("../controller/complaintFeedbackController.php");
 ?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -101,44 +83,42 @@ if ($row = mysqli_fetch_assoc($result)) {
     <div id="content">
         <h1 style="text-align: center; background-color: #000; color: #fff; padding: 20px;">COMPLAINT FEEDBACK</h1>
         <form method="get">
-        <table border="1">
-            <tr>
-                <th>Complaint ID</th>
-                <th>Name</th>
-                <th>Email</th>
-                <th>Contact No.</th>
-                <th>Description</th>
-                <th>Feedback</th>
-                <th>Feedback Given By</th>
-                <th>Action</th>
-            </tr>
-        <?php
-        if(isset($_GET['del']))
-        {
-            $id= $_GET['del'];
-            $sql1="Delete from complaint where id='$id'";
-            mysqli_query($conn,$sql1);
-        }
+            <table border="1">
+                <tr>
+                    <th>Complaint ID</th>
+                    <th>Name</th>
+                    <th>Email</th>
+                    <th>Contact No.</th>
+                    <th>Description</th>
+                    <th>Feedback</th>
+                    <th>Feedback Given By</th>
+                    <th>Action</th>
+                </tr>
+                <?php
+                if (isset($_GET['del'])) {
+                    $id = $_GET['del'];
+                    deleteComplaint($id);
+                }
 
-        $sql="select * from complaint";
-        $res= mysqli_query($conn,$sql);
+                $sql = "SELECT * FROM complaint";
+                $res = mysqli_query($conn, $sql);
 
-        while($r= mysqli_fetch_assoc($res)) {
-        ?>
-            <tr>
-                <td><?php echo $r["id"]; ?></td>
-                <td><?php echo $r["name"]; ?></td>
-                <td><?php echo $r["email"]; ?></td>
-                <td><?php echo $r["contact"]; ?></td>
-                <td><?php echo $r["description"]; ?></td>
-                <td><?php echo $r["feedback"]; ?></td>
-                <td><?php echo $r["fd_by"]; ?></td>
-                <center>
-                <td><button type="submit" name="del" value="<?php echo $r["id"]; ?>">Delete</button></td>
-                </center>
-            </tr>
-        <?php } ?>
-        </table>
+                while ($r = mysqli_fetch_assoc($res)) {
+                ?>
+                    <tr>
+                        <td><?php echo $r["id"]; ?></td>
+                        <td><?php echo $r["name"]; ?></td>
+                        <td><?php echo $r["email"]; ?></td>
+                        <td><?php echo $r["contact"]; ?></td>
+                        <td><?php echo $r["description"]; ?></td>
+                        <td><?php echo $r["feedback"]; ?></td>
+                        <td><?php echo $r["fd_by"]; ?></td>
+                        <center>
+                            <td><button type="submit" name="del" value="<?php echo $r["id"]; ?>">Delete</button></td>
+                        </center>
+                    </tr>
+                <?php } ?>
+            </table>
         </form>
     </div>
 </body>
