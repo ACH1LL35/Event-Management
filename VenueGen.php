@@ -6,7 +6,7 @@ require_once("vendor/tecnickcom/tcpdf/tcpdf_barcodes_1d.php"); // Include barcod
 // Custom TCPDF class to override Setview/footer method
 class CustomTCPDF extends TCPDF {
     // Override Setview/footer to add custom view/footer
-    public function Setview/footer() {
+    public function Setfooter() {
         // Add your custom view/footer content here
         $this->SetY(-15);
         $this->SetFont('times', 'I', 8);
@@ -28,7 +28,7 @@ function generateVenuePDF($bookingId)
     $pdf->AddPage();
 
     // Add logo to the PDF
-    $logoPath = 'logo/Untitled.jpg';
+    $logoPath = 'visuals/logo/Untitled.jpg';
     $pdf->Image($logoPath, 10, 10, 40, 15);
 
     // Add a font size 14 heading

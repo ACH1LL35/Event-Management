@@ -1,46 +1,25 @@
 <?php
-session_start();
-include("view/AdminSidebar.php");
+// Include the necessary model file to establish the database connection
+include_once("../model/commentModel.php");
 
-if (isset($_POST['logout'])) {
-    // Destroy the session and redirect to the Login page
-    session_destroy();
-    header("Location: start.php");
-    exit();
-}
-
-if (!isset($_SESSION['id'])) {
-    header("Location: start.php");
-    exit();
-}
-
-$id = $_SESSION['id'];
+// Establish database connection
 $conn = mysqli_connect("localhost", "root", "", "event_management");
 
 if (!$conn) {
     die("Connection failed: " . mysqli_connect_error());
 }
 
+
+// Include the commentActionController to handle actions
 if ($_SERVER["REQUEST_METHOD"] === "POST") {
-    if (isset($_POST['hide'])) {
-        $commentId = $_POST['hide'];
-        $sqlUpdateStatus = "UPDATE comments SET status = 0 WHERE id = $commentId";
-        mysqli_query($conn, $sqlUpdateStatus);
-    } elseif (isset($_POST['unhide'])) {
-        $commentId = $_POST['unhide'];
-        $sqlUpdateStatus = "UPDATE comments SET status = 1 WHERE id = $commentId";
-        mysqli_query($conn, $sqlUpdateStatus);
-    }
+    include_once("../controller/commentActionController.php");
 }
 
-$query = "SELECT * FROM admin_mod WHERE id = '$id'";
-$result = mysqli_query($conn, $query);
 
-if ($row = mysqli_fetch_assoc($result)) {
-    $username = $row['uname']; // Update to use the correct variable name
-    // $email = $row['email'];
-}
+    include_once("../controller/commentController.php");
+
 ?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -112,6 +91,7 @@ if ($row = mysqli_fetch_assoc($result)) {
 <body>
     <div id="content">
         <h1 style="text-align: center; background-color: #000; color: #fff; padding: 20px;">COMMENT MODERATION HISTORY</h1>
+        
         <form method="post">
             <table border="1">
                 <tr>
@@ -121,28 +101,31 @@ if ($row = mysqli_fetch_assoc($result)) {
                     <th>STATUS</th>
                     <th>ACTION</th>
                 </tr>
+                
                 <?php
-                $sql="SELECT * FROM comments WHERE status = 0";
-                $res= mysqli_query($conn,$sql);
+                // Retrieve comments data from the database
+                $sql = "SELECT * FROM comments WHERE status = 0";
+                $res = mysqli_query($conn, $sql);
 
-                while($r= mysqli_fetch_assoc($res)) {
+                while ($r = mysqli_fetch_assoc($res)) {
                 ?>
                     <tr>
                         <td><?php echo $r["posted_by_username"]; ?></td>
                         <td><?php echo $r["comment"]; ?></td>
                         <td><?php echo $r["created_at"]; ?></td>
                         <td><?php echo $r["status"]; ?></td>
-                        <center>
                         <td>
-                            <?php if ($r["status"] == 1): ?>
-                                <button type="submit" name="hide" value="<?php echo $r["id"]; ?>">Hide</button>
-                            <?php else: ?>
-                                <button type="submit" name="unhide" value="<?php echo $r["id"]; ?>">Unhide</button>
-                            <?php endif; ?>
+                            <center>
+                                <?php if ($r["status"] == 1): ?>
+                                    <button type="submit" name="hide" value="<?php echo $r["id"]; ?>">Hide</button>
+                                <?php else: ?>
+                                    <button type="submit" name="unhide" value="<?php echo $r["id"]; ?>">Unhide</button>
+                                <?php endif; ?>
+                            </center>
                         </td>
-                        </center>
                     </tr>
                 <?php } ?>
+                
             </table>
         </form>
     </div>

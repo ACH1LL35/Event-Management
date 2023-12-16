@@ -184,7 +184,6 @@ include("UserSidebar.php");
     ?>
 
     <div id="content">
-
         <div class="container">
             <h2>Purchase Ticket</h2>
             <?php
@@ -206,12 +205,12 @@ include("UserSidebar.php");
                             die("Connection failed: " . $conn->connect_error);
                         }
 
-                        $sql = "SELECT event_name, available_tickets, venue FROM ticket_cr";
+                        $sql = "SELECT event_name, available_tickets, venue, Showid FROM ticket_cr";
                         $result = $conn->query($sql);
 
                         if ($result->num_rows > 0) {
                             while ($row = $result->fetch_assoc()) {
-                                echo "<option value='" . $row["event_name"] . "' data-venue='" . $row["venue"] . "'>" . $row["event_name"] . "</option>";
+                                echo "<option value='" . $row["event_name"] . "' data-venue='" . $row["venue"] . "' data-showid='" . $row["Showid"] . "'>" . $row["event_name"] . "</option>";
                             }
                         }
 
@@ -224,15 +223,19 @@ include("UserSidebar.php");
 
                     <!-- Hidden input to capture the selected venue -->
                     <input type="hidden" id="selected_venue" name="selected_venue">
+                    <!-- Hidden input to capture the Showid -->
+                    <input type="hidden" id="show_id" name="show_id">
 
                     <input type="submit" value="Purchase Ticket">
                 </form>
 
                 <script>
-                    // Script to update selected venue
+                    // Script to update selected venue and Showid
                     document.querySelector('select[name="event_name"]').addEventListener('change', function() {
                         var selectedVenue = this.options[this.selectedIndex].getAttribute('data-venue');
+                        var selectedShowId = this.options[this.selectedIndex].getAttribute('data-showid');
                         document.getElementById('selected_venue').value = selectedVenue;
+                        document.getElementById('show_id').value = selectedShowId;
                     });
                 </script>
             <?php
@@ -246,6 +249,7 @@ include("UserSidebar.php");
                 $ticket_quantity = $_POST["ticket_quantity"];
                 $user_id = $_SESSION['id'];
                 $selected_venue = $_POST["selected_venue"];
+                $show_id = $_POST["show_id"];
 
                 $servername = "localhost";
                 $username = "root";
@@ -271,7 +275,7 @@ include("UserSidebar.php");
                         if ($conn->query($update_sql) === TRUE) {
                             $ticket_id = generateRandomString(10);
 
-                            $insert_purchase_sql = "INSERT INTO purchase_info (event_name, venue, ticket_quantity, contact_number, user_id, email, name, ticket_id) VALUES ('$event_name','$selected_venue' , $ticket_quantity, '$cnumber', $user_id, '$email', '$name', '$ticket_id')";
+                            $insert_purchase_sql = "INSERT INTO purchase_info (event_name, venue, ticket_quantity, contact_number, user_id, email, name, ticket_id, Showid) VALUES ('$event_name', '$selected_venue', $ticket_quantity, '$cnumber', $user_id, '$email', '$name', '$ticket_id', '$show_id')";
 
                             if ($conn->query($insert_purchase_sql) === TRUE) {
                                 $message = "Tickets purchased successfully. Ticket ID: $ticket_id";

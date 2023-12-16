@@ -29,7 +29,7 @@ if ($row = mysqli_fetch_assoc($result)) {
 }
 ?>
 <?php
-include('model/visuals/galleryModel.php');
+include('model/galleryModel.php');
 
 class galleryController {
     private $galleryModel;
@@ -51,7 +51,7 @@ class galleryController {
             $userData = $this->galleryModel->getUserDetails($id);
 
             // Include the view
-            include('view/visuals/gallery_upload_view.php');
+            include('view/gallery_upload_view.php');
         } else {
             echo "User ID not found in session.";
         }

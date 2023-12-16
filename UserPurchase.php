@@ -26,8 +26,6 @@ function generateTicketPDF($ticketId)
     $pdf->Cell(0, 10, "Event Name: " . $ticketData['event_name'], 0, 1);
     $pdf->Cell(0, 10, "Ticket Quantity: " . $ticketData['ticket_quantity'], 0, 1);
 
-    // ... Add more ticket details as needed
-
     // Close the database connection
     mysqli_close($conn);
 
@@ -41,6 +39,53 @@ function generateTicketPDF($ticketId)
 if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['download_ticket'])) {
     $ticketId = $_POST['download_ticket_id'];
     generateTicketPDF($ticketId);
+}
+
+// Handle cancel ticket button click
+if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['cancel_ticket'])) {
+    $ticketId = $_POST['ticket_id'];
+    $event_name = $_POST['event_name'];
+    $ticket_quantity = $_POST['ticket_quantity'];
+
+    // Logic to add the quantity back to the available_tickets in the ticket_cr table
+    $conn = mysqli_connect("localhost", "root", "", "event_management");
+
+    if (!$conn) {
+        die("Connection failed: " . mysqli_connect_error());
+    }
+
+    // Fetch current available_tickets for the event
+    $fetch_query = "SELECT available_tickets FROM ticket_cr WHERE event_name = '$event_name'";
+    $fetch_result = mysqli_query($conn, $fetch_query);
+
+    if ($fetch_result && mysqli_num_rows($fetch_result) == 1) {
+        $row = mysqli_fetch_assoc($fetch_result);
+        $current_available_tickets = $row['available_tickets'];
+
+        // Update available_tickets with the added quantity
+        $new_available_tickets = $current_available_tickets + $ticket_quantity;
+        $update_query = "UPDATE ticket_cr SET available_tickets = $new_available_tickets WHERE event_name = '$event_name'";
+
+        if (mysqli_query($conn, $update_query)) {
+            // Cancellation successful
+            echo "Ticket canceled successfully. Quantity added back to available tickets.";
+
+            // Delete the ticket from the purchase_info table
+            $delete_query = "DELETE FROM purchase_info WHERE ticket_id = '$ticketId'";
+            if (mysqli_query($conn, $delete_query)) {
+                echo "Ticket removed from purchase history.";
+            } else {
+                echo "Error deleting ticket from purchase history: " . mysqli_error($conn);
+            }
+        } else {
+            echo "Error updating available tickets: " . mysqli_error($conn);
+        }
+    } else {
+        echo "Error fetching current available tickets: " . mysqli_error($conn);
+    }
+
+    // Close the database connection
+    mysqli_close($conn);
 }
 
 // Display purchase history

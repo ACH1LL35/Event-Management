@@ -1,6 +1,6 @@
 <?php
 
-include('controller/visuals/galleryController.php');
+include('controller/galleryController.php');
 
 $controller = new galleryController();
 
