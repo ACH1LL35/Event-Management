@@ -173,7 +173,7 @@ if ($row = mysqli_fetch_assoc($result)) {
                 <ul>
                     <li><a href="PublishTicketView.php">⤷ TICKET PUBLISH</a></li>
                     <li><a href="AdminTicketManagement.php">⤷ TICKET MANAGEMENT</a></li>
-                    <li><a href="AdminTicketList.php">⤷ TICKET SALE LIST</a></li>
+                    <li><a href="TicketSalesView.php">⤷ TICKET SALE LIST</a></li>
                     <li><a href="TicketAuditView.php">⤷ TICKET AUDIT</a></li>
                 </ul>
             </details>
