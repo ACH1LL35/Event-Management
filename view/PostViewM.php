@@ -1,6 +1,6 @@
 <?php
 session_start();
-include("view/AdminSidebar.php");
+include("../view/AdminSidebar.php");
 
 if (isset($_POST['logout'])) {
     // Destroy the session and redirect to the Login page
@@ -15,41 +15,33 @@ if (!isset($_SESSION['id'])) {
 }
 
 $id = $_SESSION['id'];
-$conn = mysqli_connect("localhost", "root", "", "event_management");
 
-if (!$conn) {
-    die("Connection failed: " . mysqli_connect_error());
+$servername = "localhost";
+$username = "root";
+$pass = "";
+$dbname = "event_management";
+
+// Create a database connection
+$conn = new mysqli($servername, $username, $pass, $dbname);
+
+if ($conn->connect_error) {
+    die("Connection failed: " . $conn->connect_error);
 }
 
-if ($_SERVER["REQUEST_METHOD"] === "POST") {
-    if (isset($_POST['hide'])) {
-        $postId = $_POST['hide'];
-        $sqlUpdateStatus = "UPDATE posts SET status = 0 WHERE id = $postId";
-        mysqli_query($conn, $sqlUpdateStatus);
-    } elseif (isset($_POST['unhide'])) {
-        $postId = $_POST['unhide'];
-        $sqlUpdateStatus = "UPDATE posts SET status = 1 WHERE id = $postId";
-        mysqli_query($conn, $sqlUpdateStatus);
-    }
-}
+include('../controller/PostControllerM.php');
 
-$query = "SELECT * FROM admin_mod WHERE id = '$id'";
-$result = mysqli_query($conn, $query);
+$postControllerM = new PostControllerM($conn);
+$postControllerM->handleRequest();
 
-if ($row = mysqli_fetch_assoc($result)) {
-    $username = $row['uname']; // Update to use the correct variable name
-    // $email = $row['email'];
-}
 ?>
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>POST MODERATION HISTORY</title>
+    <title>POST MODERATION</title>
     <style>
-       body {
+        body {
             font-family: Arial, Helvetica, sans-serif;
             background-color: #f2f2f2;
             display: flex;
@@ -111,39 +103,41 @@ if ($row = mysqli_fetch_assoc($result)) {
     </style>
 </head>
 <body>
-    <div id="content">
-    <h1 style="text-align: center; background-color: #000; color: #fff; padding: 20px;">POST MODERATION HISTORY</h1>
+    <div class="content">
+        <h1 style="text-align: center; background-color: #000; color: #fff; padding: 20px;">POST MODERATION</h1>
         <form method="post">
             <table border="1">
                 <tr>
+                    <th>POST UniqueID</th>
+                    <th>POSTERS UniqueID</th>
+                    <th>POSTERS UserName</th>
                     <th>POST TITLE</th>
                     <th>POST</th>
                     <th>POST DATE</th>
                     <th>STATUS</th>
                     <th>ACTION</th>
                 </tr>
-                <?php
-                $sql = "SELECT * FROM posts WHERE status = 0";
-                $res = mysqli_query($conn, $sql);
-
-                while ($r = mysqli_fetch_assoc($res)) {
-                    ?>
+                <?php foreach ($postControllerM->getAllPosts() as $post): ?>
                     <tr>
-                        <td><?php echo $r["title"]; ?></td>
-                        <td><?php echo $r["content"]; ?></td>
-                        <td><?php echo $r["created_at"]; ?></td>
-                        <td><?php echo $r["status"]; ?></td>
+                        <td><?php echo $post["id"]; ?></td>
+                        <td><?php echo $post["posted_by_id"]; ?></td>
+                        <td><?php echo $post["posted_by_username"]; ?></td>
+                        <td><?php echo $post["title"]; ?></td>
+                        <td><?php echo $post["content"]; ?></td>
+                        <td><?php echo $post["created_at"]; ?></td>
+                        <td><?php echo $post["status"]; ?></td>
                         <td>
-                            <?php if ($r["status"] == 1): ?>
-                                <button type="submit" name="hide" value="<?php echo $r["id"]; ?>">Hide</button>
+                            <?php if ($post["status"] == 1): ?>
+                                <button type="submit" name="hide" value="<?php echo $post["id"]; ?>">Hide</button>
                             <?php else: ?>
-                                <button type="submit" name="unhide" value="<?php echo $r["id"]; ?>">Unhide</button>
+                                <button type="submit" name="unhide" value="<?php echo $post["id"]; ?>">Unhide</button>
                             <?php endif; ?>
                         </td>
                     </tr>
-                <?php } ?>
+                <?php endforeach; ?>
             </table>
         </form>
     </div>
 </body>
 </html>
+?>

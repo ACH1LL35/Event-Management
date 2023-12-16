@@ -207,7 +207,7 @@ if ($row = mysqli_fetch_assoc($result)) {
             <details>
                 <summary>➾ MODERATION</summary>
                 <ul>
-                    <li><a href="AdminPostModeration.php">⤷ POST MODERATION</a></li>
+                    <li><a href="PostViewM.php">⤷ POST MODERATION</a></li>
                     <li><a href="PostViewH.php">⤷ POST MODERATION HISTORY</a></li>
                     <li><a href="commentViewM.php">⤷ COMMENT MODERATION</a></li>
                     <li><a href="commentViewH.php">⤷ COMMENT MODERATION HISTORY</a></li>
