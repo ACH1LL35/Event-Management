@@ -21,7 +21,7 @@ class AdminLoginController {
                 $_SESSION['id'] = $userData['id'];
 
                 if ($userData['type'] === 'admin') {
-                    header("Location: AdminPanel.php");
+                    header("Location: dash.php");
                 } elseif ($userData['type'] === 'mod') {
                     header("Location: ModPanel.php");
                 } else {

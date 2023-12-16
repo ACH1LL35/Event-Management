@@ -51,7 +51,7 @@ $tables = array(
     "ticket_cr" => "",
     "query" => "",
     "quotation" => "",
-    "visuals/gallery_data" => ""
+    "gallery_data" => ""
 );
 
 $counts = array();
@@ -222,23 +222,27 @@ foreach ($tables as $tableName => $customName) {
         </form>
         <h1>Welcome, <?php echo $username; ?>!</h1>
         <ul>
-            <li><a href="dash.php">➾ HOME</a></li>
+        <li><a href="view/dash.php">➾ HOME</a></li>
+        <li><a href="AdminProfileView.php">➾ Info Update</a></li>
+
             
             <!-- Use details and summary for the dropdown -->
             <details>
                 <summary>➾ TICKET</summary>
                 <ul>
-                    <li><a href="AdminTicketCreation.php">⤷ TICKET PUBLISH</a></li>
-                    <li><a href="AdminTicketManagement.php">⤷ TICKET MANAGEMENT</a></li>
-                    <li><a href="AdminTicketList.php">⤷ TICKET SALE LIST</a></li>
+                    <li><a href="PublishTicketView.php">⤷ TICKET PUBLISH</a></li>
+                    <li><a href="TicketView.php">⤷ TICKET MANAGEMENT</a></li>
+                    <li><a href="TicketSalesView.php">⤷ TICKET SALE LIST</a></li>
+                    <li><a href="TicketAuditView.php">⤷ TICKET AUDIT</a></li>
+
                 </ul>
             </details>
 
             <details>
                 <summary>➾ EVENT</summary>
                 <ul>
-                    <li><a href="AdminEventHistory.php">⤷ EVENT HISTORY</a></li>
-                    <li><a href="AdminEventCal.php">⤷ EVENT CALENDAR</a></li>
+                    <li><a href="EventsArchiveView.php">⤷ EVENT HISTORY</a></li>
+                    <!-- <li><a href="view/AdminEventCal.php">⤷ EVENT CALENDAR</a></li> -->
                 </ul>
             </details>
             
@@ -253,8 +257,8 @@ foreach ($tables as $tableName => $customName) {
             <details>
                 <summary>➾ MODERATOR</summary>
                 <ul>
-                    <li><a href="AdminModAccess.php">⤷ MODERATOR ACCESS</a></li>
-                    <li><a href="AdminModManagement.php">⤷ MODERATOR MANAGEMENT</a></li>
+                    <li><a href="ModeratorRegistrationView.php">⤷ MODERATOR ACCESS</a></li>
+                    <li><a href="ModeratorListView.php">⤷ MODERATOR MANAGEMENT</a></li>
                 </ul>
             </details>
             
@@ -264,19 +268,19 @@ foreach ($tables as $tableName => $customName) {
             <details>
                 <summary>➾ MODERATION</summary>
                 <ul>
-                    <li><a href="AdminPostModeration.php">⤷ POST MODERATION</a></li>
-                    <li><a href="AdminPMH.php">⤷ POST MODERATION HISTORY</a></li>
-                    <li><a href="AdminCommentModeration.php">⤷ COMMENT MODERATION</a></li>
-                    <li><a href="AdminCMH.php">⤷ COMMENT MODERATION HISTORY</a></li>
+                    <li><a href="PostViewM.php">⤷ POST MODERATION</a></li>
+                    <li><a href="PostViewH.php">⤷ POST MODERATION HISTORY</a></li>
+                    <li><a href="commentViewM.php">⤷ COMMENT MODERATION</a></li>
+                    <li><a href="commentViewH.php">⤷ COMMENT MODERATION HISTORY</a></li>
                 </ul>
             </details>
 
             <details>
                 <summary>➾ FEEDBACK</summary>
                 <ul>
-                    <li><a href="AdminQueryF.php">⤷ QUERY FEEDBACK</a></li>
-                    <li><a href="AdminQuotationF.php">⤷ QUOTATION FEEDBACK</a></li>
-                    <li><a href="AdminComplaint.php">⤷ COMPLAINT FEEDBACK</a></li>
+                    <li><a href="QueryView.php">⤷ QUERY FEEDBACK</a></li>
+                    <li><a href="QuotationView.php">⤷ QUOTATION FEEDBACK</a></li>
+                    <li><a href="complaintFeedbackView.php">⤷ COMPLAINT FEEDBACK</a></li>
                 </ul>
             </details>
 
