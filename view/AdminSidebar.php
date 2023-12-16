@@ -217,8 +217,8 @@ if ($row = mysqli_fetch_assoc($result)) {
             <details>
                 <summary>➾ FEEDBACK</summary>
                 <ul>
-                    <li><a href="AdminQueryF.php">⤷ QUERY FEEDBACK</a></li>
-                    <li><a href="AdminQuotationF.php">⤷ QUOTATION FEEDBACK</a></li>
+                    <li><a href="QueryView.php">⤷ QUERY FEEDBACK</a></li>
+                    <li><a href="QuotationView.php">⤷ QUOTATION FEEDBACK</a></li>
                     <li><a href="complaintFeedbackView.php">⤷ COMPLAINT FEEDBACK</a></li>
                 </ul>
             </details>

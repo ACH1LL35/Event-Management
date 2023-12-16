@@ -1,6 +1,6 @@
 <?php
 session_start();
-include("view/AdminSidebar.php");
+include("../view/AdminSidebar.php");
 
 if (isset($_POST['logout'])) {
     // Destroy the session and redirect to the Login page
@@ -15,26 +15,30 @@ if (!isset($_SESSION['id'])) {
 }
 
 $id = $_SESSION['id'];
-$conn = mysqli_connect("localhost", "root", "", "event_management");
 
-if (!$conn) {
-    die("Connection failed: " . mysqli_connect_error());
+$servername = "localhost";
+$username = "root";
+$pass = "";
+$dbname = "event_management";
+
+// Create a database connection
+$conn = new mysqli($servername, $username, $pass, $dbname);
+
+if ($conn->connect_error) {
+    die("Connection failed: " . $conn->connect_error);
 }
 
-$query = "SELECT * FROM admin_mod WHERE id = '$id'";
-$result = mysqli_query($conn, $query);
+include('../controller/QuotationController.php');
 
-if ($row = mysqli_fetch_assoc($result)) {
-    $username = $row['uname']; // Update to use the correct variable name
-    // $email = $row['email'];
-}
+$quotationController = new QuotationController($conn);
+$quotationController->handleRequest();
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>QUERY FEEDBACK</title>
     <style>
         body {
             font-family: Arial, Helvetica, sans-serif;
@@ -98,39 +102,32 @@ if ($row = mysqli_fetch_assoc($result)) {
     </style>
 </head>
 <body>
-    <div class="content">
-        <h1 style="text-align: center; background-color: #000; color: #fff; padding: 20px;">QUERY FEEDBACK</h1>
-        <form method="get">
+    <div id="content">
+    <h1 style="text-align: center; background-color: #000; color: #fff; padding: 20px;">QUOTATION FEEDBACK</h1>
         <table border="1">
             <tr>
-                <th>QUERY ID</th>
+                <th>QUOTATION ID</th>
                 <th>Name</th>
                 <th>Email</th>
-                <th>Title</th>
+                <th>ABOUT</th>
                 <th>Description</th>
                 <th>Feedback</th>
                 <th>Feedback Given By</th>
                 <th>Action</th>
             </tr>
-        <?php
-
-        $sql="select * from query";
-        $res= mysqli_query($conn,$sql);
-
-        while($r= mysqli_fetch_assoc($res)) {
-        ?>
-            <tr>
-                <td><?php echo $r["q_id"]; ?></td>
-                <td><?php echo $r["u_name"]; ?></td>
-                <td><?php echo $r["u_email"]; ?></td>
-                <td><?php echo $r["q_title"]; ?></td>
-                <td><?php echo $r["q_des"]; ?></td>
-                <td><?php echo $r["q_fed"]; ?></td>
-                <td><?php echo $r["fd_by"]; ?></td>
-            </tr>
-        <?php } ?>
+            <?php foreach ($quotationController->getAllQuotations() as $quotation): ?>
+                <tr>
+                    <td><?php echo $quotation["qo_id"]; ?></td>
+                    <td><?php echo $quotation["u_name"]; ?></td>
+                    <td><?php echo $quotation["u_email"]; ?></td>
+                    <td><?php echo $quotation["qo_about"]; ?></td>
+                    <td><?php echo $quotation["qo_des"]; ?></td>
+                    <td><?php echo $quotation["qo_fed"]; ?></td>
+                    <td><?php echo $quotation["fd_by"]; ?></td>
+                </tr>
+            <?php endforeach; ?>
         </table>
-        </form>
     </div>
 </body>
 </html>
+
