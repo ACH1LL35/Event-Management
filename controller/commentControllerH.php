@@ -13,7 +13,7 @@ if (!isset($_SESSION['id'])) {
 }
 
 $id = $_SESSION['id'];
-require_once("../model/commentModel.php");
+require_once("../model/commentModelH.php");
 
 if ($_SERVER["REQUEST_METHOD"] === "POST") {
     require_once("../controller/commentActionControllerH.php");
