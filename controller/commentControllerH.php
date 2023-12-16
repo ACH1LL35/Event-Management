@@ -16,7 +16,7 @@ $id = $_SESSION['id'];
 require_once("../model/commentModel.php");
 
 if ($_SERVER["REQUEST_METHOD"] === "POST") {
-    require_once("../controller/commentActionController.php");
+    require_once("../controller/commentActionControllerH.php");
 }
 
 $result = getAdminDetails($id);
@@ -24,5 +24,5 @@ $result = getAdminDetails($id);
 if ($row = mysqli_fetch_assoc($result)) {
     $username = $row['uname'];
 }
-require_once("../view/commentView.php");
+require_once("../view/commentViewH.php");
 ?>

@@ -1,6 +1,6 @@
 <?php
 // Include the necessary model file to establish the database connection
-include_once("../model/commentModel.php");
+include_once("../model/commentModelH.php");
 
 // Establish database connection
 $conn = mysqli_connect("localhost", "root", "", "event_management");
@@ -12,11 +12,11 @@ if (!$conn) {
 
 // Include the commentActionController to handle actions
 if ($_SERVER["REQUEST_METHOD"] === "POST") {
-    include_once("../controller/commentActionController.php");
+    include_once("../controller/commentActionControllerH.php");
 }
 
 
-    include_once("../controller/commentController.php");
+    include_once("../controller/commentControllerH.php");
 
 ?>
 
