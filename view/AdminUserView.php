@@ -44,6 +44,10 @@ if ($row = mysqli_fetch_assoc($result)) {
             flex-direction: column; /* Align content vertically */
             padding-left: 20px; /* Added padding to align with the previous version with the sidebar */
         }
+        h1 {
+            text-align: center;
+            margin-bottom: 20px;
+        }
 
         table {
             border-collapse: collapse;
