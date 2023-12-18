@@ -1,5 +1,8 @@
 <?php
-// session_start();
+// Check if the session is not already active
+if (session_status() == PHP_SESSION_NONE) {
+    session_start();
+}
 
 if (isset($_POST['logout'])) {
     // Destroy the session and redirect to the Login page

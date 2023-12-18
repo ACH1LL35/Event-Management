@@ -1,10 +1,14 @@
 <?php
+
 class GalleryModel {
     private $conn;
 
     public function __construct() {
         // Establish a database connection
-        $this->conn = $this->getConnection();
+        $this->conn = mysqli_connect("localhost", "root", "", "event_management");
+        if (!$this->conn) {
+            die("Connection failed: " . mysqli_connect_error());
+        }
     }
 
     public function getUserDetails($id) {
@@ -22,21 +26,12 @@ class GalleryModel {
     public function uploadImage($title, $description, $fileName) {
         // Insert image details into the database
         $insertQuery = "INSERT INTO gallery_data (title, description, image_path) VALUES ('$title', '$description', '$fileName')";
-        
+
         if (mysqli_query($this->conn, $insertQuery)) {
             return true;
         } else {
             return false;
         }
-    }
-
-    private function getConnection() {
-        // Establish and return a database connection
-        $conn = mysqli_connect("localhost", "root", "", "event_management");
-        if (!$conn) {
-            die("Connection failed: " . mysqli_connect_error());
-        }
-        return $conn;
     }
 
     public function closeConnection() {
