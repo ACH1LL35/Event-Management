@@ -1,39 +1,20 @@
 <?php
+// AdminBookingHistoryView.php
 session_start();
-include("../view/AdminSidebar.php");
 
-if (isset($_POST['logout'])) {
-    // Destroy the session and redirect to the Login page
-    session_destroy();
-    header("Location: start.php");
-    exit();
-}
+// Include the Model
+include("../model/AdminBookingHistoryModel.php");
 
-if (!isset($_SESSION['id'])) {
-    header("Location: start.php");
-    exit();
-}
-
-$id = $_SESSION['id'];
-$conn = mysqli_connect("localhost", "root", "", "event_management");
-
-if (!$conn) {
-    die("Connection failed: " . mysqli_connect_error());
-}
-
-$query = "SELECT * FROM admin_mod WHERE id = '$id'";
-$result = mysqli_query($conn, $query);
-
-if ($row = mysqli_fetch_assoc($result)) {
-    $username = $row['uname'];
-}
+// Fetch booking history data from the Model
+$bookingHistory = getBookingHistory();
 ?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Ticket Sales</title>
+    <title>Venue Booking History</title>
     <style>
         body {
             font-family: Arial, Helvetica, sans-serif;
@@ -44,6 +25,10 @@ if ($row = mysqli_fetch_assoc($result)) {
             align-items: flex-start;
             height: 100vh;
             margin: 0;
+        }
+        h1 {
+            text-align: center;
+            margin-bottom: 20px;
         }
 
         #content {
@@ -97,8 +82,11 @@ if ($row = mysqli_fetch_assoc($result)) {
     </style>
 </head>
 <body>
+    <?php include("../view/AdminSidebar.php"); ?> <!-- Include AdminSidebar.php -->
+
     <div id="content">
-        <h1 style="text-align: center; background-color: #000; color: #fff; padding: 20px;">Venue Booking History</h1>
+        <!-- Session-related data in the view -->
+        <h1 style="text-align: center; background-color: #000; color: #fff; padding: 20px;">Venue Booking History</h1>        
         <form method="get">
             <table border="1">
                 <tr>
@@ -110,27 +98,21 @@ if ($row = mysqli_fetch_assoc($result)) {
                     <th>To Date</th>
                 </tr>
                 <?php
-                $servername = "localhost";
-                $username = "root";
-                $pass = "";
-                $dbname = "event_management";
-                $conn = new mysqli($servername, $username, $pass, $dbname);
-
-                $sql = "select * from booking";
-                $res = mysqli_query($conn, $sql);
-
-                while ($r = mysqli_fetch_assoc($res)) {
+                if (!empty($bookingHistory)) {
+                    foreach ($bookingHistory as $booking) {
+                        echo "<tr>";
+                        echo "<td>" . $booking["user_id"] . "</td>";
+                        echo "<td>" . $booking["name"] . "</td>";
+                        echo "<td>" . $booking["venue_name"] . "</td>";
+                        echo "<td>" . $booking["booking_id"] . "</td>";
+                        echo "<td>" . $booking["from_date"] . "</td>";
+                        echo "<td>" . $booking["to_date"] . "</td>";
+                        echo "</tr>";
+                    }
+                } else {
+                    echo "<tr><td colspan='6'>No booking history data available</td></tr>";
+                }
                 ?>
-                    <tr>
-                        <td><?php echo $r["user_id"]; ?></td>
-                        <td><?php echo $r["name"]; ?></td>
-                        <td><?php echo $r["venue_name"]; ?></td>
-                        <td><?php echo $r["booking_id"]; ?></td>
-                        <td><?php echo $r["from_date"]; ?></td>
-                        <td><?php echo $r["to_date"]; ?></td>
-                        <!-- <td><button type="submit" name="del" value="<?php echo $r["id"]; ?>">Delete</button></td> -->
-                    </tr>
-                <?php } ?>
             </table>
         </form>
     </div>

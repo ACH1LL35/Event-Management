@@ -95,6 +95,10 @@ foreach ($tables as $tableName => $customName) {
         li {
             margin: 1px 0;
         }
+        h1 {
+            text-align: center;
+            margin-bottom: 20px;
+        }
 
         h2 {
             background-color: #333;
@@ -250,7 +254,7 @@ foreach ($tables as $tableName => $customName) {
                 <summary>➾ VENUE</summary>
                 <ul>
                     <li><a href="AdminVenueManagement.php">⤷ VENUE MANAGEMENT</a></li>
-                    <li><a href="AdminVenueBookHistory.php">⤷ VENUE BOOKING LIST</a></li>
+                    <li><a href="AdminBookingHistoryView.php">⤷ VENUE BOOKING LIST</a></li>
                 </ul>
             </details>
 
@@ -295,7 +299,7 @@ foreach ($tables as $tableName => $customName) {
             <details>
                 <summary>➾ USER</summary>
                 <ul>
-                    <li><a href="AdminUserManagement.php">⤷ USER MANAGEMENT</a></li>
+                    <li><a href="AdminUserView.php">⤷ USER MANAGEMENT</a></li>
                     <li><a href="AdminNewsletter.php">⤷ NEWSLETTER</a></li>
                 </ul>
             </details>

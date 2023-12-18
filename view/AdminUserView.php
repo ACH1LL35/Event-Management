@@ -1,14 +1,10 @@
+<!-- AdminUserView.php -->
+
 <?php
+// Start the session
 session_start();
-include("../view/AdminSidebar.php");
 
-if (isset($_POST['logout'])) {
-    // Destroy the session and redirect to the Login page
-    session_destroy();
-    header("Location: start.php");
-    exit();
-}
-
+// Check if the user is logged in
 if (!isset($_SESSION['id'])) {
     header("Location: start.php");
     exit();
@@ -28,6 +24,7 @@ if ($row = mysqli_fetch_assoc($result)) {
     $username = $row['uname'];
 }
 ?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -109,6 +106,8 @@ if ($row = mysqli_fetch_assoc($result)) {
     </style>
 </head>
 <body>
+    <?php include("../view/AdminSidebar.php"); ?> <!-- Include AdminSidebar.php -->
+
     <div id="content">
         <h1 style="text-align: center; background-color: #000; color: #fff; padding: 20px;">User List</h1>
 

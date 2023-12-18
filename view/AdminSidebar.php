@@ -190,7 +190,7 @@ if ($row = mysqli_fetch_assoc($result)) {
                 <summary>➾ VENUE</summary>
                 <ul>
                     <li><a href="AdminVenueManagement.php">⤷ VENUE MANAGEMENT</a></li>
-                    <li><a href="AdminVenueBookHistory.php">⤷ VENUE BOOKING LIST</a></li>
+                    <li><a href="AdminBookingHistoryView.php">⤷ VENUE BOOKING LIST</a></li>
                 </ul>
             </details>
 
@@ -224,13 +224,13 @@ if ($row = mysqli_fetch_assoc($result)) {
                 </ul>
             </details>
 
-                    <li><a href="upload.php">⤷ ADD TO visuals/gallery</a></li>
+                    <li><a href="upload.php">⤷ ADD TO   GALLERY</a></li>
 
 
             <details>
                 <summary>➾ USER</summary>
                 <ul>
-                    <li><a href="AdminUserManagement.php">⤷ USER MANAGEMENT</a></li>
+                    <li><a href="AdminUserView.php">⤷ USER MANAGEMENT</a></li>
                     <li><a href="AdminNewsletter.php">⤷ NEWSLETTER</a></li>
                 </ul>
             </details>
