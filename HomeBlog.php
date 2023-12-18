@@ -42,7 +42,7 @@ if ($row = mysqli_fetch_assoc($result)) {
         /* Basic CSS styles */
         body {
             font-family: Arial, sans-serif;
-            background-image: url('visuals/images/bl.jpg'); /* Path to your background image in the "images" folder */
+            background-image: url('images/bl.jpg'); /* Path to your background image in the "images" folder */
             margin: 0;
             padding: 0;
         }
@@ -193,6 +193,6 @@ if ($row = mysqli_fetch_assoc($result)) {
     ?>
 </body>
 </html>
-<?php include 'view/footer.php'; ?>
+<?php include 'footer.php'; ?>
 </body>
 </html>

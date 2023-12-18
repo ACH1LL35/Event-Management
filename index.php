@@ -6,7 +6,7 @@
     <style>
         body {
             font-family: Arial, sans-serif;
-            background-image: url('visuals/images/gal.jpg'); /* Path to your background image in the "images" folder */
+            background-image: url('images/gal.jpg'); /* Path to your background image in the "images" folder */
             margin: 0;
             padding: 0;
         }
@@ -41,7 +41,7 @@
             background-color: #ff9933;
         }
 
-        /* CSS styles for the visuals/gallery */
+        /* CSS styles for the gallery */
         .gallery img {
             max-width: 23%; /* Adjust the image size as needed */
             height: auto;
@@ -79,7 +79,7 @@
             cursor: pointer;
         }
 
-        .visuals/gallery img {
+        .gallery img {
             max-width: 23%; /* Adjust the image size as needed */
             height: auto;
             margin: 10px;
@@ -94,7 +94,7 @@
         $dbUser = 'root';
         $dbPass = '';
         $dbName = 'event_management';
-        $basePath = "visuals/gallery/"; // Adjust the base path as needed
+        $basePath = "gallery/"; // Adjust the base path as needed
 
         try {
             $pdo = new PDO("mysql:host=$dbHost;dbname=$dbName", $dbUser, $dbPass);
@@ -110,7 +110,7 @@
                 // Check if the image file exists
                 if (file_exists($imagePath)) {
                     echo '<a href="details.php?id=' . $row['id'] . '">';
-                    echo '<img src="' . $imagePath . '" alt="visuals/gallery Image">';
+                    echo '<img src="' . $imagePath . '" alt="Gallery Image">';
                     echo '</a>';
                 } else {
                     echo '<p>Error: Image not found for ID ' . $row['id'] . '</p>';
@@ -122,6 +122,6 @@
         ?>
     </div>
 
-    <?php include 'view/footer.php'; ?>
+    <?php include 'footer.php'; ?>
 </body>
 </html>

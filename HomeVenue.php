@@ -7,7 +7,7 @@
         /* Basic CSS styles... */
         body {
             font-family: Arial, sans-serif;
-            background-image: url('visuals/images/ven2.jpg'); /* Path to your background image in the "images" folder */
+            background-image: url('images/ven2.jpg'); /* Path to your background image in the "images" folder */
             margin: 0;
             padding: 0;
             color: #000;
@@ -168,10 +168,10 @@
         <!-- Display 3 images and descriptions in a zigzag layout -->
         <div class="zigzag">
             <div class="image">
-                <img src="visuals/images/h1.jpg" alt="Image 1">
+                <img src="images/h1.jpg" alt="Image 1">
                 <input type="radio" id="popup1" class="image-input" />
                 <div class="image-popup" id="popup1">
-                    <img src="visuals/images/h1.jpg" alt="Image 1">
+                    <img src="images/h1.jpg" alt="Image 1">
                 </div>
             </div>
             <div class="description">
@@ -188,22 +188,22 @@
                 <p> U-Shape: 300</p>
                 <div class="button-container">
                     <!-- Create a button for the popup -->
-                    <a class="button" href="visuals/images/h1-1.jpg">Full Banquet Dining</a>
-                    <a class="button" href="visuals/images/h1-2.jpg">Banquet Dining with Stage</a>
+                    <a class="button" href="images/h1-1.jpg">Full Banquet Dining</a>
+                    <a class="button" href="images/h1-2.jpg">Banquet Dining with Stage</a>
                 </div>
                 <div class="button-container">
-                    <a class="button" href="visuals/images/h1-3.jpg">Theater with Stage</a>
-                    <a class="button" href="visuals/images/h1-4.jpg">Banquet with Waiting Stage</a>
+                    <a class="button" href="images/h1-3.jpg">Theater with Stage</a>
+                    <a class="button" href="images/h1-4.jpg">Banquet with Waiting Stage</a>
                 </div>
             </div>
         </div>
 
         <div class="zigzag">
             <div class="image">
-                <img src="visuals/images/h2.jpg" alt="Image 2">
+                <img src="images/h2.jpg" alt="Image 2">
                 <input type="radio" id="popup2" class="image-input" />
                 <div class="image-popup" id="popup2">
-                    <img src="visuals/images/h2.jpg" alt="Image 2">
+                    <img src="images/h2.jpg" alt="Image 2">
                 </div>
             </div>
             <div class "description">
@@ -220,22 +220,22 @@
                 <p> U-Shape: 300</p>
                 <div class="button-container">
                     <!-- Create a button for the popup -->
-                    <a class="button" href="visuals/images/h2-1.jpg">Full Banquet Dining</a>
-                    <a class="button" href="visuals/images/h2-2.jpg">Banquet Dining with Stage</a>
+                    <a class="button" href="images/h2-1.jpg">Full Banquet Dining</a>
+                    <a class="button" href="images/h2-2.jpg">Banquet Dining with Stage</a>
                 </div>
                 <div class="button-container">
-                    <a class="button" href="visuals/images/h2-3.jpg">Theater with Stage</a>
-                    <a class="button" href="visuals/images/h2-4.jpg">Banquet with Waiting Stage</a>
+                    <a class="button" href="images/h2-3.jpg">Theater with Stage</a>
+                    <a class="button" href="images/h2-4.jpg">Banquet with Waiting Stage</a>
                 </div>
             </div>
         </div>
 
         <div class="zigzag">
             <div class="image">
-                <img src="visuals/images/h3.jpg" alt="Image 3">
+                <img src="images/h3.jpg" alt="Image 3">
                 <input type="radio" id="popup3" class="image-input" />
                 <div class="image-popup" id="popup3">
-                    <img src="visuals/images/h3.jpg" alt="Image 3">
+                    <img src="images/h3.jpg" alt="Image 3">
                 </div>
             </div>
             <div class="description">
@@ -252,16 +252,16 @@
                 <p> U-Shape: 300</p>
                 <div class="button-container">
                     <!-- Create a button for the popup -->
-                    <a class="button" href="visuals/images/h3-1.jpg">Full Banquet Dining</a>
-                    <a class="button" href="visuals/images/h3-2.jpg">Banquet Dining with Stage</a>
+                    <a class="button" href="images/h3-1.jpg">Full Banquet Dining</a>
+                    <a class="button" href="images/h3-2.jpg">Banquet Dining with Stage</a>
                 </div>
                 <div class="button-container">
-                    <a class="button" href="visuals/images/h3-3.jpg">Theater with Stage</a>
-                    <a class="button" href="visuals/images/h3-4.jpg">Banquet with Waiting Stage</a>
+                    <a class="button" href="images/h3-3.jpg">Theater with Stage</a>
+                    <a class="button" href="images/h3-4.jpg">Banquet with Waiting Stage</a>
                 </div>
             </div>
         </div>
     </div>
-    <?php include 'view/footer.php'; ?>
+    <?php include 'footer.php'; ?>
 </body>
 </html>
