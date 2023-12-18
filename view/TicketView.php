@@ -66,6 +66,10 @@ mysqli_close($conn);
             height: 100vh;
             margin: 0;
         }
+        h1 {
+            text-align: center;
+            margin-bottom: 20px;
+        }
 
         #content {
             max-width: 1000px;

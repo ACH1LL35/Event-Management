@@ -36,6 +36,10 @@ include_once("../controller/commentControllerH.php");
             height: 100vh;
             margin: 0;
         }
+        h1 {
+            text-align: center;
+            margin-bottom: 20px;
+        }
 
         #content {
             flex: 1;

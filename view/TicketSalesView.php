@@ -46,6 +46,10 @@ $ticketSalesList = $ticketSalesController->getTicketSalesList();
             flex-direction: column;
             padding-left: 20px;
         }
+        h1 {
+            text-align: center;
+            margin-bottom: 20px;
+        }
 
         h2 {
             text-align: center;
