@@ -7,7 +7,7 @@
         /* Basic CSS styles */
         body {
             font-family: Arial, sans-serif;
-            background-image: url('images/gal.jpg'); /* Path to your background image in the "images" folder */
+            background-image: url('visuals/images/gal.jpg'); /* Path to your background image in the "images" folder */
             margin: 0;
             padding: 0;
         }
@@ -55,7 +55,7 @@
 
     <div class="gallery">
         <?php
-        $galleryPath = 'gallery/'; // Relative path to your gallery folder
+        $galleryPath = 'visuals/gallery/'; // Relative path to your gallery folder
 
         // Get all image files in the gallery folder
         $images = glob($galleryPath . "*.{jpg,jpeg,png,gif}", GLOB_BRACE);
