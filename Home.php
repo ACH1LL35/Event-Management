@@ -8,7 +8,7 @@
             font-family: Arial, sans-serif;
             margin: 0;
             padding: 0;
-            background-image: url('images/bg.jpg'); /* Path to your background image in the "images" folder */
+            background-image: url('visuals/images/bg.jpg'); /* Path to your background image in the "images" folder */
             background-size: cover;
             background-position: center;
             background-attachment: fixed;
@@ -81,6 +81,6 @@
 <body>
 
     <!-- Your page content goes here -->
-    <?php include 'footer.php'; ?>
+    <?php include 'view/footer.php'; ?>
 </body>
 </html>
