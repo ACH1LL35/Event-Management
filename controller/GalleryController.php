@@ -1,8 +1,6 @@
 <?php
 
-// session_start();
-
-include_once('../model/GalleryModel.php');
+include('../model/GalleryModel.php');
 
 class GalleryController {
     private $galleryModel;
@@ -10,20 +8,34 @@ class GalleryController {
     public function __construct() {
         // Initialize the model
         $this->galleryModel = new GalleryModel();
+
+        // Check if session is started
+        if (session_status() == PHP_SESSION_NONE) {
+            session_start();
+        }
     }
 
     public function showUploadForm() {
         // Fetch user details from the model
-        $userData = $this->getUserDetails();
+        $id = $_SESSION['id'] ?? null;
 
-        // Include the view
-        include_once('../view/upload.php');
+        if ($id) {
+            $userData = $this->galleryModel->getUserDetails($id);
+
+            // Include the view
+            include('../view/upload.php');
+        } else {
+            echo "User ID not found in session.";
+        }
     }
 
     public function handleUpload() {
         // Handle image upload logic
-        $title = mysqli_real_escape_string($this->galleryModel->conn, $_POST['title']);
-        $description = mysqli_real_escape_string($this->galleryModel->conn, $_POST['description']);
+        $title = mysqli_real_escape_string($this->galleryModel->getConnection(), $_POST['title']);
+        $description = mysqli_real_escape_string($this->galleryModel->getConnection(), $_POST['description']);
+
+        // Define the target directory on the server where you want to save the images
+        $targetDirectory = 'C:/xampp/htdocs/project/visuals/gallery/';
 
         // Get the uploaded file information
         $uploadedFile = $_FILES['image'];
@@ -34,7 +46,6 @@ class GalleryController {
             $fileName = $uploadedFile['name'];
 
             // Generate a unique file name to prevent overwriting
-            $targetDirectory = 'C:/xampp/htdocs/project/visuals/gallery/';
             $targetFile = $targetDirectory . $fileName;
 
             // Move the uploaded file to the target directory on the server
@@ -58,21 +69,7 @@ class GalleryController {
         $this->galleryModel->closeConnection();
     }
 
-    public function logout() {
-        // Destroy the session and redirect to the Login page
-        session_destroy();
-        header("Location: start.php");
-        exit();
-    }
-
-    public function getUserDetails() {
-        $id = $_SESSION['id'] ?? null;
-
-        if ($id) {
-            return $this->galleryModel->getUserDetails($id);
-        } else {
-            return null;
-        }
-    }
+    // Add more methods as needed
 }
+
 ?>
