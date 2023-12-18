@@ -7,9 +7,10 @@
         /* Basic CSS styles... */
         body {
             font-family: Arial, sans-serif;
-            background-image: url('visuals/images/evsup.jpg'); /* Path to your background image in the "images" folder */
+            background-image: url('../visuals/images/evsup.jpg'); /* Path to your background image in the "images" folder */
             margin: 0;
             padding: 0;
+            color: #000;
         }
 
         #Login-button {
@@ -143,10 +144,10 @@
         <!-- Display 3 images and descriptions in a zigzag layout -->
         <div class="zigzag">
             <div class="image">
-                <img src="visuals/images/cel.jpg" alt="Image 1">
+                <img src="../visuals/images/cel.jpg" alt="Image 1">
                 <input type="radio" id="popup1" class="image-input" />
                 <div class="image-popup" id="popup1">
-                    <img src="visuals/images/cel.jpg" alt="Image 1">
+                    <img src="../visuals/images/cel.jpg" alt="Image 1">
                 </div>
             </div>
             <div class="description">
@@ -158,10 +159,10 @@
 
         <div class="zigzag">
             <div class="image">
-                <img src="images/gate.jpg" alt="Image 3">
+                <img src="../visuals/images/gate.jpg" alt="Image 3">
                 <input type="radio" id="popup3" class="image-input" />
                 <div class="image-popup" id="popup3">
-                    <img src="images/gate.jpg" alt="Image 3">
+                    <img src="../visuals/images/gate.jpg" alt="Image 3">
                 </div>
             </div>
             <div class="description">
@@ -173,10 +174,10 @@
 
         <div class="zigzag">
             <div class="image">
-                <img src="images/stage.jpg" alt="Image 3">
+                <img src="../visuals/images/stage.jpg" alt="Image 3">
                 <input type="radio" id="popup3" class="image-input" />
                 <div class="image-popup" id="popup3">
-                    <img src="images/stage.jpg" alt="Image 3">
+                    <img src="../visuals/images/stage.jpg" alt="Image 3">
                 </div>
             </div>
             <div class="description">
@@ -186,6 +187,6 @@
             </div>
         </div>
     </div>
-    <?php include 'view/footer.php'; ?>
+    <?php include 'footer.php'; ?>
 </body>
 </html>

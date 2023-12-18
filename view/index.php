@@ -6,7 +6,7 @@
     <style>
         body {
             font-family: Arial, sans-serif;
-            background-image: url('visuals/images/gal.jpg'); /* Path to your background image in the "images" folder */
+            background-image: url('../visuals/images/gal.jpg'); /* Path to your background image in the "images" folder */
             margin: 0;
             padding: 0;
         }
@@ -94,7 +94,7 @@
         $dbUser = 'root';
         $dbPass = '';
         $dbName = 'event_management';
-        $basePath = "visuals/gallery/"; // Adjust the base path as needed
+        $basePath = "../visuals/gallery/"; // Adjust the base path as needed
 
         try {
             $pdo = new PDO("mysql:host=$dbHost;dbname=$dbName", $dbUser, $dbPass);
@@ -122,6 +122,6 @@
         ?>
     </div>
 
-    <?php include 'view/footer.php'; ?>
+    <?php include 'footer.php'; ?>
 </body>
 </html>

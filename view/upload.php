@@ -1,12 +1,21 @@
 <?php
+include_once('../controller/GalleryController.php');
 
-include('../controller/galleryController.php');
+$controller = new GalleryController();
 
-$controller = new galleryController();
+// If logout is requested, handle it in the controller
+if (isset($_POST['logout'])) {
+    $controller->logout();
+}
 
+// Fetch user details from the controller
+$userData = $controller->getUserDetails();
+
+// Show upload form or handle upload based on the request
 if (isset($_POST['upload'])) {
     $controller->handleUpload();
 } else {
-    $controller->showUploadForm();
+    // Include the view
+    include_once('../view/upload.php');
 }
 ?>

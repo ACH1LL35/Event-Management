@@ -61,28 +61,28 @@
     <!-- Your page content goes here -->
     <div class="footer">
         <div class="footer-links">
-            <a href="view/Privacy.php">Privacy Policy</a>
+            <a href="Privacy.php">Privacy Policy</a>
             <a>||</a>
-            <a href="view/collection-statement">Collection Statement</a>
+            <a href="collection-statement">Collection Statement</a>
             <a>||</a>
-            <a href="view/Term.php">Terms & Conditions</a>
+            <a href="Term.php">Terms & Conditions</a>
             <a>||</a>
-            <a href="view/Ad.php">Advertise</a>
+            <a href="Ad.php">Advertise</a>
             <a>||</a>
-            <a href="view/HomeContactUs.php">Contact Us</a>
+            <a href="HomeContactUs.php">Contact Us</a>
         </div>
         <div class="social-icons">
             <a href="https://www.instagram.com/" target="_blank">
-                <img src="visuals/logo/instagram.png" alt="Instagram" width="20" height="20">
+                <img src="../visuals/logo/instagram.png" alt="Instagram" width="20" height="20">
             </a>
             <a href="https://twitter.com/" target="_blank">
-                <img src="visuals/logo/twitter.png" alt="Twitter" width="20" height="20">
+                <img src="../visuals/logo/twitter.png" alt="Twitter" width="20" height="20">
             </a>
             <a href="https://www.facebook.com/" target="_blank">
-                <img src="visuals/logo/facebook.png" alt="Facebook" width="20" height="20">
+                <img src="../visuals/logo/facebook.png" alt="Facebook" width="20" height="20">
             </a>
             <a href="https://www.youtube.com/" target="_blank">
-                <img src="visuals/logo/youtube.png" alt="YouTube" width="20" height="20">
+                <img src="../visuals/logo/youtube.png" alt="YouTube" width="20" height="20">
             </a>
         </div>
         <div class="line"></div>

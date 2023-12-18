@@ -1,5 +1,4 @@
 <?php
-
 class GalleryModel {
     private $conn;
 
@@ -45,5 +44,4 @@ class GalleryModel {
         mysqli_close($this->conn);
     }
 }
-
 ?>
