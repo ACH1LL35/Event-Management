@@ -193,7 +193,7 @@ if ($row = mysqli_fetch_assoc($result)) {
             <details>
                 <summary>➾ VENUE</summary>
                 <ul>
-                    <li><a href="AdminVenueManagement.php">⤷ VENUE MANAGEMENT</a></li>
+                    <li><a href="VenueView.php">⤷ VENUE MANAGEMENT</a></li>
                     <li><a href="AdminBookingHistoryView.php">⤷ VENUE BOOKING LIST</a></li>
                 </ul>
             </details>

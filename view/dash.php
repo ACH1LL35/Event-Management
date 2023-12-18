@@ -226,7 +226,7 @@ foreach ($tables as $tableName => $customName) {
         </form>
         <h1>Welcome, <?php echo $uname; ?>!</h1>
         <ul>
-        <li><a href="view/dash.php">➾ HOME</a></li>
+        <li><a href="dash.php">➾ HOME</a></li>
         <li><a href="AdminProfileView.php">➾ Info Update</a></li>
 
             
@@ -253,7 +253,7 @@ foreach ($tables as $tableName => $customName) {
             <details>
                 <summary>➾ VENUE</summary>
                 <ul>
-                    <li><a href="AdminVenueManagement.php">⤷ VENUE MANAGEMENT</a></li>
+                    <li><a href="VenueView.php">⤷ VENUE MANAGEMENT</a></li>
                     <li><a href="AdminBookingHistoryView.php">⤷ VENUE BOOKING LIST</a></li>
                 </ul>
             </details>
