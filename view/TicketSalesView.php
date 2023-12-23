@@ -155,7 +155,6 @@ $ticketSalesList = $ticketSalesController->getTicketSalesList();
 <body>
     <div id="content">
         <h2 style="text-align: center; background-color: #000; color: #fff; padding: 20px;">Ticket Sales List</h2>
-        <!-- Add the search input -->
         <input type="text" id="searchInput" placeholder="Search for tickets..." maxlength="50px">
         <form method="get">
             <table border="1" id="ticketSalesTable">
