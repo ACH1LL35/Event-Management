@@ -1,6 +1,8 @@
 project/
 |-- controller/
 |   |-- AdminProfileController.php
+|   |-- AdminBookingHistoryController.php
+|   |-- AdminUserController.php
 |   |-- admin_login_controller.php
 |   |-- commentActionControllerH.php
 |   |-- commentActionControllerM.php
@@ -14,14 +16,18 @@ project/
 |   |-- PostControllerH.php
 |   |-- PostControllerM.php
 |   |-- PublishTicketController.php
+|   |-- PublishVenueController.php
 |   |-- QueryController.php
 |   |-- QuotationController.php
 |   |-- TicketAuditController.php
 |   |-- TicketController.php
 |   |-- TicketSalesController.php
+|   |-- VenueController.php
 |
 |-- model/
 |   |-- AdminProfileModel.php
+AdminBookingHistoryModel
+|   |-- AdminUserModel.php
 |   |-- admin_login_model.php
 |   |-- commentActionModelH.php
 |   |-- commentActionModelM.php
@@ -34,17 +40,19 @@ project/
 |   |-- PostModelH.php
 |   |-- PostModelM.php
 |   |-- PublishTicketModel.php
+PublishVenueModel
 |   |-- QueryModel.php
 |   |-- QuotationModel.php
 |   |-- TicketAuditModel.php
 |   |-- TicketModel.php
 |   |-- TicketSalesModel.php
+VenueModel
 |
 |-- views/
 |   |-- Ad.php [basic HTML file]
 |   |-- AdminProfileView.php
 |   |-- AdminSidebar.php
-|   |-- AdminUserManagement.php
+|   |-- AdminUserView.php
 |   |-- AdminVenueBookHistory.php
 |   |-- AdminVenueManagement.php
 |   |-- admin_login_view.php

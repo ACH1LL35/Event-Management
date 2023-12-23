@@ -246,7 +246,6 @@ foreach ($tables as $tableName => $customName) {
                 <summary>➾ EVENT</summary>
                 <ul>
                     <li><a href="EventsArchiveView.php">⤷ EVENT HISTORY</a></li>
-                    <!-- <li><a href="view/AdminEventCal.php">⤷ EVENT CALENDAR</a></li> -->
                 </ul>
             </details>
             

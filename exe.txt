@@ -1,31 +1,30 @@
 dashboard/ [model/view/controller]
-|-- home/
+|-- home/[//]
 |-- info_update/
 |-- ticket/
-|   |-- ticket_publish/ [model/view/controller]
-|   |-- ticket_management/ [model/view/controller]
-|   |-- ticket_sale_list/ [model/view/controller]
-|   |-- ticket_audit/ [model/view/controller]
+|   |-- ticket_publish/ [PublishTicketModel.php/PublishTicketView.php/PublishTicketController.php]
+|   |-- ticket_management/ [TicketModel.php/TicketView.php/TicketController.php]
+|   |-- ticket_sale_list/ [TicketSalesModel.php/TicketSalesView.php/TicketSalesController.php]
+|   |-- ticket_audit/ [TicketAuditModel.php/TicketAuditView.php/TicketAuditController.php]
 |-- event/
-|   |-- event_publish/ [model/view/controller]
-|   |-- event_history/ [model/view/controller]
+|   |-- event_history/ [model/EventsArchiveView.php/EventsArchiveController.php]
 |-- venue/
-|   |-- venue_management/ [model/view/controller]
-|   |-- venue_booking_list/ [model/view/controller]
+|   |-- venue_management/ [VenueModel.php/VenueView.php/VenueController.php]
+|   |-- venue_booking_list/ [AdminBookingHistoryModel/AdminVenueBookHistory.php/AdminBookingHistoryController]
 |-- moderator/
-|   |-- moderator_access/ [model/view/controller]
-|   |-- moderator_management/ [model/view/controller]
+|   |-- moderator_access/ [ModeratorRegistrationModel.php/ModeratorRegistrationView.php/ModeratorRegistrationController.php]
+|   |-- moderator_management/ [ModeratorListModel.php/ModeratorListView.php/ModeratorListController.php]
 |-- analysis/
 |-- moderation/
-|   |-- post_moderation/ [model/view/controller]
-|   |-- post_history/ [model/view/controller]
-|   |-- comment_moderation/ [model/view/controller]
-|   |-- comment_history/ [model/view/controller]
+|   |-- post_moderation/ [PostModelM.php/PostViewM.php/PostControllerM.php]
+|   |-- post_history/ [PostModelH.php/PostViewH.php/PostControllerH.php]
+|   |-- comment_moderation/ [commentModelM.php/commentViewM.php/commentControllerM.php]
+|   |-- comment_history/ [commentModelH.php/commentViewH.php/commentControllerH.php]
 |-- feedback/
-|   |-- query/ [model/view/controller]
-|   |-- quotation/ [model/view/controller]
-|   |-- complaint/ [model/view/controller]
-|-- gallery/
+|   |-- query/ [QueryModel.php/QueryView.php/QueryController.php]
+|   |-- quotation/ [QuotationModel.php/QuotationView.php/QuotationController.php]
+|   |-- complaint/ [complaintFeedbackModel.php/complaintFeedbackView.php/complaintFeedbackController.php]
+|-- gallery/[GalleryModel.php/gallery_upload_view.php/GalleryController.php]
 |-- user/
-|   |-- user_management/ [model/view/controller]
+|   |-- user_management/ [AdminUserModel.php/AdminUserView.php/AdminUserController.php]
 |   |-- newsletter/ [model/view/controller]
