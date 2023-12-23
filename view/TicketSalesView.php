@@ -25,9 +25,11 @@ $ticketSalesList = $ticketSalesController->getTicketSalesList();
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
+    <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Ticket Sales</title>
+    <!-- Include jQuery library -->
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
     <style>
         body {
             font-family: Arial, Helvetica, sans-serif;
@@ -100,13 +102,63 @@ $ticketSalesList = $ticketSalesController->getTicketSalesList();
         .logout-form .logout-button:hover {
             background-color: #0056b3;
         }
-        </style>
+
+        #searchInput {
+        padding: 8px;
+        margin-bottom: 1px;
+        width: 400px; /* Set your desired width */
+        box-sizing: border-box;
+        border: 1px solid #ccc;
+        border-radius: 20px;
+        overflow: hidden;
+        white-space: nowrap;
+        text-overflow: ellipsis; /* Display ellipsis (...) for overflowed text */
+        margin-top: 25px;
+    }
+
+    /* Styles for the table */
+    #ticketSalesTable {
+        border-collapse: collapse;
+        width: 80%;
+        background-color: #ffffff;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        margin-top: 20px;
+        margin-bottom: 20px;
+    }
+
+    th, td {
+        padding: 10px;
+        border: 1px solid #ccc;
+        text-align: left;
+    }
+
+    th {
+        background-color: #007BFF;
+        color: #fff;
+    }
+
+    </style>
+    <script>
+        $(document).ready(function() {
+            // Function to handle the search input
+            $("#searchInput").on("keyup", function() {
+                var value = $(this).val().toLowerCase();
+                $("#ticketSalesTable tr").filter(function() {
+                    $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1);
+                });
+            });
+        });
+    </script>
 </head>
 <body>
     <div id="content">
         <h2 style="text-align: center; background-color: #000; color: #fff; padding: 20px;">Ticket Sales List</h2>
+        <!-- Add the search input -->
+        <input type="text" id="searchInput" placeholder="Search for tickets..." maxlength="50px">
         <form method="get">
-            <table border="1">
+            <table border="1" id="ticketSalesTable">
                 <tr>
                     <th>USER ID</th>
                     <th>Event Name</th>
@@ -121,7 +173,6 @@ $ticketSalesList = $ticketSalesController->getTicketSalesList();
                         <td><?php echo $r["ticket_id"]; ?></td>
                         <td><?php echo $r["ticket_quantity"]; ?></td>
                         <td><?php echo $r["contact_number"]; ?></td>
-                        <!-- <td><button type="submit" name="del" value="?php echo $r["id"]; ?>">Delete</button></td> -->
                     </tr>
                 <?php endforeach; ?>
             </table>
