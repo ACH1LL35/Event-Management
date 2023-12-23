@@ -26,28 +26,24 @@ function generateTicketPDF($ticketId)
     $pdf->AddPage();
 
     // Add logo to the PDF
-     $logoPath = 'logo/Untitled.jpg';
+     $logoPath = 'visuals/logo/Untitled.jpg';
     $pdf->Image($logoPath, 10, 10, 40, 15);
 
     // Add a font size 14 heading
     $pdf->SetFont('times', 'B', 20);
     $pdf->Cell(0, 30, 'ENTRY PASS', 0, 1, 'C'); // Center-aligned heading
-
+    $pdf->Ln(-15);
     // Set font
     $pdf->SetFont('times', '', 10);
-
-    // $customX = 0;
-    // $customY = 0;
-
-    // Add booking information to the PDF at custom X and Y coordinates
-    // $pdf->SetXY($customX, $customY);
     $pdf->Cell(0, 20, "Ticket ID: " . $ticketData['ticket_id'], 0, 1);
-    $pdf->Cell(0, 20.1, "Event Name: " . $ticketData['event_name'], 0, 1);
-    $pdf->Cell(0, 24, "Ticket Quantity: " . $ticketData['ticket_quantity'], 0, 1);
-    // $pdf->Cell(0, 50, "Gate Opening : 2 PM |" . $ticketData['venue'], 0, 1);
-    // $pdf->Cell(0, 60, "Event Start : 3 PM" . $ticketData['venue'], 0, 1);
-    // $pdf->Cell(0, 70, "Venue :  " . $ticketData['venue'], 0, 1);
-    $pdf->Cell(0, 26, "Printing Time: " . date('Y-m-d H:i:s'), 0, 1);
+    $pdf->Ln(-15);
+    $pdf->Cell(0, 20, "Event Name: " . $ticketData['event_name'], 0, 1);
+    $pdf->Ln(-15);
+    $pdf->Cell(0, 20, "Ticket Quantity: " . $ticketData['ticket_quantity'], 0, 1);
+    $pdf->Ln(-15);
+    $pdf->Cell(0, 20, "Gate Opening : 2 PM |Event Start : 3 PM | Venue: " . $ticketData['venue'], 0, 1);
+
+    $pdf->Cell(0, 20, "Printing Time: " . date('Y-m-d H:i:s'), 0, 1);
 
 
 
