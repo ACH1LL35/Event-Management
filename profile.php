@@ -42,10 +42,10 @@ if ($conn->connect_error) {
 
 // Define table names with optional custom names
 $tables = array(
-    "booking" => "",
-    "purchase_info" => "",
-    "posts" => "",
-    "comments" => ""
+    "booking" => "Venue Booked",
+    "purchase_info" => "Event Ticket Purchased",
+    "posts" => "Total Post",
+    "comments" => "Total Comment"
 );
 
 $counts = array();

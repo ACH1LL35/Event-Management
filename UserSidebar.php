@@ -99,7 +99,7 @@
     <div id="sidebar">
         <h2>My Accounts</h2>
         <ul>
-            <li><a href="UserProfile.php">DASHBOARD</a></li>
+            <li><a href="profile.php">DASHBOARD</a></li>
             <li><a href="UserUpdate.php">ACCOUNT DETAILS</a></li>
             <li><a href="UserAddress.php">ADDRESS BOOK</a></li>
             <li><a href="UserTicket.php">PURCHASE TICKET</a></li>
