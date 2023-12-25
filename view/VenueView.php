@@ -107,9 +107,9 @@ mysqli_close($conn);
 <body>
 
     <div id="content">
-        <h2>Select Event:</h2>
+        <h2>Select Venue:</h2>
         <select id="eventSelect">
-            <option value="" disabled selected>Select an event</option>
+            <option value="" disabled selected>Select a venue</option>
             <?php foreach ($events as $event): ?>
                 <option value="<?php echo $event['venue_id']; ?>"><?php echo $event['venue_name']; ?></option>
             <?php endforeach; ?>

@@ -1,4 +1,32 @@
 <?php
+
+// Handle cancellation logic
+if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['cancel_ticket_id'])) {
+    $cancelledTicketId = $_POST['cancel_ticket_id'];
+
+    // Add logic to delete the ticket from the database
+    $conn = new mysqli("localhost", "root", "", "event_management");
+    if ($conn->connect_error) {
+        die("Connection failed: " . $conn->connect_error);
+    }
+
+    // Use prepared statement to prevent SQL injection
+    $stmt = $conn->prepare("DELETE FROM purchase_info WHERE ticket_id = ?");
+    $stmt->bind_param("s", $cancelledTicketId);
+
+    if ($stmt->execute()) {
+        // Ticket cancellation successful
+        echo "<script>alert('Ticket cancellation successful.');</script>";
+    } else {
+        // Ticket cancellation failed
+        echo "<script>alert('Ticket cancellation failed.');</script>";
+    }
+
+    // Close the prepared statement and database connection
+    $stmt->close();
+    $conn->close();
+}
+
 session_start();
 include("../view/AdminSidebar.php");
 
@@ -25,7 +53,7 @@ $ticketSalesList = $ticketSalesController->getTicketSalesList();
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
+<meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Ticket Sales</title>
     <!-- Include jQuery library -->
@@ -74,12 +102,13 @@ $ticketSalesList = $ticketSalesController->getTicketSalesList();
         th, td {
             padding: 10px;
             border: 1px solid #ccc;
-            text-align: left;
+            text-align: center;
         }
 
         th {
             background-color: #007BFF;
             color: #fff;
+            text-align: center;
         }
 
         /* Styles for the logout form */
@@ -131,13 +160,14 @@ $ticketSalesList = $ticketSalesController->getTicketSalesList();
     th, td {
         padding: 10px;
         border: 1px solid #ccc;
-        text-align: left;
+        text-align: center;
     }
 
     th {
         background-color: #007BFF;
         color: #fff;
     }
+    
 
     </style>
     <script>
@@ -150,13 +180,12 @@ $ticketSalesList = $ticketSalesController->getTicketSalesList();
                 });
             });
         });
-    </script>
-</head>
+    </script></head>
 <body>
     <div id="content">
         <h2 style="text-align: center; background-color: #000; color: #fff; padding: 20px;">Ticket Sales List</h2>
-        <input type="text" id="searchInput" placeholder="Search..">
-        <form method="get">
+        <form method="post" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>">
+            <input type="text" id="searchInput" placeholder="Search..">
             <table border="1" id="ticketSalesTable">
                 <tr>
                     <th>USER ID</th>
@@ -164,6 +193,7 @@ $ticketSalesList = $ticketSalesController->getTicketSalesList();
                     <th>Ticket ID</th>
                     <th>Ticket Quantity</th>
                     <th>Contact No.</th>
+                    <th colspan="2">Action</th>
                 </tr>
                 <?php foreach ($ticketSalesList as $r): ?>
                     <tr>
@@ -172,6 +202,12 @@ $ticketSalesList = $ticketSalesController->getTicketSalesList();
                         <td><?php echo $r["ticket_id"]; ?></td>
                         <td><?php echo $r["ticket_quantity"]; ?></td>
                         <td><?php echo $r["contact_number"]; ?></td>
+                        <td>
+                            <button class="download-button" type="button" onclick="window.open('TicketGenView.php?ticket_id=<?php echo $r["ticket_id"]; ?>', '_blank')">Download</button>
+                        </td>
+                        <td>
+                            <button type="submit" name="cancel_ticket_id" value="<?php echo $r["ticket_id"]; ?>">Cancel</button>
+                        </td>
                     </tr>
                 <?php endforeach; ?>
             </table>

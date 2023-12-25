@@ -1,10 +1,9 @@
 <?php
 // AdminBookingHistoryController.php
 
-// Include the Model if it's not already included
-if (!function_exists('getBookingHistory')) {
-    include("../model/AdminBookingHistoryModel.php");
-}
+// Include the Model and necessary files
+include("../model/AdminBookingHistoryModel.php");
+include("../view/AdminBookingHistoryView.php");
 
 // Fetch booking history data from the Model
 $bookingHistory = getBookingHistory();
