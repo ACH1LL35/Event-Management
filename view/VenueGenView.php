@@ -28,13 +28,12 @@ function generateVenuePDF($bookingId)
     $pdf->AddPage();
 
     // Add logo to the PDF
-    $logoPath = 'visuals/logo/Untitled.jpg';
+    $logoPath = '../visuals/logo/Untitled.jpg';
     $pdf->Image($logoPath, 10, 10, 40, 15);
 
     // Add a font size 14 heading
-    $pdf->SetFont('times', 'B', 20);
-    $pdf->Cell(0, 30, 'BOOKING RECEIPT', 0, 1, 'C'); // Center-aligned heading
-    $pdf->Cell(0, 30, 'ADMIN PRINT', 0, 1, 'C'); // Center-aligned heading
+    $pdf->SetFont('times', 'B', 15);
+    $pdf->Cell(0, 30, 'BOOKING RECEIPT [ADMIN RE-PRINT]', 0, 1, 'C'); // Center-aligned heading
 
     // Set font
     $pdf->SetFont('times', '', 12);
@@ -73,7 +72,7 @@ function generateVenuePDF($bookingId)
     $customY = 85;
     
     $pdf->SetXY($customX, $customY);
-    $pdf->Cell(0, 10, "SIGNETURE----------------", 0, 1);
+    $pdf->Cell(0, 10, "SIGNETURE-[ADMIN COPY SIGNETURE NOT REQUIRED]", 0, 1);
      // Add booking information to the PDF at custom X and Y coordinates
     $pdf->SetXY($customX, $customY);
     $pdf->Cell(0, 20, "Booked By - " . $bookingData['name'], 0, 1);

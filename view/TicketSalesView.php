@@ -183,7 +183,7 @@ $ticketSalesList = $ticketSalesController->getTicketSalesList();
     </script></head>
 <body>
     <div id="content">
-        <h2 style="text-align: center; background-color: #000; color: #fff; padding: 20px;">Ticket Sales List</h2>
+    <h1 style="text-align: center; background-color: #000; color: #fff; padding: 20px;">Ticket Sales List</h1>        
         <form method="post" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>">
             <input type="text" id="searchInput" placeholder="Search..">
             <table border="1" id="ticketSalesTable">

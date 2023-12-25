@@ -27,11 +27,12 @@ if (isset($_POST['upload'])) {
         }
 
         #upload-container {
-            margin: 20px;
-            padding: 20px;
+            margin: 165px;
+            padding: 105px;
             background-color: #fff;
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
             border-radius: 5px;
+            margin-left: 300px;
         }
 
         #upload-container form {
@@ -65,6 +66,13 @@ if (isset($_POST['upload'])) {
         #upload-container button:hover {
             background-color: #0056b3;
         }
+        element{
+            width: 300px;
+            height: 100px;
+
+            max-width: 300px;
+            max-height: 100px;
+        }
     </style>
 </head>
 
@@ -74,7 +82,7 @@ if (isset($_POST['upload'])) {
         <form method="post" action="<?php echo $_SERVER['PHP_SELF']; ?>" enctype="multipart/form-data">
             <!-- Form fields for image upload -->
             <input type="text" name="title" placeholder="Image Title" required>
-            <textarea name="description" placeholder="Image Description" required></textarea>
+            <textarea name="description" placeholder="Image Description" required="" style="width: 300px; height: 100px; max-width: 300px; max-height: 100px "></textarea>
             <input type="file" name="image" accept="image/*" required>
 
             <!-- Submit button -->
