@@ -1,4 +1,4 @@
-8<?php
+<?php
     // Handle cancellation logic
     if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['cancel_button'])) {
         $cancelledBookingId = $_POST['cancel_button'];
@@ -131,8 +131,7 @@ $bookingHistory = getBookingHistory();
                         echo "<td>" . $booking["from_date"] . "</td>";
                         echo "<td>" . $booking["to_date"] . "</td>";
                         echo "<td>";
-                        echo "<input type='hidden' name='booking_id' value='" . $booking["booking_id"] . "'>";
-                        echo "<button type='submit' name='download_button'>Download</button>";
+                        echo "<button class='download-button' type='button' onclick=\"window.open('VenueGenView.php?booking_id=" . $booking["booking_id"] . "', '_blank')\">Download</button>";
                         echo "</td>";
                         echo "<td>";
                         echo "<button type='submit' name='cancel_button' value='" . $booking["booking_id"] . "'>Cancel</button>";

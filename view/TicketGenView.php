@@ -26,12 +26,14 @@ function generateTicketPDF($ticketId)
     $pdf->AddPage();
 
     // Add logo to the PDF
-     $logoPath = 'visuals/logo/Untitled.jpg';
+     $logoPath = '../visuals/logo/Untitled.jpg';
     $pdf->Image($logoPath, 10, 10, 40, 15);
 
     // Add a font size 14 heading
     $pdf->SetFont('times', 'B', 20);
     $pdf->Cell(0, 30, 'ENTRY PASS', 0, 1, 'C'); // Center-aligned heading
+    $pdf->Ln(-15);
+    $pdf->Cell(0, 30, 'ADMIN RE-PRINT', 0, 1, 'C'); // Center-aligned heading
     $pdf->Ln(-15);
     // Set font
     $pdf->SetFont('times', '', 10);

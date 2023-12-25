@@ -34,6 +34,7 @@ function generateVenuePDF($bookingId)
     // Add a font size 14 heading
     $pdf->SetFont('times', 'B', 20);
     $pdf->Cell(0, 30, 'BOOKING RECEIPT', 0, 1, 'C'); // Center-aligned heading
+    $pdf->Cell(0, 30, 'ADMIN PRINT', 0, 1, 'C'); // Center-aligned heading
 
     // Set font
     $pdf->SetFont('times', '', 12);
