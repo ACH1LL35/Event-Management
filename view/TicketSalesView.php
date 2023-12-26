@@ -10,20 +10,35 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['cancel_ticket_id'])) {
         die("Connection failed: " . $conn->connect_error);
     }
 
-    // Use prepared statement to prevent SQL injection
-    $stmt = $conn->prepare("DELETE FROM purchase_info WHERE ticket_id = ?");
-    $stmt->bind_param("s", $cancelledTicketId);
+    // Retrieve ticket information before deletion
+    $stmtSelect = $conn->prepare("SELECT Showid, ticket_quantity FROM purchase_info WHERE ticket_id = ?");
+    $stmtSelect->bind_param("s", $cancelledTicketId);
+    $stmtSelect->execute();
+    $stmtSelect->bind_result($showId, $cancelledQuantity);
+    $stmtSelect->fetch();
+    $stmtSelect->close();
 
-    if ($stmt->execute()) {
+    // Delete the ticket from the purchase_info table
+    $stmtDelete = $conn->prepare("DELETE FROM purchase_info WHERE ticket_id = ?");
+    $stmtDelete->bind_param("s", $cancelledTicketId);
+
+    if ($stmtDelete->execute()) {
         // Ticket cancellation successful
+
+        // Add logic to update the ticket_cr table with the cancelled quantity
+        $stmtUpdate = $conn->prepare("UPDATE ticket_cr SET available_tickets = available_tickets + ? WHERE Showid = ?");
+        $stmtUpdate->bind_param("ii", $cancelledQuantity, $showId);
+        $stmtUpdate->execute();
+        $stmtUpdate->close();
+
         echo "<script>alert('Ticket cancellation successful.');</script>";
     } else {
         // Ticket cancellation failed
         echo "<script>alert('Ticket cancellation failed.');</script>";
     }
 
-    // Close the prepared statement and database connection
-    $stmt->close();
+    // Close the delete statement and database connection
+    $stmtDelete->close();
     $conn->close();
 }
 
