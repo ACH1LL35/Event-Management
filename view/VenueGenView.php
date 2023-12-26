@@ -126,7 +126,10 @@ function generateVenuePDF($bookingId)
     $pdf->SetXY($customX, $customY);
     $pdf->MultiCell(0, 10, "**Venue Booking Service - Terms and Conditions**\n" .
     "By using our Venue Booking Service, you agree to the following terms\n\n" .
-    "Upon confirming a reservation, payment details and venue-specific cancellation policies apply. Refunds are subject to the policies of the booked venue. Users must provide accurate information and conduct themselves respectfully. We act as an intermediary between users and venues, with no liability for venue services. Privacy and data protection are governed by our Privacy Policy. We reserve the right to modify terms and terminate services at our discretion. These terms are governed by the laws of Bangladesh]. Contact us for any inquiries. Thank you for choosing EventX!", 0, 1);
+    "Upon confirming a reservation, payment details and venue-specific cancellation policies apply. Refunds are subject to the policies of the booked venue. Users must provide accurate information and conduct themselves respectfully. We act as an intermediary between users and venues, with no liability for venue services. Privacy and data protection are governed by our Privacy Policy.\n\n" .
+    " **We reserve the right to modify terms and terminate services at our discretion.** \n\n" .
+    "These terms are governed by the laws of Bangladesh. Contact us for any inquiries. \n\n" .
+    "##Thank you for choosing EventX!##", 0, 1);
     
 
     // Output the PDF to the browser for download
