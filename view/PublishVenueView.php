@@ -111,13 +111,13 @@ $publishVenueController->handleRequest();
         <h1 style="text-align: center; background-color: #000; color: #fff; padding: 20px;">PUBLISH VENUE</h1>
         <form method="post">
             <label for="venue_name">Venue Name:</label>
-            <input type="text" name="venue_name" placeholder="HALL-01"  required><br>
+            <input type="text" name="venue_name" placeholder="HALL - 01"  required><br>
 
             <label for="venue_fee">Venue Fee:</label>
             <input type="text" name="venue_fee" required><br>
 
             <center>
-            <input type="submit" value="Create Event">
+            <input type="submit" value="Create Venue">
             </center>
         </form>
     </div>

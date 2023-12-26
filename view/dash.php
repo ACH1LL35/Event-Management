@@ -41,14 +41,14 @@ if ($conn->connect_error) {
 
 // Define table names with optional custom names
 $tables = array(
-    "credential" => "",
-    "booking" => "",
+    "credential" => "Regsitered User",
+    "booking" => "Total Booking",
     "comments" => "",
     "complaint" => "",
-    "events" => "",
+    "events" => "Active Event",
     "posts" => "",
     "purchase_info" => "",
-    "ticket_cr" => "",
+    "ticket_cr" => "Ongoing Show",
     "query" => "",
     "quotation" => "",
     "gallery_data" => ""
@@ -103,7 +103,7 @@ foreach ($tables as $tableName => $customName) {
         h2 {
             background-color: #333;
             color: #fff;
-            padding: 20px;
+            padding: 10px;
             text-align: center;
             margin: 0;
         }
