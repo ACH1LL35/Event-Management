@@ -45,6 +45,7 @@ if ($row = mysqli_fetch_assoc($result)) {
             background-image: url('visuals/images/bl.jpg'); /* Path to your background image in the "images" folder */
             margin: 0;
             padding: 0;
+            color: #000;
         }
 
         .company-name {
@@ -193,6 +194,6 @@ if ($row = mysqli_fetch_assoc($result)) {
     ?>
 </body>
 </html>
-<?php include 'view/footer.php'; ?>
+<?php include '../view/footer.php'; ?>
 </body>
 </html>
