@@ -209,7 +209,7 @@ if ($row = mysqli_fetch_assoc($result)) {
                 </ul>
             </details>
             
-            <li><a href="AdminAnalysis.php">➾ ANALYSIS</a></li>
+            <li><a href="#">➾ ANALYSIS</a></li>
             
 
             <details>
@@ -238,7 +238,7 @@ if ($row = mysqli_fetch_assoc($result)) {
                 <summary>➾ USER</summary>
                 <ul>
                     <li><a href="AdminUserView.php">⤷ USER MANAGEMENT</a></li>
-                    <li><a href="AdminNewsletter.php">⤷ NEWSLETTER</a></li>
+                    <li><a href="#">⤷ NEWSLETTER</a></li>
                 </ul>
             </details>
         </ul>

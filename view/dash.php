@@ -266,7 +266,7 @@ foreach ($tables as $tableName => $customName) {
                 </ul>
             </details>
             
-            <li><a href="AdminAnalysis.php">➾ ANALYSIS</a></li>
+            <li><a href="#">➾ ANALYSIS</a></li>
             
 
             <details>
@@ -294,7 +294,7 @@ foreach ($tables as $tableName => $customName) {
                 <summary>➾ USER</summary>
                 <ul>
                     <li><a href="AdminUserView.php">⤷ USER MANAGEMENT</a></li>
-                    <li><a href="AdminNewsletter.php">⤷ NEWSLETTER</a></li>
+                    <li><a href="#">⤷ NEWSLETTER</a></li>
                 </ul>
             </details>
         </ul>
