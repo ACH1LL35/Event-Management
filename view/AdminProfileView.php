@@ -29,7 +29,7 @@ $controller->handleRequest();
     <style>
         body {
             font-family: Arial, Helvetica, sans-serif;
-            background-color: #f2f2f2;
+            background-color: #fff;
             display: flex;
             flex-direction: row;
             align-items: flex-start;

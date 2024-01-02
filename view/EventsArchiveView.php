@@ -99,13 +99,13 @@ include_once('../controller/EventsArchiveController.php');
         while($r= mysqli_fetch_assoc($res)) {
         ?>
             <tr>
-                <td><?php echo $r["id"]; ?></td>
+                <td><?php echo $r["ev_id"]; ?></td>
                 <td><?php echo $r["event_name"]; ?></td>
                 <td><?php echo $r["event_date"]; ?></td>
                 <td><?php echo $r["event_details"]; ?></td>
                 <td><?php echo $r["posted_by"]; ?></td>
                 <center>
-                <td><button type="submit" name="del" value="<?php echo $r["id"]; ?>">Delete</button></td>
+                <td><button type="submit" name="del" value="<?php echo $r["ev_id"]; ?>">Delete</button></td>
                 </center>
             </tr>
         <?php } ?>

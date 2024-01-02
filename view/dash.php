@@ -72,7 +72,7 @@ foreach ($tables as $tableName => $customName) {
     <style>
         body {
             font-family: Arial, Helvetica, sans-serif;
-            background-color: #f2f2f2;
+            background-color: #fff;
             display: flex;
             align-items: flex-start;
             height: 100vh;
@@ -245,7 +245,9 @@ foreach ($tables as $tableName => $customName) {
             <details>
                 <summary>➾ EVENT</summary>
                 <ul>
+                    <li><a href="AdminEvent.php">⤷ POST NEW EVENT</a></li>
                     <li><a href="EventsArchiveView.php">⤷ EVENT HISTORY</a></li>
+                    <li><a href="test.php">⤷ EDIT EVENT</a></li>
                 </ul>
             </details>
             
