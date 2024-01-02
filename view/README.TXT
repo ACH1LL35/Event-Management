@@ -1,4 +1,3 @@
-The provided data outlines the directory structure for an admin-moderator login system and a comprehensive dashboard with various options. Each major feature or section of the system has its own set of controllers, models, and views, organized into a structured hierarchy. Below is a description of the main components:
 
 ### Admin-Mod Login Handler
 - **admin_login_controller.php:** Controller handling the logic for admin and moderator login.
