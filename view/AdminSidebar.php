@@ -153,7 +153,7 @@ if ($row = mysqli_fetch_assoc($result)) {
             border: 2px solid #007BFF;
             border-radius: 3px;
             cursor: pointer;
-            width: 290px;
+            width: 215px;
             text-decoration: none;
             margin-bottom: 5px;
             margin-left: 5px;
@@ -204,8 +204,8 @@ if ($row = mysqli_fetch_assoc($result)) {
             <details>
                 <summary>➾ MODERATOR</summary>
                 <ul>
-                    <li><a href="ModeratorRegistrationView.php">⤷ MODERATOR ACCESS</a></li>
-                    <li><a href="ModeratorListView.php">⤷ MODERATOR MANAGEMENT</a></li>
+                    <li><a href="ModeratorRegistrationView.php">⤷ MOD ACCESS</a></li>
+                    <li><a href="ModeratorListView.php">⤷ MOD MANAGEMENT</a></li>
                 </ul>
             </details>
             
@@ -216,9 +216,9 @@ if ($row = mysqli_fetch_assoc($result)) {
                 <summary>➾ MODERATION</summary>
                 <ul>
                     <li><a href="PostViewM.php">⤷ POST MODERATION</a></li>
-                    <li><a href="PostViewH.php">⤷ POST MODERATION HISTORY</a></li>
+                    <li><a href="PostViewH.php">⤷ POST MOD HISTORY</a></li>
                     <li><a href="commentViewM.php">⤷ COMMENT MODERATION</a></li>
-                    <li><a href="commentViewH.php">⤷ COMMENT MODERATION HISTORY</a></li>
+                    <li><a href="commentViewH.php">⤷ COMMENT MOD HISTORY</a></li>
                 </ul>
             </details>
 

@@ -1,8 +1,8 @@
-**With Model, View, and Controller:**
 1. **AdminBookingHistory**
    - Model: `AdminBookingHistoryModel.php`
    - View: `AdminBookingHistoryView.php`
    - Controller: `AdminBookingHistoryController.php`
+   **
    - View: `VenueGenView.php` [PDF gen]
 
 2. **AdminLogin**
@@ -21,20 +21,24 @@
    - Controller: `AdminUserController.php`
 
 5. **Comment**
-   - Model (History): `commentModelH.php`
-   - View (History): `commentViewH.php`
-   - Controller (History): `commentControllerH.php`
-   - Model (Moderation): `commentModelM.php`
-   - View (Moderation): `commentViewM.php`
-   - Controller (Moderation): `commentControllerM.php`
+   - History
+      - Model (History): `commentModelH.php`
+      - View (History): `commentViewH.php`
+      - Controller (History): `commentControllerH.php`
+   - Moderation
+      - Model (Moderation): `commentModelM.php`
+      - View (Moderation): `commentViewM.php`
+      - Controller (Moderation): `commentControllerM.php`
 
 6. **CommentAction**
-   - Model (History): `commentActionModelH.php`
-   - View (History): `commentViewH.php`
-   - Controller (History): `commentActionControllerH.php`
-   - Model (Moderation): `commentActionModelM.php`
-   - View (Moderation): `commentViewM.php`
-   - Controller (Moderation): `commentActionControllerM.php`
+   - History
+      - Model (History): `commentActionModelH.php`
+      - View (History): `commentViewH.php`
+      - Controller (History): `commentActionControllerH.php`
+   - Moderation
+      - Model (Moderation): `commentActionModelM.php`
+      - View (Moderation): `commentViewM.php`
+      - Controller (Moderation): `commentActionControllerM.php`
 
 7. **ComplaintFeedback**
    - Model: `complaintFeedbackModel.php`
@@ -43,7 +47,7 @@
 
 8. **Gallery**
    - Model: `GalleryModel.php`
-   - View: `GalleryController.php`
+   - View: `upload.php`
    - Controller: `GalleryController.php`
 
 9. **ModeratorList**
@@ -57,12 +61,14 @@
     - Controller: `ModeratorRegistrationController.php`
 
 11. **Post**
-    - Model (History): `PostModelH.php`
-    - View (History): `PostViewH.php`
-    - Controller (History): `PostControllerH.php`
-    - Model (Moderation): `PostModelM.php`
-    - View (Moderation): `PostViewM.php`
-    - Controller (Moderation): `PostControllerM.php`
+    - History
+       - Model (History): `PostModelH.php`
+       - View (History): `PostViewH.php`
+       - Controller (History): `PostControllerH.php`
+    - Moderation
+       - Model (Moderation): `PostModelM.php`
+       - View (Moderation): `PostViewM.php`
+       - Controller (Moderation): `PostControllerM.php`
 
 12. **PublishTicket**
     - Model: `PublishTicketModel.php`
@@ -84,10 +90,13 @@
     - View: `QuotationView.php`
     - Controller: `QuotationController.php`
 
-16. **Ticket**
+16. **Ticket**[management]
     - Model: `TicketModel.php`
     - View: `TicketView.php`
     - Controller: `TicketController.php`
+
+    **UpdateEventDetails**
+    - View: `update_event_details.php`
 
 17. **TicketAudit**
     - Model: `TicketAuditModel.php`
@@ -98,6 +107,7 @@
     - Model: `TicketSalesModel.php`
     - View: `TicketSalesView.php`
     - Controller: `TicketSalesController.php`
+    **
     - View: `TicketGenView.php` [PDF gen]
 
 19. **Venue**
@@ -105,7 +115,19 @@
     - View: `VenueView.php`
     - Controller: `VenueController.php`
 
-**Single File Entries:**
+    **UpdateVenueDetails**
+    - View: `update_venue_details.php`
+
+20. **Home Gallery**
+   - View: `index.php`
+
+   **Details** [click action]
+    - View: `Details.php`
+
+
+
+
+**Single File Entries:** [plain HTML files]
 1. **Home**
    - View: `Home.php`
 
@@ -130,26 +152,12 @@
 8. **HomeTopBar**
    - View: `HomeTopBar.php`
 
-9. **Index**
-   - View: `index.php`
-
 10. **Privacy**
     - View: `Privacy.php`
 
 11. **Start**
-    - View: `start.php`
+    - View: `start.php` [Login Start Page]
 
 12. **Term**
     - View: `Term.php`
 
-13. **TicketGen**
-    - View: `TicketGenView.php`
-
-14. **UpdateEventDetails**
-    - View: `update_event_details.php`
-
-15. **UpdateVenueDetails**
-    - View: `update_venue_details.php`
-
-16. **Upload**
-    - View: `upload.php`
