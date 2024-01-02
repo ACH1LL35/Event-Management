@@ -102,8 +102,8 @@ The provided data outlines the directory structure for an admin-moderator login 
 - **Upload.php:** View for uploading content to the gallery.
 
 #### User
-- **AdminUserController.php:** Controller for managing admin users.
-- **AdminUserModel.php:** Model managing admin user data.
-- **AdminUserView.php:** View for displaying admin user information.
+- **AdminUserController.php:** Controller for managing users.
+- **AdminUserModel.php:** Model managing user data.
+- **AdminUserView.php:** View for displaying user information.
 
 This structured approach to organizing controllers, models, and views provides a clear separation of concerns and facilitates maintainability in a larger web application.
