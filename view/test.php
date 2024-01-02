@@ -132,25 +132,25 @@
         </form>
 
         <!-- Display current event details -->
-<div id="current-event-details">
-    <h3>Current Event Details</h3>
-    <?php
-    // Fetch current event details from the database
-    if (isset($_POST["select-event-submit"])) {
-        $selectedEventId = $_POST["event-name"];
-        $sql = "SELECT * FROM events WHERE ev_id=$selectedEventId";
-        $result = $conn->query($sql);
+        <div id="current-event-details">
+            <h3>Current Event Details</h3>
+            <?php
+            // Fetch current event details from the database
+            if (isset($_POST["select-event-submit"])) {
+                $selectedEventId = $_POST["event-name"];
+                $sql = "SELECT * FROM events WHERE ev_id=$selectedEventId";
+                $result = $conn->query($sql);
 
-        if ($result->num_rows > 0) {
-            $row = $result->fetch_assoc();
-            echo "<p>Event ID: " . $row["ev_id"] . "</p>";
-            echo "<p>Event Name: " . $row["event_name"] . "</p>";
-            echo "<p>Event Date: " . $row["event_date"] . "</p>";
-            echo "<p>Event Details: " . $row["event_details"] . "</p>";
-        }
-    }
-    ?>
-</div>
+                if ($result->num_rows > 0) {
+                    $row = $result->fetch_assoc();
+                    echo "<p>Event ID: " . $row["ev_id"] . "</p>";
+                    echo "<p>Event Name: " . $row["event_name"] . "</p>";
+                    echo "<p>Event Date: " . $row["event_date"] . "</p>";
+                    echo "<p>Event Details: " . $row["event_details"] . "</p>";
+                }
+            }
+            ?>
+        </div>
 
         <!-- Form for updating event details -->
         <form method="POST" action="<?php echo $_SERVER['PHP_SELF']; ?>">
@@ -190,6 +190,13 @@
                     echo "<p>Updated Event Name: " . $row["event_name"] . "</p>";
                     echo "<p>Updated Event Date: " . $row["event_date"] . "</p>";
                     echo "<p>Updated Event Details: " . $row["event_details"] . "</p>";
+
+                    // Output JavaScript to reload the page after 2 seconds
+                    echo "<script>
+                            setTimeout(function () {
+                                window.location.href = '../view/test.php';
+                            }, 2000);
+                          </script>";
                 }
             } else {
                 echo "<p>Error updating event: " . $conn->error . "</p>";

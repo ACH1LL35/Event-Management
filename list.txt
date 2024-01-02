@@ -33,12 +33,9 @@
 6. **CommentAction**
    - History
       - Model (History): `commentActionModelH.php`
-      - View (History): `commentViewH.php`
-      - Controller (History): `commentActionControllerH.php`
+
    - Moderation
       - Model (Moderation): `commentActionModelM.php`
-      - View (Moderation): `commentViewM.php`
-      - Controller (Moderation): `commentActionControllerM.php`
 
 7. **ComplaintFeedback**
    - Model: `complaintFeedbackModel.php`
@@ -62,13 +59,14 @@
 
 11. **Post**
     - History
-       - Model (History): `PostModelH.php`
-       - View (History): `PostViewH.php`
-       - Controller (History): `PostControllerH.php`
+    - Model (History): `PostModelH.php`
+    - View (History): `PostViewH.php`
+    - Controller (History): `PostControllerH.php`
+    
     - Moderation
-       - Model (Moderation): `PostModelM.php`
-       - View (Moderation): `PostViewM.php`
-       - Controller (Moderation): `PostControllerM.php`
+    - Model (Moderation): `PostModelM.php`
+    - View (Moderation): `PostViewM.php`
+    - Controller (Moderation): `PostControllerM.php`
 
 12. **PublishTicket**
     - Model: `PublishTicketModel.php`
