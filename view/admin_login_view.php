@@ -42,15 +42,33 @@
         input[type="submit"]:hover {
             background-color: #555;
         }
+        #message {
+            color: red;
+        }
     </style>
+    <script>
+        function validateForm() {
+            var idOrEmail = document.forms["loginForm"]["id"].value;
+            var password = document.forms["loginForm"]["password"].value;
+
+            if (idOrEmail === "" || password === "") {
+                alert("Please fill in both ID/Email and password fields");
+                return false;
+            }
+
+            return true; // Submit the form if validation passes
+        }
+    </script>
 </head>
 <body>
     <h1>Administrator Login</h1>
-    <form method="post" action="">
-        ID or Email: <input type="text" name="id" required><br>
-        Password: <input type="password" name="password" required><br>
+    <form method="post" action="" name="loginForm" onsubmit="return validateForm()">
+        ID or Email: <input type="text" name="id" ><br>
+        Password: <input type="password" name="password" ><br>
         <input type="submit" value="Login">
     </form>
+
+    <div id="message"></div>
 
     <?php
     if (isset($loginMessage)) {
