@@ -200,7 +200,7 @@ $ticketSalesList = $ticketSalesController->getTicketSalesList();
     <div id="content">
     <h1 style="text-align: center; background-color: #000; color: #fff; padding: 20px;">Ticket Sales List</h1>        
         <form method="post" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>">
-            <input type="text" id="searchInput" placeholder="Search..">
+            <input type="text" id="searchInput" placeholder="Search Ticket..">
             <table border="1" id="ticketSalesTable">
                 <tr>
                     <th>USER ID</th>

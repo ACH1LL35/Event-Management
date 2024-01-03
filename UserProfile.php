@@ -111,6 +111,7 @@
             <li><a href="UserQuery.php">QUERY</a></li>
             <li><a href="UserQuotation.php">ASK FOR QUOTATION</a></li>
             <li><a href="UserFeedback.php">FEEDBACK</a></li>
+            <li><a href="UserInb.php">INBOX</a></li>
         </ul>
     </div>
 

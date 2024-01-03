@@ -243,6 +243,8 @@ if ($row = mysqli_fetch_assoc($result)) {
                     <li><a href="#">⤷ NEWSLETTER</a></li>
                 </ul>
             </details>
+
+            <li><a href="AdminMsg.php"> Message</a></li>
         </ul>
     </div>
 </body>

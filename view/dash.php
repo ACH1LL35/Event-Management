@@ -299,6 +299,8 @@ foreach ($tables as $tableName => $customName) {
                     <li><a href="#">⤷ NEWSLETTER</a></li>
                 </ul>
             </details>
+
+            <li><a href="AdminMsg.php"> Message</a></li>
         </ul>
     </div>
 

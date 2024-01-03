@@ -56,7 +56,7 @@
                 return false;
             }
 
-            return true; // Submit the form if validation passes
+            return true;
         }
     </script>
 </head>
@@ -72,7 +72,7 @@
 
     <?php
     if (isset($loginMessage)) {
-        echo $loginMessage; // Display login result
+        echo $loginMessage;
     }
     ?>
 </body>
