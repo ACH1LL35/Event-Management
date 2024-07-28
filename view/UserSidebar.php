@@ -1,7 +1,6 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Dashboard</title>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -97,7 +96,10 @@
     <h1>Welcome, <?php echo $username; ?>!</h1>
 
     <div id="sidebar">
+        <center>
         <h2>My Accounts</h2>
+        </center>
+        
         <ul>
             <li><a href="profile.php">DASHBOARD</a></li>
             <li><a href="UserUpdate.php">ACCOUNT DETAILS</a></li>

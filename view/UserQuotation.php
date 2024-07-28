@@ -75,11 +75,6 @@ include("UserSidebar.php");
             margin-top: 50px;
         }
 
-
-        h2 {
-            text-align: left;
-        }
-
         label {
             display: inline-block;
             font-weight: bold;

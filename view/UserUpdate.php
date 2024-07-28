@@ -5,7 +5,7 @@ include("UserSidebar.php");
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Dashboard</title>
+    <title>PROFILE</title>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -22,7 +22,7 @@ include("UserSidebar.php");
         }
         #sidebar {
             float: left;
-            width: 20%;
+            width: 15%;
         }
         #content {
             float: left;

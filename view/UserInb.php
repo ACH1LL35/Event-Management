@@ -5,7 +5,7 @@ include("UserSidebar.php");
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Feedback History</title>
+    <title>USER INBOX</title>
     <style>
         /* Style for the body */
         body {

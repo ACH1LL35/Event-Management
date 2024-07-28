@@ -66,6 +66,9 @@
         ID or Email: <input type="text" name="id" ><br>
         Password: <input type="password" name="password" ><br>
         <input type="submit" value="Login">
+        <center>
+        <p><a href="Home.php">Back To Home</a></p>
+        </center>
     </form>
 
     <div id="message"></div>

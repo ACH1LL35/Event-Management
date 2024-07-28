@@ -15,6 +15,7 @@
             background-position: center;
             background-attachment: fixed;
             color: #fff;
+            text-align: center;
         }
 
         #Login-button,

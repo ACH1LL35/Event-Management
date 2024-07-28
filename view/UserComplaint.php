@@ -5,7 +5,7 @@ include("UserSidebar.php");
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Dashboard</title>
+    <title>COMPLAINT</title>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -73,11 +73,6 @@ include("UserSidebar.php");
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
             margin-left: 550px;
             margin-top: 50px;
-        }
-
-
-        h2 {
-            text-align: left;
         }
 
         label {
