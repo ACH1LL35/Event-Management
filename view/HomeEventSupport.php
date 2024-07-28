@@ -2,7 +2,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>EventX - Your Event Partner</title>
+    <title>Event Support</title>
     <style>
         /* Basic CSS styles... */
         body {

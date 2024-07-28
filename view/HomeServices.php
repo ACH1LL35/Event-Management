@@ -2,7 +2,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>EventX - Your Event Partner</title>
+    <title>Event Services</title>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -137,7 +137,7 @@
 <body>
 
     <div class="content">
-        <h1 class="center-text">Welcome to EventX</h1>
+        <h1 class="center-text , color-text">Welcome to EventX</h1>
         <p class="center-text , color-text" >EventX is your premier event partner, providing a wide range of services and unforgettable experiences for all your special occasions.</p>
 
         <div class="zigzag">

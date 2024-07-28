@@ -44,7 +44,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Query/Complaint Submission Form</title>
+    <title>Contact US</title>
     <style>
         
         

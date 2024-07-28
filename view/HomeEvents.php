@@ -2,7 +2,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>EventX - Your Event Partner</title>
+    <title>Events</title>
     <style>
         body {
             font-family: Arial, sans-serif;
