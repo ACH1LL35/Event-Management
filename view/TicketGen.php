@@ -1,6 +1,6 @@
 <?php
-require_once("vendor/tecnickcom/tcpdf/tcpdf.php");
-require_once("vendor/tecnickcom/tcpdf/tcpdf_barcodes_1d.php");
+require_once("../vendor/tecnickcom/tcpdf/tcpdf.php");
+require_once("../vendor/tecnickcom/tcpdf/tcpdf_barcodes_1d.php");
 
 class CustomTCPDF extends TCPDF {
     // Override Setview/footer to customize view/footer content
@@ -26,7 +26,7 @@ function generateTicketPDF($ticketId)
     $pdf->AddPage();
 
     // Add logo to the PDF
-     $logoPath = 'visuals/logo/Untitled.jpg';
+     $logoPath = '../visuals/logo/Untitled.jpg';
     $pdf->Image($logoPath, 10, 10, 40, 15);
 
     // Add a font size 14 heading

@@ -25,7 +25,7 @@ include("UserSidebar.php");
 
         #sidebar {
             float: left;
-            width: 20%;
+            width: 15%;
         }
 
         #content {

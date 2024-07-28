@@ -161,6 +161,9 @@ $conn->close();
         <center>
         <p>Don't have an account? <a href="Signup.php">Signup</a></p>
         </center>
+        <center>
+        <p><a href="Home.php">Back To Home</a></p>
+        </center>
     </div>
 </body>
 </html>

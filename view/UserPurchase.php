@@ -1,12 +1,12 @@
 <?php
-require_once("vendor/tecnickcom/tcpdf/tcpdf.php"); // Adjust the path accordingly
+require_once("../vendor/tecnickcom/tcpdf/tcpdf.php"); // Adjust the path accordingly
 include("UserSidebar.php");
 
 // Function to generate PDF for a specific ticket
 function generateTicketPDF($ticketId)
 {
     // Include the TCPDF library
-    require_once("vendor/tecnickcom/tcpdf/tcpdf.php");
+    require_once("../vendor/tecnickcom/tcpdf/tcpdf.php");
 
     // Logic to fetch ticket information from the database (adjust based on your database structure)
     $conn = mysqli_connect("localhost", "root", "", "event_management");
