@@ -1,3 +1,4 @@
+<?php include 'HomeTopBar.php'; ?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -92,23 +93,23 @@
         $dbHost = 'localhost';
         $dbUser = 'root';
         $dbPass = '';
-        $dbName = 'host';
-        $basePath = "visuals/assets/"; // Adjust the base path as needed
+        $dbName = 'event_management';
+        $basePath = "visuals/gallery/"; // Adjust the base path as needed
 
         try {
             $pdo = new PDO("mysql:host=$dbHost;dbname=$dbName", $dbUser, $dbPass);
             $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
-            $stmt = $pdo->prepare("SELECT bid, bimag FROM blogs");
+            $stmt = $pdo->prepare("SELECT id, image_path FROM gallery_data");
             $stmt->execute();
             $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
             foreach ($result as $row) {
-                $imagePath = $basePath . $row['bimag'];
+                $imagePath = $basePath . $row['image_path'];
 
                 // Check if the image file exists
                 if (file_exists($imagePath)) {
-                    echo '<a href="details.php?bid=' . $row['bid'] . '">';
+                    echo '<a href="details.php?id=' . $row['id'] . '">';
                     echo '<img src="' . $imagePath . '" alt="Gallery Image">';
                     echo '</a>';
                 } else {
@@ -120,5 +121,7 @@
         }
         ?>
     </div>
+
+    <?php include 'view/footer.php'; ?>
 </body>
 </html>
