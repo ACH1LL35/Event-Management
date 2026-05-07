@@ -1,21 +1,22 @@
+<?php if(!defined('APP_RUNNING')) define('APP_RUNNING', true); ?>
 <?php
 session_start();
-include("AdminSidebar.php");
+include('includes/AdminSidebar.php');
 
 if (isset($_POST['logout'])) {
     // Destroy the session and redirect to the Login page
     session_destroy();
-    header("Location: start.php");
+    header("Location: start");
     exit();
 }
 
 if (!isset($_SESSION['id'])) {
-    header("Location: start.php");
+    header("Location: start");
     exit();
 }
 
 $id = $_SESSION['id'];
-$conn = mysqli_connect("localhost", "root", "", "event_management");
+include 'includes/db.php';
 
 if (!$conn) {
     die("Connection failed: " . mysqli_connect_error());

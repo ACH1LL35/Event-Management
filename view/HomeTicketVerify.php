@@ -1,4 +1,4 @@
-<?php include 'HomeTopBar.php'; ?>
+<?php if(!defined('APP_RUNNING')) define('APP_RUNNING', true); ?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -10,7 +10,7 @@
             font-family: Arial, sans-serif;
             margin: 0;
             padding: 0;
-            background-image: url('../visuals/images/tkt.jpg'); /* Path to your background image in the "images" folder */
+            background-image: url('visuals/images/tkt.jpg'); /* Path to your background image in the "images" folder */
             background-size: cover;
             background-position: center;
             background-attachment: fixed;
@@ -67,6 +67,7 @@
     </style>
 </head>
 <body>
+    <?php include 'includes/HomeTopBar.php'; ?>
   
     <h2>Ticket Verification</h2>
     <form action="HomeTicketVerify.php" method="post">
@@ -119,7 +120,7 @@
         $conn->close();
     }
     ?>
-<?php include 'footer.php'; ?>
+<?php include 'includes/footer.php'; ?>
 </body>
 </html>
 

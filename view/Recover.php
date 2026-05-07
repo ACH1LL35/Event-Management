@@ -1,218 +1,100 @@
 <?php
+if(!defined('APP_RUNNING')) define('APP_RUNNING', true);
+include 'includes/db.php';
 
-$servername = "localhost";
-$username = "root";
-$pass = "";
-$dbname = "event_management";
-$con = new mysqli($servername, $username, $pass, $dbname);
-
-if ($con->connect_error) {
-    die("Connection failed: " . $con->connect_error);
+if (file_exists('../vendor/autoload.php')) {
+    require '../vendor/autoload.php';
+} else {
+    require '../vendor/phpmailer/phpmailer/src/PHPMailer.php';
+    require '../vendor/phpmailer/phpmailer/src/SMTP.php';
+    require '../vendor/phpmailer/phpmailer/src/Exception.php';
 }
-
-// Update the path to the correct location
-require '../vendor/phpmailer/phpmailer/src/PHPMailer.php';
-require '../vendor/phpmailer/phpmailer/src/SMTP.php';
-require '../vendor/phpmailer/phpmailer/src/Exception.php';
 
 use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\SMTP;
 use PHPMailer\PHPMailer\Exception;
 
-function sendMail($_email, $reset_token)
-{
+$statusMessage = "";
+$statusType = "";
+
+function sendMail($_email, $reset_token) {
     $mail = new PHPMailer(true);
-
     try {
-        //Server settings
-        $mail->isSMTP();                                     //Send using SMTP
-        $mail->Host       = 'smtp.gmail.com';                //Set the SMTP server to send through
-        $mail->SMTPAuth   = true;                            //Enable SMTP authentication
-        $mail->Username   = 'eventa2zmanagement@gmail.com';  //SMTP username
-        $mail->Password   = 'kawn bptd orqf nmci';           //SMTP password
-        $mail->SMTPSecure = PHPMailer::ENCRYPTION_SMTPS;     //Enable implicit TLS encryption
-        $mail->Port       = 465;                             //TCP port to connect to; use 587 if you have set `SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS`
+        $mail->isSMTP();
+        $mail->Host       = 'smtp.gmail.com';
+        $mail->SMTPAuth   = true;
+        $mail->Username   = 'eventa2zmanagement@gmail.com';
+        $mail->Password   = 'kawn bptd orqf nmci';
+        $mail->SMTPSecure = PHPMailer::ENCRYPTION_SMTPS;
+        $mail->Port       = 465;
 
-        //Recipients
-        $mail->setFrom('eventa2zmanagement@gmail.com', 'A2Z EVENTS');
-        $mail->addAddress($_email);                          //Add a recipient
-
-        //Content
-        $mail->isHTML(true);                                 //Set email format to HTML
-        $mail->Subject = 'Password Reset Link from A2Z Events';
-        $mail->Body    = "We got a request from you to reset your password! <br>
-          Click the link below : <br>
-          <a href='http://localhost/Project/Update_password.php?email=$_email&reset_token=$reset_token'> Reset Password</a>
-        ";
-
+        $mail->setFrom('eventa2zmanagement@gmail.com', 'EventX Support');
+        $mail->addAddress($_email);
+        $mail->isHTML(true);
+        $mail->Subject = 'Password Reset Request - EventX';
+        $resetLink = "http://" . $_SERVER['HTTP_HOST'] . "/Event-Management/Update_password?email=$_email&reset_token=$reset_token";
+        
+        $mail->Body = "<h3>Password Reset</h3><p>Click the link below to reset your password:</p><a href='$resetLink'>$resetLink</a>";
         $mail->send();
         return true;
-    } catch (Exception $e) {
-        return false;
-    }
+    } catch (Exception $e) { return false; }
 }
 
 if (isset($_POST['sendlink_btn'])) {
-    $query = "SELECT * FROM `credential` WHERE `email`='$_POST[email]'";
-    $result = mysqli_query($con, $query);
-    if ($result) {
-        if (mysqli_num_rows($result) == 1) {
-            $reset_token = bin2hex(random_bytes(16));
-            date_default_timezone_set('Asia/Dhaka');
-            $date = date("Y-m-d");
-            
-            // Set resettokenexpire to be 1 day plus the current date
-            $expire_date = date('Y-m-d', strtotime($date . ' + 1 days'));
-            
-            $query1 = "UPDATE `credential` SET `resettoken`='$reset_token',`resettokenexpire`='$expire_date' WHERE `email`='$_POST[email]'";
-            if (mysqli_query($con, $query1) && sendMail($_POST["email"], $reset_token)) {
-                echo "
-                    <script>
-                        alert('Password Reset Link Sent to mail');
-                        window.location.href='Recover.php';
-                    </script>
-                ";
-            } else {
-                echo "
-                    <script>
-                        alert('Server Down! try again later');
-                        window.location.href='Recover.php';
-                    </script>
-                ";
-            }
+    $email = $conn->real_escape_string($_POST['email']);
+    $query = "SELECT * FROM `credential` WHERE `email`='$email'";
+    $result = $conn->query($query);
+    
+    if ($result && $result->num_rows == 1) {
+        $reset_token = bin2hex(random_bytes(16));
+        $expire_date = date('Y-m-d', strtotime('+1 day'));
+        $query1 = "UPDATE `credential` SET `resettoken`='$reset_token',`resettokenexpire`='$expire_date' WHERE `email`='$email'";
+        if ($conn->query($query1) && sendMail($email, $reset_token)) {
+            $statusMessage = "Recovery link sent to your email.";
+            $statusType = "success";
         } else {
-            echo "
-                <script>
-                    alert(' Email not Found ');
-                    window.location.href='Recover.php';
-                </script>
-            ";
+            $statusMessage = "Mail server error. Try again later.";
+            $statusType = "error";
         }
     } else {
-        echo "
-            <script>
-                alert('Cannot Run Query');
-                window.location.href='Recover.php';
-            </script>
-        ";
+        $statusMessage = "Email address not found.";
+        $statusType = "error";
     }
 }
 ?>
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Forgot Password</title>
-<style>
-    /* ---- Base Styles ---- */
-    body {
-        font-family: 'Poppins', Arial, sans-serif;
-        background: linear-gradient(135deg, #6a11cb, #2575fc);
-        height: 100vh;
-        margin: 0;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        color: #333;
-    }
-
-    .container {
-        background-color: #ffffff;
-        border-radius: 15px;
-        padding: 40px 30px;
-        width: 100%;
-        max-width: 420px;
-        box-shadow: 0 8px 30px rgba(0, 0, 0, 0.2);
-        animation: fadeIn 0.7s ease;
-        text-align: center;
-    }
-
-    @keyframes fadeIn {
-        from { opacity: 0; transform: translateY(30px); }
-        to { opacity: 1; transform: translateY(0); }
-    }
-
-    h2 {
-        color: #222;
-        margin-bottom: 30px;
-        letter-spacing: 1px;
-    }
-
-    label {
-        display: block;
-        font-weight: 600;
-        margin-bottom: 8px;
-        text-align: left;
-        color: #444;
-    }
-
-    input[type="email"] {
-        width: 100%;
-        padding: 12px;
-        margin-bottom: 20px;
-        border: 1px solid #ddd;
-        border-radius: 8px;
-        font-size: 15px;
-        transition: 0.3s ease;
-    }
-
-    input[type="email"]:focus {
-        border-color: #2575fc;
-        outline: none;
-        box-shadow: 0 0 5px rgba(37, 117, 252, 0.4);
-    }
-
-    .btn {
-        display: block;
-        width: 100%;
-        padding: 12px;
-        background: linear-gradient(135deg, #2575fc, #6a11cb);
-        color: white;
-        font-weight: 600;
-        border: none;
-        border-radius: 8px;
-        cursor: pointer;
-        transition: all 0.3s ease;
-        letter-spacing: 0.5px;
-    }
-
-    .btn:hover {
-        background: linear-gradient(135deg, #6a11cb, #2575fc);
-        transform: scale(1.03);
-        box-shadow: 0 4px 15px rgba(106, 17, 203, 0.3);
-    }
-
-    .info-text {
-        margin-top: 15px;
-        font-size: 14px;
-        color: #555;
-    }
-
-    .info-text a {
-        color: #2575fc;
-        font-weight: 600;
-        text-decoration: none;
-    }
-
-    .info-text a:hover {
-        text-decoration: underline;
-    }
-</style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Recover Password - EventX</title>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600&display=swap" rel="stylesheet">
+    <style>
+        body { font-family: 'Outfit', sans-serif; background: #f1f5f9; margin: 0; display: flex; justify-content: center; align-items: center; height: 100vh; color: #1e293b; }
+        .card { background: #fff; padding: 40px; border-radius: 20px; box-shadow: 0 10px 15px -3px rgba(0,0,0,0.1); width: 100%; max-width: 400px; border: 1px solid #e2e8f0; text-align: center; }
+        h2 { margin-top: 0; color: #0f172a; }
+        p { color: #64748b; font-size: 0.9rem; margin-bottom: 25px; }
+        input { width: 100%; padding: 12px; margin-bottom: 20px; border: 1px solid #cbd5e1; border-radius: 10px; box-sizing: border-box; }
+        .btn { width: 100%; padding: 12px; background: #2563eb; color: #fff; border: none; border-radius: 10px; font-weight: 600; cursor: pointer; transition: 0.2s; }
+        .btn:hover { background: #1d4ed8; }
+        .status { padding: 10px; border-radius: 8px; margin-bottom: 20px; font-size: 0.85rem; }
+        .success { background: #dcfce7; color: #166534; }
+        .error { background: #fee2e2; color: #991b1b; }
+        a { color: #2563eb; text-decoration: none; font-size: 0.9rem; display: block; margin-top: 20px; }
+    </style>
 </head>
 <body>
-<div class="container">
-    <h2>Forgot Password</h2>
-    <form method="POST">
-        <label for="email">Email</label>
-        <input type="email" id="email" name="email" placeholder="Enter your email" required>
-        <button type="submit" class="btn" name="sendlink_btn">Reset Password</button>
-    </form>
-    <div class="info-text">
-        <p>If the provided email matches an account, a recovery email will be sent.</p>
-        <p><a href="UserLogin.php">Back to Login</a></p>
+    <div class="card">
+        <h2>Recover Access</h2>
+        <p>Enter your email to receive a password reset link.</p>
+        <?php if ($statusMessage): ?>
+            <div class="status <?php echo $statusType; ?>"><?php echo $statusMessage; ?></div>
+        <?php endif; ?>
+        <form method="POST">
+            <input type="email" name="email" placeholder="Email Address" required>
+            <button type="submit" name="sendlink_btn" class="btn">Send Recovery Link</button>
+        </form>
+        <a href="UserLogin">Back to Login</a>
     </div>
-</div>
 </body>
 </html>

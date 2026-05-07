@@ -1,3 +1,4 @@
+<?php if(!defined('APP_RUNNING')) define('APP_RUNNING', true); ?>
 <!DOCTYPE html>
 <html>
 <head>
@@ -68,18 +69,18 @@
     if (isset($_POST['logout'])) {
         // Destroy the session and redirect to the Login page
         session_destroy();
-        header("Location: UserLogin.php");
+        header("Location: UserLogin");
         exit();
     }
 
     if (!isset($_SESSION['id'])) {
-        header("Location: UserLogin.php");
+        header("Location: UserLogin");
         exit();
     }
 
     $id = $_SESSION['id'];
 
-    $conn = mysqli_connect("localhost", "root", "", "event_management");
+    include 'includes/db.php';
 
     if (!$conn) {
         die("Connection failed: " . mysqli_connect_error());
@@ -99,19 +100,19 @@
     <div id="sidebar">
         <h2>My Accounts</h2>
         <ul>
-            <li><a href="UserProfile.php">DASHBOARD</a></li>
-            <li><a href="UserUpdate.php">ACCOUNT DETAILS</a></li>
-            <li><a href="UserAddress.php">ADDRESS BOOK</a></li>
-            <li><a href="UserTicket.php">PURCHASE TICKET</a></li>
-            <li><a href="UserPurchase.php">PURCHASE HISTORY</a></li>
-            <li><a href="UserVenueBook.php">BOOK VENUE</a></li>
-            <li><a href="UserVenueHistory.php">BOOKING HISTORY</a></li>
+            <li><a href="UserProfile">DASHBOARD</a></li>
+            <li><a href="UserUpdate">ACCOUNT DETAILS</a></li>
+            <li><a href="UserAddress">ADDRESS BOOK</a></li>
+            <li><a href="UserTicket">PURCHASE TICKET</a></li>
+            <li><a href="UserPurchase">PURCHASE HISTORY</a></li>
+            <li><a href="UserVenueBook">BOOK VENUE</a></li>
+            <li><a href="UserVenueHistory">BOOKING HISTORY</a></li>
             <li><a href="#">UPCOMING</a></li>
-            <li><a href="UserComplaint.php">COMPLAINT</a></li>
-            <li><a href="UserQuery.php">QUERY</a></li>
-            <li><a href="UserQuotation.php">ASK FOR QUOTATION</a></li>
-            <li><a href="UserFeedback.php">FEEDBACK</a></li>
-            <li><a href="UserInb.php">INBOX</a></li>
+            <li><a href="UserComplaint">COMPLAINT</a></li>
+            <li><a href="UserQuery">QUERY</a></li>
+            <li><a href="UserQuotation">ASK FOR QUOTATION</a></li>
+            <li><a href="UserFeedback">FEEDBACK</a></li>
+            <li><a href="UserInb">INBOX</a></li>
         </ul>
     </div>
 

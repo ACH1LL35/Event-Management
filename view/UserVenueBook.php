@@ -1,5 +1,6 @@
+<?php if(!defined('APP_RUNNING')) define('APP_RUNNING', true); ?>
 <?php
-include("UserSidebar.php");
+include('includes/UserSidebar.php');
 ?>
 
 <!DOCTYPE html>
@@ -161,18 +162,18 @@ include("UserSidebar.php");
 
     if (isset($_POST['logout'])) {
         session_destroy();
-        header("Location: UserLogin.php");
+        header("Location: UserLogin");
         exit();
     }
 
     if (!isset($_SESSION['id'])) {
-        header("Location: UserLogin.php");
+        header("Location: UserLogin");
         exit();
     }
 
     $id = $_SESSION['id'];
 
-    $conn = mysqli_connect("localhost", "root", "", "event_management");
+    include 'includes/db.php';
 
     if (!$conn) {
         die("Connection failed: " . mysqli_connect_error());

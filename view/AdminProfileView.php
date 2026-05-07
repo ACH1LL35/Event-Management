@@ -1,3 +1,4 @@
+<?php if(!defined('APP_RUNNING')) define('APP_RUNNING', true); ?>
 <?php
 session_start();
 
@@ -7,12 +8,12 @@ include("../model/AdminProfileModel.php");
 
 if (isset($_POST['logout'])) {
     session_destroy();
-    header("Location: start.php");
+    header("Location: start");
     exit();
 }
 
 if (!isset($_SESSION['id'])) {
-    header("Location: start.php");
+    header("Location: start");
     exit();
 }
 

@@ -1,20 +1,21 @@
+<?php if(!defined('APP_RUNNING')) define('APP_RUNNING', true); ?>
 <?php
 session_start();
 
 if (isset($_POST['logout'])) {
     // Destroy the session and redirect to the Login page
     session_destroy();
-    header("Location: start.php");
+    header("Location: start");
     exit();
 }
 
 if (!isset($_SESSION['id'])) {
-    header("Location: start.php");
+    header("Location: start");
     exit();
 }
 
 $id = $_SESSION['id'];
-$conn = mysqli_connect("localhost", "root", "", "event_management");
+include 'includes/db.php';
 
 if (!$conn) {
     die("Connection failed: " . mysqli_connect_error());
@@ -226,18 +227,18 @@ foreach ($tables as $tableName => $customName) {
         </form>
         <h1>Welcome, <?php echo $uname; ?>!</h1>
         <ul>
-        <li><a href="dash.php">➾ HOME</a></li>
-        <li><a href="AdminProfileView.php">➾ Info Update</a></li>
+        <li><a href="dash">➾ HOME</a></li>
+        <li><a href="AdminProfileView">➾ Info Update</a></li>
 
             
             <!-- Use details and summary for the dropdown -->
             <details>
                 <summary>➾ TICKET</summary>
                 <ul>
-                    <li><a href="PublishTicketView.php">⤷ TICKET PUBLISH</a></li>
-                    <li><a href="TicketView.php">⤷ TICKET MANAGEMENT</a></li>
-                    <li><a href="TicketSalesView.php">⤷ TICKET SALE LIST</a></li>
-                    <li><a href="TicketAuditView.php">⤷ TICKET AUDIT</a></li>
+                    <li><a href="PublishTicketView">⤷ TICKET PUBLISH</a></li>
+                    <li><a href="TicketView">⤷ TICKET MANAGEMENT</a></li>
+                    <li><a href="TicketSalesView">⤷ TICKET SALE LIST</a></li>
+                    <li><a href="TicketAuditView">⤷ TICKET AUDIT</a></li>
 
                 </ul>
             </details>
@@ -245,26 +246,26 @@ foreach ($tables as $tableName => $customName) {
             <details>
                 <summary>➾ EVENT</summary>
                 <ul>
-                    <li><a href="AdminEvent.php">⤷ POST NEW EVENT</a></li>
-                    <li><a href="EventsArchiveView.php">⤷ EVENT HISTORY</a></li>
-                    <li><a href="test.php">⤷ EDIT EVENT</a></li>
+                    <li><a href="AdminEvent">⤷ POST NEW EVENT</a></li>
+                    <li><a href="EventsArchiveView">⤷ EVENT HISTORY</a></li>
+                    <li><a href="test">⤷ EDIT EVENT</a></li>
                 </ul>
             </details>
             
             <details>
                 <summary>➾ VENUE</summary>
                 <ul>
-                    <li><a href="PublishVenueView.php">⤷ ADD VENUE</a></li>
-                    <li><a href="VenueView.php">⤷ VENUE MANAGEMENT</a></li>
-                    <li><a href="AdminBookingHistoryView.php">⤷ VENUE BOOKING LIST</a></li>
+                    <li><a href="PublishVenueView">⤷ ADD VENUE</a></li>
+                    <li><a href="VenueView">⤷ VENUE MANAGEMENT</a></li>
+                    <li><a href="AdminBookingHistoryView">⤷ VENUE BOOKING LIST</a></li>
                 </ul>
             </details>
 
             <details>
                 <summary>➾ MODERATOR</summary>
                 <ul>
-                    <li><a href="ModeratorRegistrationView.php">⤷ MOD ACCESS</a></li>
-                    <li><a href="ModeratorListView.php">⤷ MOD MANAGEMENT</a></li>
+                    <li><a href="ModeratorRegistrationView">⤷ MOD ACCESS</a></li>
+                    <li><a href="ModeratorListView">⤷ MOD MANAGEMENT</a></li>
                 </ul>
             </details>
             
@@ -274,33 +275,33 @@ foreach ($tables as $tableName => $customName) {
             <details>
                 <summary>➾ MODERATION</summary>
                 <ul>
-                    <li><a href="PostViewM.php">⤷ POST MODERATION</a></li>
-                    <li><a href="PostViewH.php">⤷ POST MOD HISTORY</a></li>
-                    <li><a href="commentViewM.php">⤷ COMMENT MODERATION</a></li>
-                    <li><a href="commentViewH.php">⤷ COMMENT MOD HISTORY</a></li>
+                    <li><a href="PostViewM">⤷ POST MODERATION</a></li>
+                    <li><a href="PostViewH">⤷ POST MOD HISTORY</a></li>
+                    <li><a href="commentViewM">⤷ COMMENT MODERATION</a></li>
+                    <li><a href="commentViewH">⤷ COMMENT MOD HISTORY</a></li>
                 </ul>
             </details>
 
             <details>
                 <summary>➾ FEEDBACK</summary>
                 <ul>
-                    <li><a href="QueryView.php">⤷ QUERY FEEDBACK</a></li>
-                    <li><a href="QuotationView.php">⤷ QUOTATION FEEDBACK</a></li>
-                    <li><a href="complaintFeedbackView.php">⤷ COMPLAINT FEEDBACK</a></li>
+                    <li><a href="QueryView">⤷ QUERY FEEDBACK</a></li>
+                    <li><a href="QuotationView">⤷ QUOTATION FEEDBACK</a></li>
+                    <li><a href="complaintFeedbackView">⤷ COMPLAINT FEEDBACK</a></li>
                 </ul>
             </details>
 
-            <li><a href="upload.php">⤷ ADD TO   GALLERY</a></li>
+            <li><a href="upload">⤷ ADD TO   GALLERY</a></li>
 
             <details>
                 <summary>➾ USER</summary>
                 <ul>
-                    <li><a href="AdminUserView.php">⤷ USER MANAGEMENT</a></li>
+                    <li><a href="AdminUserView">⤷ USER MANAGEMENT</a></li>
                     <li><a href="#">⤷ NEWSLETTER</a></li>
                 </ul>
             </details>
 
-            <li><a href="AdminMsg.php"> Message</a></li>
+            <li><a href="AdminMsg"> Message</a></li>
         </ul>
     </div>
 

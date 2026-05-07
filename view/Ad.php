@@ -1,3 +1,4 @@
+<?php if(!defined('APP_RUNNING')) define('APP_RUNNING', true); ?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -64,6 +65,6 @@
         <h2>Contact Us</h2>
         <p>If you're interested in advertising with EventX or have any questions, please contact us at [Your Contact Information]. We look forward to partnering with you to help you achieve your advertising goals.</p>
     </div>
-    <?php include 'footer.php'; ?>
+    <?php include 'includes/footer.php'; ?>
 </body>
 </html>

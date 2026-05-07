@@ -1,3 +1,4 @@
+<?php if(!defined('APP_RUNNING')) define('APP_RUNNING', true); ?>
 <?php
 require_once("../vendor/tecnickcom/tcpdf/tcpdf.php");
 require_once("../vendor/tecnickcom/tcpdf/tcpdf_barcodes_1d.php");
@@ -16,7 +17,7 @@ class CustomTCPDF extends TCPDF {
 function generateTicketPDF($ticketId)
 {
     // Logic to fetch ticket information from the database (adjust based on your database structure)
-    $conn = mysqli_connect("localhost", "root", "", "event_management");
+    include 'includes/db.php';
     $query = "SELECT * FROM purchase_info WHERE ticket_id = '$ticketId'";
     $result = mysqli_query($conn, $query);
     $ticketData = mysqli_fetch_assoc($result);
@@ -26,7 +27,7 @@ function generateTicketPDF($ticketId)
     $pdf->AddPage();
 
     // Add logo to the PDF
-     $logoPath = '../visuals/logo/Untitled.jpg';
+     $logoPath = 'visuals/logo/Untitled.jpg';
     $pdf->Image($logoPath, 10, 10, 40, 15);
 
     // Add a font size 14 heading
@@ -103,7 +104,7 @@ if ($_SERVER["REQUEST_METHOD"] == "GET" && isset($_GET['ticket_id'])) {
     generateTicketPDF($ticketId);
 } else {
     // Redirect to a suitable page if accessed without the ticket_id
-    header("Location: TicketSalesView.php");
+    header("Location: TicketSalesView");
     exit;
 }
 ?>

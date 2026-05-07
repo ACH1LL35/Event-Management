@@ -1,3 +1,4 @@
+<?php if(!defined('APP_RUNNING')) define('APP_RUNNING', true); ?>
 <?php
     // Handle cancellation logic
     if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['cancel_button'])) {

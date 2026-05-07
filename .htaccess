@@ -1,0 +1,13 @@
+# Enable URL rewriting
+RewriteEngine On
+
+# Redirect root to view/Index.php but keep the URL clean
+RewriteRule ^$ view/Index.php [L]
+
+# Redirect /Index to view/Index.php
+RewriteRule ^Index/?$ view/Index.php [L]
+
+# For any other request, if it doesn't exist in root, check in view folder
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule ^([^/]+)/?$ view/$1.php [L]

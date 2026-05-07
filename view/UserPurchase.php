@@ -1,6 +1,7 @@
+<?php if(!defined('APP_RUNNING')) define('APP_RUNNING', true); ?>
 <?php
 require_once("../vendor/tecnickcom/tcpdf/tcpdf.php"); // Adjust the path accordingly
-include("UserSidebar.php");
+include('includes/UserSidebar.php');
 
 // Function to generate PDF for a specific ticket
 function generateTicketPDF($ticketId)
@@ -9,7 +10,7 @@ function generateTicketPDF($ticketId)
     require_once("../vendor/tecnickcom/tcpdf/tcpdf.php");
 
     // Logic to fetch ticket information from the database (adjust based on your database structure)
-    $conn = mysqli_connect("localhost", "root", "", "event_management");
+    include 'includes/db.php';
     $query = "SELECT * FROM purchase_info WHERE ticket_id = '$ticketId'";
     $result = mysqli_query($conn, $query);
     $ticketData = mysqli_fetch_assoc($result);
@@ -48,7 +49,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['cancel_ticket'])) {
     $ticket_quantity = $_POST['ticket_quantity'];
 
     // Logic to add the quantity back to the available_tickets in the ticket_cr table
-    $conn = mysqli_connect("localhost", "root", "", "event_management");
+    include 'includes/db.php';
 
     if (!$conn) {
         die("Connection failed: " . mysqli_connect_error());
@@ -89,7 +90,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['cancel_ticket'])) {
 }
 
 // Display purchase history
-$conn = mysqli_connect("localhost", "root", "", "event_management");
+include 'includes/db.php';
 
 if (!$conn) {
     die("Connection failed: " . mysqli_connect_error());

@@ -1,3 +1,4 @@
+<?php if(!defined('APP_RUNNING')) define('APP_RUNNING', true); ?>
 <?php
 
 // Handle cancellation logic
@@ -48,12 +49,12 @@ include("../view/AdminSidebar.php");
 if (isset($_POST['logout'])) {
     // Destroy the session and redirect to the Login page
     session_destroy();
-    header("Location: start.php");
+    header("Location: start");
     exit();
 }
 
 if (!isset($_SESSION['id'])) {
-    header("Location: start.php");
+    header("Location: start");
     exit();
 }
 

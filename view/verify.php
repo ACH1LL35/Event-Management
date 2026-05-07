@@ -1,3 +1,4 @@
+<?php if(!defined('APP_RUNNING')) define('APP_RUNNING', true); ?>
 <?php
 
 $servername = "localhost";
@@ -30,7 +31,7 @@ if(isset($_GET['email']) && isset($_GET['verifi_code']))
                     echo "
                         <script>
                             alert('Email Verification Successfully');
-                            window.location.href='Registration.php';
+                            window.location.href="Registration";
                         </script> 
                     ";
                 }
@@ -39,7 +40,7 @@ if(isset($_GET['email']) && isset($_GET['verifi_code']))
                     echo "
                         <script>
                             alert('Cannot Run Query');
-                            window.location.href='index.php';
+                            window.location.href="index";
                         </script> 
                     ";
                 }
@@ -49,7 +50,7 @@ if(isset($_GET['email']) && isset($_GET['verifi_code']))
                 echo "
                     <script>
                         alert('Verification is done. Please Login');
-                        window.location.href='Login.php';
+                        window.location.href="Login";
                     </script> 
                  ";
             }
@@ -59,7 +60,7 @@ if(isset($_GET['email']) && isset($_GET['verifi_code']))
             echo "
             <script>
                 alert('Number of rows is not 1');
-                window.location.href='index.php';
+                window.location.href="index";
             </script> 
              ";
         }
@@ -70,7 +71,7 @@ if(isset($_GET['email']) && isset($_GET['verifi_code']))
         echo "
             <script>
                 alert('Cannot Run Query');
-                window.location.href='Registration.php';
+                window.location.href="Registration";
             </script> 
         ";
     }

@@ -1,26 +1,16 @@
 <?php
+if(!defined('APP_RUNNING')) define('APP_RUNNING', true);
 session_start();
 
-// Database credentials
-$servername = "localhost";
-$username = "root";
-$password = "";
-$database = "event_management";
-
-// Create a connection
-$conn = new mysqli($servername, $username, $password, $database);
-if ($conn->connect_error) {
-    die("Connection failed: " . $conn->connect_error);
-}
+include 'includes/db.php';
 
 $errors = array();
 
 if ($_SERVER["REQUEST_METHOD"] === "POST") {
-    $identifier = trim($_POST["identifier"]); // user id, email, or phone
+    $identifier = $conn->real_escape_string(trim($_POST["identifier"]));
     $password = $_POST["password"];
     $identifierField = '';
 
-    // Detect type
     if (filter_var($identifier, FILTER_VALIDATE_EMAIL)) {
         $identifierField = "email";
     } elseif (preg_match('/^01[3-9]\d{8}$/', $identifier)) {
@@ -29,157 +19,176 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
         $identifierField = "id";
     }
 
-    if (empty($errors)) {
-        $identifier = $conn->real_escape_string($identifier);
-        $query = "SELECT id, password, status FROM credential WHERE $identifierField = '$identifier'";
-        $result = $conn->query($query);
+    $query = "SELECT id, password, status FROM credential WHERE $identifierField = '$identifier'";
+    $result = $conn->query($query);
 
-        if (!$result) {
-            $errors[] = "Database query error: " . $conn->error;
-        } else {
-            if ($result->num_rows == 1) {
-                $row = $result->fetch_assoc();
-
-                if ($password === $row["password"]) {
-                    if ($row["status"] == 1) {
-                        $_SESSION["id"] = $row["id"];
-                        header("Location: UserProfile.php");
-                        exit;
-                    } else {
-                        $errors[] = "Account is not active. Please contact support.";
-                    }
-                } else {
-                    $errors[] = "Invalid credentials.";
-                }
+    if ($result && $result->num_rows == 1) {
+        $row = $result->fetch_assoc();
+        if ($password === $row["password"]) {
+            if ($row["status"] == 1) {
+                $_SESSION["id"] = $row["id"];
+                header("Location: UserProfile");
+                exit;
             } else {
-                $errors[] = "Invalid credentials.";
+                $errors[] = "Account is not active.";
             }
+        } else {
+            $errors[] = "Invalid credentials.";
         }
+    } else {
+        $errors[] = "Account not found.";
     }
 }
-
 $conn->close();
 ?>
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>User Login</title>
-<style>
-    body {
-        font-family: 'Poppins', Arial, sans-serif;
-        background: linear-gradient(135deg, #6a11cb, #2575fc);
-        height: 100vh;
-        margin: 0;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        color: #333;
-    }
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login - EventX</title>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Outfit', sans-serif;
+            background-color: #f1f5f9;
+            margin: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            color: #1e293b;
+        }
 
-    .container {
-        background-color: #ffffff;
-        border-radius: 15px;
-        padding: 40px 30px;
-        width: 100%;
-        max-width: 420px;
-        box-shadow: 0 8px 30px rgba(0, 0, 0, 0.2);
-        animation: fadeIn 0.7s ease;
-        text-align: center;
-    }
+        .login-card {
+            background: #ffffff;
+            padding: 48px;
+            border-radius: 24px;
+            width: 100%;
+            max-width: 400px;
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+            border: 1px solid #e2e8f0;
+        }
 
-    @keyframes fadeIn {
-        from { opacity: 0; transform: translateY(30px); }
-        to { opacity: 1; transform: translateY(0); }
-    }
+        h2 {
+            text-align: center;
+            font-size: 1.8rem;
+            font-weight: 700;
+            margin-bottom: 8px;
+            color: #0f172a;
+        }
 
-    h2 {
-        color: #222;
-        margin-bottom: 30px;
-        letter-spacing: 1px;
-    }
+        p.subtitle {
+            text-align: center;
+            color: #64748b;
+            margin-bottom: 32px;
+            font-size: 0.95rem;
+        }
 
-    input[type="text"],
-    input[type="password"] {
-        width: 100%;
-        padding: 14px;
-        margin-bottom: 20px;
-        border: 1px solid #ddd;
-        border-radius: 8px;
-        font-size: 15px;
-        transition: 0.3s ease;
-    }
+        .form-group {
+            margin-bottom: 20px;
+        }
 
-    input:focus {
-        border-color: #2575fc;
-        outline: none;
-        box-shadow: 0 0 5px rgba(37,117,252,0.4);
-    }
+        label {
+            display: block;
+            font-size: 0.9rem;
+            font-weight: 600;
+            margin-bottom: 8px;
+            color: #475569;
+        }
 
-    .btn {
-        width: 100%;
-        background: linear-gradient(135deg, #2575fc, #6a11cb);
-        color: white;
-        font-weight: 600;
-        padding: 12px;
-        border: none;
-        border-radius: 8px;
-        cursor: pointer;
-        transition: all 0.3s ease;
-        letter-spacing: 0.5px;
-    }
+        input {
+            width: 100%;
+            padding: 14px;
+            border: 1px solid #cbd5e1;
+            border-radius: 12px;
+            font-size: 1rem;
+            box-sizing: border-box;
+            transition: all 0.2s;
+        }
 
-    .btn:hover {
-        background: linear-gradient(135deg, #6a11cb, #2575fc);
-        transform: scale(1.03);
-        box-shadow: 0 4px 15px rgba(106, 17, 203, 0.3);
-    }
+        input:focus {
+            outline: none;
+            border-color: #2563eb;
+            box-shadow: 0 0 0 4px rgba(37, 99, 235, 0.1);
+        }
 
-    .error-messages {
-        background-color: #ffe0e0;
-        color: #e74c3c;
-        padding: 10px;
-        border-radius: 8px;
-        margin-bottom: 20px;
-        font-weight: 500;
-    }
+        .btn-login {
+            width: 100%;
+            padding: 14px;
+            background-color: #2563eb;
+            color: #fff;
+            border: none;
+            border-radius: 12px;
+            font-weight: 600;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: background 0.2s;
+            margin-top: 10px;
+        }
 
-    .text-center a {
-        color: #2575fc;
-        text-decoration: none;
-        font-weight: 600;
-    }
+        .btn-login:hover {
+            background-color: #1d4ed8;
+        }
 
-    .text-center a:hover {
-        text-decoration: underline;
-    }
-</style>
+        .error-msg {
+            background: #fee2e2;
+            color: #991b1b;
+            padding: 12px;
+            border-radius: 8px;
+            margin-bottom: 24px;
+            font-size: 0.9rem;
+            border: 1px solid #fecaca;
+        }
+
+        .footer-links {
+            margin-top: 24px;
+            text-align: center;
+            font-size: 0.9rem;
+            color: #64748b;
+        }
+
+        .footer-links a {
+            color: #2563eb;
+            text-decoration: none;
+            font-weight: 600;
+        }
+
+        .footer-links a:hover {
+            text-decoration: underline;
+        }
+    </style>
 </head>
 <body>
-<div class="container">
-    <h2>User Login</h2>
+    <div class="login-card">
+        <h2>Welcome Back</h2>
+        <p class="subtitle">Please enter your details to sign in.</p>
 
-    <?php if (!empty($errors)) : ?>
-        <div class="error-messages">
-            <?php foreach ($errors as $error) : ?>
-                <p><?php echo $error; ?></p>
-            <?php endforeach; ?>
+        <?php if (!empty($errors)) : ?>
+            <div class="error-msg">
+                <?php foreach ($errors as $error) : ?>
+                    <p style="margin:0;"><?php echo $error; ?></p>
+                <?php endforeach; ?>
+            </div>
+        <?php endif; ?>
+
+        <form method="POST">
+            <div class="form-group">
+                <label>Identifier</label>
+                <input type="text" name="identifier" placeholder="ID, Email or Phone" required>
+            </div>
+            <div class="form-group">
+                <label>Password</label>
+                <input type="password" name="password" placeholder="••••••••" required>
+            </div>
+            <button type="submit" class="btn-login">Sign In</button>
+        </form>
+
+        <div class="footer-links">
+            <p><a href="Recover">Forgot password?</a></p>
+            <p>New here? <a href="Signup">Create an account</a></p>
+            <p><a href="Index">Back to Homepage</a></p>
         </div>
-    <?php endif; ?>
-
-    <form method="POST" action="<?php echo $_SERVER['PHP_SELF']; ?>">
-        <input type="text" name="identifier" placeholder="User ID / Email / Phone" required>
-        <input type="password" name="password" placeholder="Enter your password" required>
-        <button type="submit" class="btn">Login</button>
-    </form>
-
-    <div class="text-center">
-        <p><a href="Recover.php">Forgot password?</a></p>
-        <p>Don't have an account? <a href="Signup.php">Signup</a></p>
-        <p><a href="Index">Back To Home</a></p>
     </div>
-</div>
 </body>
 </html>

@@ -1,3 +1,4 @@
+<?php if(!defined('APP_RUNNING')) define('APP_RUNNING', true); ?>
 <?php
 // Include the TCPDF library
 require_once("../vendor/tecnickcom/tcpdf/tcpdf.php");
@@ -18,7 +19,7 @@ class CustomTCPDF extends TCPDF {
 function generateVenuePDF($bookingId)
 {
     // Logic to fetch booking information from the database (adjust based on your database structure)
-    $conn = mysqli_connect("localhost", "root", "", "event_management");
+    include 'includes/db.php';
     $query = "SELECT * FROM booking WHERE booking_id = '$bookingId'";
     $result = mysqli_query($conn, $query);
     $bookingData = mysqli_fetch_assoc($result);
@@ -28,7 +29,7 @@ function generateVenuePDF($bookingId)
     $pdf->AddPage();
 
     // Add logo to the PDF
-    $logoPath = '../visuals/logo/Untitled.jpg';
+    $logoPath = 'visuals/logo/Untitled.jpg';
     $pdf->Image($logoPath, 10, 10, 40, 15);
 
     // Add a font size 14 heading
@@ -147,7 +148,7 @@ if ($_SERVER["REQUEST_METHOD"] == "GET" && isset($_GET['booking_id'])) {
     generateVenuePDF($bookingId);
 } else {
     // Redirect to a suitable page if accessed without the booking_id
-    header("Location: AdminBookingHistoryView.php");
+    header("Location: AdminBookingHistoryView");
     exit;
 }
 ?>

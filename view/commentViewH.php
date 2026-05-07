@@ -1,9 +1,10 @@
+<?php if(!defined('APP_RUNNING')) define('APP_RUNNING', true); ?>
 <?php
 // Include the necessary model file to establish the database connection
 include_once("../model/commentModelH.php");
 
 // Establish database connection
-$conn = mysqli_connect("localhost", "root", "", "event_management");
+include 'includes/db.php';
 
 if (!$conn) {
     die("Connection failed: " . mysqli_connect_error());

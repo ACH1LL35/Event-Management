@@ -1,3 +1,4 @@
+<?php if(!defined('APP_RUNNING')) define('APP_RUNNING', true); ?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -62,7 +63,7 @@
 <body>
 
 <div>
-    <?php include("AdminSidebar.php"); ?>
+    <?php include('includes/AdminSidebar.php'); ?>
 </div>
 
 <?php

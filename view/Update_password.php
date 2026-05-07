@@ -1,3 +1,4 @@
+<?php if(!defined('APP_RUNNING')) define('APP_RUNNING', true); ?>
 <?php
 $servername = "localhost";
 $username = "root";
@@ -40,7 +41,7 @@ if(isset($_GET['email']) && isset($_GET['reset_token']))
                 echo "
                     <script>
                         alert('Password has already been updated.');
-                        window.location.href='UserLogin.php';
+                        window.location.href="UserLogin";
                     </script>
                 ";
             }
@@ -50,7 +51,7 @@ if(isset($_GET['email']) && isset($_GET['reset_token']))
             echo "
                 <script>
                     alert('Invalid or Expired Link');
-                    window.location.href='Recover.php';
+                    window.location.href="Recover";
                 </script>
             ";
         }
@@ -60,7 +61,7 @@ if(isset($_GET['email']) && isset($_GET['reset_token']))
         echo "
             <script>
                 alert('Server Down! try again later');
-                window.location.href='Home.php';
+                window.location.href="Home";
             </script>
         ";
     }
@@ -86,7 +87,7 @@ if(isset($_POST['update_btn']))
             echo "
                 <script>
                     alert('Password Updated Successfully');
-                    window.location.href='UserLogin.php';
+                    window.location.href="UserLogin";
                 </script>
             ";
             exit; // Add this line to prevent further execution
@@ -96,7 +97,7 @@ if(isset($_POST['update_btn']))
             echo "
                 <script>
                     alert('Server Down! try again later');
-                    window.location.href='Recover.php';
+                    window.location.href="Recover";
                 </script>
             ";
         }
@@ -104,7 +105,7 @@ if(isset($_POST['update_btn']))
         echo "
             <script>
                 alert('Password and Confirm Password do not match');
-                window.location.href='Update_password.php';
+                window.location.href="Update_password";
             </script>
         ";
     }

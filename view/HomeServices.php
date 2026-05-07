@@ -1,218 +1,178 @@
-<?php include 'HomeTopBar.php'; ?>
+<?php if(!defined('APP_RUNNING')) define('APP_RUNNING', true); ?>
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-    <title>Event Services</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Services - EventX</title>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700&display=swap" rel="stylesheet">
     <style>
         body {
-            font-family: Arial, sans-serif;
-            background-image: url('../visuals/images/ser.jpg'); /* Path to "images" folder */
+            font-family: 'Outfit', sans-serif;
             margin: 0;
             padding: 0;
-            color: #000;
+            background-color: #f8fafc;
+            color: #1e293b;
         }
 
-        #Login-button {
-            position: absolute;
-            top: 20px;
-            right: 10px;
-            background-color: #ff6600;
+        .hero-banner {
+            background: linear-gradient(rgba(15, 23, 42, 0.8), rgba(15, 23, 42, 0.8)), url('visuals/images/bg.jpg');
+            background-size: cover;
+            background-position: center;
             color: #fff;
-            padding: 5px 10px;
-            border-radius: 5px;
-            text-decoration: none;
-        }
-
-        #Login-button:hover {
-            background-color: #ff9933;
-        }
-
-        #book-button {
-            position: absolute;
-            top: 20px;
-            right: 80px;
-            background-color: #ff6600;
-            color: #fff;
-            padding: 5px 10px;
-            border-radius: 5px;
-            text-decoration: none;
-        }
-
-        #book-button:hover {
-            background-color: #ff9933;
-        }
-
-        .content {
-            padding: 20px;
-        }
-
-        .zigzag {
-            display: flex;
-            flex-direction: row;
-            justify-content: space-between;
-            align-items: center;
-            margin: 20px;
-            padding: 20px;
-            background-color: #f8f8f8;
-            border: 1px solid #ddd;
-            border-radius: 5px;
-            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-        }
-
-        .zigzag:nth-child(odd) {
-            flex-direction: row-reverse;
-        }
-
-        .image {
-            width: 1000px;
-        }
-
-        .image img {
-            max-width: 100%;
-            height: auto;
-        }
-
-        .description {
-            width: 300px;
-        }
-
-        .description h2 {
-            font-size: 18px;
-            margin-bottom: 10px;
-        }
-
-        .description p {
-            font-size: 14px;
-            line-height: 1.6;
-        }
-
-        .image-input {
-            display: none;
-        }
-
-        .image-label {
-            display: block;
-            width: 100%;
-            background-color: #ff6600;
-            color: #fff;
-            padding: 5px 10px;
+            padding: 80px 20px;
             text-align: center;
-            border-radius: 5px;
-            cursor: pointer;
         }
 
-        .image-input:checked + .image-label {
-            background-color: #ff9933;
+        .hero-banner h1 {
+            font-size: 3rem;
+            margin-bottom: 15px;
+            font-weight: 700;
         }
 
-        .image-popup {
-            display: none;
-            position: fixed;
-            top: 0;
-            left: 0;
+        .hero-banner p {
+            font-size: 1.2rem;
+            max-width: 700px;
+            margin: 0 auto;
+            opacity: 0.9;
+        }
+
+        .services-grid {
+            max-width: 1200px;
+            margin: -50px auto 60px;
+            padding: 0 20px;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 30px;
+        }
+
+        .service-card {
+            background: #fff;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.05);
+            border: 1px solid #e2e8f0;
+            transition: all 0.3s ease;
+        }
+
+        .service-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px -15px rgba(0, 0, 0, 0.1);
+            border-color: #3b82f6;
+        }
+
+        .service-image {
+            height: 240px;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .service-image img {
             width: 100%;
             height: 100%;
-            background: rgba(0, 0, 0, 0.7);
-            text-align: center;
+            object-fit: cover;
+            transition: transform 0.5s ease;
         }
 
-        .image-popup img {
-            max-height: 80%;
-            max-width: 80%;
-            margin: 10% 0;
+        .service-card:hover .service-image img {
+            transform: scale(1.1);
         }
 
-        .image-popup:target {
-            display: block;
-        }
-        .center-text {
-            text-align: center;
-        }
-        .color-text {
-            color: wheat;
+        .service-info {
+            padding: 30px;
         }
 
+        .service-info h2 {
+            font-size: 1.5rem;
+            margin: 0 0 12px;
+            color: #0f172a;
+        }
+
+        .service-info p {
+            color: #64748b;
+            line-height: 1.6;
+            margin-bottom: 20px;
+        }
+
+        .badge {
+            display: inline-block;
+            padding: 4px 12px;
+            background: #eff6ff;
+            color: #2563eb;
+            border-radius: 50px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            margin-bottom: 10px;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        .coming-soon {
+            background: #f1f5f9;
+            color: #64748b;
+        }
     </style>
 </head>
 <body>
+    <?php include 'includes/HomeTopBar.php'; ?>
 
-    <div class="content">
-        <h1 class="center-text , color-text">Welcome to EventX</h1>
-        <p class="center-text , color-text" >EventX is your premier event partner, providing a wide range of services and unforgettable experiences for all your special occasions.</p>
+    <div class="hero-banner">
+        <h1>Excellence in Execution</h1>
+        <p>From conceptualization to the final applause, we provide comprehensive event solutions tailored to your unique needs.</p>
+    </div>
 
-        <div class="zigzag">
-            <div class="image">
-                <img src="../visuals/images/ven.jpg" alt="Image 1">
-                <input type="radio" id="popup1" class="image-input" />
-                <div class="image-popup" id="popup1">
-                    <img src="../visuals/images/ven.jpg" alt="Image 1">
-                </div>
-            </div>
-            <div class="description">
-                <h1>VENUE</h1>
-                <p> Discover the perfect venue that sets the stage for your event's success.</p>
+    <div class="services-grid main-content">
+        <!-- Venue Card -->
+        <div class="service-card">
+            <div class="service-image"><img src="visuals/images/ven.jpg" alt="Venue Selection"></div>
+            <div class="service-info">
+                <span class="badge">Available Now</span>
+                <h2>Venue Selection</h2>
+                <p>We partner with the most exclusive locations to find the perfect backdrop for your corporate or private events.</p>
             </div>
         </div>
 
-        <div class="zigzag">
-            <div class="image">
-                <img src="../visuals/images/staff.jpg" alt="Image 3">
-                <input type="radio" id="popup3" class="image-input" />
-                <div class="image-popup" id="popup3">
-                    <img src="../visuals/images/staff.jpg" alt="Image 3">
-                </div>
-            </div>
-            <div class="description">
-                <h1>STAFFING</h1>
-                <p>Our professional staffing ensures seamless execution from start to finish, leaving you stress-free.</p>
+        <!-- Staffing Card -->
+        <div class="service-card">
+            <div class="service-image"><img src="visuals/images/staff.jpg" alt="Professional Staffing"></div>
+            <div class="service-info">
+                <span class="badge">Available Now</span>
+                <h2>Professional Staffing</h2>
+                <p>Our highly trained team ensures every guest is treated with world-class hospitality and attention to detail.</p>
             </div>
         </div>
 
-        <div class="zigzag">
-            <div class="image">
-                <img src="../visuals/images/deco.jpg" alt="Image 3">
-                <input type="radio" id="popup3" class="image-input" />
-                <div class="image-popup" id="popup3">
-                    <img src="../visuals/images/deco.jpg" alt="Image 3">
-                </div>
-            </div>
-            <div class="description">
-                <h1>DECORATION</h1>
-                <p> [SERVICE LAUNCHING SOON] </p>
-                <p>Elevate the ambiance with our exquisite decorations that create a memorable atmosphere.</p>
+        <!-- Decoration Card -->
+        <div class="service-card">
+            <div class="service-image"><img src="visuals/images/deco.jpg" alt="Creative Decoration"></div>
+            <div class="service-info">
+                <span class="badge coming-soon">Coming Soon</span>
+                <h2>Creative Decoration</h2>
+                <p>Bespoke floral arrangements, lighting designs, and thematic decor to transform any space into a masterpiece.</p>
             </div>
         </div>
 
-        <div class="zigzag">
-            <div class="image">
-                <img src="../visuals/images/sup.jpg" alt="Image 3">
-                <input type="radio" id="popup3" class="image-input" />
-                <div class="image-popup" id="popup3">
-                    <img src="../visuals/images/sup.jpg" alt="Image 3">
-                </div>
-            </div>
-            <div class="description">
-                <h1>SUPPLIES</h1>
-                <p> [SERVICE LAUNCHING SOON] </p>
-                <p>From supplies to A/V equipment, we've got your event essentials covered..</p>
+        <!-- Supplies Card -->
+        <div class="service-card">
+            <div class="service-image"><img src="visuals/images/sup.jpg" alt="Event Supplies"></div>
+            <div class="service-info">
+                <span class="badge coming-soon">Coming Soon</span>
+                <h2>Event Supplies & A/V</h2>
+                <p>Top-tier audio-visual equipment and logistics support to power your conferences and presentations.</p>
             </div>
         </div>
 
-        <div class="zigzag">
-            <div class="image">
-                <img src="../visuals/images/cat.jpg" alt="Image 3">
-                <input type="radio" id="popup3" class="image-input" />
-                <div class="image-popup" id="popup3">
-                    <img src="../visuals/images/cat.jpg" alt="Image 3">
-                </div>
-            </div>
-            <div class="description">
-                <h1>CATERING</h1>
-                <p> [SERVICE LAUNCHING SOON] </p>
-                <p>Indulge in culinary delights with our top-notch catering, offering a delectable menu to satisfy every palate.</p>
+        <!-- Catering Card -->
+        <div class="service-card">
+            <div class="service-image"><img src="visuals/images/cat.jpg" alt="Gourmet Catering"></div>
+            <div class="service-info">
+                <span class="badge coming-soon">Coming Soon</span>
+                <h2>Gourmet Catering</h2>
+                <p>Exquisite culinary experiences featuring local and international cuisines curated by master chefs.</p>
             </div>
         </div>
     </div>
-    <?php include 'footer.php'; ?>
+
+    <?php include 'includes/footer.php'; ?>
 </body>
 </html>

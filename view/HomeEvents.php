@@ -1,4 +1,4 @@
-<?php include 'HomeTopBar.php'; ?>
+<?php if(!defined('APP_RUNNING')) define('APP_RUNNING', true); ?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -66,46 +66,13 @@
     .event:hover .event-details {
         display: block;
     }
-
-    /* Top Bar buttons overrides */
-    #Login-button, #book-button {
-        position: absolute;
-        top: 20px;
-        color: #fff;
-        padding: 8px 15px;
-        border-radius: 6px;
-        text-decoration: none;
-        font-weight: 600;
-        transition: 0.3s ease;
-    }
-
-    #Login-button { right: 10px; background: linear-gradient(135deg, #2575fc, #6a11cb); }
-    #book-button { right: 90px; background: linear-gradient(135deg, #2575fc, #6a11cb); }
-
-    #Login-button:hover, #book-button:hover {
-        background: linear-gradient(135deg, #6a11cb, #2575fc);
-        transform: scale(1.05);
-    }
-
-    /* Responsive adjustments */
-    @media (max-width: 600px) {
-        .event-list {
-            grid-template-columns: 1fr;
-            gap: 20px;
-        }
-    }
 </style>
 </head>
 <body>
+    <?php include 'includes/HomeTopBar.php'; ?>
     <div class="event-list">
         <?php
-        $servername = "localhost";
-        $username = "root";
-        $password = "";
-        $dbname = "event_management";
-
-        $conn = new mysqli($servername, $username, $password, $dbname);
-        if ($conn->connect_error) { die("Connection failed: " . $conn->connect_error); }
+        include 'includes/db.php';
 
         $sql = "SELECT event_name, event_date, event_details FROM events ORDER BY event_date DESC";
         $result = $conn->query($sql);
@@ -125,6 +92,6 @@
         $conn->close();
         ?>
     </div>
-<?php include 'footer.php'; ?>
+<?php include 'includes/footer.php'; ?>
 </body>
-</html>
+</html>

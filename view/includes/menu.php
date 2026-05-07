@@ -1,8 +1,5 @@
 <?php
-// Check if the session is not already active
-if (session_status() == PHP_SESSION_NONE) {
-    session_start();
-}
+session_start();
 
 if (isset($_POST['logout'])) {
     // Destroy the session and redirect to the Login page
@@ -17,7 +14,7 @@ if (!isset($_SESSION['id'])) {
 }
 
 $id = $_SESSION['id'];
-$conn = mysqli_connect("localhost", "root", "", "event_management");
+include 'includes/db.php';
 
 if (!$conn) {
     die("Connection failed: " . mysqli_connect_error());
@@ -27,7 +24,7 @@ $query = "SELECT * FROM admin_mod WHERE id = '$id'";
 $result = mysqli_query($conn, $query);
 
 if ($row = mysqli_fetch_assoc($result)) {
-    $uname = $row['uname']; // Update to use the correct variable name
+    $username = $row['uname']; // Update to use the correct variable name
     // $email = $row['email'];
 }
 ?>
@@ -41,7 +38,7 @@ if ($row = mysqli_fetch_assoc($result)) {
     <style>
         body {
             font-family: Arial, Helvetica, sans-serif;
-            background-color: #fff;
+            background-color: #f2f2f2;
             display: flex;
             align-items: flex-start;
             height: 100vh;
@@ -50,12 +47,10 @@ if ($row = mysqli_fetch_assoc($result)) {
 
         #menu {
             width: 250px;
-            /* background-color: #333; */
-            color: #333;
+            background-color: #333;
+            color: #fff;
             padding: 20px;
-            overflow-y: auto; /* Add this line for vertical scrolling */
         }
-
 
         ul {
             list-style: none;
@@ -64,10 +59,6 @@ if ($row = mysqli_fetch_assoc($result)) {
 
         li {
             margin: 1px 0;
-        }
-        h1 {
-            text-align: center;
-            margin-bottom: 20px;
         }
 
         h2 {
@@ -153,10 +144,9 @@ if ($row = mysqli_fetch_assoc($result)) {
             border: 2px solid #007BFF;
             border-radius: 3px;
             cursor: pointer;
-            width: 215px;
+            width: 200px;
             text-decoration: none;
             margin-bottom: 5px;
-            margin-left: 5px;
         }
 
         details a:hover {
@@ -169,82 +159,81 @@ if ($row = mysqli_fetch_assoc($result)) {
         <form class="logout-form" method="post">
             <input type="submit" name="logout" class="logout-button" value="Log Out">
         </form>
-        <h1>Welcome, <?php echo $uname; ?>!</h1>
+        <h1>Welcome, <?php echo $username; ?>!</h1>
         <ul>
-            <li><a href="dash.php">➾ HOME</a></li>
-            <li><a href="AdminProfileView.php">➾ Info Update</a></li>
+            <li><a href="/Event-Management/AdminPanel">➾ Home</a></li>
             
             <!-- Use details and summary for the dropdown -->
             <details>
-                <summary>➾ TICKET</summary>
+                <summary>➾ Ticket</summary>
                 <ul>
-                    <li><a href="PublishTicketView.php">⤷ TICKET PUBLISH</a></li>
-                    <li><a href="TicketView.php">⤷ TICKET MANAGEMENT</a></li>
-                    <li><a href="TicketSalesView.php">⤷ TICKET SALE LIST</a></li>
-                    <li><a href="TicketAuditView.php">⤷ TICKET AUDIT</a></li>
+                    <li><a href="/Event-Management/AdminTicketCreation">⤷ TICKET PUBLISH</a></li>
+                    <li><a href="/Event-Management/AdminTicketManagement">⤷ TICKET MANAGEMENT</a></li>
+                    <li><a href="/Event-Management/AdminTicketList">⤷ TICKET SALE LIST</a></li>
                 </ul>
             </details>
 
             <details>
                 <summary>➾ EVENT</summary>
                 <ul>
-                    <li><a href="AdminEvent.php">⤷ POST NEW EVENT</a></li>
-                    <li><a href="EventsArchiveView.php">⤷ EVENT HISTORY</a></li>
-                    <li><a href="test.php">⤷ EDIT EVENT</a></li>
+                    <li><a href="/Event-Management/AdminEventHistory">⤷ EVENT HISTORY</a></li>
+                    <li><a href="/Event-Management/AdminEventCal">⤷ EVENT CALENDAR</a></li>
                 </ul>
             </details>
             
             <details>
                 <summary>➾ VENUE</summary>
                 <ul>
-                    <li><a href="PublishVenueView.php">⤷ ADD VENUE</a></li>
-                    <li><a href="VenueView.php">⤷ VENUE MANAGEMENT</a></li>
-                    <li><a href="AdminBookingHistoryView.php">⤷ VENUE BOOKING LIST</a></li>
+                    <li><a href="/Event-Management/AdminVenueManagement">⤷ VENUE MANAGEMENT</a></li>
+                    <li><a href="/Event-Management/AdminVenueBookHistory">⤷ VENUE BOOKING LIST</a></li>
                 </ul>
             </details>
 
             <details>
                 <summary>➾ MODERATOR</summary>
                 <ul>
-                    <li><a href="ModeratorRegistrationView.php">⤷ MOD ACCESS</a></li>
-                    <li><a href="ModeratorListView.php">⤷ MOD MANAGEMENT</a></li>
+                    <li><a href="/Event-Management/AdminModAccess">⤷ MODERATOR ACCESS</a></li>
+                    <li><a href="/Event-Management/AdminModManagement">⤷ MODERATOR MANAGEMENT</a></li>
                 </ul>
             </details>
             
-            <li><a href="#">➾ ANALYSIS</a></li>
+            <li><a href="/Event-Management/AdminAnalysis">➾ ANALYSIS</a></li>
             
 
             <details>
                 <summary>➾ MODERATION</summary>
                 <ul>
-                    <li><a href="PostViewM.php">⤷ POST MODERATION</a></li>
-                    <li><a href="PostViewH.php">⤷ POST MOD HISTORY</a></li>
-                    <li><a href="commentViewM.php">⤷ COMMENT MODERATION</a></li>
-                    <li><a href="commentViewH.php">⤷ COMMENT MOD HISTORY</a></li>
+                    <li><a href="/Event-Management/AdminPostModeration">⤷ POST MODERATION</a></li>
+                    <li><a href="/Event-Management/AdminPMH">⤷ POST MODERATION HISTORY</a></li>
+                    <li><a href="/Event-Management/AdminCommentModeration">⤷ COMMENT MODERATION</a></li>
+                    <li><a href="/Event-Management/AdminCMH">⤷ COMMENT MODERATION HISTORY</a></li>
                 </ul>
             </details>
 
             <details>
                 <summary>➾ FEEDBACK</summary>
                 <ul>
-                    <li><a href="QueryView.php">⤷ QUERY FEEDBACK</a></li>
-                    <li><a href="QuotationView.php">⤷ QUOTATION FEEDBACK</a></li>
-                    <li><a href="complaintFeedbackView.php">⤷ COMPLAINT FEEDBACK</a></li>
+                    <li><a href="/Event-Management/AdminQueryF">⤷ QUERY FEEDBACK</a></li>
+                    <li><a href="/Event-Management/AdminQuotationF">⤷ QUOTATION FEEDBACK</a></li>
+                    <li><a href="/Event-Management/AdminComplaint">⤷ COMPLAINT FEEDBACK</a></li>
                 </ul>
             </details>
 
-                    <li><a href="upload.php">⤷ ADD TO   GALLERY</a></li>
-
+            <details>
+                <summary>➾ visuals/gallery</summary>
+                <ul>
+                    <li><a href="/Event-Management/AdminAdd2Gallary">⤷ DD TO visuals/gallery</a></li>
+                    <li><a href="/Event-Management/AdminLinkImage">⤷ LINK TO visuals/gallery</a></li>
+                </ul>
+            </details>
 
             <details>
                 <summary>➾ USER</summary>
                 <ul>
-                    <li><a href="AdminUserView.php">⤷ USER MANAGEMENT</a></li>
-                    <li><a href="#">⤷ NEWSLETTER</a></li>
+                    <li><a href="/Event-Management/AdminUserManagement">⤷ USER MANAGEMENT</a></li>
+                    <li><a href="/Event-Management/AdminNewsletter">⤷ NEWSLETTER</a></li>
                 </ul>
             </details>
-
-            <li><a href="AdminMsg.php"> Message</a></li>
         </ul>
     </div>
 </body>

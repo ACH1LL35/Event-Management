@@ -1,127 +1,135 @@
-<?php include 'HomeTopBar.php'; ?>
+<?php if(!defined('APP_RUNNING')) define('APP_RUNNING', true); ?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <title>EventX - Your Event Partner</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gallery - EventX</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
     <style>
         body {
-            font-family: Arial, sans-serif;
-            background-image: url('../visuals/images/gal.jpg'); /* Path to your background image in the "images" folder */
+            font-family: 'Poppins', sans-serif;
+            background: #0f172a;
             margin: 0;
             padding: 0;
+            color: #f8fafc;
         }
 
-        #Login-button {
-            position: absolute;
-            top: 20px;
-            right: 10px;
-            background-color: #ff6600;
-            color: #fff;
-            padding: 5px 10px;
-            border-radius: 5px;
-            text-decoration: none;
+        .hero-section {
+            text-align: center;
+            padding: 60px 20px;
+            background: linear-gradient(to bottom, rgba(15, 23, 42, 0.8), #0f172a), url('visuals/images/gal.jpg');
+            background-size: cover;
+            background-position: center;
         }
 
-        #Login-button:hover {
-            background-color: #ff9933;
+        .hero-section h1 {
+            font-size: 3rem;
+            margin-bottom: 10px;
+            background: linear-gradient(to right, #60a5fa, #a855f7);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
         }
 
-        #book-button {
-            position: absolute;
-            top: 20px;
-            right: 80px;
-            background-color: #ff6600;
-            color: #fff;
-            padding: 5px 10px;
-            border-radius: 5px;
-            text-decoration: none;
-        }
-
-        #book-button:hover {
-            background-color: #ff9933;
-        }
-
-        /* CSS styles for the gallery */
-        .gallery img {
-            max-width: 23%; /* Adjust the image size as needed */
-            height: auto;
-            margin: 10px;
-            cursor: pointer; /* Add cursor pointer to indicate the images are clickable */
-        }
-
-        /* Styles for the modal (popup) */
-        .modal {
-            display: none;
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-color: rgba(0, 0, 0, 0.7);
-            justify-content: center;
-            align-items: center;
-        }
-
-        .modal-content {
-            background-color: #fff;
+        .gallery-container {
+            max-width: 1200px;
+            margin: 0 auto 50px;
             padding: 20px;
-            border-radius: 5px;
-            max-width: 80%;
-            max-height: 80%;
-            overflow: auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 30px;
         }
 
-        .close {
-            color: #aaa;
-            float: right;
-            font-size: 28px;
-            font-weight: bold;
-            cursor: pointer;
+        .gallery-item {
+            position: relative;
+            overflow: hidden;
+            border-radius: 20px;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
         }
 
-        .gallery img {
-            max-width: 23%; /* Adjust the image size as needed */
-            height: auto;
-            margin: 10px;
+        .gallery-item:hover {
+            transform: translateY(-10px);
+            border-color: rgba(96, 165, 250, 0.5);
+            box-shadow: 0 20px 40px -15px rgba(0, 0, 0, 0.5);
+        }
+
+        .gallery-item img {
+            width: 100%;
+            height: 250px;
+            object-fit: cover;
+            display: block;
+            transition: transform 0.6s ease;
+        }
+
+        .gallery-item:hover img {
+            transform: scale(1.1);
+        }
+
+        .overlay {
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(to top, rgba(15, 23, 42, 0.9), transparent);
+            display: flex;
+            align-items: flex-end;
+            padding: 20px;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .gallery-item:hover .overlay {
+            opacity: 1;
+        }
+
+        .overlay span {
+            color: #fff;
+            font-weight: 600;
+            font-size: 1.1rem;
         }
     </style>
 </head>
 <body>
+    <?php include 'includes/HomeTopBar.php'; ?>
 
-    <div class="gallery">
+    <div class="hero-section">
+        <h1>Moments Captured</h1>
+        <p>Explore our past events and vibrant gallery</p>
+    </div>
+
+    <div class="gallery-container">
         <?php
-        $dbHost = 'localhost';
-        $dbUser = 'root';
-        $dbPass = '';
-        $dbName = 'event_management';
-        $basePath = "../visuals/gallery/"; // Adjust the base path as needed
+        include 'includes/db.php';
+        $basePath = "visuals/gallery/";
 
         try {
-            $pdo = new PDO("mysql:host=$dbHost;dbname=$dbName", $dbUser, $dbPass);
-            $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-
-            $stmt = $pdo->prepare("SELECT id, image_path FROM gallery_data");
+            $stmt = $conn->prepare("SELECT id, title, image_path FROM gallery_data");
             $stmt->execute();
-            $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
+            $result = $stmt->get_result();
 
-            foreach ($result as $row) {
-                $imagePath = $basePath . $row['image_path'];
+            while ($row = $result->fetch_assoc()) {
+                $imageURL = $basePath . $row['image_path'];
+                $imageFS = __DIR__ . '/../' . $imageURL;
 
-                // Check if the image file exists
-                if (file_exists($imagePath)) {
-                    echo '<a href="details.php?id=' . $row['id'] . '">';
-                    echo '<img src="' . $imagePath . '" alt="Gallery Image">';
-                    echo '</a>';
-                } else {
-                    echo '<p>Error: Image not found for ID ' . $row['id'] . '</p>';
+                if (file_exists($imageFS)) {
+                    ?>
+                    <div class="gallery-item">
+                        <a href="details?id=<?php echo $row['id']; ?>">
+                            <img src="<?php echo $imageURL; ?>" alt="Gallery Image">
+                            <div class="overlay">
+                                <span><?php echo htmlspecialchars($row['title']); ?></span>
+                            </div>
+                        </a>
+                    </div>
+                    <?php
                 }
             }
-        } catch (PDOException $e) {
-            echo "Error: " . $e->getMessage();
+        } catch (Exception $e) {
+            echo "<p style='color:red; text-align:center;'>Error: " . $e->getMessage() . "</p>";
         }
         ?>
     </div>
 
-    <?php include 'footer.php'; ?>
+    <?php include 'includes/footer.php'; ?>
 </body>
 </html>

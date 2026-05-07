@@ -1,3 +1,4 @@
+<?php if(!defined('APP_RUNNING')) define('APP_RUNNING', true); ?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -83,7 +84,7 @@
 
 <body>
     <div id="sidebar">
-        <?php include("AdminSidebar.php"); ?>
+        <?php include('includes/AdminSidebar.php'); ?>
     </div>
 
     <div id="update-event-form">

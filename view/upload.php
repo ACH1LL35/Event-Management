@@ -1,3 +1,4 @@
+<?php if(!defined('APP_RUNNING')) define('APP_RUNNING', true); ?>
 <?php
 include("../view/AdminSidebar.php");
 include_once('../controller/GalleryController.php');

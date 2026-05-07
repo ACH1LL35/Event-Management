@@ -1,3 +1,4 @@
+<?php if(!defined('APP_RUNNING')) define('APP_RUNNING', true); ?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -70,6 +71,6 @@
         <h2>8. Contact Information</h2>
         <p>If you have any questions or concerns regarding these terms and conditions, please contact us at [Your Contact Information].</p>
     </div>
-    <?php include 'footer.php'; ?>
+    <?php include 'includes/footer.php'; ?>
 </body>
 </html>

@@ -1,3 +1,4 @@
+<?php if(!defined('APP_RUNNING')) define('APP_RUNNING', true); ?>
 <!-- AdminUserView.php -->
 
 <?php
@@ -6,12 +7,12 @@ session_start();
 
 // Check if the user is logged in
 if (!isset($_SESSION['id'])) {
-    header("Location: start.php");
+    header("Location: start");
     exit();
 }
 
 $id = $_SESSION['id'];
-$conn = mysqli_connect("localhost", "root", "", "event_management");
+include 'includes/db.php';
 
 if (!$conn) {
     die("Connection failed: " . mysqli_connect_error());
